@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmlk.dao.IUserDao">
+    <resultMap type="com.tmlk.po.UserExt" id="UserMap">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+    <insert id="create" parameterType="com.tmlk.po.UserExt">
+        <![CDATA[
+
+         INSERT INTO User(
+          name,age
+          )
+          VALUES(
+          #{name},#{age}
+          )
+
+        ]]>
+    </insert>
+
+    <update id="update" parameterType="com.tmlk.po.UserExt" flushCache="true">
+        <![CDATA[
+
+        update User
+        set
+        name = #{name},
+        age = #{age}
+        where ID = #{id}
+
+        ]]>
+    </update>
+
+    <select id="load" parameterType="java.lang.Long" resultMap="UserMap">
+        select * from User where ID = #{id}
+    </select>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        delete from User where ID = #{id}
+    </delete>
+
+    <select id="criteriaQuery" resultMap="UserMap">
+        select * from User
+        <if test="mqlList.size > 0">
+            where
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+        <if test="mortList.size > 0">
+            order by
+            <foreach collection="mortList" item="mort" separator=",">
+                ${mort}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="criteriaCount" resultType="int">
+        select count(*) from User
+        <if test="mqlList.size > 0">
+            where
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+    </select>
+</mapper>
