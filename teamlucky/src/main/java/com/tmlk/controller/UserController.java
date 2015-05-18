@@ -4,10 +4,11 @@ package com.tmlk.controller;
  * Created by YangJunLin on 2015/4/18.
  */
 
-import com.tmlk.model.UserModel;
+import com.tmlk.model.SysUserModel;
 
-import com.tmlk.po.UserExt;
-import com.tmlk.service.IUserServiceExt;
+import com.tmlk.po.SysUserExt;
+import com.tmlk.service.ISysUserServiceExt;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,15 +28,15 @@ public class UserController {
     private static final Logger logger = Logger.getLogger(UserController.class);
 
     @Autowired
-    private IUserServiceExt userService;
+    private ISysUserServiceExt sysUserService;
 
     @RequestMapping(value = "/test")
-    public String getUsers(HttpServletRequest request, @ModelAttribute UserModel userModel, ModelMap model) throws IOException {
+    public String getUsers(HttpServletRequest request, @ModelAttribute SysUserModel sysUserModel, ModelMap model) throws IOException {
 
         //根据ID查
-        UserExt user = userService.load(Long.parseLong(request.getParameter("userId")));
+        SysUserExt user = sysUserService.load(request.getParameter("userId"));
 
-        userModel.setUser(user);
+        sysUserModel.setSysUserExt(user);
 
 //        创建
 //        UserExt user = new UserExt();
@@ -73,21 +74,21 @@ public class UserController {
 //        List<UserExt> users = userService.criteriaQuery(conditions,orders);
 //        List<UserExt> users = userService.criteriaQuery(conditions,orders,pp);
 
-        model.addAttribute("model", userModel);
+        model.addAttribute("model", sysUserModel);
 
         return "/user/show";
     }
 
     @RequestMapping(value = "/show")
     @ResponseBody
-    public UserExt showUser(HttpServletRequest request, ModelMap model, HttpServletResponse response) {
-        UserExt user = new UserExt();
+    public SysUserExt showUser(HttpServletRequest request, ModelMap model, HttpServletResponse response) {
+        SysUserExt user = new SysUserExt();
 
         return user;
     }
 
     @RequestMapping(value = "/error")
-    public String errorUser(HttpServletRequest request, @ModelAttribute UserModel userModel, ModelMap model) {
+    public String errorUser(HttpServletRequest request, @ModelAttribute SysUserModel sysUserModel, ModelMap model) {
 
         return "/user/error";
     }

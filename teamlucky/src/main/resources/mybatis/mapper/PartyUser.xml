@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmlk.dao.IPartyUserDao">
+	<resultMap type="com.tmlk.po.PartyUserExt" id="PartyUserMap">
+		<id property="id" column="ID" />
+		<result property="loginName" column="LoginName" />
+		<result property="partyId" column="PartyId" />
+		<result property="loginPwd" column="LoginPwd" />
+		<result property="userName" column="UserName" />
+		<result property="sex" column="Sex" />
+		<result property="birthDay" column="BirthDay" />
+		<result property="userAvatar" column="UserAvatar" />
+		<result property="userRemark" column="UserRemark" />
+		<result property="userStatus" column="UserStatus" />
+		<result property="tel" column="Tel" />
+		<result property="email" column="Email" />
+		<result property="qQ" column="QQ" />
+		<result property="weiXin" column="Weixin" />
+		<result property="registerTime" column="RegisterTime" />
+		<result property="registerIP" column="RegisterIP" />
+		<result property="lastLoginTime" column="LastLoginTime" />
+		<result property="lastLoginIP" column="LastLoginIP" />
+	</resultMap>
+
+	<insert id="create" parameterType="com.tmlk.po.PartyUserExt">
+		<![CDATA[
+		INSERT INTO PartyUser(
+			ID,
+			LoginName,
+			PartyId,
+			LoginPwd,
+			UserName,
+			Sex,
+			BirthDay,
+			UserAvatar,
+			UserRemark,
+			UserStatus,
+			Tel,
+			Email,
+			QQ,
+			Weixin,
+			RegisterTime,
+			RegisterIP,
+			LastLoginTime,
+			LastLoginIP
+		)  
+		VALUES(
+			#{id},
+			#{loginName},
+			#{partyId},
+			#{loginPwd},
+			#{userName},
+			#{sex},
+			#{birthDay},
+			#{userAvatar},
+			#{userRemark},
+			#{userStatus},
+			#{tel},
+			#{email},
+			#{qQ},
+			#{weiXin},
+			#{registerTime},
+			#{registerIP},
+			#{lastLoginTime},
+			#{lastLoginIP}
+		)
+		]]>
+	</insert>
+	
+	<update id="update" parameterType="com.tmlk.po.PartyUserExt" flushCache="true">
+		<![CDATA[
+		UPDATE PartyUser
+		SET
+		LoginName = #{loginName},
+		PartyId = #{partyId},
+		LoginPwd = #{loginPwd},
+		UserName = #{userName},
+		Sex = #{sex},
+		BirthDay = #{birthDay},
+		UserAvatar = #{userAvatar},
+		UserRemark = #{userRemark},
+		UserStatus = #{userStatus},
+		Tel = #{tel},
+		Email = #{email},
+		QQ = #{qQ},
+		Weixin = #{weiXin},
+		RegisterTime = #{registerTime},
+		RegisterIP = #{registerIP},
+		LastLoginTime = #{lastLoginTime},
+		LastLoginIP = #{lastLoginIP}
+		WHERE id = #{id}
+		]]>
+	</update>
+	
+	<select id="load" parameterType="java.lang.String" resultMap="PartyUserMap">
+		<![CDATA[
+		SELECT * FROM PartyUser WHERE id = #{id}
+		]]>
+	</select>
+	
+	<delete id="delete" parameterType="java.lang.String">  
+        <![CDATA[
+        DELETE FROM PartyUser WHERE id = #{id}
+        ]]>
+    </delete>
+    
+    <select id="criteriaQuery" resultMap="PartyUserMap">
+		<![CDATA[
+		SELECT * FROM PartyUser
+        <if test="mqlList.size > 0">
+            WHERE
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+        <if test="mortList.size > 0">
+            ORDER BY
+            <foreach collection="mortList" item="mort" separator=",">
+                ${mort}
+            </foreach>
+        </if>
+		]]>
+	</select>
+	
+	<select id="criteriaCount" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*) FROM PartyUser
+        <if test="mqlList.size > 0">
+            WHERE
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+        ]]>
+	</select>
+	
+</mapper>

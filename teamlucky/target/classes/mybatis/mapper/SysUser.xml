@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmlk.dao.ISysUserDao">
+	<resultMap type="com.tmlk.po.SysUserExt" id="SysUserMap">
+		<id property="id" column="ID" />
+		<result property="loginName" column="LoginName" />
+		<result property="loginPwd" column="LoginPwd" />
+		<result property="userName" column="UserName" />
+		<result property="sex" column="Sex" />
+		<result property="birthDay" column="BirthDay" />
+		<result property="userAvatar" column="UserAvatar" />
+		<result property="userRemark" column="UserRemark" />
+		<result property="tel" column="Tel" />
+		<result property="email" column="Email" />
+		<result property="qQ" column="QQ" />
+		<result property="weiXin" column="Weixin" />
+		<result property="registerTime" column="RegisterTime" />
+		<result property="registerIP" column="RegisterIP" />
+		<result property="lastLoginTime" column="LastLoginTime" />
+		<result property="lastLoginIP" column="LastLoginIP" />
+	</resultMap>
+
+	<insert id="create" parameterType="com.tmlk.po.SysUserExt">
+		<![CDATA[
+		INSERT INTO SysUser(
+			ID,
+			LoginName,
+			LoginPwd,
+			UserName,
+			Sex,
+			BirthDay,
+			UserAvatar,
+			UserRemark,
+			Tel,
+			Email,
+			QQ,
+			Weixin,
+			RegisterTime,
+			RegisterIP,
+			LastLoginTime,
+			LastLoginIP
+		)  
+		VALUES(
+			#{id},
+			#{loginName},
+			#{loginPwd},
+			#{userName},
+			#{sex},
+			#{birthDay},
+			#{userAvatar},
+			#{userRemark},
+			#{tel},
+			#{email},
+			#{qQ},
+			#{weiXin},
+			#{registerTime},
+			#{registerIP},
+			#{lastLoginTime},
+			#{lastLoginIP}
+		)
+		]]>
+	</insert>
+	
+	<update id="update" parameterType="com.tmlk.po.SysUserExt" flushCache="true">
+		<![CDATA[
+		UPDATE SysUser
+		SET
+		LoginName = #{loginName},
+		LoginPwd = #{loginPwd},
+		UserName = #{userName},
+		Sex = #{sex},
+		BirthDay = #{birthDay},
+		UserAvatar = #{userAvatar},
+		UserRemark = #{userRemark},
+		Tel = #{tel},
+		Email = #{email},
+		QQ = #{qQ},
+		Weixin = #{weiXin},
+		RegisterTime = #{registerTime},
+		RegisterIP = #{registerIP},
+		LastLoginTime = #{lastLoginTime},
+		LastLoginIP = #{lastLoginIP}
+		WHERE id = #{id}
+		]]>
+	</update>
+	
+	<select id="load" parameterType="java.lang.String" resultMap="SysUserMap">
+		<![CDATA[
+		SELECT * FROM SysUser WHERE id = #{id}
+		]]>
+	</select>
+	
+	<delete id="delete" parameterType="java.lang.String">  
+        <![CDATA[
+        DELETE FROM SysUser WHERE id = #{id}
+        ]]>
+    </delete>
+    
+    <select id="criteriaQuery" resultMap="SysUserMap">
+		<![CDATA[
+		SELECT * FROM SysUser
+        <if test="mqlList.size > 0">
+            WHERE
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+        <if test="mortList.size > 0">
+            ORDER BY
+            <foreach collection="mortList" item="mort" separator=",">
+                ${mort}
+            </foreach>
+        </if>
+		]]>
+	</select>
+	
+	<select id="criteriaCount" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*) FROM SysUser
+        <if test="mqlList.size > 0">
+            WHERE
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+        ]]>
+	</select>
+	
+</mapper>

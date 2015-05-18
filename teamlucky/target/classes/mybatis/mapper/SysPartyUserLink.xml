@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmlk.dao.ISysPartyUserLinkDao">
+	<resultMap type="com.tmlk.po.SysPartyUserLinkExt" id="SysPartyUserLinkMap">
+		<id property="id" column="ID" />
+		<result property="sysUserId" column="SysUserId" />
+		<result property="partyUserId" column="PartyUserId" />
+		<result property="partyId" column="PartyId" />
+	</resultMap>
+
+	<insert id="create" parameterType="com.tmlk.po.SysPartyUserLinkExt">
+		<![CDATA[
+		INSERT INTO SysPartyUserLink(
+			ID,
+			SysUserId,
+			PartyUserId,
+			PartyId
+		)  
+		VALUES(
+			#{id},
+			#{sysUserId},
+			#{partyUserId},
+			#{partyId}
+		)
+		]]>
+	</insert>
+	
+	<update id="update" parameterType="com.tmlk.po.SysPartyUserLinkExt" flushCache="true">
+		<![CDATA[
+		UPDATE SysPartyUserLink
+		SET
+		SysUserId = #{sysUserId},
+		PartyUserId = #{partyUserId},
+		PartyId = #{partyId}
+		WHERE id = #{id}
+		]]>
+	</update>
+	
+	<select id="load" parameterType="java.lang.Long" resultMap="SysPartyUserLinkMap">
+		<![CDATA[
+		SELECT * FROM SysPartyUserLink WHERE id = #{id}
+		]]>
+	</select>
+	
+	<delete id="delete" parameterType="java.lang.Long">  
+        <![CDATA[
+        DELETE FROM SysPartyUserLink WHERE id = #{id}
+        ]]>
+    </delete>
+    
+    <select id="criteriaQuery" resultMap="SysPartyUserLinkMap">
+		<![CDATA[
+		SELECT * FROM SysPartyUserLink
+        <if test="mqlList.size > 0">
+            WHERE
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+        <if test="mortList.size > 0">
+            ORDER BY
+            <foreach collection="mortList" item="mort" separator=",">
+                ${mort}
+            </foreach>
+        </if>
+		]]>
+	</select>
+	
+	<select id="criteriaCount" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*) FROM SysPartyUserLink
+        <if test="mqlList.size > 0">
+            WHERE
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+        ]]>
+	</select>
+	
+</mapper>
