@@ -1004,12 +1004,12 @@
       <updated>1431940687580</updated>
       <workItem from="1431940689629" duration="391000" />
       <workItem from="1431941121445" duration="1092000" />
-      <workItem from="1431943880371" duration="1430000" />
+      <workItem from="1431943880371" duration="1530000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2913000" />
+    <option name="totallyTimeSpent" value="3013000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="776" extended-state="6" />
@@ -1306,7 +1306,7 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.034802783" vertical-offset="0" max-vertical-offset="431">
-          <caret line="1" column="10" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="10" />
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
         </state>
       </provider>
