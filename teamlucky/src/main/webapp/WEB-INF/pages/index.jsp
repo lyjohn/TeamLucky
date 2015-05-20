@@ -64,14 +64,14 @@
 
         <p>To see the difference between static and fixed top navbars, just scroll.</p>
 
-        <form action="<%=request.getContextPath() %>/user/test" method="post">
+        <form action="" onsubmit="return false;">
             <div class="form-group">
-                <label for="exampleInputUserId">用户ID</label>
-                <input type="text" class="form-control" name="userId" id="exampleInputUserId" placeholder="用户名">
+                <label for="loginName">帐号</label>
+                <input type="text" class="form-control" name="loginName" id="loginName" placeholder="用户名 或者 邮箱">
             </div>
             <div class="form-group">
-                <label for="exampleInputEmail">邮箱测试</label>
-                <input type="email" class="form-control" name="email" id="exampleInputEmail" placeholder="邮箱格式">
+                <label for="loginPwd">登录</label>
+                <input type="password" class="form-control" name="loginPwd" id="loginPwd" placeholder="密码">
             </div>
             <%--<div class="form-group">--%>
             <%--<label for="exampleInputPassword1">密码</label>--%>
@@ -82,7 +82,8 @@
                     <input type="checkbox"> 记住我
                 </label>
             </div>
-            <button type="submit" class="btn btn-success">提交</button>
+            <button id="js-login" type="submit" class="btn btn-success">提交</button>
+            <button id="js-register" type="submit" class="btn btn-info">注册</button>
         </form>
 
     </div>
@@ -100,6 +101,56 @@
 
 <script type="text/javascript">
     $(function () {
+        $(document).on("click","#js-register",function(){
+            var loginName = $("#loginName").val();
+            var loginPwd = $("#loginPwd").val();
+
+            if(loginName=="" || loginPwd=="")
+            {
+                alert("用户名或密码不能为空")
+                return false;
+            }
+            if(loginName.indexOf("_")>0){
+                alert("帐号不能包含下划线_")
+                return false;
+            }
+            $.post("${ctx}/register",{loginName: loginName,loginPwd:loginPwd},function(res){
+                if(res.status==0){
+                    alert("注册成功");
+                }else{
+                    alert(res.message);
+                }
+            },"json");
+        }).on("click","#js-login",function(){
+            var loginName = $("#loginName").val();
+            var loginPwd = $("#loginPwd").val();
+            if(loginName=="" || loginPwd=="")
+            {
+                alert("用户名或密码不能为空")
+                return false;
+            }
+            $.post("${ctx}/login",{loginName: loginName,loginPwd:loginPwd},function(res){
+                if(res.status==0){
+                    alert("登录成功");
+                }else{
+                    alert(res.message);
+                }
+            },"json");
+        }).on("blur","#loginName",function(){
+            var loginName = $(this).val();
+            if(loginName=="")
+            {
+                alert("用户名不能为空")
+                $(this).focus();
+                return false;
+            }
+            $.post("${ctx}/checkLoginName",{loginName: loginName},function(res){
+                if(res.status!=0){
+                    alert(res.message);
+                    $(this).focus();
+                }
+            },"json");
+        })
     })
 </script>
 

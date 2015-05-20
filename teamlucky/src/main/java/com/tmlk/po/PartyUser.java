@@ -19,15 +19,6 @@ public class PartyUser{
 		this.id = id;
 	}
 	
-	private String loginName;
-	
-	public String getLoginName(){
-		return loginName;
-	}
-	
-	public void setLoginName(String loginName){
-		this.loginName = loginName;
-	}
 	private Long partyId;
 	
 	public Long getPartyId(){
@@ -36,6 +27,15 @@ public class PartyUser{
 	
 	public void setPartyId(Long partyId){
 		this.partyId = partyId;
+	}
+	private String loginName;
+	
+	public String getLoginName(){
+		return loginName;
+	}
+	
+	public void setLoginName(String loginName){
+		this.loginName = loginName;
 	}
 	private String loginPwd;
 	
@@ -118,14 +118,14 @@ public class PartyUser{
 	public void setEmail(String email){
 		this.email = email;
 	}
-	private String qQ;
+	private String qq;
 	
-	public String getQQ(){
-		return qQ;
+	public String getQq(){
+		return qq;
 	}
 	
-	public void setQQ(String qQ){
-		this.qQ = qQ;
+	public void setQq(String qq){
+		this.qq = qq;
 	}
 	private String weiXin;
 	

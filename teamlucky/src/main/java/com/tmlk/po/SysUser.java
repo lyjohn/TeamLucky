@@ -100,14 +100,14 @@ public class SysUser{
 	public void setEmail(String email){
 		this.email = email;
 	}
-	private String qQ;
+	private String qq;
 	
-	public String getQQ(){
-		return qQ;
+	public String getQq(){
+		return qq;
 	}
 	
-	public void setQQ(String qQ){
-		this.qQ = qQ;
+	public void setQq(String qq){
+		this.qq = qq;
 	}
 	private String weiXin;
 	

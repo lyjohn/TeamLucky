@@ -3,51 +3,51 @@
 <mapper namespace="com.tmlk.dao.IPartyUserDao">
 	<resultMap type="com.tmlk.po.PartyUserExt" id="PartyUserMap">
 		<id property="id" column="ID" />
-		<result property="loginName" column="LoginName" />
-		<result property="partyId" column="PartyId" />
-		<result property="loginPwd" column="LoginPwd" />
-		<result property="userName" column="UserName" />
-		<result property="sex" column="Sex" />
-		<result property="birthDay" column="BirthDay" />
-		<result property="userAvatar" column="UserAvatar" />
-		<result property="userRemark" column="UserRemark" />
-		<result property="userStatus" column="UserStatus" />
-		<result property="tel" column="Tel" />
-		<result property="email" column="Email" />
-		<result property="qQ" column="QQ" />
-		<result property="weiXin" column="Weixin" />
-		<result property="registerTime" column="RegisterTime" />
-		<result property="registerIP" column="RegisterIP" />
-		<result property="lastLoginTime" column="LastLoginTime" />
-		<result property="lastLoginIP" column="LastLoginIP" />
+		<result property="partyId" column="partyId" />
+		<result property="loginName" column="loginName" />
+		<result property="loginPwd" column="loginPwd" />
+		<result property="userName" column="userName" />
+		<result property="sex" column="sex" />
+		<result property="birthDay" column="birthDay" />
+		<result property="userAvatar" column="userAvatar" />
+		<result property="userRemark" column="userRemark" />
+		<result property="userStatus" column="userStatus" />
+		<result property="tel" column="tel" />
+		<result property="email" column="email" />
+		<result property="qq" column="qq" />
+		<result property="weiXin" column="weiXin" />
+		<result property="registerTime" column="registerTime" />
+		<result property="registerIP" column="registerIP" />
+		<result property="lastLoginTime" column="lastLoginTime" />
+		<result property="lastLoginIP" column="lastLoginIP" />
 	</resultMap>
 
 	<insert id="create" parameterType="com.tmlk.po.PartyUserExt">
 		<![CDATA[
 		INSERT INTO PartyUser(
 			ID,
-			LoginName,
-			PartyId,
-			LoginPwd,
-			UserName,
-			Sex,
-			BirthDay,
-			UserAvatar,
-			UserRemark,
-			UserStatus,
-			Tel,
-			Email,
-			QQ,
-			Weixin,
-			RegisterTime,
-			RegisterIP,
-			LastLoginTime,
-			LastLoginIP
+			partyId,
+			loginName,
+			loginPwd,
+			userName,
+			sex,
+			birthDay,
+			userAvatar,
+			userRemark,
+			userStatus,
+			tel,
+			email,
+			qq,
+			weiXin,
+			registerTime,
+			registerIP,
+			lastLoginTime,
+			lastLoginIP
 		)  
 		VALUES(
 			#{id},
-			#{loginName},
 			#{partyId},
+			#{loginName},
 			#{loginPwd},
 			#{userName},
 			#{sex},
@@ -57,11 +57,11 @@
 			#{userStatus},
 			#{tel},
 			#{email},
-			#{qQ},
+			#{qq},
 			#{weiXin},
-			#{registerTime},
+			#{registerTime, jdbcType = TIMESTAMP},
 			#{registerIP},
-			#{lastLoginTime},
+			#{lastLoginTime, jdbcType = TIMESTAMP},
 			#{lastLoginIP}
 		)
 		]]>
@@ -71,23 +71,23 @@
 		<![CDATA[
 		UPDATE PartyUser
 		SET
-		LoginName = #{loginName},
-		PartyId = #{partyId},
-		LoginPwd = #{loginPwd},
-		UserName = #{userName},
-		Sex = #{sex},
-		BirthDay = #{birthDay},
-		UserAvatar = #{userAvatar},
-		UserRemark = #{userRemark},
-		UserStatus = #{userStatus},
-		Tel = #{tel},
-		Email = #{email},
-		QQ = #{qQ},
-		Weixin = #{weiXin},
-		RegisterTime = #{registerTime},
-		RegisterIP = #{registerIP},
-		LastLoginTime = #{lastLoginTime},
-		LastLoginIP = #{lastLoginIP}
+		partyId = #{partyId},
+		loginName = #{loginName},
+		loginPwd = #{loginPwd},
+		userName = #{userName},
+		sex = #{sex},
+		birthDay = #{birthDay},
+		userAvatar = #{userAvatar},
+		userRemark = #{userRemark},
+		userStatus = #{userStatus},
+		tel = #{tel},
+		email = #{email},
+		qq = #{qq},
+		weiXin = #{weiXin},
+		registerTime = #{registerTime},
+		registerIP = #{registerIP},
+		lastLoginTime = #{lastLoginTime},
+		lastLoginIP = #{lastLoginIP}
 		WHERE id = #{id}
 		]]>
 	</update>
@@ -105,7 +105,6 @@
     </delete>
     
     <select id="criteriaQuery" resultMap="PartyUserMap">
-		<![CDATA[
 		SELECT * FROM PartyUser
         <if test="mqlList.size > 0">
             WHERE
@@ -119,11 +118,9 @@
                 ${mort}
             </foreach>
         </if>
-		]]>
 	</select>
 	
 	<select id="criteriaCount" resultType="int">
-		<![CDATA[
 		SELECT COUNT(*) FROM PartyUser
         <if test="mqlList.size > 0">
             WHERE
@@ -131,7 +128,6 @@
                 ${mql}
             </foreach>
         </if>
-        ]]>
 	</select>
 	
 </mapper>

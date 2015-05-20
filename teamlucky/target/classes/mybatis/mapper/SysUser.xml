@@ -3,42 +3,42 @@
 <mapper namespace="com.tmlk.dao.ISysUserDao">
 	<resultMap type="com.tmlk.po.SysUserExt" id="SysUserMap">
 		<id property="id" column="ID" />
-		<result property="loginName" column="LoginName" />
-		<result property="loginPwd" column="LoginPwd" />
-		<result property="userName" column="UserName" />
-		<result property="sex" column="Sex" />
-		<result property="birthDay" column="BirthDay" />
-		<result property="userAvatar" column="UserAvatar" />
-		<result property="userRemark" column="UserRemark" />
-		<result property="tel" column="Tel" />
-		<result property="email" column="Email" />
-		<result property="qQ" column="QQ" />
-		<result property="weiXin" column="Weixin" />
-		<result property="registerTime" column="RegisterTime" />
-		<result property="registerIP" column="RegisterIP" />
-		<result property="lastLoginTime" column="LastLoginTime" />
-		<result property="lastLoginIP" column="LastLoginIP" />
+		<result property="loginName" column="loginName" />
+		<result property="loginPwd" column="loginPwd" />
+		<result property="userName" column="userName" />
+		<result property="sex" column="sex" />
+		<result property="birthDay" column="birthDay" />
+		<result property="userAvatar" column="userAvatar" />
+		<result property="userRemark" column="userRemark" />
+		<result property="tel" column="tel" />
+		<result property="email" column="email" />
+		<result property="qq" column="qq" />
+		<result property="weiXin" column="weiXin" />
+		<result property="registerTime" column="registerTime" />
+		<result property="registerIP" column="registerIP" />
+		<result property="lastLoginTime" column="lastLoginTime" />
+		<result property="lastLoginIP" column="lastLoginIP" />
 	</resultMap>
 
 	<insert id="create" parameterType="com.tmlk.po.SysUserExt">
 		<![CDATA[
 		INSERT INTO SysUser(
 			ID,
-			LoginName,
-			LoginPwd,
-			UserName,
-			Sex,
-			BirthDay,
-			UserAvatar,
-			UserRemark,
-			Tel,
-			Email,
-			QQ,
-			Weixin,
-			RegisterTime,
-			RegisterIP,
-			LastLoginTime,
-			LastLoginIP
+			loginName,
+			loginPwd,
+			userName,
+			sex,
+			birthDay,
+			userAvatar,
+			userRemark,
+			tel,
+			email,
+			qq,
+			weiXin,
+			registerTime,
+			registerIP,
+			lastLoginTime,
+			lastLoginIP
 		)  
 		VALUES(
 			#{id},
@@ -51,11 +51,11 @@
 			#{userRemark},
 			#{tel},
 			#{email},
-			#{qQ},
+			#{qq},
 			#{weiXin},
-			#{registerTime},
+			#{registerTime, jdbcType = TIMESTAMP},
 			#{registerIP},
-			#{lastLoginTime},
+			#{lastLoginTime, jdbcType = TIMESTAMP},
 			#{lastLoginIP}
 		)
 		]]>
@@ -65,21 +65,21 @@
 		<![CDATA[
 		UPDATE SysUser
 		SET
-		LoginName = #{loginName},
-		LoginPwd = #{loginPwd},
-		UserName = #{userName},
-		Sex = #{sex},
-		BirthDay = #{birthDay},
-		UserAvatar = #{userAvatar},
-		UserRemark = #{userRemark},
-		Tel = #{tel},
-		Email = #{email},
-		QQ = #{qQ},
-		Weixin = #{weiXin},
-		RegisterTime = #{registerTime},
-		RegisterIP = #{registerIP},
-		LastLoginTime = #{lastLoginTime},
-		LastLoginIP = #{lastLoginIP}
+		loginName = #{loginName},
+		loginPwd = #{loginPwd},
+		userName = #{userName},
+		sex = #{sex},
+		birthDay = #{birthDay},
+		userAvatar = #{userAvatar},
+		userRemark = #{userRemark},
+		tel = #{tel},
+		email = #{email},
+		qq = #{qq},
+		weiXin = #{weiXin},
+		registerTime = #{registerTime},
+		registerIP = #{registerIP},
+		lastLoginTime = #{lastLoginTime},
+		lastLoginIP = #{lastLoginIP}
 		WHERE id = #{id}
 		]]>
 	</update>
@@ -97,7 +97,6 @@
     </delete>
     
     <select id="criteriaQuery" resultMap="SysUserMap">
-		<![CDATA[
 		SELECT * FROM SysUser
         <if test="mqlList.size > 0">
             WHERE
@@ -111,11 +110,9 @@
                 ${mort}
             </foreach>
         </if>
-		]]>
 	</select>
 	
 	<select id="criteriaCount" resultType="int">
-		<![CDATA[
 		SELECT COUNT(*) FROM SysUser
         <if test="mqlList.size > 0">
             WHERE
@@ -123,7 +120,6 @@
                 ${mql}
             </foreach>
         </if>
-        ]]>
 	</select>
 	
 </mapper>

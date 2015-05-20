@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.tmlk.framework.session.SessionUser;
 import com.tmlk.po.UserExt;
 import org.springframework.util.StringUtils;
 
@@ -55,7 +56,7 @@ public class CheckLoginFilter implements Filter {
 
         request.setAttribute("ctx", WebContext.contextPath);
 
-        UserExt user = (UserExt) session.getAttribute(Constants.SESSION_USER);
+        SessionUser user =(SessionUser)session.getAttribute(Constants.SESSION_USER);
 
         String path = request.getServletPath();
 

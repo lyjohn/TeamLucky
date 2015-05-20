@@ -40,6 +40,9 @@
             <param-name>excludeUrl</param-name>
             <param-value>
                 /
+                /login
+                /register
+                /checkLoginName
                 /user/index
                 /user/test
                 /user/error

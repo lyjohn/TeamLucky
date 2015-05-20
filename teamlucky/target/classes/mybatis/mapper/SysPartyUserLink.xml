@@ -3,18 +3,18 @@
 <mapper namespace="com.tmlk.dao.ISysPartyUserLinkDao">
 	<resultMap type="com.tmlk.po.SysPartyUserLinkExt" id="SysPartyUserLinkMap">
 		<id property="id" column="ID" />
-		<result property="sysUserId" column="SysUserId" />
-		<result property="partyUserId" column="PartyUserId" />
-		<result property="partyId" column="PartyId" />
+		<result property="sysUserId" column="sysUserId" />
+		<result property="partyUserId" column="partyUserId" />
+		<result property="partyId" column="partyId" />
 	</resultMap>
 
 	<insert id="create" parameterType="com.tmlk.po.SysPartyUserLinkExt">
 		<![CDATA[
 		INSERT INTO SysPartyUserLink(
 			ID,
-			SysUserId,
-			PartyUserId,
-			PartyId
+			sysUserId,
+			partyUserId,
+			partyId
 		)  
 		VALUES(
 			#{id},
@@ -29,9 +29,9 @@
 		<![CDATA[
 		UPDATE SysPartyUserLink
 		SET
-		SysUserId = #{sysUserId},
-		PartyUserId = #{partyUserId},
-		PartyId = #{partyId}
+		sysUserId = #{sysUserId},
+		partyUserId = #{partyUserId},
+		partyId = #{partyId}
 		WHERE id = #{id}
 		]]>
 	</update>
@@ -49,7 +49,6 @@
     </delete>
     
     <select id="criteriaQuery" resultMap="SysPartyUserLinkMap">
-		<![CDATA[
 		SELECT * FROM SysPartyUserLink
         <if test="mqlList.size > 0">
             WHERE
@@ -63,11 +62,9 @@
                 ${mort}
             </foreach>
         </if>
-		]]>
 	</select>
 	
 	<select id="criteriaCount" resultType="int">
-		<![CDATA[
 		SELECT COUNT(*) FROM SysPartyUserLink
         <if test="mqlList.size > 0">
             WHERE
@@ -75,7 +72,6 @@
                 ${mql}
             </foreach>
         </if>
-        ]]>
 	</select>
 	
 </mapper>
