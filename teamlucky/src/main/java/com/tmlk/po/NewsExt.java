@@ -3,9 +3,9 @@ package com.tmlk.po;
 import java.util.Date;
 import java.io.Serializable;
 
-import com.tmlk.po.Notice;
+import com.tmlk.po.News;
 
-public class NoticeExt extends Notice  implements Serializable{
+public class NewsExt extends News  implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
