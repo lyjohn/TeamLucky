@@ -43,9 +43,7 @@
                 /login
                 /register
                 /checkLoginName
-                /user/index
-                /user/test
-                /user/error
+                /error
             </param-value>
         </init-param>
     </filter>

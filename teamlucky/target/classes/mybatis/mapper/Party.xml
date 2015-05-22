@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmlk.dao.IPartyDao">
+	<resultMap type="com.tmlk.po.PartyExt" id="PartyMap">
+		<id property="id" column="id" />
+		<result property="partyName" column="partyName" />
+		<result property="partyCode" column="partyCode" />
+		<result property="partyCover" column="partyCover" />
+		<result property="partyRemark" column="partyRemark" />
+		<result property="partyStatus" column="partyStatus" />
+		<result property="isPublic" column="isPublic" />
+		<result property="isGroup" column="isGroup" />
+		<result property="isCustomBuild" column="isCustomBuild" />
+		<result property="memberNumMin" column="memberNumMin" />
+		<result property="memberNumMax" column="memberNumMax" />
+		<result property="buildEndTime" column="buildEndTime" />
+		<result property="createBy" column="createBy" />
+		<result property="createTime" column="createTime" />
+		<result property="memberCount" column="memberCount" />
+		<result property="hotCount" column="hotCount" />
+	</resultMap>
+
+	<insert id="create" parameterType="com.tmlk.po.PartyExt" useGeneratedKeys="true" keyProperty="id">
+		<![CDATA[
+		INSERT INTO Party(
+			id,
+			partyName,
+			partyCode,
+			partyCover,
+			partyRemark,
+			partyStatus,
+			isPublic,
+			isGroup,
+			isCustomBuild,
+			memberNumMin,
+			memberNumMax,
+			buildEndTime,
+			createBy,
+			createTime,
+			memberCount,
+			hotCount
+		)  
+		VALUES(
+			#{id},
+			#{partyName},
+			#{partyCode},
+			#{partyCover},
+			#{partyRemark},
+			#{partyStatus},
+			#{isPublic},
+			#{isGroup},
+			#{isCustomBuild},
+			#{memberNumMin},
+			#{memberNumMax},
+			#{buildEndTime, jdbcType = TIMESTAMP},
+			#{createBy},
+			#{createTime, jdbcType = TIMESTAMP},
+			#{memberCount},
+			#{hotCount}
+		)
+		]]>
+	</insert>
+	
+	<update id="update" parameterType="com.tmlk.po.PartyExt" flushCache="true">
+		<![CDATA[
+		UPDATE Party
+		SET
+		partyName = #{partyName},
+		partyCode = #{partyCode},
+		partyCover = #{partyCover},
+		partyRemark = #{partyRemark},
+		partyStatus = #{partyStatus},
+		isPublic = #{isPublic},
+		isGroup = #{isGroup},
+		isCustomBuild = #{isCustomBuild},
+		memberNumMin = #{memberNumMin},
+		memberNumMax = #{memberNumMax},
+		buildEndTime = #{buildEndTime},
+		createBy = #{createBy},
+		createTime = #{createTime},
+		memberCount = #{memberCount},
+		hotCount = #{hotCount}
+		WHERE id = #{id}
+		]]>
+	</update>
+	
+	<select id="load" parameterType="java.lang.Long" resultMap="PartyMap">
+		<![CDATA[
+		SELECT * FROM Party WHERE id = #{id}
+		]]>
+	</select>
+	
+	<delete id="delete" parameterType="java.lang.Long">  
+        <![CDATA[
+        DELETE FROM Party WHERE id = #{id}
+        ]]>
+    </delete>
+    
+    <select id="criteriaQuery" resultMap="PartyMap">
+		SELECT * FROM Party
+        <if test="mqlList.size > 0">
+            WHERE
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+        <if test="mortList.size > 0">
+            ORDER BY
+            <foreach collection="mortList" item="mort" separator=",">
+                ${mort}
+            </foreach>
+        </if>
+	</select>
+	
+	<select id="criteriaCount" resultType="int">
+		SELECT COUNT(*) FROM Party
+        <if test="mqlList.size > 0">
+            WHERE
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+	</select>
+
+	<select id="loadByCode" parameterType="java.lang.String" resultMap="PartyMap">
+		<![CDATA[
+		SELECT * FROM Party WHERE partyCode = #{code}
+		]]>
+	</select>
+</mapper>

@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.tmlk.framework.session.SessionUser;
-import com.tmlk.po.UserExt;
 import org.springframework.util.StringUtils;
 
 import com.tmlk.framework.servlet.WebContext;
@@ -65,7 +64,7 @@ public class CheckLoginFilter implements Filter {
             if ("XMLHttpRequest".equalsIgnoreCase(xReq)) {
                 response.setHeader("sessioninvalid", "true");
             } else {
-                response.sendRedirect(WebContext.contextPath + "/user/error");
+                response.sendRedirect(WebContext.contextPath + "/error");
             }
         } else {
             chain.doFilter(request, response);

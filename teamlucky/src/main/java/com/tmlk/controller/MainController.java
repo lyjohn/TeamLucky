@@ -54,6 +54,11 @@ public class MainController {
         return "/index";
     }
 
+    @RequestMapping(value = "/error")
+    public String error(){
+        return "/error";
+    }
+
     @RequestMapping(value = "/login")
     @ResponseBody
     public JsonResult doLogin(@RequestParam(value="loginName",required=true) String loginName, @RequestParam(value="loginPwd",required=true) String loginPwd, HttpServletRequest request, HttpSession session, ModelMap map){
@@ -80,6 +85,7 @@ public class MainController {
                             partyUserService.update(partyUser);
 
                             result.setStatus(0);
+                            result.setData("2");
                         }
                     }else{
                         result.setMessage("密码不正确");
@@ -101,6 +107,7 @@ public class MainController {
                         sysUser.setLastLoginIP(ipAddress);
                         sysUserService.update(sysUser);
 
+                        result.setData("1");
                         result.setStatus(0);
                     }else{
                         result.setMessage("密码不正确");
@@ -137,6 +144,9 @@ public class MainController {
             sysUserExt.setUserName(loginName);
 
             sysUserService.create(sysUserExt);
+
+            //注册完直接登录
+            sessionStatus.checkAndLogin(session, sysUserExt, request);
 
             result.setStatus(0);
         }catch (Exception ex){

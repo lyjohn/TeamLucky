@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmlk.dao.IDocumentDao">
+	<resultMap type="com.tmlk.po.DocumentExt" id="DocumentMap">
+		<id property="id" column="id" />
+		<result property="docFullName" column="docFullName" />
+		<result property="docName" column="docName" />
+		<result property="docExtName" column="docExtName" />
+		<result property="docSize" column="docSize" />
+		<result property="docPath" column="docPath" />
+		<result property="isPublic" column="isPublic" />
+		<result property="downloadCount" column="downloadCount" />
+		<result property="groupId" column="groupId" />
+		<result property="partyId" column="partyId" />
+		<result property="createBy" column="createBy" />
+		<result property="createTime" column="createTime" />
+	</resultMap>
+
+	<insert id="create" parameterType="com.tmlk.po.DocumentExt">
+		<![CDATA[
+		INSERT INTO Document(
+			id,
+			docFullName,
+			docName,
+			docExtName,
+			docSize,
+			docPath,
+			isPublic,
+			downloadCount,
+			groupId,
+			partyId,
+			createBy,
+			createTime
+		)  
+		VALUES(
+			#{id},
+			#{docFullName},
+			#{docName},
+			#{docExtName},
+			#{docSize},
+			#{docPath},
+			#{isPublic},
+			#{downloadCount},
+			#{groupId},
+			#{partyId},
+			#{createBy},
+			#{createTime, jdbcType = TIMESTAMP}
+		)
+		]]>
+	</insert>
+	
+	<update id="update" parameterType="com.tmlk.po.DocumentExt" flushCache="true">
+		<![CDATA[
+		UPDATE Document
+		SET
+		docFullName = #{docFullName},
+		docName = #{docName},
+		docExtName = #{docExtName},
+		docSize = #{docSize},
+		docPath = #{docPath},
+		isPublic = #{isPublic},
+		downloadCount = #{downloadCount},
+		groupId = #{groupId},
+		partyId = #{partyId},
+		createBy = #{createBy},
+		createTime = #{createTime}
+		WHERE id = #{id}
+		]]>
+	</update>
+	
+	<select id="load" parameterType="java.lang.Long" resultMap="DocumentMap">
+		<![CDATA[
+		SELECT * FROM Document WHERE id = #{id}
+		]]>
+	</select>
+	
+	<delete id="delete" parameterType="java.lang.Long">  
+        <![CDATA[
+        DELETE FROM Document WHERE id = #{id}
+        ]]>
+    </delete>
+    
+    <select id="criteriaQuery" resultMap="DocumentMap">
+		SELECT * FROM Document
+        <if test="mqlList.size > 0">
+            WHERE
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+        <if test="mortList.size > 0">
+            ORDER BY
+            <foreach collection="mortList" item="mort" separator=",">
+                ${mort}
+            </foreach>
+        </if>
+	</select>
+	
+	<select id="criteriaCount" resultType="int">
+		SELECT COUNT(*) FROM Document
+        <if test="mqlList.size > 0">
+            WHERE
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+	</select>
+	
+</mapper>

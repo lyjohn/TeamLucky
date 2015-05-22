@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmlk.dao.IForumCommentDao">
+	<resultMap type="com.tmlk.po.ForumCommentExt" id="ForumCommentMap">
+		<id property="id" column="id" />
+		<result property="forumId" column="forumId" />
+		<result property="commentContent" column="commentContent" />
+		<result property="parentId" column="parentId" />
+		<result property="createBy" column="createBy" />
+		<result property="createTime" column="createTime" />
+	</resultMap>
+
+	<insert id="create" parameterType="com.tmlk.po.ForumCommentExt">
+		<![CDATA[
+		INSERT INTO ForumComment(
+			id,
+			forumId,
+			commentContent,
+			parentId,
+			createBy,
+			createTime
+		)  
+		VALUES(
+			#{id},
+			#{forumId},
+			#{commentContent},
+			#{parentId},
+			#{createBy},
+			#{createTime, jdbcType = TIMESTAMP}
+		)
+		]]>
+	</insert>
+	
+	<update id="update" parameterType="com.tmlk.po.ForumCommentExt" flushCache="true">
+		<![CDATA[
+		UPDATE ForumComment
+		SET
+		forumId = #{forumId},
+		commentContent = #{commentContent},
+		parentId = #{parentId},
+		createBy = #{createBy},
+		createTime = #{createTime}
+		WHERE id = #{id}
+		]]>
+	</update>
+	
+	<select id="load" parameterType="java.lang.Long" resultMap="ForumCommentMap">
+		<![CDATA[
+		SELECT * FROM ForumComment WHERE id = #{id}
+		]]>
+	</select>
+	
+	<delete id="delete" parameterType="java.lang.Long">  
+        <![CDATA[
+        DELETE FROM ForumComment WHERE id = #{id}
+        ]]>
+    </delete>
+    
+    <select id="criteriaQuery" resultMap="ForumCommentMap">
+		SELECT * FROM ForumComment
+        <if test="mqlList.size > 0">
+            WHERE
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+        <if test="mortList.size > 0">
+            ORDER BY
+            <foreach collection="mortList" item="mort" separator=",">
+                ${mort}
+            </foreach>
+        </if>
+	</select>
+	
+	<select id="criteriaCount" resultType="int">
+		SELECT COUNT(*) FROM ForumComment
+        <if test="mqlList.size > 0">
+            WHERE
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+	</select>
+	
+</mapper>

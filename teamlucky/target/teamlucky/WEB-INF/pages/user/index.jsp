@@ -33,27 +33,41 @@
                         <div class="widget-main">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <form class="form-horizontal" id="sysUserForm" action="" method="post">
-                                        <div class="form-group">
-                                            <label class="col-xs-3 control-label no-padding-right"
-                                                   for="name-field">用户名:</label>
+                                    <c:choose>
+                                        <c:when test="${!empty model.sysUserExt}">
+                                            <form class="form-horizontal" id="sysUserForm" action="" method="post">
+                                                <div class="form-group">
+                                                    <label class="col-xs-3 control-label no-padding-right"
+                                                           for="name-field">用户名:</label>
 
-                                            <div class="col-xs-9">
-                                                <span class="galaxy-form-value"><c:out value="${model.user.name}"
+                                                    <div class="col-xs-9">
+                                                <span class="galaxy-form-value"><c:out value="${model.sysUserExt.loginName}"
                                                                                        escapeXml="true"></c:out></span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-xs-3 control-label no-padding-right"
-                                                   for="age-field">姓名:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-3 control-label no-padding-right"
+                                                           for="age-field">姓名:</label>
 
-                                            <div class="col-xs-9">
-                                                <span class="galaxy-form-value"><c:out value="${model.user.age}"
+                                                    <div class="col-xs-9">
+                                                <span class="galaxy-form-value"><c:out value="${model.sysUserExt.userName}"
                                                                                        escapeXml="true"></c:out></span>
-                                            </div>
-                                        </div>
+                                                    </div>
+                                                </div>
 
-                                    </form>
+                                            </form>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <form class="form-horizontal" id="sysUserForm" action="" method="post">
+                                                <div class="form-group">
+                                                    用户不存在
+                                                </div>
+
+                                            </form>
+                                        </c:otherwise>
+                                    </c:choose>
+
+
                                 </div>
                             </div>
                         </div>

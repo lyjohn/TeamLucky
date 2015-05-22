@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmlk.dao.IGroupUserDao">
+	<resultMap type="com.tmlk.po.GroupUserExt" id="GroupUserMap">
+		<id property="id" column="id" />
+		<result property="partyUserId" column="partyUserId" />
+		<result property="memberStatus" column="memberStatus" />
+		<result property="groupId" column="groupId" />
+	</resultMap>
+
+	<insert id="create" parameterType="com.tmlk.po.GroupUserExt">
+		<![CDATA[
+		INSERT INTO GroupUser(
+			id,
+			partyUserId,
+			memberStatus,
+			groupId
+		)  
+		VALUES(
+			#{id},
+			#{partyUserId},
+			#{memberStatus},
+			#{groupId}
+		)
+		]]>
+	</insert>
+	
+	<update id="update" parameterType="com.tmlk.po.GroupUserExt" flushCache="true">
+		<![CDATA[
+		UPDATE GroupUser
+		SET
+		partyUserId = #{partyUserId},
+		memberStatus = #{memberStatus},
+		groupId = #{groupId}
+		WHERE id = #{id}
+		]]>
+	</update>
+	
+	<select id="load" parameterType="java.lang.Long" resultMap="GroupUserMap">
+		<![CDATA[
+		SELECT * FROM GroupUser WHERE id = #{id}
+		]]>
+	</select>
+	
+	<delete id="delete" parameterType="java.lang.Long">  
+        <![CDATA[
+        DELETE FROM GroupUser WHERE id = #{id}
+        ]]>
+    </delete>
+    
+    <select id="criteriaQuery" resultMap="GroupUserMap">
+		SELECT * FROM GroupUser
+        <if test="mqlList.size > 0">
+            WHERE
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+        <if test="mortList.size > 0">
+            ORDER BY
+            <foreach collection="mortList" item="mort" separator=",">
+                ${mort}
+            </foreach>
+        </if>
+	</select>
+	
+	<select id="criteriaCount" resultType="int">
+		SELECT COUNT(*) FROM GroupUser
+        <if test="mqlList.size > 0">
+            WHERE
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+	</select>
+	
+</mapper>

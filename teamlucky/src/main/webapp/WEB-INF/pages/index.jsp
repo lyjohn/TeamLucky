@@ -44,9 +44,9 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="../navbar/">Default</a></li>
-                <li><a href="../navbar-static-top/">Static top</a></li>
-                <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
+                <li><a href="../navbar/">用户名称</a></li>
+                <li><a href="${ctx}/party/create">创建活动</a></li>
+                <li class="active"><a href="./">退出</a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->
@@ -57,13 +57,7 @@
 
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
-        <h1>Navbar example</h1>
-
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It
-            includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
-
+        <h1>测试登录</h1>
         <form action="" onsubmit="return false;">
             <div class="form-group">
                 <label for="loginName">帐号</label>
@@ -117,6 +111,7 @@
             $.post("${ctx}/register",{loginName: loginName,loginPwd:loginPwd},function(res){
                 if(res.status==0){
                     alert("注册成功");
+                    window.location.href = "${ctx}/user/index";
                 }else{
                     alert(res.message);
                 }
@@ -132,6 +127,10 @@
             $.post("${ctx}/login",{loginName: loginName,loginPwd:loginPwd},function(res){
                 if(res.status==0){
                     alert("登录成功");
+                    if(res.data=="1")
+                        window.location.href = "${ctx}/user/index";
+                    else
+                        alert("活动用户直接进入活动");
                 }else{
                     alert(res.message);
                 }

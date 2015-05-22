@@ -22,5 +22,28 @@
     <bean id="sysPartyUserLinkService" class="com.tmlk.service.impl.SysPartyUserLinkServiceExt">
         <property name="sysPartyUserLinkDao" ref="sysPartyUserLinkDao"/>
     </bean>
-
+    <bean id="partyService" class="com.tmlk.service.impl.PartyServiceExt">
+        <property name="partyDao" ref="partyDao" />
+    </bean>
+    <bean id="groupService" class="com.tmlk.service.impl.GroupServiceExt">
+        <property name="groupDao" ref="groupDao" />
+    </bean>
+    <bean id="groupUserService" class="com.tmlk.service.impl.GroupUserServiceExt">
+        <property name="groupUserDao" ref="groupUserDao" />
+    </bean>
+    <bean id="messageService" class="com.tmlk.service.impl.MessageServiceExt">
+        <property name="messageDao" ref="messageDao" />
+    </bean>
+    <bean id="noticeService" class="com.tmlk.service.impl.NoticeServiceExt">
+        <property name="noticeDao" ref="noticeDao" />
+    </bean>
+    <bean id="forumService" class="com.tmlk.service.impl.ForumServiceExt">
+        <property name="forumDao" ref="forumDao" />
+    </bean>
+    <bean id="forumCommentService" class="com.tmlk.service.impl.ForumCommentServiceExt">
+        <property name="forumCommentDao" ref="forumCommentDao" />
+    </bean>
+    <bean id="documentService" class="com.tmlk.service.impl.DocumentServiceExt">
+        <property name="documentDao" ref="documentDao" />
+    </bean>
 </beans>

@@ -4,6 +4,9 @@ package com.tmlk.controller;
  * Created by YangJunLin on 2015/4/18.
  */
 
+import com.tmlk.framework.session.SessionUser;
+import com.tmlk.framework.util.Constants;
+import com.tmlk.framework.util.FormatUtils;
 import com.tmlk.model.SysUserModel;
 
 import com.tmlk.po.SysUserExt;
@@ -14,11 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Controller
@@ -30,54 +35,24 @@ public class UserController {
     @Autowired
     private ISysUserServiceExt sysUserService;
 
-    @RequestMapping(value = "/test")
-    public String getUsers(HttpServletRequest request, @ModelAttribute SysUserModel sysUserModel, ModelMap model) throws IOException {
+    @RequestMapping(value = {"/","/index"})
+    public String show(@ModelAttribute SysUserModel sysUserModel, ModelMap model, HttpSession session) throws IOException {
+        SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
+        SysUserExt sysUserExt = (SysUserExt) sessionUser.getUser();
 
-        //根据ID查
-        SysUserExt user = sysUserService.load(request.getParameter("userId"));
-
-        sysUserModel.setSysUserExt(user);
-
-//        创建
-//        UserExt user = new UserExt();
-//        user.setAge(29);
-//        user.setName("赖国强");
-//        userService.create(user);
-//
-//        更新
-//        UserExt user = userService.load(3L);
-//        user.setAge(28);
-//
-//        userService.update(user);
-//        userModel.setUser(user);
-
-//        删除
-//        Long delId = 1L;
-//        userService.delete(delId);
-
-//        查询
-//        List<ICondition> conditions = new ArrayList<ICondition>();
-//        conditions.add(new GtCondition("id",0));
-//
-//        List<Order> orders = new ArrayList<Order>();
-//        orders.add(Order.desc("id"));
-//        orders.add(Order.asc("name"));
-//
-//        Pagination pp = new Pagination();
-//        pp.setCurrentPage(1);
-//        pp.setPageSize(2);
-//
-//        int count = userService.count(conditions);
-//        pp.checkPagination(count);
-//
-//        List<UserExt> users = userService.criteriaQuery(conditions);
-//        List<UserExt> users = userService.criteriaQuery(conditions,orders);
-//        List<UserExt> users = userService.criteriaQuery(conditions,orders,pp);
-
+        sysUserModel.setSysUserExt(sysUserExt);
         model.addAttribute("model", sysUserModel);
 
-        return "/user/show";
+        return "/user/index";
     }
+
+//    @RequestMapping(value="/users/{userId}")：{×××}占位符，  请求的 URL 可以是  “/users/123456”或
+//    “/users/abcd” ，通过 6.6.5 讲的通过@PathV ariable 可以提取 URI 模板模式中的{×××}中的×××变量。
+//    @RequestMapping(value="/users/{userId}/create") ： 这样 也 是 可 以 的 ，请 求的 URL 可 以是
+//    “/users/123/create” 。
+//    @RequestMapping(value="/users/{userId}/topics/{topicId}")：这样也是可以的，请求的 URL 可以是
+//    “/users/123/topics/123”
+
 
     @RequestMapping(value = "/show")
     @ResponseBody
@@ -90,6 +65,24 @@ public class UserController {
     @RequestMapping(value = "/error")
     public String errorUser(HttpServletRequest request, @ModelAttribute SysUserModel sysUserModel, ModelMap model) {
 
-        return "/user/error";
+        return "/error";
     }
+
+    @RequestMapping(value = "/{id}")
+    public String getUser(@PathVariable("id") String id, @ModelAttribute SysUserModel sysUserModel, ModelMap model, HttpSession session) {
+
+        SysUserExt sysUserExt = null;
+        if (FormatUtils.isEmpty(id)) {
+            SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
+            sysUserExt = (SysUserExt) sessionUser.getUser();
+
+        } else {
+            sysUserExt = sysUserService.load(id);
+        }
+
+        sysUserModel.setSysUserExt(sysUserExt);
+        model.addAttribute("model", sysUserModel);
+        return "/user/index";
+    }
+
 }

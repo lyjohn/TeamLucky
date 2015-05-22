@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmlk.dao.INoticeDao">
+	<resultMap type="com.tmlk.po.NoticeExt" id="NoticeMap">
+		<id property="id" column="id" />
+		<result property="noticeTitle" column="noticeTitle" />
+		<result property="noticeContent" column="noticeContent" />
+		<result property="isPublic" column="isPublic" />
+		<result property="readCount" column="readCount" />
+		<result property="groupId" column="groupId" />
+		<result property="partyId" column="partyId" />
+		<result property="createBy" column="createBy" />
+		<result property="createTime" column="createTime" />
+	</resultMap>
+
+	<insert id="create" parameterType="com.tmlk.po.NoticeExt">
+		<![CDATA[
+		INSERT INTO Notice(
+			id,
+			noticeTitle,
+			noticeContent,
+			isPublic,
+			readCount,
+			groupId,
+			partyId,
+			createBy,
+			createTime
+		)  
+		VALUES(
+			#{id},
+			#{noticeTitle},
+			#{noticeContent},
+			#{isPublic},
+			#{readCount},
+			#{groupId},
+			#{partyId},
+			#{createBy},
+			#{createTime, jdbcType = TIMESTAMP}
+		)
+		]]>
+	</insert>
+	
+	<update id="update" parameterType="com.tmlk.po.NoticeExt" flushCache="true">
+		<![CDATA[
+		UPDATE Notice
+		SET
+		noticeTitle = #{noticeTitle},
+		noticeContent = #{noticeContent},
+		isPublic = #{isPublic},
+		readCount = #{readCount},
+		groupId = #{groupId},
+		partyId = #{partyId},
+		createBy = #{createBy},
+		createTime = #{createTime}
+		WHERE id = #{id}
+		]]>
+	</update>
+	
+	<select id="load" parameterType="java.lang.Long" resultMap="NoticeMap">
+		<![CDATA[
+		SELECT * FROM Notice WHERE id = #{id}
+		]]>
+	</select>
+	
+	<delete id="delete" parameterType="java.lang.Long">  
+        <![CDATA[
+        DELETE FROM Notice WHERE id = #{id}
+        ]]>
+    </delete>
+    
+    <select id="criteriaQuery" resultMap="NoticeMap">
+		SELECT * FROM Notice
+        <if test="mqlList.size > 0">
+            WHERE
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+        <if test="mortList.size > 0">
+            ORDER BY
+            <foreach collection="mortList" item="mort" separator=",">
+                ${mort}
+            </foreach>
+        </if>
+	</select>
+	
+	<select id="criteriaCount" resultType="int">
+		SELECT COUNT(*) FROM Notice
+        <if test="mqlList.size > 0">
+            WHERE
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+	</select>
+	
+</mapper>

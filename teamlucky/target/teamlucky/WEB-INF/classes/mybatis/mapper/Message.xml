@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmlk.dao.IMessageDao">
+	<resultMap type="com.tmlk.po.MessageExt" id="MessageMap">
+		<id property="id" column="id" />
+		<result property="messageTitle" column="messageTitle" />
+		<result property="messageContent" column="messageContent" />
+		<result property="messageUrl" column="messageUrl" />
+		<result property="isRead" column="isRead" />
+		<result property="messageFrom" column="messageFrom" />
+		<result property="messageTo" column="messageTo" />
+		<result property="messageTime" column="messageTime" />
+	</resultMap>
+
+	<insert id="create" parameterType="com.tmlk.po.MessageExt">
+		<![CDATA[
+		INSERT INTO Message(
+			id,
+			messageTitle,
+			messageContent,
+			messageUrl,
+			isRead,
+			messageFrom,
+			messageTo,
+			messageTime
+		)  
+		VALUES(
+			#{id},
+			#{messageTitle},
+			#{messageContent},
+			#{messageUrl},
+			#{isRead},
+			#{messageFrom},
+			#{messageTo},
+			#{messageTime, jdbcType = TIMESTAMP}
+		)
+		]]>
+	</insert>
+	
+	<update id="update" parameterType="com.tmlk.po.MessageExt" flushCache="true">
+		<![CDATA[
+		UPDATE Message
+		SET
+		messageTitle = #{messageTitle},
+		messageContent = #{messageContent},
+		messageUrl = #{messageUrl},
+		isRead = #{isRead},
+		messageFrom = #{messageFrom},
+		messageTo = #{messageTo},
+		messageTime = #{messageTime}
+		WHERE id = #{id}
+		]]>
+	</update>
+	
+	<select id="load" parameterType="java.lang.Long" resultMap="MessageMap">
+		<![CDATA[
+		SELECT * FROM Message WHERE id = #{id}
+		]]>
+	</select>
+	
+	<delete id="delete" parameterType="java.lang.Long">  
+        <![CDATA[
+        DELETE FROM Message WHERE id = #{id}
+        ]]>
+    </delete>
+    
+    <select id="criteriaQuery" resultMap="MessageMap">
+		SELECT * FROM Message
+        <if test="mqlList.size > 0">
+            WHERE
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+        <if test="mortList.size > 0">
+            ORDER BY
+            <foreach collection="mortList" item="mort" separator=",">
+                ${mort}
+            </foreach>
+        </if>
+	</select>
+	
+	<select id="criteriaCount" resultType="int">
+		SELECT COUNT(*) FROM Message
+        <if test="mqlList.size > 0">
+            WHERE
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+	</select>
+	
+</mapper>
