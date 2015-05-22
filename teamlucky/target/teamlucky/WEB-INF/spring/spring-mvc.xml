@@ -64,8 +64,8 @@
     <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
             <props>
-                <prop key="java.lang.Exception">errors/error</prop>
-                <prop key="java.lang.Throwable">errors/err</prop>
+                <prop key="java.lang.Exception">/errors/error</prop>
+                <prop key="java.lang.Throwable">/errors/err</prop>
             </props>
         </property>
         <property name="statusCodes">
