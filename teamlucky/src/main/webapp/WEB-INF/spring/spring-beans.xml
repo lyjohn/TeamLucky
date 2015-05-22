@@ -34,8 +34,8 @@
     <bean id="messageService" class="com.tmlk.service.impl.MessageServiceExt">
         <property name="messageDao" ref="messageDao" />
     </bean>
-    <bean id="noticeService" class="com.tmlk.service.impl.NoticeServiceExt">
-        <property name="noticeDao" ref="noticeDao" />
+    <bean id="newsService" class="com.tmlk.service.impl.NewsServiceExt">
+        <property name="newsDao" ref="newsDao" />
     </bean>
     <bean id="forumService" class="com.tmlk.service.impl.ForumServiceExt">
         <property name="forumDao" ref="forumDao" />

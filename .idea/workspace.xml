@@ -60,11 +60,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="spring-mvc.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="spring-mvc.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/spring/spring-mvc.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2539267" vertical-offset="878" max-vertical-offset="1515">
-              <caret line="65" column="19" selection-start-line="65" selection-start-column="19" selection-end-line="65" selection-end-column="19" />
+            <state vertical-scroll-proportion="-9.88" vertical-offset="878" max-vertical-offset="1515">
+              <caret line="75" column="19" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="spring-beans.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/spring/spring-beans.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.4136126" vertical-offset="0" max-vertical-offset="810">
+              <caret line="36" column="25" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -140,7 +150,6 @@
         <option value="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/po/SysUser.java" />
         <option value="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/framework/session/SessionUser.java" />
         <option value="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/framework/session/SessionStatus.java" />
-        <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/spring/spring-beans.xml" />
         <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/user/index.jsp" />
         <option value="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/UserController.java" />
         <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/index.jsp" />
@@ -167,6 +176,7 @@
         <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/create.jsp" />
         <option value="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/PartyController.java" />
         <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/spring/spring-mvc.xml" />
+        <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/spring/spring-beans.xml" />
       </list>
     </option>
   </component>
@@ -709,7 +719,7 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FullScreen" value="false" />
-    <property name="project.structure.last.edited" value="Facets" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
@@ -1082,12 +1092,12 @@
       <workItem from="1431941121445" duration="1092000" />
       <workItem from="1431943880371" duration="1605000" />
       <workItem from="1432096024974" duration="14314000" />
-      <workItem from="1432261913594" duration="8998000" />
+      <workItem from="1432261913594" duration="9947000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26400000" />
+    <option name="totallyTimeSpent" value="27349000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1230,22 +1240,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/dao/INoticeDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17772512" vertical-offset="0" max-vertical-offset="422">
-          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/spring/spring-beans.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.28" vertical-offset="178" max-vertical-offset="810">
-          <caret line="24" column="59" selection-start-line="24" selection-start-column="59" selection-end-line="24" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/service/impl/ForumService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1185">
@@ -1340,14 +1334,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
           <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/service/INoticeServiceExt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="165">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -1537,19 +1523,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/teamlucky/src/main/resources/mybatis/mapper/Notice.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="1545">
-          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-          <folding>
-            <marker date="1432273941000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1432273941000" expanded="true" signature="-1:-1" placeholder="UPDATE Notic..." />
-            <marker date="1432273941000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Notice..." />
-            <marker date="1432273941000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/teamlucky/src/main/resources/mybatis/mapper/PartyUser.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="2085">
@@ -1649,8 +1622,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/spring/spring-mvc.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2539267" vertical-offset="878" max-vertical-offset="1515">
-          <caret line="65" column="19" selection-start-line="65" selection-start-column="19" selection-end-line="65" selection-end-column="19" />
+        <state vertical-scroll-proportion="-9.88" vertical-offset="878" max-vertical-offset="1515">
+          <caret line="75" column="19" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/spring/spring-beans.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.4136126" vertical-offset="0" max-vertical-offset="810">
+          <caret line="36" column="25" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
           <folding />
         </state>
       </provider>

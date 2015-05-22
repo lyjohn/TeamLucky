@@ -3,15 +3,15 @@ package com.tmlk.model;
 import java.util.List;
 import java.util.Map;
 
-import com.tmlk.po.NoticeExt;
+import com.tmlk.po.NewsExt;
 import com.tmlk.framework.util.Pagination;
 
-public class NoticeModel {
+public class NewsModel {
 
 	/************************系统预定义字段，勿动！*****************************/
-	private NoticeExt noticeExt = new NoticeExt();
+	private NewsExt newsExt = new NewsExt();
 	
-	private NoticeExt noticeQueryCon = new NoticeExt();
+	private NewsExt newsQueryCon = new NewsExt();
 	
 	private Pagination pp = new Pagination();
 	
@@ -21,26 +21,26 @@ public class NoticeModel {
 	
 	private Long dataId;
 	
-	private List<NoticeExt> items;
+	private List<NewsExt> items;
 	
 	private String sortType;
 	
 	private String querySort;
 	
-	public NoticeExt getNoticeExt() {
-		return noticeExt;
+	public NewsExt getNewsExt() {
+		return newsExt;
 	}
 
-	public void setNoticeExt(NoticeExt noticeExt) {
-		this.noticeExt = noticeExt;
+	public void setNewsExt(NewsExt newsExt) {
+		this.newsExt = newsExt;
 	}
 
-	public NoticeExt getNoticeQueryCon() {
-		return noticeQueryCon;
+	public NewsExt getNewsQueryCon() {
+		return newsQueryCon;
 	}
 
-	public void setNoticeQueryCon(NoticeExt noticeQueryCon) {
-		this.noticeQueryCon = noticeQueryCon;
+	public void setNewsQueryCon(NewsExt newsQueryCon) {
+		this.newsQueryCon = newsQueryCon;
 	}
 
 	public Pagination getPp() {
@@ -75,11 +75,11 @@ public class NoticeModel {
 		this.dataId = dataId;
 	}
 
-	public List<NoticeExt> getItems() {
+	public List<NewsExt> getItems() {
 		return items;
 	}
 
-	public void setItems(List<NoticeExt> items) {
+	public void setItems(List<NewsExt> items) {
 		this.items = items;
 	}
 

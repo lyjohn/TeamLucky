@@ -2,10 +2,10 @@ package com.tmlk.po;
 
 import java.util.Date;
 
-public class Notice{
+public class News{
 
 	/**
-	 * 通知表
+	 * 新闻通知
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -19,23 +19,23 @@ public class Notice{
 		this.id = id;
 	}
 	
-	private String noticeTitle;
+	private String newsTitle;
 	
-	public String getNoticeTitle(){
-		return noticeTitle;
+	public String getNewsTitle(){
+		return newsTitle;
 	}
 	
-	public void setNoticeTitle(String noticeTitle){
-		this.noticeTitle = noticeTitle;
+	public void setNewsTitle(String newsTitle){
+		this.newsTitle = newsTitle;
 	}
-	private String noticeContent;
+	private String newsContent;
 	
-	public String getNoticeContent(){
-		return noticeContent;
+	public String getNewsContent(){
+		return newsContent;
 	}
 	
-	public void setNoticeContent(String noticeContent){
-		this.noticeContent = noticeContent;
+	public void setNewsContent(String newsContent){
+		this.newsContent = newsContent;
 	}
 	private Boolean isPublic;
 	
@@ -98,11 +98,11 @@ public class Notice{
         {
             return true;
         }
-        if (!(object instanceof Notice))
+        if (!(object instanceof News))
         {
             return false;
         }
-        final Notice that = (Notice)object;
+        final News that = (News)object;
         if (this.id == null || that.getId() == null || !this.id.equals(that.getId()))
         {
             return false;
@@ -125,12 +125,12 @@ public class Notice{
 
 	}
 	
-	public Notice cloneNotice (){
+	public News cloneNews (){
         
-		Notice newObj = null;
+		News newObj = null;
         try
         {
-            newObj = (Notice)org.apache.commons.beanutils.BeanUtils.cloneBean(this);            
+            newObj = (News)org.apache.commons.beanutils.BeanUtils.cloneBean(this);            
         } catch (IllegalAccessException e)
         {
             // TODO Auto-generated catch block
