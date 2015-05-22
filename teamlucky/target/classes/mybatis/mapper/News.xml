@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.tmlk.dao.INoticeDao">
-	<resultMap type="com.tmlk.po.NoticeExt" id="NoticeMap">
-		<id property="id" column="id" />
-		<result property="noticeTitle" column="noticeTitle" />
-		<result property="noticeContent" column="noticeContent" />
+<mapper namespace="com.tmlk.dao.INewsDao">
+	<resultMap type="com.tmlk.po.NewsExt" id="NewsMap">
+		<id property="id" column="ID" />
+		<result property="newsTitle" column="newsTitle" />
+		<result property="newsContent" column="newsContent" />
 		<result property="isPublic" column="isPublic" />
 		<result property="readCount" column="readCount" />
 		<result property="groupId" column="groupId" />
@@ -13,12 +13,12 @@
 		<result property="createTime" column="createTime" />
 	</resultMap>
 
-	<insert id="create" parameterType="com.tmlk.po.NoticeExt">
+	<insert id="create" parameterType="com.tmlk.po.NewsExt">
 		<![CDATA[
-		INSERT INTO Notice(
-			id,
-			noticeTitle,
-			noticeContent,
+		INSERT INTO News(
+			ID,
+			newsTitle,
+			newsContent,
 			isPublic,
 			readCount,
 			groupId,
@@ -28,8 +28,8 @@
 		)  
 		VALUES(
 			#{id},
-			#{noticeTitle},
-			#{noticeContent},
+			#{newsTitle},
+			#{newsContent},
 			#{isPublic},
 			#{readCount},
 			#{groupId},
@@ -40,12 +40,12 @@
 		]]>
 	</insert>
 	
-	<update id="update" parameterType="com.tmlk.po.NoticeExt" flushCache="true">
+	<update id="update" parameterType="com.tmlk.po.NewsExt" flushCache="true">
 		<![CDATA[
-		UPDATE Notice
+		UPDATE News
 		SET
-		noticeTitle = #{noticeTitle},
-		noticeContent = #{noticeContent},
+		newsTitle = #{newsTitle},
+		newsContent = #{newsContent},
 		isPublic = #{isPublic},
 		readCount = #{readCount},
 		groupId = #{groupId},
@@ -56,20 +56,20 @@
 		]]>
 	</update>
 	
-	<select id="load" parameterType="java.lang.Long" resultMap="NoticeMap">
+	<select id="load" parameterType="java.lang.Long" resultMap="NewsMap">
 		<![CDATA[
-		SELECT * FROM Notice WHERE id = #{id}
+		SELECT * FROM News WHERE id = #{id}
 		]]>
 	</select>
 	
 	<delete id="delete" parameterType="java.lang.Long">  
         <![CDATA[
-        DELETE FROM Notice WHERE id = #{id}
+        DELETE FROM News WHERE id = #{id}
         ]]>
     </delete>
     
-    <select id="criteriaQuery" resultMap="NoticeMap">
-		SELECT * FROM Notice
+    <select id="criteriaQuery" resultMap="NewsMap">
+		SELECT * FROM News
         <if test="mqlList.size > 0">
             WHERE
             <foreach collection="mqlList" item="mql" separator="and">
@@ -85,7 +85,7 @@
 	</select>
 	
 	<select id="criteriaCount" resultType="int">
-		SELECT COUNT(*) FROM Notice
+		SELECT COUNT(*) FROM News
         <if test="mqlList.size > 0">
             WHERE
             <foreach collection="mqlList" item="mql" separator="and">

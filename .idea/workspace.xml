@@ -41,11 +41,9 @@
       <file leaf-file-name="PartyController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/PartyController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1425">
+            <state vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="1170">
               <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -53,8 +51,8 @@
       <file leaf-file-name="IDocumentService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/service/IDocumentService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5159705" vertical-offset="0" max-vertical-offset="435">
-              <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.36585367" vertical-offset="0" max-vertical-offset="435">
+              <caret line="16" column="38" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -73,7 +71,7 @@
       <file leaf-file-name="web.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/web.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1440">
+            <state vertical-scroll-proportion="0.0" vertical-offset="675" max-vertical-offset="1440">
               <caret line="45" column="22" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
               <folding />
             </state>
@@ -83,7 +81,7 @@
       <file leaf-file-name="spring-mvc.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/spring/spring-mvc.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.88" vertical-offset="878" max-vertical-offset="1515">
+            <state vertical-scroll-proportion="0.0" vertical-offset="878" max-vertical-offset="1515">
               <caret line="75" column="19" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="19" />
               <folding />
             </state>
@@ -93,7 +91,7 @@
       <file leaf-file-name="spring-beans.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/spring/spring-beans.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-21.6" vertical-offset="0" max-vertical-offset="810">
+            <state vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="810">
               <caret line="36" column="25" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
               <folding />
             </state>
@@ -103,7 +101,7 @@
       <file leaf-file-name="setting.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/setting.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.25" vertical-offset="0" max-vertical-offset="2745">
+            <state vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="2745">
               <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
@@ -113,7 +111,7 @@
       <file leaf-file-name="index.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/user/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-21.25" vertical-offset="0" max-vertical-offset="1425">
+            <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="1425">
               <caret line="34" column="55" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="55" />
               <folding />
             </state>
@@ -123,7 +121,7 @@
       <file leaf-file-name="create.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/create.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.9166665" vertical-offset="1910" max-vertical-offset="2715">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1910" max-vertical-offset="2715">
               <caret line="140" column="10" selection-start-line="140" selection-start-column="10" selection-end-line="140" selection-end-column="10" />
               <folding />
             </state>
@@ -133,7 +131,7 @@
       <file leaf-file-name="_header.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/shared/_header.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="285">
+            <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="285">
               <caret line="6" column="50" selection-start-line="6" selection-start-column="50" selection-end-line="6" selection-end-column="50" />
               <folding />
             </state>
@@ -283,6 +281,9 @@
     <OptionsSetting value="true" id="Get Latest Version" />
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="1" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -717,8 +718,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -728,19 +729,11 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
-    <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="FullScreen" value="false" />
-    <property name="project.structure.last.edited" value="Artifacts" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
-    <property name="restartRequiresConfirmation" value="true" />
-    <property name="LayoutCode.rearrangeEntriesJava" value="false" />
-    <property name="OverrideImplement.combined" value="true" />
-    <property name="OverrideImplement.overriding.sorted" value="false" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -1106,12 +1099,13 @@
       <workItem from="1431941121445" duration="1092000" />
       <workItem from="1431943880371" duration="1605000" />
       <workItem from="1432096024974" duration="14314000" />
-      <workItem from="1432261913594" duration="10569000" />
+      <workItem from="1432261913594" duration="10684000" />
+      <workItem from="1432285956684" duration="182000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27971000" />
+    <option name="totallyTimeSpent" value="28268000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1151,11 +1145,11 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329927" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32846716" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24964234" sideWeight="0.49756098" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3343465" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3343465" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329927" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33890578" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33890578" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32784432" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964234" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
@@ -1195,6 +1189,9 @@
           <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
       <option name="time" value="11" />
     </breakpoint-manager>
     <watches-manager />
@@ -1204,6 +1201,30 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/user/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="1425">
+          <caret line="34" column="55" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/create.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1910" max-vertical-offset="2715">
+          <caret line="140" column="10" selection-start-line="140" selection-start-column="10" selection-end-line="140" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/shared/_header.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="285">
+          <caret line="6" column="50" selection-start-line="6" selection-start-column="50" selection-end-line="6" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/dao/ISysUserDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.53317535" vertical-offset="0" max-vertical-offset="422">
@@ -1250,7 +1271,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="1065">
           <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1280,9 +1300,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33252427" vertical-offset="343" max-vertical-offset="1665">
           <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1290,7 +1307,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30952382" vertical-offset="0" max-vertical-offset="1065">
           <caret line="17" column="44" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1298,7 +1314,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14285715" vertical-offset="0" max-vertical-offset="630">
           <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1314,9 +1329,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="794" max-vertical-offset="1245">
           <caret line="69" column="46" selection-start-line="69" selection-start-column="46" selection-end-line="69" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1324,7 +1336,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
           <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1340,7 +1351,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
           <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1356,7 +1366,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.7641277" vertical-offset="778" max-vertical-offset="1185">
           <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1381,7 +1390,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
           <caret line="10" column="41" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="41" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1391,8 +1400,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="253" max-vertical-offset="690">
           <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
           <folding>
-            <element signature="e#978#990#0" expanded="true" />
-            <element signature="e#1086#1093#0" expanded="true" />
+            <element signature="e#978#990#0" expanded="false" />
+            <element signature="e#1086#1093#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1409,7 +1418,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="3.502538" vertical-offset="0" max-vertical-offset="1470">
           <caret line="92" column="4" selection-start-line="92" selection-start-column="4" selection-end-line="92" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1433,13 +1441,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1633" max-vertical-offset="2040">
           <caret line="124" column="14" selection-start-line="124" selection-start-column="12" selection-end-line="124" selection-end-column="14" />
-          <folding>
-            <marker date="1432273822000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1432273822000" expanded="true" signature="-1:-1" placeholder="UPDATE Party..." />
-            <marker date="1432273822000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Party..." />
-            <marker date="1432273822000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1432273822000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Party..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1447,12 +1449,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.1666667" vertical-offset="198" max-vertical-offset="1725">
           <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
-          <folding>
-            <marker date="1432273866000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1432273866000" expanded="true" signature="-1:-1" placeholder="UPDATE Docum..." />
-            <marker date="1432273866000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Document..." />
-            <marker date="1432273866000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1460,12 +1457,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.1481482" vertical-offset="28" max-vertical-offset="1605">
           <caret line="6" column="41" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="46" />
-          <folding>
-            <marker date="1432273880000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1432273880000" expanded="true" signature="-1:-1" placeholder="UPDATE Forum..." />
-            <marker date="1432273880000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Forum..." />
-            <marker date="1432273880000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1473,12 +1465,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.1666665" vertical-offset="0" max-vertical-offset="1365">
           <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
-          <folding>
-            <marker date="1432273892000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1432273892000" expanded="true" signature="-1:-1" placeholder="UPDATE Forum..." />
-            <marker date="1432273892000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..ForumComment..." />
-            <marker date="1432273892000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1486,12 +1473,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.3888888" vertical-offset="0" max-vertical-offset="1725">
           <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
-          <folding>
-            <marker date="1432273899000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1432273899000" expanded="true" signature="-1:-1" placeholder="UPDATE Group..." />
-            <marker date="1432273899000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Group..." />
-            <marker date="1432273899000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1499,12 +1481,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.9444444" vertical-offset="0" max-vertical-offset="1245">
           <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
-          <folding>
-            <marker date="1432273906000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1432273906000" expanded="true" signature="-1:-1" placeholder="UPDATE Group..." />
-            <marker date="1432273906000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..GroupUser..." />
-            <marker date="1432273906000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1512,12 +1489,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.7222223" vertical-offset="0" max-vertical-offset="1485">
           <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
-          <folding>
-            <marker date="1432273914000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1432273914000" expanded="true" signature="-1:-1" placeholder="UPDATE Messa..." />
-            <marker date="1432273914000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Message..." />
-            <marker date="1432273914000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1525,12 +1497,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="2085">
           <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
-          <folding>
-            <marker date="1432273941000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1432273941000" expanded="true" signature="-1:-1" placeholder="UPDATE Party..." />
-            <marker date="1432273941000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..PartyUser..." />
-            <marker date="1432273941000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1538,12 +1505,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.6111112" vertical-offset="0" max-vertical-offset="1245">
           <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
-          <folding>
-            <marker date="1432273941000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1432273941000" expanded="true" signature="-1:-1" placeholder="UPDATE SysPa..." />
-            <marker date="1432273941000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..SysPartyUserLink..." />
-            <marker date="1432273941000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1551,12 +1513,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.6666666" vertical-offset="0" max-vertical-offset="1965">
           <caret line="6" column="37" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
-          <folding>
-            <marker date="1432273941000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1432273941000" expanded="true" signature="-1:-1" placeholder="UPDATE SysUs..." />
-            <marker date="1432273941000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..SysUser..." />
-            <marker date="1432273941000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1570,7 +1527,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/shared/_header.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="285">
+        <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="285">
           <caret line="6" column="50" selection-start-line="6" selection-start-column="50" selection-end-line="6" selection-end-column="50" />
           <folding />
         </state>
@@ -1578,7 +1535,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/setting.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.25" vertical-offset="0" max-vertical-offset="2745">
+        <state vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="2745">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
@@ -1586,7 +1543,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/user/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.25" vertical-offset="0" max-vertical-offset="1425">
+        <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="1425">
           <caret line="34" column="55" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="55" />
           <folding />
         </state>
@@ -1594,7 +1551,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/create.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.9166665" vertical-offset="1910" max-vertical-offset="2715">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1910" max-vertical-offset="2715">
           <caret line="140" column="10" selection-start-line="140" selection-start-column="10" selection-end-line="140" selection-end-column="10" />
           <folding />
         </state>
@@ -1610,7 +1567,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/spring/spring-mvc.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.88" vertical-offset="878" max-vertical-offset="1515">
+        <state vertical-scroll-proportion="0.0" vertical-offset="878" max-vertical-offset="1515">
           <caret line="75" column="19" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="19" />
           <folding />
         </state>
@@ -1618,7 +1575,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/spring/spring-beans.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.6" vertical-offset="0" max-vertical-offset="810">
+        <state vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="810">
           <caret line="36" column="25" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
           <folding />
         </state>
@@ -1628,9 +1585,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1425">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1644,8 +1599,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/service/IDocumentService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5159705" vertical-offset="0" max-vertical-offset="435">
-          <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.36585367" vertical-offset="0" max-vertical-offset="435">
+          <caret line="16" column="38" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
           <folding />
         </state>
       </provider>
@@ -1669,7 +1624,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>Spring</last-edited>
+          <last-edited>Web</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1704,7 +1659,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>Web|teamlucky</last-edited>
+          <last-edited>Spring|teamlucky</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1716,7 +1671,7 @@
       </state>
       <state key="ProjectJDKs.UI">
         <settings>
-          <last-edited>1.7</last-edited>
+          <last-edited>1.8</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
