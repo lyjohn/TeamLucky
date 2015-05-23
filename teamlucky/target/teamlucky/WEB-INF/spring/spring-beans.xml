@@ -16,6 +16,12 @@
     <bean id="sysUserService" class="com.tmlk.service.impl.SysUserServiceExt">
         <property name="sysUserDao" ref="sysUserDao"/>
     </bean>
+    <bean id="sysLogService" class="com.tmlk.service.impl.SysLogServiceExt">
+        <property name="sysLogDao" ref="sysLogDao" />
+    </bean>
+    <bean id="sysExceptionService" class="com.tmlk.service.impl.SysExceptionServiceExt">
+        <property name="sysExceptionDao" ref="sysExceptionDao"/>
+    </bean>
     <bean id="partyUserService" class="com.tmlk.service.impl.PartyUserServiceExt">
         <property name="partyUserDao" ref="partyUserDao"/>
     </bean>
@@ -24,12 +30,13 @@
     </bean>
     <bean id="partyService" class="com.tmlk.service.impl.PartyServiceExt">
         <property name="partyDao" ref="partyDao" />
+        <property name="partyUserService" ref="partyUserService" />
+        <property name="sysUserService" ref="sysUserService"/>
+        <property name="partyGroupService" ref="groupService"/>
+        <property name="sysPartyUserLinkService" ref="sysPartyUserLinkService"/>
     </bean>
-    <bean id="groupService" class="com.tmlk.service.impl.GroupServiceExt">
-        <property name="groupDao" ref="groupDao" />
-    </bean>
-    <bean id="groupUserService" class="com.tmlk.service.impl.GroupUserServiceExt">
-        <property name="groupUserDao" ref="groupUserDao" />
+    <bean id="groupService" class="com.tmlk.service.impl.PartyGroupServiceExt">
+        <property name="partyGroupDao" ref="partyGroupDao" />
     </bean>
     <bean id="messageService" class="com.tmlk.service.impl.MessageServiceExt">
         <property name="messageDao" ref="messageDao" />

@@ -12,7 +12,7 @@
 		<result property="messageTime" column="messageTime" />
 	</resultMap>
 
-	<insert id="create" parameterType="com.tmlk.po.MessageExt">
+	<insert id="create" parameterType="com.tmlk.po.MessageExt" useGeneratedKeys="true" keyProperty="id">
 		<![CDATA[
 		INSERT INTO Message(
 			id,

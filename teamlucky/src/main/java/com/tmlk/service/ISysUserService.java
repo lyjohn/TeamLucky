@@ -11,7 +11,7 @@ import com.tmlk.po.SysUserExt;
 public interface ISysUserService {
 	
 	public SysUserExt create(SysUserExt sysUser);
-	
+
 	public void update(SysUserExt sysUser);
 	
 	public SysUserExt load(String  id);
@@ -21,7 +21,7 @@ public interface ISysUserService {
 	public List<SysUserExt> criteriaQuery(List<ICondition> conditions);
 	
 	public List<SysUserExt> criteriaQuery(List<ICondition> conditions, List<Order> orders);
-	
+
 	public List<SysUserExt> criteriaQuery(List<ICondition> conditions, List<Order> orders, Pagination pp);
 	
 	public int count(List<ICondition> conditions);

@@ -10,59 +10,59 @@ import com.tmlk.framework.mybatis.Order;
 import com.tmlk.framework.util.Pagination;
 import com.tmlk.framework.util.Constants;
 
-import com.tmlk.dao.IGroupUserDao;
-import com.tmlk.po.GroupUserExt;
-import com.tmlk.service.IGroupUserService;
+import com.tmlk.dao.ISysExceptionDao;
+import com.tmlk.po.SysExceptionExt;
+import com.tmlk.service.ISysExceptionService;
 
-public class GroupUserService implements IGroupUserService{
+public class SysExceptionService implements ISysExceptionService{
 	
-	private IGroupUserDao groupUserDao;
+	private ISysExceptionDao sysExceptionDao;
 	
-	public IGroupUserDao getGroupUserDao() {
-		return groupUserDao;
+	public ISysExceptionDao getSysExceptionDao() {
+		return sysExceptionDao;
 	}
 
-	public void setGroupUserDao(IGroupUserDao groupUserDao) {
-		this.groupUserDao = groupUserDao;
+	public void setSysExceptionDao(ISysExceptionDao sysExceptionDao) {
+		this.sysExceptionDao = sysExceptionDao;
 	}
 
 	@Override
-	public GroupUserExt create(GroupUserExt groupUser) {
-		int res = groupUserDao.create(groupUser);
+	public SysExceptionExt create(SysExceptionExt sysException) {
+		int res = sysExceptionDao.create(sysException);
 		if(res == 1)
-			return groupUser;
+			return sysException;
 		
 		return null;
 	}
 
 	@Override
-	public void update(GroupUserExt groupUser) {
-		groupUserDao.update(groupUser);
+	public void update(SysExceptionExt sysException) {
+		sysExceptionDao.update(sysException);
 	}
 	
 	@Override
-	public GroupUserExt load(Long id) {
-		return groupUserDao.load(id);
+	public SysExceptionExt load(Long id) {
+		return sysExceptionDao.load(id);
 	}
 
 	@Override
 	public void delete(Long  id) {
-		groupUserDao.delete(id);
+		sysExceptionDao.delete(id);
 	}
 	
 	
 	@Override
-	public List<GroupUserExt> criteriaQuery(List<ICondition> conditions) {
+	public List<SysExceptionExt> criteriaQuery(List<ICondition> conditions) {
 		return this.criteriaQuery(conditions, null, null);
 	}
 	
 	@Override
-	public List<GroupUserExt> criteriaQuery(List<ICondition> conditions, List<Order> orders) {
+	public List<SysExceptionExt> criteriaQuery(List<ICondition> conditions, List<Order> orders) {
 		return this.criteriaQuery(conditions, orders, null);
 	}
 	
 	@Override
-	public List<GroupUserExt> criteriaQuery(List<ICondition> conditions, List<Order> orders, Pagination pp) {
+	public List<SysExceptionExt> criteriaQuery(List<ICondition> conditions, List<Order> orders, Pagination pp) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		List<String> mqlList = new ArrayList<String>();
 		if(conditions != null){
@@ -78,7 +78,7 @@ public class GroupUserService implements IGroupUserService{
 			}
 		}
 		
-		return groupUserDao.criteriaQuery(mqlList, mortList, params, pp);
+		return sysExceptionDao.criteriaQuery(mqlList, mortList, params, pp);
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class GroupUserService implements IGroupUserService{
 			}
 		}
 		
-		return groupUserDao.criteriaCount(mqlList,params);
+		return sysExceptionDao.criteriaCount(mqlList,params);
 	}
 	
 }

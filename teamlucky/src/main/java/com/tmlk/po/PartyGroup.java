@@ -2,10 +2,10 @@ package com.tmlk.po;
 
 import java.util.Date;
 
-public class Group{
+public class PartyGroup{
 
 	/**
-	 * 小组
+	 * 活动小组
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -125,11 +125,11 @@ public class Group{
         {
             return true;
         }
-        if (!(object instanceof Group))
+        if (!(object instanceof PartyGroup))
         {
             return false;
         }
-        final Group that = (Group)object;
+        final PartyGroup that = (PartyGroup)object;
         if (this.id == null || that.getId() == null || !this.id.equals(that.getId()))
         {
             return false;
@@ -152,12 +152,12 @@ public class Group{
 
 	}
 	
-	public Group cloneGroup (){
+	public PartyGroup clonePartyGroup (){
         
-		Group newObj = null;
+		PartyGroup newObj = null;
         try
         {
-            newObj = (Group)org.apache.commons.beanutils.BeanUtils.cloneBean(this);            
+            newObj = (PartyGroup)org.apache.commons.beanutils.BeanUtils.cloneBean(this);            
         } catch (IllegalAccessException e)
         {
             // TODO Auto-generated catch block

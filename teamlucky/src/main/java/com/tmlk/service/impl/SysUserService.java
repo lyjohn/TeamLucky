@@ -8,7 +8,6 @@ import java.util.Map;
 import com.tmlk.framework.mybatis.ICondition;
 import com.tmlk.framework.mybatis.Order;
 import com.tmlk.framework.util.Pagination;
-import com.tmlk.framework.util.Constants;
 
 import com.tmlk.dao.ISysUserDao;
 import com.tmlk.po.SysUserExt;
@@ -49,8 +48,7 @@ public class SysUserService implements ISysUserService{
 	public void delete(String  id) {
 		sysUserDao.delete(id);
 	}
-	
-	
+
 	@Override
 	public List<SysUserExt> criteriaQuery(List<ICondition> conditions) {
 		return this.criteriaQuery(conditions, null, null);

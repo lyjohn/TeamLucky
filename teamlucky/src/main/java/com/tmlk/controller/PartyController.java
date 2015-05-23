@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
@@ -39,31 +40,17 @@ public class PartyController {
 
     @RequestMapping(value = "/doCreate", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult doCreate(@ModelAttribute PartyExt partyExt, HttpSession session){
+    public JsonResult doCreate(@ModelAttribute PartyExt partyExt, HttpSession session, HttpServletRequest request){
         JsonResult result = new JsonResult();
         try{
             String partyCode = partyExt.getPartyCode();
 
-
             if(!partyService.existParty(partyCode)){
 
                 SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
-                SysUserExt sysUserExt = (SysUserExt)sessionUser.getUser();
+                partyExt.setCreateBy(sessionUser.getSysUserId());
 
-                if(!partyExt.getIsGroup()){ //不分组 我们将自动创建一个小组来保持所有
-                    partyExt.setBuildEndTime(null);
-                    partyExt.setMemberNumMax(0);
-                    partyExt.setMemberNumMin(0);
-                    partyExt.setIsCustomBuild(null);
-                }
-                partyExt.setCreateBy(sysUserExt.getId());
-                partyExt.setCreateTime(new Date());
-
-                partyExt.setHotCount(0);
-                partyExt.setMemberCount(0);
-                partyExt.setPartyStatus(1);
-
-                partyService.create(partyExt);
+                partyService.launch(partyExt, request);
 
                 result.setStatus(0);
 

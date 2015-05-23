@@ -3,15 +3,15 @@ package com.tmlk.model;
 import java.util.List;
 import java.util.Map;
 
-import com.tmlk.po.GroupUserExt;
+import com.tmlk.po.SysLogExt;
 import com.tmlk.framework.util.Pagination;
 
-public class GroupUserModel {
+public class SysLogModel {
 
 	/************************系统预定义字段，勿动！*****************************/
-	private GroupUserExt groupUserExt = new GroupUserExt();
+	private SysLogExt sysLogExt = new SysLogExt();
 	
-	private GroupUserExt groupUserQueryCon = new GroupUserExt();
+	private SysLogExt sysLogQueryCon = new SysLogExt();
 	
 	private Pagination pp = new Pagination();
 	
@@ -21,26 +21,26 @@ public class GroupUserModel {
 	
 	private Long dataId;
 	
-	private List<GroupUserExt> items;
+	private List<SysLogExt> items;
 	
 	private String sortType;
 	
 	private String querySort;
 	
-	public GroupUserExt getGroupUserExt() {
-		return groupUserExt;
+	public SysLogExt getSysLogExt() {
+		return sysLogExt;
 	}
 
-	public void setGroupUserExt(GroupUserExt groupUserExt) {
-		this.groupUserExt = groupUserExt;
+	public void setSysLogExt(SysLogExt sysLogExt) {
+		this.sysLogExt = sysLogExt;
 	}
 
-	public GroupUserExt getGroupUserQueryCon() {
-		return groupUserQueryCon;
+	public SysLogExt getSysLogQueryCon() {
+		return sysLogQueryCon;
 	}
 
-	public void setGroupUserQueryCon(GroupUserExt groupUserQueryCon) {
-		this.groupUserQueryCon = groupUserQueryCon;
+	public void setSysLogQueryCon(SysLogExt sysLogQueryCon) {
+		this.sysLogQueryCon = sysLogQueryCon;
 	}
 
 	public Pagination getPp() {
@@ -75,11 +75,11 @@ public class GroupUserModel {
 		this.dataId = dataId;
 	}
 
-	public List<GroupUserExt> getItems() {
+	public List<SysLogExt> getItems() {
 		return items;
 	}
 
-	public void setItems(List<GroupUserExt> items) {
+	public void setItems(List<SysLogExt> items) {
 		this.items = items;
 	}
 

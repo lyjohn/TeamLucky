@@ -8,7 +8,7 @@
 		<result property="partyId" column="partyId" />
 	</resultMap>
 
-	<insert id="create" parameterType="com.tmlk.po.SysPartyUserLinkExt">
+	<insert id="create" parameterType="com.tmlk.po.SysPartyUserLinkExt" useGeneratedKeys="true" keyProperty="id">
 		<![CDATA[
 		INSERT INTO SysPartyUserLink(
 			id,

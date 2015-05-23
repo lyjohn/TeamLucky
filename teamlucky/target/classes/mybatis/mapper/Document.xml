@@ -16,7 +16,7 @@
 		<result property="createTime" column="createTime" />
 	</resultMap>
 
-	<insert id="create" parameterType="com.tmlk.po.DocumentExt">
+	<insert id="create" parameterType="com.tmlk.po.DocumentExt" useGeneratedKeys="true" keyProperty="id">
 		<![CDATA[
 		INSERT INTO Document(
 			id,

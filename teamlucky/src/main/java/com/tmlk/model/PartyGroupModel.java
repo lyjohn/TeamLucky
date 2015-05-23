@@ -3,15 +3,15 @@ package com.tmlk.model;
 import java.util.List;
 import java.util.Map;
 
-import com.tmlk.po.GroupExt;
+import com.tmlk.po.PartyGroupExt;
 import com.tmlk.framework.util.Pagination;
 
-public class GroupModel {
+public class PartyGroupModel {
 
 	/************************系统预定义字段，勿动！*****************************/
-	private GroupExt groupExt = new GroupExt();
+	private PartyGroupExt partyGroupExt = new PartyGroupExt();
 	
-	private GroupExt groupQueryCon = new GroupExt();
+	private PartyGroupExt partyGroupQueryCon = new PartyGroupExt();
 	
 	private Pagination pp = new Pagination();
 	
@@ -21,26 +21,26 @@ public class GroupModel {
 	
 	private Long dataId;
 	
-	private List<GroupExt> items;
+	private List<PartyGroupExt> items;
 	
 	private String sortType;
 	
 	private String querySort;
 	
-	public GroupExt getGroupExt() {
-		return groupExt;
+	public PartyGroupExt getPartyGroupExt() {
+		return partyGroupExt;
 	}
 
-	public void setGroupExt(GroupExt groupExt) {
-		this.groupExt = groupExt;
+	public void setPartyGroupExt(PartyGroupExt partyGroupExt) {
+		this.partyGroupExt = partyGroupExt;
 	}
 
-	public GroupExt getGroupQueryCon() {
-		return groupQueryCon;
+	public PartyGroupExt getPartyGroupQueryCon() {
+		return partyGroupQueryCon;
 	}
 
-	public void setGroupQueryCon(GroupExt groupQueryCon) {
-		this.groupQueryCon = groupQueryCon;
+	public void setPartyGroupQueryCon(PartyGroupExt partyGroupQueryCon) {
+		this.partyGroupQueryCon = partyGroupQueryCon;
 	}
 
 	public Pagination getPp() {
@@ -75,11 +75,11 @@ public class GroupModel {
 		this.dataId = dataId;
 	}
 
-	public List<GroupExt> getItems() {
+	public List<PartyGroupExt> getItems() {
 		return items;
 	}
 
-	public void setItems(List<GroupExt> items) {
+	public void setItems(List<PartyGroupExt> items) {
 		this.items = items;
 	}
 

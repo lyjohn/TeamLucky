@@ -8,102 +8,197 @@ import javax.servlet.http.HttpSession;
 
 import com.tmlk.framework.util.Constants;
 import com.tmlk.po.PartyUserExt;
-import com.tmlk.po.SysUser;
 import com.tmlk.po.SysUserExt;
 
 public class SessionStatus {
 
-	private static SessionStatus instance = new SessionStatus();
+    private static SessionStatus instance = new SessionStatus();
 
-	public static SessionStatus getInstance() {
-		return instance;
-	}
+    public static SessionStatus getInstance() {
+        return instance;
+    }
 
-	private Map<String, HttpSession> sessionMap = new HashMap<String, HttpSession>(10000);
+    private Map<String, HttpSession> sessionMap = new HashMap<String, HttpSession>(10000);
 
-	private long sessionCount = 0;
+    private long sessionCount = 0;
 
-	private SessionStatus() {
-	}
+    private SessionStatus() {
+    }
 
-	public synchronized long getSessionCount() {
-		return sessionCount;
-	}
+    public synchronized long getSessionCount() {
+        return sessionCount;
+    }
 
-	public synchronized void checkAndLogin(HttpSession session, Object user, HttpServletRequest request) {
+    /**
+     * 登录的时候调用，将用户的 id name avatar记录到Session中
+     *
+     * @param session HttpSession
+     * @param user    用户对象
+     * @param request HttpServletRequest
+     * @return 返回值
+     */
+    public synchronized void checkAndLogin(HttpSession session, Object user, HttpServletRequest request) {
 
-		SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+        SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
 
-		String userId = "";
-		if(user.getClass() == SysUserExt.class){ //系统用户
-			SysUserExt sysUser = (SysUserExt)user;
-			userId = sysUser.getId();
-		}
-		else{
-			PartyUserExt partyUser = (PartyUserExt)user;
-			userId = partyUser.getId();
-		}
-	
-		if (sessionUser == null) {
-			sessionUser = new SessionUser();
-			if(user.getClass() == SysUserExt.class){ //系统用户
-				SysUserExt sysUser = (SysUserExt)user;
-				sessionUser.setUserType(1);
-				sessionUser.setUserId(userId);
-				sessionUser.setUser(sysUser);
-			}
-			else{
-				PartyUserExt partyUser = (PartyUserExt)user;
-				sessionUser.setUserType(2);
-				sessionUser.setUserId(userId);
-				sessionUser.setUser(partyUser);
-			}
+        String sessionKey = "";
+        if (user.getClass() == SysUserExt.class) { //系统用户
+            SysUserExt sysUser = (SysUserExt) user;
+            sessionKey = sysUser.getId();
+        } else {
+            PartyUserExt partyUser = (PartyUserExt) user;
+            sessionKey = partyUser.getId();
+        }
 
-			session.setAttribute(Constants.SESSION_USER, sessionUser);
+        if (sessionUser == null) {
+            sessionUser = new SessionUser();
+            if (user.getClass() == SysUserExt.class) { //系统用户
+                SysUserExt sysUser = (SysUserExt) user;
+                sessionUser.setUserType(1);
+                sessionUser.setSessionKey(sessionKey);
+                sessionUser.setSysUserAvatar(sysUser.getUserAvatar());
+                sessionUser.setSysUserId(sysUser.getId());
+                sessionUser.setSysUserName(sysUser.getUserName());
+            } else {
+                PartyUserExt partyUser = (PartyUserExt) user;
+                sessionUser.setUserType(2);
+                sessionUser.setSessionKey(sessionKey);
+                sessionUser.setSysUserAvatar(partyUser.getUserAvatar());
+                sessionUser.setSysUserId(partyUser.getId());
+                sessionUser.setSysUserName(partyUser.getUserName());
+                sessionUser.setPartyId(partyUser.getPartyId());
+                sessionUser.setGroupId(partyUser.getGroupId());
+            }
 
-			HttpSession s = sessionMap.get(userId);
-			if(s == null){
-				sessionMap.put(userId, session);
-				sessionCount++;
-			}else{
-				try{
-					s.invalidate();
-				}catch(Exception e){
-					sessionCount--;
-				}
-				sessionMap.put(userId, session);
-				sessionCount++;
-			}
-			
-		} else { //如果当前Session登录的用户 重新加载一下
-			sessionMap.remove(sessionUser.getUserId());
+            session.setAttribute(Constants.SESSION_USER, sessionUser);
 
-			if(user.getClass() == SysUserExt.class){ //系统用户
-				SysUserExt sysUser = (SysUserExt)user;
-				sessionUser.setUserType(1);
-				sessionUser.setUserId(userId);
-				sessionUser.setUser(sysUser);
-			}
-			else{
-				PartyUserExt partyUser = (PartyUserExt)user;
-				sessionUser.setUserType(2);
-				sessionUser.setUserId(userId);
-				sessionUser.setUser(partyUser);
-			}
+            HttpSession s = sessionMap.get(sessionKey);
+            if (s == null) {
+                sessionMap.put(sessionKey, session);
+                sessionCount++;
+            } else {
+                try {
+                    s.invalidate();
+                } catch (Exception e) {
+                    sessionCount--;
+                }
+                sessionMap.put(sessionKey, session);
+                sessionCount++;
+            }
 
-			session.setAttribute(Constants.SESSION_USER, sessionUser);
-			sessionMap.put(userId, session);
-		}
-	}
+        } else { //如果当前Session登录的用户 重新加载一下
+            sessionMap.remove(sessionUser.getSessionKey());
 
-	public synchronized void logout(HttpSession session) {
-		SysUser user = (SysUser) session.getAttribute(Constants.SESSION_USER);
-		if (user != null) {
-			session.removeAttribute(Constants.SESSION_USER);
-			HttpSession s = sessionMap.remove(user.getId());
-			if(s != null){
-				sessionCount--;
-			}
-		}
-	}
+            if (user.getClass() == SysUserExt.class) { //系统用户
+                SysUserExt sysUser = (SysUserExt) user;
+                sessionUser.setUserType(1);
+                sessionUser.setSessionKey(sessionKey);
+                sessionUser.setSysUserAvatar(sysUser.getUserAvatar());
+                sessionUser.setSysUserId(sysUser.getId());
+                sessionUser.setSysUserName(sysUser.getUserName());
+            } else {
+                PartyUserExt partyUser = (PartyUserExt) user;
+                sessionUser.setUserType(2);
+                sessionUser.setSessionKey(sessionKey);
+                sessionUser.setSysUserAvatar(partyUser.getUserAvatar());
+                sessionUser.setSysUserId(partyUser.getId());
+                sessionUser.setSysUserName(partyUser.getUserName());
+                sessionUser.setPartyId(partyUser.getPartyId());
+                sessionUser.setGroupId(partyUser.getGroupId());
+            }
+
+            session.setAttribute(Constants.SESSION_USER, sessionUser);
+
+            sessionMap.put(sessionKey, session);
+        }
+    }
+
+    /**
+     * 用户进入活动的时候，将用户在活动中对应的活动用户记录到Session中
+     *
+     * @param session   HttpSession
+     * @param partyUser 活动用户
+     * @param request   HttpServletRequest
+     * @return 返回值
+     */
+    public synchronized void checkAndInParty(HttpSession session, PartyUserExt partyUser, HttpServletRequest request) {
+
+        SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
+
+        //既然能切换活动，肯定是系统用户了,sessionKey 不用变
+        sessionMap.remove(sessionUser.getSessionKey());
+
+        //需要重新配置了PartyUser的相关信息
+        sessionUser.setSysUserAvatar(partyUser.getUserAvatar());
+        sessionUser.setSysUserId(partyUser.getId());
+        sessionUser.setSysUserName(partyUser.getUserName());
+        sessionUser.setPartyId(partyUser.getPartyId());
+        sessionUser.setGroupId(partyUser.getGroupId());
+        sessionUser.setGroupId(partyUser.getGroupId());
+
+        session.setAttribute(Constants.SESSION_USER, sessionUser);
+
+        sessionMap.put(sessionUser.getSessionKey(), session);
+    }
+
+    /**
+     * 活动用户绑定系统用户之后，需存入系统用户的信息
+     *
+     * @param session   HttpSession
+     * @param sysUser 系统用户
+     * @param request   HttpServletRequest
+     * @return 返回值
+     */
+    public synchronized void checkAndBindSysUser(HttpSession session, SysUserExt sysUser, HttpServletRequest request) {
+
+        SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
+
+        sessionMap.remove(sessionUser.getSessionKey());
+
+        //需要添加配置了SysUser的相关信息
+        sessionUser.setUserType(1);
+        sessionUser.setSysUserAvatar(sysUser.getUserAvatar());
+        sessionUser.setSysUserId(sysUser.getId());
+        sessionUser.setSysUserName(sysUser.getUserName());
+
+        //活动用户的sessionKey去掉，换为系统用户的ID作为SessionKey
+        sessionUser.setSessionKey(sysUser.getId());
+
+        session.setAttribute(Constants.SESSION_USER, sessionUser);
+
+        sessionMap.put(sessionUser.getSessionKey(), session);
+    }
+
+    /**
+     * 活动用户进入某个小组，例如：直接进入某个小组时，或者被通过进入某个小组时（可以在接收消息的时候调用此函数，必须是本人调用才能生效哟）
+     *
+     * @param session   HttpSession
+     * @param groupId   小组ID
+     * @param request   HttpServletRequest
+     * @return 返回值
+     */
+    public synchronized void checkAndJoinGroup(HttpSession session,Long groupId, HttpServletRequest request) {
+
+        SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
+
+        sessionMap.remove(sessionUser.getSessionKey());
+
+        //设置该SessionUser的GroupId
+        sessionUser.setGroupId(groupId);
+
+        session.setAttribute(Constants.SESSION_USER, sessionUser);
+
+        sessionMap.put(sessionUser.getSessionKey(), session);
+    }
+
+    public synchronized void logout(HttpSession session) {
+        SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
+        if (sessionUser != null) {
+            session.removeAttribute(Constants.SESSION_USER);
+            HttpSession s = sessionMap.remove(sessionUser.getSessionKey());
+            if (s != null) {
+                sessionCount--;
+            }
+        }
+    }
 }

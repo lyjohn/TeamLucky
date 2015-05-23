@@ -28,6 +28,15 @@ public class PartyUser{
 	public void setPartyId(Long partyId){
 		this.partyId = partyId;
 	}
+	private Long groupId;
+	
+	public Long getGroupId(){
+		return groupId;
+	}
+	
+	public void setGroupId(Long groupId){
+		this.groupId = groupId;
+	}
 	private String loginName;
 	
 	public String getLoginName(){
@@ -171,6 +180,15 @@ public class PartyUser{
 	
 	public void setLastLoginIP(String lastLoginIP){
 		this.lastLoginIP = lastLoginIP;
+	}
+	private Integer hotCount;
+	
+	public Integer getHotCount(){
+		return hotCount;
+	}
+	
+	public void setHotCount(Integer hotCount){
+		this.hotCount = hotCount;
 	}
 
 	public boolean equals(Object object)

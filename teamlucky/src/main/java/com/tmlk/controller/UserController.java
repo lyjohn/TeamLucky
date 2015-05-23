@@ -38,7 +38,8 @@ public class UserController {
     @RequestMapping(value = {"/","/index"})
     public String show(@ModelAttribute SysUserModel sysUserModel, ModelMap model, HttpSession session) throws IOException {
         SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
-        SysUserExt sysUserExt = (SysUserExt) sessionUser.getUser();
+
+        SysUserExt sysUserExt = sysUserService.load(sessionUser.getSysUserId());
 
         sysUserModel.setSysUserExt(sysUserExt);
         model.addAttribute("model", sysUserModel);
@@ -74,7 +75,7 @@ public class UserController {
         SysUserExt sysUserExt = null;
         if (FormatUtils.isEmpty(id)) {
             SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
-            sysUserExt = (SysUserExt) sessionUser.getUser();
+            sysUserExt = sysUserService.load(sessionUser.getSysUserId());
 
         } else {
             sysUserExt = sysUserService.load(id);

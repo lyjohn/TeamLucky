@@ -10,7 +10,7 @@
 		<result property="createTime" column="createTime" />
 	</resultMap>
 
-	<insert id="create" parameterType="com.tmlk.po.ForumCommentExt">
+	<insert id="create" parameterType="com.tmlk.po.ForumCommentExt" useGeneratedKeys="true" keyProperty="id">
 		<![CDATA[
 		INSERT INTO ForumComment(
 			id,

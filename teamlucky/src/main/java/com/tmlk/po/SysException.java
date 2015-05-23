@@ -2,10 +2,10 @@ package com.tmlk.po;
 
 import java.util.Date;
 
-public class GroupUser{
+public class SysException{
 
 	/**
-	 * 小组成员
+	 * 系统异常日志
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -19,32 +19,68 @@ public class GroupUser{
 		this.id = id;
 	}
 	
-	private String partyUserId;
+	private String userName;
 	
-	public String getPartyUserId(){
-		return partyUserId;
+	public String getUserName(){
+		return userName;
 	}
 	
-	public void setPartyUserId(String partyUserId){
-		this.partyUserId = partyUserId;
+	public void setUserName(String userName){
+		this.userName = userName;
 	}
-	private Integer memberStatus;
+	private String userIp;
 	
-	public Integer getMemberStatus(){
-		return memberStatus;
-	}
-	
-	public void setMemberStatus(Integer memberStatus){
-		this.memberStatus = memberStatus;
-	}
-	private Long groupId;
-	
-	public Long getGroupId(){
-		return groupId;
+	public String getUserIp(){
+		return userIp;
 	}
 	
-	public void setGroupId(Long groupId){
-		this.groupId = groupId;
+	public void setUserIp(String userIp){
+		this.userIp = userIp;
+	}
+	private Integer logAction;
+	
+	public Integer getLogAction(){
+		return logAction;
+	}
+	
+	public void setLogAction(Integer logAction){
+		this.logAction = logAction;
+	}
+	private String logDesc;
+	
+	public String getLogDesc(){
+		return logDesc;
+	}
+	
+	public void setLogDesc(String logDesc){
+		this.logDesc = logDesc;
+	}
+	private java.util.Date logTime;
+	
+	public java.util.Date getLogTime(){
+		return logTime;
+	}
+	
+	public void setLogTime(java.util.Date logTime){
+		this.logTime = logTime;
+	}
+	private Long logObjId;
+	
+	public Long getLogObjId(){
+		return logObjId;
+	}
+	
+	public void setLogObjId(Long logObjId){
+		this.logObjId = logObjId;
+	}
+	private String logContent;
+	
+	public String getLogContent(){
+		return logContent;
+	}
+	
+	public void setLogContent(String logContent){
+		this.logContent = logContent;
 	}
 
 	public boolean equals(Object object)
@@ -53,11 +89,11 @@ public class GroupUser{
         {
             return true;
         }
-        if (!(object instanceof GroupUser))
+        if (!(object instanceof SysException))
         {
             return false;
         }
-        final GroupUser that = (GroupUser)object;
+        final SysException that = (SysException)object;
         if (this.id == null || that.getId() == null || !this.id.equals(that.getId()))
         {
             return false;
@@ -80,12 +116,12 @@ public class GroupUser{
 
 	}
 	
-	public GroupUser cloneGroupUser (){
+	public SysException cloneSysException (){
         
-		GroupUser newObj = null;
+		SysException newObj = null;
         try
         {
-            newObj = (GroupUser)org.apache.commons.beanutils.BeanUtils.cloneBean(this);            
+            newObj = (SysException)org.apache.commons.beanutils.BeanUtils.cloneBean(this);            
         } catch (IllegalAccessException e)
         {
             // TODO Auto-generated catch block

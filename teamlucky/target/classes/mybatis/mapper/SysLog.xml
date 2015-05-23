@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmlk.dao.ISysLogDao">
+	<resultMap type="com.tmlk.po.SysLogExt" id="SysLogMap">
+		<id property="id" column="id" />
+		<result property="userName" column="userName" />
+		<result property="userIp" column="userIp" />
+		<result property="logAction" column="logAction" />
+		<result property="logDesc" column="logDesc" />
+		<result property="logTime" column="logTime" />
+		<result property="logObjId" column="logObjId" />
+		<result property="logContent" column="logContent" />
+	</resultMap>
+
+	<insert id="create" parameterType="com.tmlk.po.SysLogExt">
+		<![CDATA[
+		INSERT INTO SysLog(
+			id,
+			userName,
+			userIp,
+			logAction,
+			logDesc,
+			logTime,
+			logObjId,
+			logContent
+		)  
+		VALUES(
+			#{id},
+			#{userName},
+			#{userIp},
+			#{logAction},
+			#{logDesc},
+			#{logTime, jdbcType = TIMESTAMP},
+			#{logObjId},
+			#{logContent}
+		)
+		]]>
+	</insert>
+	
+	<update id="update" parameterType="com.tmlk.po.SysLogExt" flushCache="true">
+		<![CDATA[
+		UPDATE SysLog
+		SET
+		userName = #{userName},
+		userIp = #{userIp},
+		logAction = #{logAction},
+		logDesc = #{logDesc},
+		logTime = #{logTime},
+		logObjId = #{logObjId},
+		logContent = #{logContent}
+		WHERE id = #{id}
+		]]>
+	</update>
+	
+	<select id="load" parameterType="java.lang.Long" resultMap="SysLogMap">
+		<![CDATA[
+		SELECT * FROM SysLog WHERE id = #{id}
+		]]>
+	</select>
+	
+	<delete id="delete" parameterType="java.lang.Long">  
+        <![CDATA[
+        DELETE FROM SysLog WHERE id = #{id}
+        ]]>
+    </delete>
+    
+    <select id="criteriaQuery" resultMap="SysLogMap">
+		SELECT * FROM SysLog
+        <if test="mqlList.size > 0">
+            WHERE
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+        <if test="mortList.size > 0">
+            ORDER BY
+            <foreach collection="mortList" item="mort" separator=",">
+                ${mort}
+            </foreach>
+        </if>
+	</select>
+	
+	<select id="criteriaCount" resultType="int">
+		SELECT COUNT(*) FROM SysLog
+        <if test="mqlList.size > 0">
+            WHERE
+            <foreach collection="mqlList" item="mql" separator="and">
+                ${mql}
+            </foreach>
+        </if>
+	</select>
+	
+</mapper>

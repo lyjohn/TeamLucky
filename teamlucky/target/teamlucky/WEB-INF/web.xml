@@ -10,6 +10,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
+            /WEB-INF/spring/spring-aop.xml
             /WEB-INF/spring/spring-dataSource.xml
             /WEB-INF/spring/spring-beans.xml
         </param-value>

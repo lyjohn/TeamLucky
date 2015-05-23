@@ -14,7 +14,7 @@
 		<result property="createTime" column="createTime" />
 	</resultMap>
 
-	<insert id="create" parameterType="com.tmlk.po.ForumExt">
+	<insert id="create" parameterType="com.tmlk.po.ForumExt" useGeneratedKeys="true" keyProperty="id">
 		<![CDATA[
 		INSERT INTO Forum(
 			id,

@@ -4,6 +4,7 @@
 	<resultMap type="com.tmlk.po.PartyUserExt" id="PartyUserMap">
 		<id property="id" column="id" />
 		<result property="partyId" column="partyId" />
+		<result property="groupId" column="groupId" />
 		<result property="loginName" column="loginName" />
 		<result property="loginPwd" column="loginPwd" />
 		<result property="userName" column="userName" />
@@ -20,6 +21,7 @@
 		<result property="registerIP" column="registerIP" />
 		<result property="lastLoginTime" column="lastLoginTime" />
 		<result property="lastLoginIP" column="lastLoginIP" />
+		<result property="hotCount" column="hotCount" />
 	</resultMap>
 
 	<insert id="create" parameterType="com.tmlk.po.PartyUserExt">
@@ -27,6 +29,7 @@
 		INSERT INTO PartyUser(
 			id,
 			partyId,
+			groupId,
 			loginName,
 			loginPwd,
 			userName,
@@ -42,11 +45,13 @@
 			registerTime,
 			registerIP,
 			lastLoginTime,
-			lastLoginIP
+			lastLoginIP,
+			hotCount
 		)  
 		VALUES(
 			#{id},
 			#{partyId},
+			#{groupId},
 			#{loginName},
 			#{loginPwd},
 			#{userName},
@@ -62,7 +67,8 @@
 			#{registerTime, jdbcType = TIMESTAMP},
 			#{registerIP},
 			#{lastLoginTime, jdbcType = TIMESTAMP},
-			#{lastLoginIP}
+			#{lastLoginIP},
+			#{hotCount}
 		)
 		]]>
 	</insert>
@@ -72,6 +78,7 @@
 		UPDATE PartyUser
 		SET
 		partyId = #{partyId},
+		groupId = #{groupId},
 		loginName = #{loginName},
 		loginPwd = #{loginPwd},
 		userName = #{userName},
@@ -87,7 +94,8 @@
 		registerTime = #{registerTime},
 		registerIP = #{registerIP},
 		lastLoginTime = #{lastLoginTime},
-		lastLoginIP = #{lastLoginIP}
+		lastLoginIP = #{lastLoginIP},
+		hotCount = #{hotCount}
 		WHERE id = #{id}
 		]]>
 	</update>

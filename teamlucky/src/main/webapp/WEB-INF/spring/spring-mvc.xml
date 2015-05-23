@@ -13,6 +13,10 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd">
 
+
+    <!--通知spring使用cglib而不是jdk的来生成代理方法 AOP可以拦截到Controller -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
     <!-- 自动扫描的包名，只用于controller -->
     <context:component-scan base-package="com.tmlk">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>

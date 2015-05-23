@@ -10,59 +10,59 @@ import com.tmlk.framework.mybatis.Order;
 import com.tmlk.framework.util.Pagination;
 import com.tmlk.framework.util.Constants;
 
-import com.tmlk.dao.IGroupDao;
-import com.tmlk.po.GroupExt;
-import com.tmlk.service.IGroupService;
+import com.tmlk.dao.ISysLogDao;
+import com.tmlk.po.SysLogExt;
+import com.tmlk.service.ISysLogService;
 
-public class GroupService implements IGroupService{
+public class SysLogService implements ISysLogService{
 	
-	private IGroupDao groupDao;
+	private ISysLogDao sysLogDao;
 	
-	public IGroupDao getGroupDao() {
-		return groupDao;
+	public ISysLogDao getSysLogDao() {
+		return sysLogDao;
 	}
 
-	public void setGroupDao(IGroupDao groupDao) {
-		this.groupDao = groupDao;
+	public void setSysLogDao(ISysLogDao sysLogDao) {
+		this.sysLogDao = sysLogDao;
 	}
 
 	@Override
-	public GroupExt create(GroupExt group) {
-		int res = groupDao.create(group);
+	public SysLogExt create(SysLogExt sysLog) {
+		int res = sysLogDao.create(sysLog);
 		if(res == 1)
-			return group;
+			return sysLog;
 		
 		return null;
 	}
 
 	@Override
-	public void update(GroupExt group) {
-		groupDao.update(group);
+	public void update(SysLogExt sysLog) {
+		sysLogDao.update(sysLog);
 	}
 	
 	@Override
-	public GroupExt load(Long id) {
-		return groupDao.load(id);
+	public SysLogExt load(Long id) {
+		return sysLogDao.load(id);
 	}
 
 	@Override
 	public void delete(Long  id) {
-		groupDao.delete(id);
+		sysLogDao.delete(id);
 	}
 	
 	
 	@Override
-	public List<GroupExt> criteriaQuery(List<ICondition> conditions) {
+	public List<SysLogExt> criteriaQuery(List<ICondition> conditions) {
 		return this.criteriaQuery(conditions, null, null);
 	}
 	
 	@Override
-	public List<GroupExt> criteriaQuery(List<ICondition> conditions, List<Order> orders) {
+	public List<SysLogExt> criteriaQuery(List<ICondition> conditions, List<Order> orders) {
 		return this.criteriaQuery(conditions, orders, null);
 	}
 	
 	@Override
-	public List<GroupExt> criteriaQuery(List<ICondition> conditions, List<Order> orders, Pagination pp) {
+	public List<SysLogExt> criteriaQuery(List<ICondition> conditions, List<Order> orders, Pagination pp) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		List<String> mqlList = new ArrayList<String>();
 		if(conditions != null){
@@ -78,7 +78,7 @@ public class GroupService implements IGroupService{
 			}
 		}
 		
-		return groupDao.criteriaQuery(mqlList, mortList, params, pp);
+		return sysLogDao.criteriaQuery(mqlList, mortList, params, pp);
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class GroupService implements IGroupService{
 			}
 		}
 		
-		return groupDao.criteriaCount(mqlList,params);
+		return sysLogDao.criteriaCount(mqlList,params);
 	}
 	
 }
