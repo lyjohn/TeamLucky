@@ -46,6 +46,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="../navbar/">用户名称</a></li>
                 <li><a href="${ctx}/party/create">创建活动</a></li>
+                <li><a href="${ctx}/news/create">news</a></li>
                 <li class="active"><a href="./">退出</a></li>
             </ul>
         </div>

@@ -27,6 +27,8 @@ public class Constants {
         SYS_LOG_MAP.put(201,"创建活动用户");
 
         SYS_LOG_MAP.put(301,"创建活动小组");
+
+        SYS_LOG_MAP.put(401,"创建通知");
     }
 
     public static final Map<Integer,String> LOGIN_RESULT_MAP = new HashMap<Integer,String>();

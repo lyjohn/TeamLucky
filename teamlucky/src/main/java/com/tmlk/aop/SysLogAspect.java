@@ -240,6 +240,11 @@ public class SysLogAspect {
 
                 sysLogExt.setLogObjId(partyGroupExt.getId());
                 sysLogExt.setLogContent(params);
+            }else if(code == 401){
+                NewsExt newsExt = (NewsExt)returnValue;
+
+                sysLogExt.setLogObjId(newsExt.getId());
+                sysLogExt.setLogContent(params);
             }else {
                 sysLogExt.setLogObjId(-1L);
                 sysLogExt.setLogContent(params);
