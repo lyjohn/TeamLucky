@@ -225,7 +225,7 @@ public class SysLogAspect {
                 sysLogExt.setUserName(sysUserExt.getLoginName());
                 sysLogExt.setLogObjId(0L);
                 sysLogExt.setLogContent(JSONUtil.object2JsonString(sysLogExt));
-            } else if (code == 201) {//创建活动
+            } else if (code == 201 || code==203) {//创建活动 || 编辑活动
                 PartyExt partyExt = (PartyExt)returnValue;
 
                 sysLogExt.setLogObjId(partyExt.getId());
