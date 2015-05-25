@@ -8,9 +8,13 @@ package com.tmlk.controller;
 
 
 
+import com.tmlk.framework.mybatis.EqCondition;
+import com.tmlk.framework.mybatis.ICondition;
+import com.tmlk.framework.mybatis.Order;
 import com.tmlk.framework.session.SessionUser;
 import com.tmlk.framework.util.Constants;
 import com.tmlk.framework.util.JsonResult;
+import com.tmlk.framework.util.Pagination;
 import com.tmlk.po.NewsExt;
 import com.tmlk.service.INewsServiceExt;
 import org.apache.log4j.Logger;
@@ -24,7 +28,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Controller
@@ -64,10 +70,36 @@ public class NewsController {
         }
         return result;
     }
-    @RequestMapping(value= "/show")
-    public String goShow(){
 
-        return  "/news/show";
+
+
+
+    @RequestMapping(value= "/show")
+    @ResponseBody
+    public JsonResult goShow(HttpSession session){
+
+        SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+
+//        Long partyId = sessionUser.getPartyId();
+//
+//        List<ICondition> conditions = new ArrayList<ICondition>();
+//        conditions.add(new EqCondition("partyId",partyId));
+//
+//        List<Order> orders = new ArrayList<Order>();
+//        orders.add(Order.desc("createTime"));
+//
+//        Pagination pp = new Pagination();
+//        pp.setCurrentPage(1);
+//        pp.setPageSize(5);
+//
+//        List<NewsExt> newsExts = newsService.criteriaQuery(conditions,orders,pp);
+
+        NewsExt newsExt = newsService.load(1L);
+
+        JsonResult result = new JsonResult();
+        result.setData(newsExt);
+
+        return result;
     }
 
 }
