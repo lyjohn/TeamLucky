@@ -11,17 +11,14 @@ package com.tmlk.controller;
 import com.tmlk.aop.SysControllerLog;
 import com.tmlk.framework.mybatis.EqCondition;
 import com.tmlk.framework.mybatis.ICondition;
+import com.tmlk.framework.mybatis.Order;
 import com.tmlk.framework.session.SessionStatus;
-import com.tmlk.framework.util.Constants;
-import com.tmlk.framework.util.FormatUtils;
-import com.tmlk.framework.util.JsonResult;
-import com.tmlk.framework.util.MD5Util;
+import com.tmlk.framework.util.*;
+import com.tmlk.model.PartyModel;
+import com.tmlk.po.PartyExt;
 import com.tmlk.po.PartyUserExt;
 import com.tmlk.po.SysUserExt;
-import com.tmlk.service.IPartyUserService;
-import com.tmlk.service.IPartyUserServiceExt;
-import com.tmlk.service.ISysUserService;
-import com.tmlk.service.ISysUserServiceExt;
+import com.tmlk.service.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,8 +51,25 @@ public class MainController {
     @Autowired
     private IPartyUserServiceExt partyUserService;
 
+    @Autowired
+    private IPartyServiceExt partyService;
+
     @RequestMapping(value = "/")
-    public String index(ModelMap model) {
+    public String index(@ModelAttribute PartyModel partyModel,ModelMap model) {
+
+        List<ICondition> conditions = new ArrayList<ICondition>();
+        conditions.add(new EqCondition("isPublic",true));
+
+        List<Order> orders = new ArrayList<Order>();
+        orders.add(Order.desc("createTime"));
+
+        Pagination pp = new Pagination();
+        pp.setCurrentPage(1);
+        pp.setPageSize(12);//每次4个 最多3个
+
+        partyModel.setItems(partyService.criteriaQuery(conditions,orders,pp));
+
+        model.addAttribute("model", partyModel);
 
         return "/index";
     }

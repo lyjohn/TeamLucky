@@ -10,7 +10,10 @@ public interface IPartyServiceExt extends IPartyService{
 
     PartyExt launch(PartyExt partyExt,HttpServletRequest request) throws Exception;
 
+    void edit(PartyExt partyExt);
+
     List<PartyUserExt> getPartyUsers(String partyId);
 
     boolean existParty(String partyCode);
+
 }

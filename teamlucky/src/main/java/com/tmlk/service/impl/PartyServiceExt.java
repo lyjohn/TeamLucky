@@ -138,6 +138,12 @@ public class PartyServiceExt extends PartyService implements IPartyServiceExt {
 	}
 
 	@Override
+	@SysServiceLog(description = "编辑活动基本信息",code = 203)
+	public void edit(PartyExt partyExt) {
+		this.update(partyExt);
+	}
+
+	@Override
 	public List<PartyUserExt> getPartyUsers(String partyId) {
 
 		List<ICondition> conditions = new ArrayList<ICondition>();

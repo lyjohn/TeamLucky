@@ -59,12 +59,12 @@ public class CheckLoginFilter implements Filter {
 
         String path = request.getServletPath();
 
-        if (user == null && (!excludeUrlSet.contains(path)) &&(!path.startsWith("/resource/")) ) {
+        if (user == null && (!excludeUrlSet.contains(path)) &&(!path.startsWith("/resource/")) &&(!path.startsWith("/errors/")) ) {
             String xReq = request.getHeader("X-Requested-With");
             if ("XMLHttpRequest".equalsIgnoreCase(xReq)) {
                 response.setHeader("sessioninvalid", "true");
             } else {
-                response.sendRedirect(WebContext.contextPath + "/error");
+                response.sendRedirect(WebContext.contextPath + "/errors/error/1");
             }
         } else {
             chain.doFilter(request, response);

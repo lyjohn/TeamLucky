@@ -24,7 +24,8 @@ public class Constants {
         SYS_LOG_MAP.put(103,"注册系统用户");
 
         SYS_LOG_MAP.put(201,"创建活动");
-        SYS_LOG_MAP.put(201,"创建活动用户");
+        SYS_LOG_MAP.put(202,"创建活动用户");
+        SYS_LOG_MAP.put(203,"编辑活动基本信息");
 
         SYS_LOG_MAP.put(301,"创建活动小组");
 

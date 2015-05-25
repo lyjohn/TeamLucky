@@ -129,13 +129,11 @@ public class SessionStatus {
         sessionMap.remove(sessionUser.getSessionKey());
 
         //需要重新配置了PartyUser的相关信息
-        sessionUser.setSysUserAvatar(partyUser.getUserAvatar());
-        sessionUser.setSysUserId(partyUser.getId());
-        sessionUser.setSysUserName(partyUser.getUserName());
+        sessionUser.setPartyUserAvatar(partyUser.getUserAvatar());
+        sessionUser.setPartyUserId(partyUser.getId());
+        sessionUser.setPartyUserName(partyUser.getUserName());
         sessionUser.setPartyId(partyUser.getPartyId());
         sessionUser.setGroupId(partyUser.getGroupId());
-        sessionUser.setGroupId(partyUser.getGroupId());
-
         session.setAttribute(Constants.SESSION_USER, sessionUser);
 
         sessionMap.put(sessionUser.getSessionKey(), session);
