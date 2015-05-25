@@ -64,6 +64,10 @@ public class NewsController {
         }
         return result;
     }
+    @RequestMapping(value= "/show")
+    public String goShow(){
 
+        return  "/news/show";
+    }
 
 }

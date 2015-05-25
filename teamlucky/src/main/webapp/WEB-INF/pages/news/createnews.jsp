@@ -93,7 +93,7 @@
         success: function(data, textStatus, jqXHR){
           if(data.status == 0){
             alert("创建成功");
-            window.location.href = "${ctx}/party/setting";
+            window.location.href = "${ctx}/news/show";
           }else{
             alert(data.message);
           }
