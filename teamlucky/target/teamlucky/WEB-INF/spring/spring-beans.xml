@@ -32,10 +32,10 @@
         <property name="partyDao" ref="partyDao" />
         <property name="partyUserService" ref="partyUserService" />
         <property name="sysUserService" ref="sysUserService"/>
-        <property name="partyGroupService" ref="groupService"/>
+        <property name="partyGroupService" ref="partyGroupService"/>
         <property name="sysPartyUserLinkService" ref="sysPartyUserLinkService"/>
     </bean>
-    <bean id="groupService" class="com.tmlk.service.impl.PartyGroupServiceExt">
+    <bean id="partyGroupService" class="com.tmlk.service.impl.PartyGroupServiceExt">
         <property name="partyGroupDao" ref="partyGroupDao" />
     </bean>
     <bean id="messageService" class="com.tmlk.service.impl.MessageServiceExt">

@@ -20,6 +20,7 @@ import com.tmlk.po.PartyUserExt;
 import com.tmlk.po.SysUserExt;
 import com.tmlk.service.*;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -45,6 +46,8 @@ public class MainController {
 
     private static SessionStatus sessionStatus = SessionStatus.getInstance();
 
+    private static final Logger logger = Logger.getLogger(MainController.class);
+
     @Autowired
     private ISysUserServiceExt sysUserService;
 
@@ -65,7 +68,7 @@ public class MainController {
 
         Pagination pp = new Pagination();
         pp.setCurrentPage(1);
-        pp.setPageSize(12);//每次4个 最多3个
+        pp.setPageSize(4);//每次4个 最多3个
 
         partyModel.setItems(partyService.criteriaQuery(conditions,orders,pp));
 
@@ -100,19 +103,29 @@ public class MainController {
     }
 
     @RequestMapping(value = "/logout")
-    @ResponseBody
-    //此处为记录AOP拦截Controller记录用户操作
     @SysControllerLog(description = "退出系统", code = 102)
-    public JsonResult doLogout(HttpSession session){
-        JsonResult result = new JsonResult();
+    public String doLogout(PartyModel partyModel,HttpSession session,ModelMap model){
         try{
             sessionStatus.logout(session);
 
-            result.setStatus(0);
         }catch (Exception ex){
-            result.setMessage(ex.getMessage());
+            logger.error(ex.getStackTrace());
         }
-        return result;
+        List<ICondition> conditions = new ArrayList<ICondition>();
+        conditions.add(new EqCondition("isPublic",true));
+
+        List<Order> orders = new ArrayList<Order>();
+        orders.add(Order.desc("createTime"));
+
+        Pagination pp = new Pagination();
+        pp.setCurrentPage(1);
+        pp.setPageSize(4);//每次4个 最多3个
+
+        partyModel.setItems(partyService.criteriaQuery(conditions,orders,pp));
+
+        model.addAttribute("model", partyModel);
+
+        return "/index";
     }
 
     @RequestMapping(value = "/register")

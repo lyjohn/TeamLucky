@@ -1,16 +1,55 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: laiguoqiang
-  Date: 15/5/18
-  Time: 下午5:02
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+<%@ page import="com.tmlk.framework.session.SessionUser" %>
+<%@ page import="com.tmlk.framework.util.Constants" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ include file="/WEB-INF/pages/core/include.jsp" %>
 
+<%
+    SessionUser sessionUser = (SessionUser) request.getSession().getAttribute(
+            Constants.SESSION_USER);
+%>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+
+    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/blue.css"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/fwslider.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/allinone_carousel.css">
+
+    <title>异常 - 校缘派</title>
+</head>
+
+<body>
+<div class="header_bg">
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <a href="${ctx}"><img src="${ctx}/resource/images/logo.png" alt=""/></a>
+            </div>
+            <jsp:include page="../shared/_header.jsp">
+                <jsp:param value="0" name="type"/>
+                <jsp:param value="null" name="cur"/>
+            </jsp:include>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="main_bg"><!-- start main -->
+    <div class="container">
+        <div class="alert alert-danger">
+            <c:out value="${message}"></c:out>
+        </div>
+    </div>
+</div>
+<jsp:include page="../shared/_footer.jsp"/>
 </body>
 </html>

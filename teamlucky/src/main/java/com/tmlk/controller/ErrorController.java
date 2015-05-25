@@ -41,8 +41,25 @@ public class ErrorController {
 
 
     @RequestMapping(value = "/error/{id}")
-    public String index(@PathVariable("id") Long id) {
+    public String index(@PathVariable("id") int id,ModelMap model) {
 
+        String message = "";
+        switch (id){
+            case 1:
+                message = "用户未登录";
+                break;
+            case 2:
+                message = "活动不存在";//id 没有找到
+                break;
+            case 3:
+                message = "私有活动，仅成员才能参与";
+                break;
+            default:
+                message = "系统错误，程序猿加班改BUG~";
+                break;
+        }
+        
+        model.addAttribute("message",message);
         return "/errors/error";
     }
 

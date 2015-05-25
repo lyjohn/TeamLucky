@@ -77,7 +77,7 @@ public class UserController {
         sysUserModel.setSysUserExt(sysUserExt);
         model.addAttribute("model", sysUserModel);
 
-        return "/user/ssprofile";
+        return "/user/sprofile";
     }
 
     @RequestMapping(value = "/pprofile")

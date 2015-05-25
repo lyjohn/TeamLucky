@@ -1,24 +1,43 @@
+<%@ page import="com.tmlk.framework.session.SessionUser" %>
+<%@ page import="com.tmlk.framework.util.Constants" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/pages/core/include.jsp" %>
 
+<%
+  SessionUser sessionUser = (SessionUser) request.getSession().getAttribute(
+          Constants.SESSION_USER);
+%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
   <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/bootstrap.min.css">
-  <title>首页 - 校缘派</title>
+  <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/blue.css"/>
+  <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/fwslider.css">
+  <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/allinone_carousel.css" >
+
+  <title>${model.partyExt.partyName} - 校缘派</title>
 </head>
-
-<body style="min-height: 2000px;padding-top: 70px;">
-
-<!-- Fixed navbar -->
-<nav class="navbar navbar-default navbar-fixed-top">
+<body>
+<div class="header_bg">
   <div class="container">
-    <jsp:include page="/WEB-INF/pages/shared/_header.jsp">
-      <jsp:param value="1" name="admin"/>
-    </jsp:include>
+    <div class="header">
+      <div class="logo">
+        <a href="${ctx}"><img src="${ctx}/resource/images/logo.png" alt=""/></a>
+      </div>
+      <jsp:include page="../shared/_header.jsp">
+        <jsp:param value="1" name="type"/>
+        <jsp:param value="null" name="cur"/>
+      </jsp:include>
+      <div class="clearfix"></div>
+    </div>
   </div>
-</nav>
+</div>
+
 <div class="container">
 
   <div class="jumbotron">
@@ -77,7 +96,8 @@
   </div>
 
 </div>
-<!-- /container -->
+
+<jsp:include page="../shared/_footer.jsp" />
 
 
 <script type="text/javascript" src="${ctx}/resource/js/jquery.min.js"></script>

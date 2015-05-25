@@ -1,63 +1,49 @@
+<%@ page import="com.tmlk.framework.session.SessionUser" %>
+<%@ page import="com.tmlk.framework.util.Constants" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/pages/core/include.jsp" %>
 
+<%
+  SessionUser sessionUser = (SessionUser) request.getSession().getAttribute(
+          Constants.SESSION_USER);
+%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
   <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/bootstrap.min.css">
-  <title>首页 - 校缘派</title>
+  <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/blue.css"/>
+  <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/fwslider.css">
+  <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/allinone_carousel.css" >
+
+  <title>发起活动 - 校缘派</title>
 </head>
 
-<body style="min-height: 2000px;padding-top: 70px;">
-
-<!-- Fixed navbar -->
-<nav class="navbar navbar-default navbar-fixed-top">
+<body>
+<div class="header_bg">
   <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-              aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Project name</a>
+    <div class="header">
+      <div class="logo">
+        <a href="${ctx}"><img src="${ctx}/resource/images/logo.png" alt=""/></a>
+      </div>
+      <jsp:include page="../shared/_header.jsp">
+        <jsp:param value="0" name="type"/>
+        <jsp:param value="partycreate" name="cur"/>
+      </jsp:include>
+      <div class="clearfix"></div>
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown
-            <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li class="dropdown-header">Nav header</li>
-            <li><a href="#">Separated link</a></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="../navbar/">Default</a></li>
-        <li><a href="../navbar-static-top/">Static top</a></li>
-        <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
-      </ul>
-    </div>
-    <!--/.nav-collapse -->
   </div>
-</nav>
+</div>
 
 <div class="container">
 
   <!-- Main component for a primary marketing message or call to action -->
   <div class="jumbotron">
-    <h1>测试登录</h1>
+    <h2>创建活动</h2>
     <form action="" onsubmit="return false;">
       <div class="form-group">
         <label for="partyName">活动名称</label>
@@ -111,6 +97,7 @@
 </div>
 <!-- /container -->
 
+<jsp:include page="../shared/_footer.jsp" />
 
 <script type="text/javascript" src="${ctx}/resource/js/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/bootstrap.min.js"></script>

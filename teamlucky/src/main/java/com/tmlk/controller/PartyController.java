@@ -90,24 +90,27 @@ public class PartyController {
         return result;
     }
 
-    @RequestMapping(value = "/goView/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/view/{id}",method = RequestMethod.GET)
     public String goView(@PathVariable("id") Long id, HttpSession session,HttpServletRequest request,@ModelAttribute PartyModel partyModel, ModelMap model){
         PartyExt partyExt = partyService.load(id);
         if(partyExt == null){
             return "/errors/error/2";
         }else{
             SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
-            if(sessionUser == null){
-                return "/errors/error/1";
-            }
+
             List<ICondition> conditions = new ArrayList<ICondition>();
             conditions.add(new EqCondition("partyId",partyExt.getId()));
             conditions.add(new EqCondition("sysUserId",sessionUser.getSysUserId()));
             List<SysPartyUserLinkExt> sysPartyUserLinkExts = sysPartyUserLinkService.criteriaQuery(conditions);
             if(sysPartyUserLinkExts.size() == 0){//已登录 但是不是该活动的成员
-                //TODO 把用户加到活动中
+                if(partyExt.getIsPublic()){
+                    //TODO 公共活动用户可以参观
+                }else{
+                    return "/errors/error/3";
+                }
             }else{
-                //TODO 用户进入活动
+                //TODO 用户进入活动 活动 小组 活跃度+1
+
                 PartyUserExt partyUserExt = partyUserService.load(sysPartyUserLinkExts.get(0).getPartyUserId());
                 sessionStatus.checkAndInParty(session,partyUserExt,request);
             }
@@ -135,9 +138,23 @@ public class PartyController {
 
             partyModel.setPartyExt(partyExtPer);
             model.addAttribute("model",partyModel);
+
+            JsonResult result = new JsonResult();
+            result.setStatus(0);
+            result.setMessage("保存成功");
+            model.addAttribute("result", result);
+
             return "/party/index";
         } catch (Exception ex){
-            return "/errors/error/3";
+            partyModel.setPartyExt(partyModel.getPartyExt());
+            model.addAttribute("model",partyModel);
+
+            JsonResult result = new JsonResult();
+            result.setMessage("保存活动失败");
+            model.addAttribute("result", result);
+
+            logger.error(ex.getStackTrace());
+            return "/party/index";
         }
     }
 
