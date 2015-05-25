@@ -26,6 +26,8 @@
     <form action="${ctx}/party/doEdit" method="post">
       <div class="form-group">
         <label for="partyName">活动名称</label>
+        <c:out value="${model.partyExt.partyName}"></c:out>
+
         <form:input class="form-control" path="model.partyExt.partyName" place="活动名名称" />
       </div>
       <div class="form-group">
