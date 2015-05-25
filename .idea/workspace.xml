@@ -806,7 +806,7 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="LayoutCode.rearrangeEntriesJava" value="false" />
@@ -1197,12 +1197,12 @@
       <workItem from="1432432468236" duration="5426000" />
       <workItem from="1432437915165" duration="873000" />
       <workItem from="1432451055859" duration="5824000" />
-      <workItem from="1432459040569" duration="15153000" />
+      <workItem from="1432459040569" duration="16208000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88800000" />
+    <option name="totallyTimeSpent" value="89855000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="776" extended-state="6" />
@@ -1755,7 +1755,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>Spring</last-edited>
+          <last-edited>Spring (teamlucky)|Spring</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1790,12 +1790,11 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>teamlucky</last-edited>
+          <last-edited>Web|teamlucky</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
