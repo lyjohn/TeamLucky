@@ -246,7 +246,7 @@
                 if (res.status == 0) {
                     alert("登录成功");
                     if (res.data == "1")
-                        window.location.href = "${ctx}/user/index";
+                        window.location.href = "${ctx}/user/sprofile";
                     else
                         alert("活动用户直接进入活动");
                 } else {

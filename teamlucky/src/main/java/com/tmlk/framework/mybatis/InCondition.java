@@ -1,5 +1,6 @@
 package com.tmlk.framework.mybatis;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,8 +29,19 @@ public class InCondition implements ICondition {
     public String generateExpression(Map<String, Object> params) {
         if (value != null) {
             List<Object> ids = (List<Object>) value;
-            String inStr = StringUtils.join(ids.toArray(), ",");
-            return propertyName + "  in ( " + inStr + " )";
+            if(ids.get(0).getClass() == Long.class || ids.get(0).getClass() == Integer.class){
+                String inStr = StringUtils.join(ids.toArray(), ",");
+                return propertyName + "  in ( " + inStr + " )";
+            }
+            else {
+                List<String> idStrList = new ArrayList<String>();
+                for(int i = 0; i < ids.size(); i++)
+                {
+                    idStrList.add("'"+ids.get(i)+"'");
+                }
+                String inStr = StringUtils.join(idStrList.toArray(), ",");
+                return propertyName + "  in ( " + inStr + " )";
+            }
         } else {
             return "";
         }
