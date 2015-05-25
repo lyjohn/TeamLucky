@@ -15,9 +15,7 @@
 <div class="container">
 
     <p class="bg-info">News Content</p>
-    <%
-        out.
-    %>
+
 </div>
 
     <script type="text/javascript" src="${ctx}/resource/js/jquery.min.js"></script>
