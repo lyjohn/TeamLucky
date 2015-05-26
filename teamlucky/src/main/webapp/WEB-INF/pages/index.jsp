@@ -86,7 +86,7 @@
                                 <h4></h4>
                                 <p><c:out value="${ var.partyRemark }" escapeXml="true"></c:out></p>
                                 <div class="read_more">
-                                    <a class="btn btn-2 active" href="${ctx}/party/view/${var.id}">立即查看</a>
+                                    <a class="btn btn-2 active" href="${ctx}/party/index/${var.id}">立即查看</a>
                                 </div>
                             </div>
                         </div>
@@ -125,6 +125,8 @@
 <script type="text/javascript" src="${ctx}/resource/js/jquery.ui.touch-punch.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/allinone_carousel.js"></script>
 
+<script type="text/javascript" src="${ctx}/resource/plugins/layer/layer.js"></script>
+
 <script type="text/javascript">
     $(function () {
         $('#allinone_carousel_charming').allinone_carousel({
@@ -149,47 +151,53 @@
             var loginPwd = $("#loginPwd").val();
 
             if (loginName == "" || loginPwd == "") {
-                console.log("用户名或密码不能为空")
+                layer.msg("用户名或密码不能为空",{icon: 5});
                 return false;
             }
             if (loginName.indexOf("_") > 0) {
-                console.log("用户名不能包含下划线")
+                layer.msg("注册时，用户名不能包含下划线",{icon: 5});
                 return false;
             }
             $.post("${ctx}/register", {loginName: loginName, loginPwd: loginPwd}, function (res) {
                 if (res.status == 0) {
-                    window.location.href = "${ctx}/user/sprofile";
+                    layer.msg('恭喜，注册成功，马上去填写个人信息吧~', function(){
+                        //关闭后的操作
+                        window.location.href = "${ctx}/user/sprofile";
+                    });
+
                 } else {
-                    console.log(res.message);
+                    layer.msg("注册失败，请重试~",{icon: 5});
                 }
             }, "json");
         }).on("click", "#js-login", function () {
             var loginName = $("#loginName").val();
             var loginPwd = $("#loginPwd").val();
             if (loginName == "" || loginPwd == "") {
-                console.log("用户名或密码不能为空")
+                layer.msg("用户名或密码不能为空",{icon: 5});
                 return false;
             }
             $.post("${ctx}/login", {loginName: loginName, loginPwd: loginPwd}, function (res) {
                 if (res.status == 0) {
                     $(".slide_content").remove();
-                    console.log("欢迎回来，我的朋友~");
+                    layer.msg("欢迎回来，我的朋友~", {icon: 6});
+
                     if (res.data == "1"){
                         $(".js_userset,.js_partycreate,.js_logout").removeClass("hide");
                         $(".js_userset a").attr("href","${ctx}/user/sprofile");
                         $(".js_partycreate a").attr("href","${ctx}/party/create");
                     }else
-                    {    $(".js_userset").removeClass("hide")
+                    {
+                        $(".js_userset").removeClass("hide")
                         $(".js_userset a").attr("href","${ctx}/user/pprofile");
                     }
                 } else {
-                    console.log(res.message);
+                    layer.msg(res.message, {icon: 5});
                 }
             }, "json");
         }).on("blur", "#loginName", function () {
             var loginName = $(this).val();
             if (loginName == "") {
-                console.log("用户名不能为空")
+                layer.msg("姓名不能为空", {icon: 0});
                 $(this).focus();
                 return false;
             }

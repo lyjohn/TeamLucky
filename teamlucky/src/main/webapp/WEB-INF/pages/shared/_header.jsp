@@ -37,7 +37,7 @@
             <li><a class="hide js_logout" href="${ctx}/logout">退出登录</a></li>
             <%}%>
             <%} else {%>
-            <li class="js_acthome"><a href="${ctx}/party/view/<%=sessionUser.getPartyId()%>">活动首页</a></li>
+            <li class="js_acthome"><a href="${ctx}/party/index/<%=sessionUser.getPartyId()%>">活动首页</a></li>
             <li class="js_userset"><a href="${ctx}/user/pprofile">个人设置</a></li>
             <li class="js_groupcreate"><a href="${ctx}/group/create">创建小组</a></li>
             <li class="js_aboutact"><a href="javascript:void(0);">关于活动</a></li>

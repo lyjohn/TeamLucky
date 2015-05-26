@@ -125,7 +125,7 @@ public class MainController {
 
         model.addAttribute("model", partyModel);
 
-        return "/index";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/register")

@@ -3,7 +3,7 @@ package com.tmlk.model;
 import java.util.List;
 import java.util.Map;
 
-import com.tmlk.po.PartyGroupExt;
+import com.tmlk.po.*;
 import com.tmlk.framework.util.Pagination;
 
 public class PartyGroupModel {
@@ -100,7 +100,58 @@ public class PartyGroupModel {
 	}
 	
 	/************************自定义字段区域开始*****************************/
-	
-	
+
+	/*
+	小组成员列表
+	 */
+	private List<PartyUserExt> groupUsers;
+
+	public List<PartyUserExt> getGroupUsers() {
+		return groupUsers;
+	}
+
+	public void setGroupUsers(List<PartyUserExt> groupUsers) {
+		this.groupUsers = groupUsers;
+	}
+
+	/*
+	小组新闻列表
+	 */
+	private List<NewsExt> groupNews;
+
+	public List<NewsExt> getGroupNews() {
+		return groupNews;
+	}
+
+	public void setGroupNews(List<NewsExt> groupNews) {
+		this.groupNews = groupNews;
+	}
+
+	/*
+	小组文档列表
+	 */
+	private List<DocumentExt> groupDocs;
+
+	public List<DocumentExt> getGroupDocs() {
+		return groupDocs;
+	}
+
+	public void setGroupDocs(List<DocumentExt> groupDocs) {
+		this.groupDocs = groupDocs;
+	}
+
+	/*
+	小组论坛列表
+	 */
+	private List<ForumExt> groupForums;
+
+	public List<ForumExt> getGroupForums() {
+		return groupForums;
+	}
+
+	public void setGroupForums(List<ForumExt> groupForums) {
+		this.groupForums = groupForums;
+	}
+
 	/************************自定义字段区域结束*****************************/
 }

@@ -54,6 +54,12 @@ public class ErrorController {
             case 3:
                 message = "私有活动，仅成员才能参与";
                 break;
+            case 30:
+                message = "还没有加入任何团队，或者您的申请还未通过.";
+                break;
+            case 31:
+                message = "团队创建人才能管理团队哦";
+                break;
             default:
                 message = "系统错误，程序猿加班改BUG~";
                 break;

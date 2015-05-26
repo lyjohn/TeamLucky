@@ -9,8 +9,9 @@ import com.tmlk.framework.mybatis.ICondition;
 import com.tmlk.framework.session.SessionStatus;
 import com.tmlk.framework.session.SessionUser;
 import com.tmlk.framework.util.Constants;
+import com.tmlk.framework.util.FormatUtils;
 import com.tmlk.framework.util.JsonResult;
-import com.tmlk.model.PartyModel;
+import com.tmlk.model.*;
 import com.tmlk.po.PartyExt;
 import com.tmlk.po.PartyUserExt;
 import com.tmlk.po.SysPartyUserLinkExt;
@@ -90,8 +91,61 @@ public class PartyController {
         return result;
     }
 
-    @RequestMapping(value = "/view/{id}",method = RequestMethod.GET)
-    public String goView(@PathVariable("id") Long id, HttpSession session,HttpServletRequest request,@ModelAttribute PartyModel partyModel, ModelMap model){
+    /*
+    *  下面是活动管理功能模块
+    */
+    //管理活动基本信息
+    @RequestMapping(value = "/conf/info")
+    public String confInfo(@ModelAttribute PartyModel partyModel, HttpServletRequest request,HttpSession session, ModelMap model) {
+        SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+
+        //查询获取活动用户
+        PartyUserExt partyUserExt = partyUserService.load(sessionUser.getPartyUserId());
+
+
+        return "/party/confinfo";
+    }
+
+    //管理活动成员
+    @RequestMapping(value = "/conf/member")
+    public String confMember(@ModelAttribute PartyUserModel partyUserModel,HttpServletRequest request,HttpSession session,ModelMap model){
+
+        return "/party/confmember";
+    }
+
+    //管理团队
+    @RequestMapping(value = "/conf/group")
+    public String confGroup(@ModelAttribute PartyGroupModel partyGroupModel,HttpServletRequest request,HttpSession session,ModelMap model){
+
+        return "/party/confgroup";
+    }
+
+    //管理通知
+    @RequestMapping(value = "/conf/news")
+    public String confNews(@ModelAttribute NewsModel newsModel,HttpServletRequest request,HttpSession session,ModelMap model){
+
+        return "/party/confnews";
+    }
+
+    //管理论坛
+    @RequestMapping(value = "/conf/forum")
+    public String confForum(@ModelAttribute ForumModel forumModel,HttpServletRequest request,HttpSession session,ModelMap model){
+
+        return "/party/confforum";
+    }
+    //管理文档
+    @RequestMapping(value = "/conf/doc")
+    public String confDocs(@ModelAttribute DocumentModel documentModel,HttpServletRequest request,HttpSession session,ModelMap model){
+
+        return "/party/confdocs";
+    }
+
+    /*
+    *  上面是活动管理功能模块
+    */
+
+    @RequestMapping(value = "/index/{id}",method = RequestMethod.GET)
+    public String index(@PathVariable("id") Long id, HttpSession session,HttpServletRequest request,@ModelAttribute PartyModel partyModel, ModelMap model){
         PartyExt partyExt = partyService.load(id);
         if(partyExt == null){
             return "/errors/error/2";
