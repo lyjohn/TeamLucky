@@ -16,9 +16,7 @@ import com.tmlk.po.PartyExt;
 import com.tmlk.po.PartyUserExt;
 import com.tmlk.po.SysPartyUserLinkExt;
 import com.tmlk.po.SysUserExt;
-import com.tmlk.service.IPartyServiceExt;
-import com.tmlk.service.IPartyUserServiceExt;
-import com.tmlk.service.ISysPartyUserLinkServiceExt;
+import com.tmlk.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -38,12 +36,6 @@ import java.util.List;
 @RequestMapping(value = "/party")
 public class PartyController {
 
-//    @InitBinder
-//    protected void initBinder(WebDataBinder binder) {
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-//    }
-
     private static SessionStatus sessionStatus = SessionStatus.getInstance();
 
     private static final Logger logger = Logger.getLogger(PartyController.class);
@@ -52,10 +44,22 @@ public class PartyController {
     private IPartyServiceExt partyService;
 
     @Autowired
+    private IPartyGroupServiceExt partyGroupService;
+
+    @Autowired
     private ISysPartyUserLinkServiceExt sysPartyUserLinkService;
 
     @Autowired
     private IPartyUserServiceExt partyUserService;
+
+    @Autowired
+    private INewsServiceExt newsService;
+
+    @Autowired
+    private IDocumentServiceExt documentService;
+
+    @Autowired
+    private IForumServiceExt forumService;
 
     @RequestMapping(value = "/create")
     public String goCreate(){
@@ -99,45 +103,133 @@ public class PartyController {
     public String confInfo(@ModelAttribute PartyModel partyModel, HttpServletRequest request,HttpSession session, ModelMap model) {
         SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
 
-        //查询获取活动用户
-        PartyUserExt partyUserExt = partyUserService.load(sessionUser.getPartyUserId());
+        //只有活动创建者才能进入管理页面
+        PartyExt partyExt = partyService.load(sessionUser.getPartyId());
+        if(partyExt.getPartyStatus() == 16 && partyExt.getCreateBy().equals(sessionUser.getSysUserId())){ //16才是管理员
 
+            partyModel.setPartyExt(partyExt);
 
-        return "/party/confinfo";
+            model.addAttribute("model",partyModel);
+            return "/party/confinfo";
+        }
+        else{
+            return "/errors/error/21";
+        }
     }
 
     //管理活动成员
     @RequestMapping(value = "/conf/member")
-    public String confMember(@ModelAttribute PartyUserModel partyUserModel,HttpServletRequest request,HttpSession session,ModelMap model){
+    public String confMember(@ModelAttribute PartyModel partyModel,HttpServletRequest request,HttpSession session,ModelMap model){
+        SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
 
-        return "/party/confmember";
+        //只有活动创建者才能进入管理页面
+        PartyExt partyExt = partyService.load(sessionUser.getPartyId());
+        if(partyExt.getPartyStatus() == 16 && partyExt.getCreateBy().equals(sessionUser.getSysUserId())){ //16才是管理员
+
+            partyModel.setPartyExt(partyExt);
+
+            List<ICondition> conditions = new ArrayList<ICondition>();
+            conditions.add(new EqCondition("partyId",partyExt.getId()));
+            partyModel.setPartyUsers(partyUserService.criteriaQuery(conditions));
+
+            model.addAttribute("model",partyModel);
+            return "/party/confmember";
+        }
+        else{
+            return "/errors/error/21";
+        }
     }
 
     //管理团队
     @RequestMapping(value = "/conf/group")
-    public String confGroup(@ModelAttribute PartyGroupModel partyGroupModel,HttpServletRequest request,HttpSession session,ModelMap model){
+    public String confGroup(@ModelAttribute PartyModel partyModel,HttpServletRequest request,HttpSession session,ModelMap model){
+        SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
 
-        return "/party/confgroup";
+        //只有活动创建者才能进入管理页面
+        PartyExt partyExt = partyService.load(sessionUser.getPartyId());
+        if(partyExt.getPartyStatus() == 16 && partyExt.getCreateBy().equals(sessionUser.getSysUserId())){ //16才是管理员
+
+            partyModel.setPartyExt(partyExt);
+
+            List<ICondition> conditions = new ArrayList<ICondition>();
+            conditions.add(new EqCondition("partyId",partyExt.getId()));
+            partyModel.setPartyGroups(partyGroupService.criteriaQuery(conditions));
+
+            model.addAttribute("model",partyModel);
+            return "/party/confgroup";
+        }
+        else{
+            return "/errors/error/21";
+        }
     }
 
     //管理通知
     @RequestMapping(value = "/conf/news")
-    public String confNews(@ModelAttribute NewsModel newsModel,HttpServletRequest request,HttpSession session,ModelMap model){
+    public String confNews(@ModelAttribute PartyModel partyModel,HttpServletRequest request,HttpSession session,ModelMap model){
+        SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
 
-        return "/party/confnews";
+        //只有活动创建者才能进入管理页面
+        PartyExt partyExt = partyService.load(sessionUser.getPartyId());
+        if(partyExt.getPartyStatus() == 16 && partyExt.getCreateBy().equals(sessionUser.getSysUserId())){ //16才是管理员
+
+            partyModel.setPartyExt(partyExt);
+
+            List<ICondition> conditions = new ArrayList<ICondition>();
+            conditions.add(new EqCondition("partyId",partyExt.getId()));
+            partyModel.setPartyNews(newsService.criteriaQuery(conditions));
+
+            model.addAttribute("model",partyModel);
+            return "/party/confnews";
+        }
+        else{
+            return "/errors/error/21";
+        }
     }
 
     //管理论坛
     @RequestMapping(value = "/conf/forum")
-    public String confForum(@ModelAttribute ForumModel forumModel,HttpServletRequest request,HttpSession session,ModelMap model){
+    public String confForum(@ModelAttribute PartyModel partyModel,HttpServletRequest request,HttpSession session,ModelMap model){
+        SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
 
-        return "/party/confforum";
+        //只有活动创建者才能进入管理页面
+        PartyExt partyExt = partyService.load(sessionUser.getPartyId());
+        if(partyExt.getPartyStatus() == 16 && partyExt.getCreateBy().equals(sessionUser.getSysUserId())){ //16才是管理员
+
+            partyModel.setPartyExt(partyExt);
+
+            List<ICondition> conditions = new ArrayList<ICondition>();
+            conditions.add(new EqCondition("partyId",partyExt.getId()));
+            partyModel.setPartyForums(forumService.criteriaQuery(conditions));
+
+            model.addAttribute("model",partyModel);
+            return "/party/confforum";
+        }
+        else{
+            return "/errors/error/21";
+        }
     }
     //管理文档
     @RequestMapping(value = "/conf/doc")
-    public String confDocs(@ModelAttribute DocumentModel documentModel,HttpServletRequest request,HttpSession session,ModelMap model){
+    public String confDocs(@ModelAttribute PartyModel partyModel,HttpServletRequest request,HttpSession session,ModelMap model){
+        SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
 
-        return "/party/confdocs";
+        //只有活动创建者才能进入管理页面
+        PartyExt partyExt = partyService.load(sessionUser.getPartyId());
+        if(partyExt.getPartyStatus() == 16 && partyExt.getCreateBy().equals(sessionUser.getSysUserId())){ //16才是管理员
+
+            partyModel.setPartyExt(partyExt);
+
+            List<ICondition> conditions = new ArrayList<ICondition>();
+            conditions.add(new EqCondition("partyId",partyExt.getId()));
+            partyModel.setPartyDocs(documentService.criteriaQuery(conditions));
+
+            model.addAttribute("model",partyModel);
+
+            return "/party/confdocs";
+        }
+        else{
+            return "/errors/error/21";
+        }
     }
 
     /*

@@ -51,6 +51,9 @@ public class ErrorController {
             case 2:
                 message = "活动不存在";//id 没有找到
                 break;
+            case 21:
+                message = "只有活动的创建人，才能管理活动";
+                break;
             case 3:
                 message = "私有活动，仅成员才能参与";
                 break;

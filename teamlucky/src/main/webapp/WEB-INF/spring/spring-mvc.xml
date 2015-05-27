@@ -17,9 +17,10 @@
     <!--通知spring使用cglib而不是jdk的来生成代理方法 AOP可以拦截到Controller -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
-    <!-- 自动扫描的包名，只用于controller -->
+    <!-- 扫描所有的controller 但是不扫描service-->
     <context:component-scan base-package="com.tmlk">
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
     </context:component-scan>
 
     <!-- 默认注解的支持，相当于注册了DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter，用于拦截请求，解析参数，然会结果转换等功能 -->

@@ -19,9 +19,6 @@
     <bean id="sysLogService" class="com.tmlk.service.impl.SysLogServiceExt">
         <property name="sysLogDao" ref="sysLogDao" />
     </bean>
-    <bean id="sysExceptionService" class="com.tmlk.service.impl.SysExceptionServiceExt">
-        <property name="sysExceptionDao" ref="sysExceptionDao"/>
-    </bean>
     <bean id="partyUserService" class="com.tmlk.service.impl.PartyUserServiceExt">
         <property name="partyUserDao" ref="partyUserDao"/>
     </bean>

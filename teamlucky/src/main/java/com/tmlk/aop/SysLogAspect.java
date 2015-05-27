@@ -5,19 +5,15 @@ import com.tmlk.framework.util.Constants;
 import com.tmlk.framework.util.JSONUtil;
 import com.tmlk.framework.util.JsonResult;
 import com.tmlk.po.*;
-import com.tmlk.service.impl.SysExceptionServiceExt;
-import com.tmlk.service.impl.SysLogServiceExt;
+import com.tmlk.service.ISysLogServiceExt;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.ContextLoader;
-import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Method;
@@ -31,11 +27,15 @@ import java.util.Date;
 public class SysLogAspect {
 
     //注入Service用于把日志保存数据库
-    @Resource
-    private SysLogServiceExt sysLogService;
+    private ISysLogServiceExt sysLogService;
 
-    @Resource
-    private SysExceptionServiceExt sysExceptionService;
+    public ISysLogServiceExt getSysLogService() {
+        return sysLogService;
+    }
+
+    public void setSysLogService(ISysLogServiceExt sysLogService) {
+        this.sysLogService = sysLogService;
+    }
 
     //本地异常日志记录对象
     private static final Logger logger = LoggerFactory.getLogger(SysLogAspect.class);
@@ -131,29 +131,9 @@ public class SysLogAspect {
                 }
             }
         }
-        try {
-            SysExceptionExt sysExceptionExt = new SysExceptionExt();
-            sysExceptionExt.setLogTime(new Date());
-            sysExceptionExt.setUserIp(ip);
-            if (sessionUser.getUserType() == 1) {
-                sysExceptionExt.setUserName(sessionUser.getSysUserName());
-            } else {
-                sysExceptionExt.setUserName(sessionUser.getPartyUserName());
-            }
-            sysExceptionExt.setLogDesc(getServiceMethodDescription(joinPoint));
-            sysExceptionExt.setLogObjId(0L);
 
-            //1：Service异常
-            sysExceptionExt.setLogAction(1);
-            sysExceptionExt.setLogContent(params);
-            //保存数据库
-            sysExceptionService.create(sysExceptionExt);
-        } catch (Exception ex) {
-            //记录本地异常日志
-            logger.error("AOP Service AfterReturn Exception:{}", ex.getMessage());
-        }
          /*==========记录本地异常日志==========*/
-        logger.error("AOP Service AfterThrown: 异常方法:{}异常代码:{}异常信息:{}参数:{}", joinPoint.getTarget().getClass().getName() + joinPoint.getSignature().getName(), e.getClass().getName(), e.getMessage(), params);
+        logger.error("AOP Service AfterThrown: 异常方法:{}\n异常代码:{}\n异常信息:{}\n参数:{}", joinPoint.getTarget().getClass().getName() + joinPoint.getSignature().getName(), e.getClass().getName(), e.getMessage(), params);
     }
 
     /**
