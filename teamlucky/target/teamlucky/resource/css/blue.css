@@ -11,7 +11,6 @@
 body {
     font-family: 'roboto_condensedregular';
 	background:#ffffff;
-	font-size: 100%;
 }
 .header_bg{
 	background: #76C7C0;
@@ -553,6 +552,8 @@ nav{margin:0;background:none;}.menu li{display:block;margin:0;}.menu li a{backgr
 /*-- start footer1 --*/
 .footer1_bg{
 	background: #6AB3AC;
+	color: #ffffff;
+	padding-top: 20px;
 }
 .footer1{
 	padding: 2% 0;

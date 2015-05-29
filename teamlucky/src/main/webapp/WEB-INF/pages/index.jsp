@@ -12,13 +12,20 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
 
     <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/codecademy.css">
+
     <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/blue.css"/>
     <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/fwslider.css">
-    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/allinone_carousel.css" >
+    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/allinone_carousel.css">
 
     <title>首页 - 校缘派</title>
 </head>
@@ -51,17 +58,20 @@
             <img src="${ctx}/resource/images/slider2.jpg">
             <!--/slide -->
         </div>
-        <% if(sessionUser == null ) { %>
+        <% if (sessionUser == null) { %>
         <div class="slide_content">
             <div class="slide_content_wrap">
                 <div class="col-md-4">
                     <div class="contact-form">
                         <h4 class="title">校缘派 专注分组</h4>
-                        <form action="" onsubmit="return false;" class="description">
-                            <input type="text" id="loginName" value="" />
-                            <input type="password" id="loginPwd" value="" />
 
-						     <span><input id="js-login" type="submit" value="登录">&nbsp;&nbsp;<input id="js-register" type="submit" value="注册"></span>
+                        <form action="" onsubmit="return false;" class="description">
+                            <input type="text" id="loginName" value=""/>
+                            <input type="password" id="loginPwd" value=""/>
+
+                            <span><input id="js-login" type="submit" value="登录">&nbsp;&nbsp;<input id="js-register"
+                                                                                                   type="submit"
+                                                                                                   value="注册"></span>
                         </form>
                     </div>
                 </div>
@@ -71,7 +81,8 @@
         <div class="timers"></div>
         <div class="slidePrev"><span></span></div>
         <div class="slideNext"><span></span></div>
-    </div><!--/slider -->
+    </div>
+    <!--/slider -->
 </div>
 <div class="main_bg"><!-- start main -->
     <div class="container">
@@ -82,50 +93,52 @@
                         <div class="col-md-3 span1_of_4">
                             <div class="span4_of_list">
                                 <span><i class="fa fa-thumbs-o-up"></i></span>
+
                                 <h3><c:out value="${ var.partyName }" escapeXml="true"></c:out></h3>
                                 <h4></h4>
+
                                 <p><c:out value="${ var.partyRemark }" escapeXml="true"></c:out></p>
+
                                 <div class="read_more">
                                     <a class="btn btn-2 active" href="${ctx}/party/index/${var.id}">立即查看</a>
                                 </div>
                             </div>
                         </div>
-                       </c:forEach>
+                    </c:forEach>
                 </c:if>
                 <div class="clearfix"></div>
             </div>
         </div>
-    </div>
-</div>
-<div class="footer1_bg">
-    <div class="container">
-        <div class="footer1">
-            <div class="copy pull-left">
-                <p class="link">Copyright &copy; 2014.Company 校缘派 All rights reserved.<a target="_blank" href="#"></a></p>
+        <hr>
+        <div class="grid-row learners padding-bottom--1">
+            <div class="grid-col-12 grid-col--center grid-col--align-center grid-col--no--padding">
+                <h2>2
+                    <small>公共活动</small>
+                    10
+                    <small>私有活动</small>
+                </h2>
+                <div class="grid-col-12 grid-col--no-spacing">正在火热开展</div>
             </div>
-            <div class="clearfix"></div>
         </div>
     </div>
 </div>
-<!-- /container -->
 
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
+<jsp:include page="shared/_footer.jsp"/>
 
 <script type="text/javascript" src="${ctx}/resource/js/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="${ctx}/resource/plugins/layer/layer.js"></script>
+<script type="text/javascript" src="${ctx}/resource/js/common.js"></script>
+
 <script type="text/javascript" src="${ctx}/resource/js/css3-mediaqueries.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/fwslider.js"></script>
 
-<script type="text/javascript" src="${ctx}/resource/js/menu.js" ></script>
+<script type="text/javascript" src="${ctx}/resource/js/menu.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/jquery.ui.touch-punch.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/allinone_carousel.js"></script>
 
-<script type="text/javascript" src="${ctx}/resource/plugins/layer/layer.js"></script>
 
 <script type="text/javascript">
     $(function () {
@@ -133,71 +146,70 @@
             skin: 'charming',
             width: 990,
             height: 454,
-            responsive:true,
+            responsive: true,
             autoPlay: 3,
-            resizeImages:true,
-            autoHideBottomNav:false,
-            showElementTitle:false,
-            verticalAdjustment:50,
-            showPreviewThumbs:false,
+            resizeImages: true,
+            autoHideBottomNav: false,
+            showElementTitle: false,
+            verticalAdjustment: 50,
+            showPreviewThumbs: false,
             //easing:'easeOutBounce',
-            numberOfVisibleItems:5,
-            nextPrevMarginTop:23,
-            playMovieMarginTop:0,
-            bottomNavMarginBottom:-10
+            numberOfVisibleItems: 5,
+            nextPrevMarginTop: 23,
+            playMovieMarginTop: 0,
+            bottomNavMarginBottom: -10
         });
         $(document).on("click", "#js-register", function () {
             var loginName = $("#loginName").val();
             var loginPwd = $("#loginPwd").val();
 
             if (loginName == "" || loginPwd == "") {
-                layer.msg("用户名或密码不能为空",{icon: 5});
+                layer.msg("用户名或密码不能为空", {icon: 5, offset: '110px'});
                 return false;
             }
             if (loginName.indexOf("_") > 0) {
-                layer.msg("注册时，用户名不能包含下划线",{icon: 5});
+                layer.msg("注册时，用户名不能包含下划线", {icon: 5, offset: '110px'});
                 return false;
             }
             $.post("${ctx}/register", {loginName: loginName, loginPwd: loginPwd}, function (res) {
                 if (res.status == 0) {
-                    layer.msg('恭喜，注册成功，马上去填写个人信息吧~', function(){
+                    layer.msg('恭喜，注册成功，马上去填写个人信息吧~', {offset: '110px'}, function () {
                         //关闭后的操作
                         window.location.href = "${ctx}/user/sprofile";
                     });
 
                 } else {
-                    layer.msg("注册失败，请重试~",{icon: 5});
+                    layer.msg("注册失败，请重试~", {icon: 5, offset: '110px'});
                 }
             }, "json");
         }).on("click", "#js-login", function () {
             var loginName = $("#loginName").val();
             var loginPwd = $("#loginPwd").val();
             if (loginName == "" || loginPwd == "") {
-                layer.msg("用户名或密码不能为空",{icon: 5});
+                layer.msg("用户名或密码不能为空", {icon: 5, offset: '110px'});
                 return false;
             }
             $.post("${ctx}/login", {loginName: loginName, loginPwd: loginPwd}, function (res) {
                 if (res.status == 0) {
                     $(".slide_content").remove();
-                    layer.msg("欢迎回来，我的朋友~", {icon: 6});
+                    layer.msg("欢迎回来，我的朋友~", {icon: 6, offset: '110px'});
 
-                    if (res.data == "1"){
+                    if (res.data == "1") {
                         $(".js_userset,.js_partycreate,.js_logout").removeClass("hide");
-                        $(".js_userset a").attr("href","${ctx}/user/sprofile");
-                        $(".js_partycreate a").attr("href","${ctx}/party/create");
-                    }else
-                    {
+                        $(".js_userset a").attr("href", "${ctx}/user/sprofile");
+                        $(".js_partycreate a").attr("href", "${ctx}/party/create");
+                    } else {
                         $(".js_userset").removeClass("hide")
-                        $(".js_userset a").attr("href","${ctx}/user/pprofile");
+                        $(".js_userset a").attr("href", "${ctx}/user/pprofile");
                     }
                 } else {
-                    layer.msg(res.message, {icon: 5});
+                    layer.msg(res.message, {icon: 5, offset: '110px'});
                 }
             }, "json");
         }).on("blur", "#loginName", function () {
             var loginName = $(this).val();
             if (loginName == "") {
-                layer.msg("姓名不能为空", {icon: 0});
+                layer.msg("姓名不能为空", {icon: 0, offset: '110px'});
                 $(this).focus();
                 return false;
             }

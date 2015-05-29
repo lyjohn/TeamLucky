@@ -18,6 +18,36 @@ public class FormatUtils {
         return DateFormatUtils.format(date, pattern);
     }
 
+    public static String getDateString(Date date, String format){
+        if(date == null){
+            return StringUtils.EMPTY;
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        return sdf.format(date);
+    }
+
+    public static Date getDate(String dateStr,String format){
+        if (dateStr == null)
+            return null;
+
+        if (format == null)
+            format = "yyyy-MM-dd";
+
+        SimpleDateFormat sdf=new SimpleDateFormat(format);
+
+        Date date= null;
+        try {
+            date = sdf.parse(dateStr);
+        } catch (ParseException pe) {
+            date = null;
+        }
+
+        return date;
+    }
+
+    public static String getCurrentDateString(String format){
+        return getDateString(new Date(), format);
+    }
     /**
      * 检测字符串是否不为空(null,"","null")
      *

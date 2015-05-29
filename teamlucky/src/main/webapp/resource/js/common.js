@@ -15,6 +15,13 @@
 
 
 $(function(){
+    $(document).on("click",".undo",function(e){
+        layer.msg("程序猿还在开发这个页面",{icon:5,offset: '110px'});
+
+        e.preventDefault();
+        return false;
+    });
+
     //是否是邮箱
     String.prototype.isEmail = function(){
         var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;

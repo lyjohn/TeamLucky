@@ -122,9 +122,7 @@ public class PartyServiceExt extends PartyService implements IPartyServiceExt {
 
 				PartyGroupExt partyGroup = partyGroupService.build(partyGroupExt);
 
-				throw new Exception("活动和小组都已经创建好了，现在抛出异常能够回滚吗？");
-
-				//partyUserExt.setGroupId(partyGroup.getId());
+				partyUserExt.setGroupId(partyGroup.getId());
 			}
 
 			PartyUserExt partyUser = partyUserService.register(partyUserExt);
