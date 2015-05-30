@@ -205,7 +205,7 @@
         <c:if test="${!empty model.items}">
         <div class="grid-row">
             <div class="grid-col--center grid-col--align-center grid-col--no--padding">
-                <a href="/party/list">更多公共活动</a>
+                <a href="${ctx}/party/list">更多公共活动</a>
             </div>
         </div>
         </c:if>
@@ -217,7 +217,7 @@
                     10
                     <small>私有活动</small>
                 </h2>
-                <div class="grid-col-12 grid-col--no-spacing">正在火热开展</div>
+                <div class="grid-col-12 grid-col--no-spacing">火热进行中</div>
             </div>
         </div>
     </div>
