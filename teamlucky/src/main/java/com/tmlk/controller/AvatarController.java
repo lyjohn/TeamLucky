@@ -59,6 +59,21 @@ public class AvatarController {
             if(session == null)
                 return null;
 
+            String fileName = file.getOriginalFilename();
+
+            String[] str = { ".jpg", ".jpeg", ".bmp", ".gif", ".png"};
+
+            boolean isPic = false;
+            for (String s : str) {
+                if (fileName.endsWith(s)) {
+                    isPic = true;
+                    break;
+                }
+            }
+
+            if(!isPic)
+                throw new Exception("上传的文件不是有效图片: jpg jpeg bmp gif png");
+
             //上传头像
             String filePath = documentService.doAvatarSave(request, file, type);
 
@@ -76,11 +91,13 @@ public class AvatarController {
     //type: 1:用户 2:活动 3:小组
     @RequestMapping(value = "/cut")
     @ResponseBody
-    public String cutAvatar(@RequestParam(value = "filePath",required = true) String filePath,@RequestParam(value = "type",required = true) int type,@RequestParam(value = "x",required = true) int x,@RequestParam(value = "y",required = true) int y,@RequestParam(value = "width",required = true) int width,@RequestParam(value = "height",required = true) int height,HttpServletRequest request,HttpSession session) {
+    public JsonResult cutAvatar(@RequestParam(value = "filePath",required = true) String filePath,@RequestParam(value = "type",required = true) int type,@RequestParam(value = "x1",required = true) int x1,@RequestParam(value = "y1",required = true) int y1,@RequestParam(value = "x2",required = true) int x2,@RequestParam(value = "y2",required = true) int y2,HttpServletRequest request,HttpSession session) {
         JsonResult result = new JsonResult();
         try {
+            int width = x2-x1;
+            int height = y2-y1;
             //剪切头像
-            String savePath = documentService.doAvatarCut(request,session, filePath, type,x,y,width,height);
+            String savePath = documentService.doAvatarCut(request,session, filePath, type,x1,y1,width,height);
 
             result.setData(savePath);
             result.setStatus(0);
@@ -88,9 +105,8 @@ public class AvatarController {
             result.setStatus(1);
             result.setMessage(e.getMessage());
         }
-        String str = JSONUtil.object2JsonString(result);
 
-        return str;
+        return result;
     }
 
 

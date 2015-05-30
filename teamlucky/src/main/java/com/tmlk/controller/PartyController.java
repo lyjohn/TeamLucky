@@ -80,7 +80,8 @@ public class PartyController {
                 SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
                 partyExt.setCreateBy(sessionUser.getSysUserId());
 
-                partyService.launch(partyExt, request);
+                PartyUserExt partyUserExt = partyService.launch(partyExt,request);
+                sessionStatus.checkAndInParty(session, partyUserExt);
 
                 result.setStatus(0);
             }
@@ -276,7 +277,7 @@ public class PartyController {
                 //TODO 用户进入活动 活动 小组 活跃度+1
 
                 PartyUserExt partyUserExt = partyUserService.load(sysPartyUserLinkExts.get(0).getPartyUserId());
-                sessionStatus.checkAndInParty(session,partyUserExt,request);
+                sessionStatus.checkAndInParty(session,partyUserExt);
             }
 
             partyModel.setPartyExt(partyExt);

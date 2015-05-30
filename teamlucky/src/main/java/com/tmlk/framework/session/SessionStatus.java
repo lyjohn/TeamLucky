@@ -3,7 +3,6 @@ package com.tmlk.framework.session;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.tmlk.framework.util.Constants;
@@ -34,10 +33,9 @@ public class SessionStatus {
      *
      * @param session HttpSession
      * @param user    用户对象
-     * @param request HttpServletRequest
      * @return 返回值
      */
-    public synchronized void checkAndLogin(HttpSession session, Object user, HttpServletRequest request) {
+    public synchronized void checkAndLogin(HttpSession session, Object user) {
 
         SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
 
@@ -118,10 +116,9 @@ public class SessionStatus {
      *
      * @param session   HttpSession
      * @param partyUser 活动用户
-     * @param request   HttpServletRequest
      * @return 返回值
      */
-    public synchronized void checkAndInParty(HttpSession session, PartyUserExt partyUser, HttpServletRequest request) {
+    public synchronized void checkAndInParty(HttpSession session, PartyUserExt partyUser) {
 
         SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
 
@@ -144,10 +141,9 @@ public class SessionStatus {
      *
      * @param session   HttpSession
      * @param sysUser 系统用户
-     * @param request   HttpServletRequest
      * @return 返回值
      */
-    public synchronized void checkAndBindSysUser(HttpSession session, SysUserExt sysUser, HttpServletRequest request) {
+    public synchronized void checkAndBindSysUser(HttpSession session, SysUserExt sysUser) {
 
         SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
 
@@ -172,10 +168,9 @@ public class SessionStatus {
      *
      * @param session   HttpSession
      * @param groupId   小组ID
-     * @param request   HttpServletRequest
      * @return 返回值
      */
-    public synchronized void checkAndJoinGroup(HttpSession session,Long groupId, HttpServletRequest request) {
+    public synchronized void checkAndJoinGroup(HttpSession session,Long groupId) {
 
         SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
 

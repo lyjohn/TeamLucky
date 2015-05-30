@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IPartyServiceExt extends IPartyService{
 
-    PartyExt launch(PartyExt partyExt,HttpServletRequest request) throws Exception;
+    PartyUserExt launch(PartyExt partyExt,HttpServletRequest request) throws Exception;
 
     void edit(PartyExt partyExt);
 

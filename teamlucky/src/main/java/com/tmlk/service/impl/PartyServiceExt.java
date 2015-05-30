@@ -59,9 +59,16 @@ public class PartyServiceExt extends PartyService implements IPartyServiceExt {
 		this.partyGroupService = partyGroupService;
 	}
 
+	/**
+	 * 创建活动，并把新建的活动用户返回去
+	 * @param partyExt 填写的表单内容
+	 * @param request HttpServletRequest对象
+	 * @return PartyUserExt
+	 * @throws Exception
+	 */
 	@Override
 	@SysServiceLog(description = "创建活动", code = 201)
-	public PartyExt launch(PartyExt partyExt,HttpServletRequest request) throws Exception {
+	public PartyUserExt launch(PartyExt partyExt,HttpServletRequest request) throws Exception {
 		SysUserExt author = sysUserService.load(partyExt.getCreateBy());
 		if(author == null)
 			throw new Exception("只有系统注册用户 才能创建活动");
@@ -132,9 +139,11 @@ public class PartyServiceExt extends PartyService implements IPartyServiceExt {
 			sysPartyUserLinkExt.setPartyUserId(partyUser.getId());
 			sysPartyUserLinkExt.setSysUserId(author.getId());
 			sysPartyUserLinkService.create(sysPartyUserLinkExt);
+
+			return partyUser;
 		}
 
-		return party;
+		return null;
 	}
 
 	@Override

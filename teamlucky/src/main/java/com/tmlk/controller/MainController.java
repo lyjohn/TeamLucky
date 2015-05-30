@@ -88,7 +88,7 @@ public class MainController {
                 loginResult = sysUserService.login(loginName,loginPwd,request);
 
             if(loginResult.getStatus() == 1 || loginResult.getStatus() == 2) {
-                sessionStatus.checkAndLogin(session, loginResult.getData(), request);
+                sessionStatus.checkAndLogin(session, loginResult.getData());
                 result.setData(loginResult.getStatus());
                 result.setStatus(0);
             }else {
@@ -138,7 +138,7 @@ public class MainController {
             sysUserService.register(sysUserExt,request);
 
             //注册完直接登录
-            sessionStatus.checkAndLogin(session, sysUserExt, request);
+            sessionStatus.checkAndLogin(session, sysUserExt);
 
             result.setStatus(0);
         }catch (Exception ex){

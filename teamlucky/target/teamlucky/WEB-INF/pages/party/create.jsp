@@ -72,6 +72,7 @@
             <div class="form-group">
                 <label class="control-label" for="partyCode">封面</label>
                 <input type="file" class="form-control" name="file" id="partyCover" placeholder="文件路径...">
+                <div class="preview-avatar"><img src=""></div>
             </div>
             <div class="checkbox">
                 <label>
@@ -109,6 +110,20 @@
 
     </div>
 
+</div>
+
+<div style="display: none;" id="photo_popup">
+    <div id="edit-photo" style="height: 390px;">
+        <div class="photo">
+            <img src="" alt="" />
+        </div>
+        <div class="preview">
+            <img src="" alt="" />
+        </div>
+        <div class="btn-div">
+            <a id="js-save" href="#" class="button button--secondary" data-method="post" rel="nofollow">确定</a>
+        </div>
+    </div>
 </div>
 <!-- /container -->
 
@@ -221,7 +236,6 @@
         });
 
         $(document).on("click", "#js-create", function () {
-
             var isSuc = validator.form();
             if (!isSuc) {
                 layer.msg("有错误项，还不能提交", {icon: 5, offset: '110px'});
@@ -231,6 +245,7 @@
             var pName = $("#partyName").val();
             var pRamark = $("#partyRemark").val();
             var pCode = $("#partyCode").val();
+            var pCover = $("#partyCover").data("img");
             var pIsGroup = $("#group").prop("checked");
             var pIsPublic = $("#public").prop("checked");
             var pIsAuto = $("#autoBuild").prop("checked");
@@ -241,6 +256,7 @@
                 partyName: pName,
                 partyRemark: pRamark,
                 partyCode: pCode,
+                partyCover: pCover,
                 isGroup: pIsGroup,
                 isPublic: pIsPublic,
                 isCustomBuild: pIsAuto,
@@ -301,54 +317,13 @@
                     var bak = JSON.parse(resStr);
                     bak = JSON.parse(bak);
                     if (bak.status == 0) {
-                        layer.open({
-                            zIndex: 1000,
-                            width:'600px',
-                            type: 1,
-                            title: false,
-                            content: "<div id='edit-photo' style='height: 390px;'>"+
-                            "<div class='photo'>"+
-                            "<img src='none' alt='' />"+
-                            "</div>"+
-                            "<div class='preview'>"+
-                            "<img src='none' alt='' />"+
-                            "</div>"+
-                            "<div class='btn-div'>"+
-                            "<button type='submit' class='lj-btn'>"+
-                            "<span id='Span1'>确 定</span>"+
-                            "</button>"+
-                            "</div>"+
-                            "</div>",
-                            success: function(layero, index){
-                                //图片加载完成之后
-                                $("#edit-photo .photo img").load(function () {
-
-                                    var initOffset = $("#edit-photo img").offset();
-                                    var imgW = $("#edit-photo img").width();
-                                    var imgH = $("#edit-photo img").height();
-
-                                    $("#edit-photo").width(imgW+100);
-                                    $(".imgareaselect-selection").parent("div").css({ "top": initOffset.top, "left": initOffset.left });
-                                    var outers = $(".imgareaselect-outer");
-                                    outers.eq(2).css({ "top": initOffset.top, "left": (initOffset.left + 120), "width": (imgW - 120), "height": imgH });
-                                    outers.eq(3).css({ "top": (initOffset.top + 120), "left": initOffset.left, "width": 120, "height": (imgH - 120) });
-                                });
-
-                            }
-                        });
-
                         $("#edit-photo .photo img").attr("src", "${ctx}/" + bak.data);
                         $("#edit-photo .preview img").attr("src", "${ctx}/" + bak.data);
-                        $('#edit-photo .photo img').imgAreaSelect({
-                            x1: 0,
-                            y1: 0,
-                            x2: 120,
-                            y2: 120, selectionOpacity: 0.2, aspectRatio: '1:1', onSelectChange: preview, zIndex: 10000, persistent: true
+                        $('#edit-photo .photo img').imgAreaSelect({x1: 0, y1: 0, x2: 80, y2: 80, selectionOpacity: 0.2, aspectRatio: '1:1', onSelectChange: preview, zIndex: 10000, persistent: true
                         });
-                        $("#edit-photo .lj-btn").attr({ "scale": "1", "x1": "0", "y1": "0", "x2": "120", "y2": "120" });
-                        //
+                        $("#edit-photo #js-save").attr({ "scale": "1", "x1": "0", "y1": "0", "x2": "80", "y2": "80" }).data("path",bak.data);
                     } else {
-                        layer.msg("logo上传失败，请重试", {icon: 5, offset: '110px'});
+                        layer.msg(bak.message, {icon: 5, offset: '110px'});
                     }
                 },
                 complete: function (XHR, TS) {
@@ -357,13 +332,61 @@
                     layer.load(2);
                 }
             });
-        })
+        }).on("click","#edit-photo #js-save",function () {
+            avatarResize();
+            return false;
+        });
+
+        //图片加载完成之后
+        $("#edit-photo .photo img").load(function () {
+            $("#photo_popup").show();
+
+            $img = $("#edit-photo .photo img");
+            var imgW = $img.width();
+            var imgH = $img.height();
+            $("#edit-photo").width(imgW+140);
+
+            layer.open({
+                zIndex: 1000,
+                type: 1,
+                title: false,
+                scrollbar: false,
+                area: ['500px', '390px'],
+                content: $("#edit-photo"),
+                success: function(layero, index){
+                    setTimeout(function(){
+                        var initOffset = $img.offset();
+
+                        var imgW = $img.width();
+                        var imgH = $img.height();
+
+                        $(".imgareaselect-selection").parent("div").css({ "top": initOffset.top, "left": initOffset.left });
+
+                        $(".imgareaselect-outer").each(function(indx) {
+                            if(indx<2)
+                                $(this).css({"top":initOffset.top,"left":initOffset.left});
+                            else if(indx == 2)
+                                $(this).css({"top":initOffset.top,"left":initOffset.left+80,"width": (imgW - 80), "height": imgH});
+                            else
+                                $(this).css({"top":initOffset.top+80,"left":initOffset.left,"width": 80, "height": (imgH - 80) });
+                        });
+                    },500);
+                },
+                end:function(){
+                    if ($(".imgareaselect-outer").length != 0) {
+                        $(".imgareaselect-selection").parent("div").hide();
+                        $(".imgareaselect-outer").hide();
+                    }
+                    $("#photo_popup").hide();
+                }
+            });
+        });
     });
 
     //图片选区
     function preview(img, selection) {
-        var scaleX = 120 / (selection.width || 1);
-        var scaleY = 120 / (selection.height || 1);
+        var scaleX = 80 / (selection.width || 1);
+        var scaleY = 80 / (selection.height || 1);
 
         $('.preview img').css({
             width: Math.round(scaleX * $(img).width()) + 'px',
@@ -371,18 +394,15 @@
             marginLeft: '-' + Math.round(scaleX * selection.x1) + 'px',
             marginTop: '-' + Math.round(scaleY * selection.y1) + 'px'
         });
-        $("#edit-photo .lj-btn").attr({ "scale": scaleX, "x1": selection.x1, "y1": selection.y1, "x2": selection.x2, "y2": selection.y2 });
+        $("#edit-photo #js-save").attr({ "scale": scaleX, "x1": selection.x1, "y1": selection.y1, "x2": selection.x2, "y2": selection.y2 });
     }
 
     //确定所选区域
     function avatarResize() {
-        var obj = $("#edit-photo .lj-btn");
+        var obj = $("#edit-photo #js-save");
         //需裁剪的头像 和 当前头像
-        var src = $("#edit-photo .photo img").attr("src");
+        var src = obj.data("path");
 
-        if (src.indexOf("http://") > -1) {
-            src = src.substring(src.indexOf("/Files"));
-        }
         var dataToSend = { filePath: src,type:2, x1: obj.attr('x1'), y1: obj.attr('y1'), x2: obj.attr('x2'), y2: obj.attr('y2') };
         $.ajax({
             url: "${ctx}/avatar/cut",
@@ -390,12 +410,16 @@
             dataType: "json",
             type: "POST",
             success: function (res) {
-                console.log(res);
-                if (res.Suc) {
+                if (res.status == 0) {
+                    layer.closeAll();
+
                     layer.msg("裁剪图片成功",{icon:6,offset:'110px'});
+                    $(".preview-avatar").slideDown();
+                    $(".preview-avatar img").attr("src","${ctx}/"+res.data);
+                    $("#partyCover").data("img",res.data);
                 }
                 else
-                    layer.msg(res.Msg, 2,{icon:5,offset:'110px'});
+                    layer.msg(res.Msg,{icon:5,offset:'110px'});
             },
             error: function (data, status, e) {
                 layer.msg("裁剪图片失败",{icon:5,offset:'110px'});

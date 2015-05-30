@@ -15,6 +15,7 @@
   <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
   <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/codecademy.css">
   <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/blue.css"/>
   <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/fwslider.css">
