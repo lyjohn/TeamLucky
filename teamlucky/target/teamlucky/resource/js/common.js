@@ -16,7 +16,7 @@
 
 $(function(){
     $(document).on("click",".undo",function(e){
-        layer.msg("程序猿还在开发这个页面",{icon:5});
+        layer.msg("程序猿还在开发这个页面",{icon:5,offset: '110px'});
 
         e.preventDefault();
         return false;

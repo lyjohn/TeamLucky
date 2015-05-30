@@ -9,4 +9,13 @@ public class PartyExt extends Party  implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
+	private SysUserExt PartyAuthor;
+
+	public SysUserExt getPartyAuthor() {
+		return PartyAuthor;
+	}
+
+	public void setPartyAuthor(SysUserExt partyAuthor) {
+		PartyAuthor = partyAuthor;
+	}
 }

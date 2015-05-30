@@ -11,6 +11,7 @@ import com.tmlk.po.PartyExt;
 import com.tmlk.po.PartyUserExt;
 import com.tmlk.po.SysUserExt;
 import com.tmlk.service.*;
+import com.tmlk.service.impl.SysUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +63,12 @@ public class MainController {
         pp.setCurrentPage(1);
         pp.setPageSize(4);//每次4个 最多3个
 
-        partyModel.setItems(partyService.criteriaQuery(conditions,orders,pp));
+        List<PartyExt> partyExtList = partyService.criteriaQuery(conditions, orders, pp);
+        for (PartyExt partyExt : partyExtList){
+            partyExt.setPartyAuthor(sysUserService.load(partyExt.getCreateBy()));
+        }
+
+        partyModel.setItems(partyExtList);
 
         model.addAttribute("model", partyModel);
 
@@ -143,18 +149,18 @@ public class MainController {
 
     @RequestMapping(value = "/checkLoginName")
     @ResponseBody
-    public JsonResult checkUser(@RequestParam(value="loginName",required=true) String loginName){
-        JsonResult result = new JsonResult();
+    public boolean checkUser(@RequestParam(value="loginName",required=true) String loginName){
+        boolean result;
         try{
             List<ICondition> conditions = new ArrayList<ICondition>();
             conditions.add(new EqCondition("loginName", loginName));
             List<SysUserExt> userList = sysUserService.criteriaQuery(conditions);
             if(userList.size() > 0)
-                result.setMessage("用户已存在");
+                result = false;
             else
-                result.setStatus(0);
+                result = true;
         }catch (Exception ex){
-            result.setMessage(ex.getMessage());
+            result = false;
         }
         return result;
     }

@@ -13,6 +13,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.UUID;
 
@@ -65,42 +66,15 @@ public class DocumentServiceExt extends DocumentService implements IDocumentServ
             sb.append(fileExtName);
         }
 
-        StringBuffer sbSave = new StringBuffer();
-        sbSave.append("resource");
-        sbSave.append(File.separator);
-        sbSave.append("avatar");
-        sbSave.append(File.separator);
-        if(type == 1)
-            sbSave.append("user");
-        else if(type == 2)
-            sbSave.append("party");
-        else if(type == 3)
-            sbSave.append("group");
-        else
-            sbSave.append("temp");
-        savePath = request.getSession().getServletContext().getRealPath(sbSave.toString());
-
-        File directorySave = new File(savePath);
-        if (!directorySave.exists()) {
-            directorySave.mkdirs();
-        }
-
-        sbSave.append(File.separator);
-        sbSave.append("userid");
-        sbSave.append(".");
-        sbSave.append(fileExtName);
-
         String filePath = request.getSession().getServletContext().getRealPath(sb.toString());
-        String destPath = request.getSession().getServletContext().getRealPath(sbSave.toString());
         try {
             in = file.getInputStream();
             out = new FileOutputStream(new File(filePath));
+            //保持图片
             FileCopyUtils.copy(in, out);
 
-            ImageUtils co = new ImageUtils(0,0,100,100);
-            co.setSrcpath(filePath);
-            co.setSavepath(destPath);
-            co.cut(120);
+            //对图片进行压缩， 最长边为350
+            ImageUtils.resize(filePath,350);
 
             isSuccess = true;
         } catch (FileNotFoundException e) {
@@ -116,7 +90,6 @@ public class DocumentServiceExt extends DocumentService implements IDocumentServ
                 }
             } catch (Exception e) {
             }
-
             try {
                 if (out != null) {
                     out.close();
@@ -126,6 +99,58 @@ public class DocumentServiceExt extends DocumentService implements IDocumentServ
         }
         if(isSuccess)
             return sb.toString();
+        return null;
+    }
+
+    @Override
+    public String doAvatarCut(HttpServletRequest request,HttpSession session, String filePath, int type, int x, int y, int width, int height) throws IOException {
+        boolean isSuccess =false;
+
+        StringBuffer sbSave = new StringBuffer();
+        sbSave.append("resource");
+        sbSave.append(File.separator);
+        sbSave.append("avatar");
+        sbSave.append(File.separator);
+        if (type == 1)
+            sbSave.append("user");
+        else if (type == 2)
+            sbSave.append("party");
+        else if (type == 3)
+            sbSave.append("group");
+        else
+            sbSave.append("temp");
+        try {
+            filePath = request.getSession().getServletContext().getRealPath(filePath);
+            File file = new File(filePath);
+            if (!file.exists())
+                return null;
+
+
+            String savePath = request.getSession().getServletContext().getRealPath(sbSave.toString());
+            File directorySave = new File(savePath);
+            if (!directorySave.exists()) {
+                directorySave.mkdirs();
+            }
+
+            sbSave.append(File.separator);
+            sbSave.append(UUID.randomUUID());
+            sbSave.append(".");
+            String fileExtName = FilenameUtils.getExtension(file.getName());
+            sbSave.append(fileExtName);
+
+            String destPath = request.getSession().getServletContext().getRealPath(sbSave.toString());
+
+            ImageUtils co = new ImageUtils(x,y,width,height);
+            co.setSrcpath(filePath);
+            co.setSavepath(destPath);
+            co.cut(120);
+            isSuccess = true;
+        }catch (Exception ex){
+            logger.trace(ex);
+        }
+        if(isSuccess)
+            return sbSave.toString();
+
         return null;
     }
 }

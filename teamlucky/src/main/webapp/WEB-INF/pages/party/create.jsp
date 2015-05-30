@@ -20,6 +20,8 @@
     } </script>
 
     <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/codecademy.css">
+
     <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/blue.css"/>
     <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/fwslider.css">
@@ -122,6 +124,8 @@
 
 <script type="text/javascript" src="${ctx}/resource/js/json2.js"></script>
 
+<script type="text/javascript" src="${ctx}/resource/js/jquery.imgareaselect.min.js"></script>
+
 <script type="text/javascript" src="${ctx}/resource/plugins/datetime/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/plugins/datetime/locales/bootstrap-datepicker.zh-CN.js"></script>
 <script type="text/javascript">
@@ -151,7 +155,16 @@
                 "partyCode": {
                     required: true,
                     alphanumber: true,
-                    minlength: 2
+                    minlength: 2,
+                    remote:{
+                        url :"${ctx}/party/checkPartyCode",
+                        type:'post',
+                        data:{
+                            partyCode : function(){
+                                return $("input[name='partyCode']").val();
+                            }
+                        }
+                    }
                 },
                 "memberMin": {
                     required: true,
@@ -167,7 +180,7 @@
             },
             messages: {
                 "partyName": {
-                    required: "活动名词不能为空"
+                    required: "活动名称不能为空"
                 },
                 "partyRemark": {
                     required: "活动描述不能为空"
@@ -175,7 +188,8 @@
                 "partyCode": {
                     required: "活动识别码不能为空，且只能是字母或数字，用于创建活动用户名的前缀.",
                     minlength: "识别码最少是2位有效字母或数字",
-                    alphanumber: "活动识别码只能包含字母和数字"
+                    alphanumber: "活动识别码只能包含字母和数字",
+                    remote: "活动识别码已存在，请重填"
                 },
                 "memberMin": {
                     required: "小组最少人数不能为空，无限制请输入0",
@@ -274,24 +288,70 @@
         }).on("change", "#partyCover", function () {
             var ths = $(this);
             $.ajaxFileUpload({
-                url: "${ctx}/doc/upload/avatar",
+                url: "${ctx}/avatar/upload",
                 fileElementId: $(this).attr("id"),
+                secureuri:false,
                 dataType: "text",
+                data:{type:2,fileId:"test"},
                 type: "post",
                 success: function (res) {
-                    var resStr = $(res).text();
+                    layer.closeAll();
 
+                    var resStr = $(res).text();
                     var bak = JSON.parse(resStr);
                     bak = JSON.parse(bak);
                     if (bak.status == 0) {
-                        ths.parent().append("<img src='${ctx}/" + bak.data + "' />");
-                        layer.msg("logo", {icon: 6, offset: '110px'});
+                        layer.open({
+                            zIndex: 1000,
+                            width:'600px',
+                            type: 1,
+                            title: false,
+                            content: "<div id='edit-photo' style='height: 390px;'>"+
+                            "<div class='photo'>"+
+                            "<img src='none' alt='' />"+
+                            "</div>"+
+                            "<div class='preview'>"+
+                            "<img src='none' alt='' />"+
+                            "</div>"+
+                            "<div class='btn-div'>"+
+                            "<button type='submit' class='lj-btn'>"+
+                            "<span id='Span1'>确 定</span>"+
+                            "</button>"+
+                            "</div>"+
+                            "</div>",
+                            success: function(layero, index){
+                                //图片加载完成之后
+                                $("#edit-photo .photo img").load(function () {
+
+                                    var initOffset = $("#edit-photo img").offset();
+                                    var imgW = $("#edit-photo img").width();
+                                    var imgH = $("#edit-photo img").height();
+
+                                    $("#edit-photo").width(imgW+100);
+                                    $(".imgareaselect-selection").parent("div").css({ "top": initOffset.top, "left": initOffset.left });
+                                    var outers = $(".imgareaselect-outer");
+                                    outers.eq(2).css({ "top": initOffset.top, "left": (initOffset.left + 80), "width": (imgW - 80), "height": imgH });
+                                    outers.eq(3).css({ "top": (initOffset.top + 80), "left": initOffset.left, "width": 80, "height": (imgH - 80) });
+                                });
+
+                            }
+                        });
+
+                        $("#edit-photo .photo img").attr("src", "${ctx}/" + bak.data);
+                        $("#edit-photo .preview img").attr("src", "${ctx}/" + bak.data);
+                        $('#edit-photo .photo img').imgAreaSelect({
+                            x1: 0,
+                            y1: 0,
+                            x2: 80,
+                            y2: 80, selectionOpacity: 0.2, aspectRatio: '1:1', onSelectChange: preview, zIndex: 10000, persistent: true
+                        });
+                        $("#edit-photo .lj-btn").attr({ "scale": "1", "x1": "0", "y1": "0", "x2": "80", "y2": "80" });
+                        //
                     } else {
                         layer.msg("logo上传失败，请重试", {icon: 5, offset: '110px'});
                     }
                 },
                 complete: function (XHR, TS) {
-                    layer.closeAll();
                 },
                 beforeSend: function (XHR) {
                     layer.load(2);
@@ -299,6 +359,52 @@
             });
         })
     });
+
+    //图片选区
+    function preview(img, selection) {
+        var scaleX = 80 / (selection.width || 1);
+        var scaleY = 80 / (selection.height || 1);
+
+        $('.preview img').css({
+            width: Math.round(scaleX * $(img).width()) + 'px',
+            height: Math.round(scaleY * $(img).height()) + 'px',
+            marginLeft: '-' + Math.round(scaleX * selection.x1) + 'px',
+            marginTop: '-' + Math.round(scaleY * selection.y1) + 'px'
+        });
+        $("#edit-photo .lj-btn").attr({ "scale": scaleX, "x1": selection.x1, "y1": selection.y1, "x2": selection.x2, "y2": selection.y2 });
+    }
+
+    //确定所选区域
+    function avatarResize() {
+        var obj = $("#edit-photo .lj-btn");
+        //需裁剪的头像 和 当前头像
+        var src = $("#edit-photo .photo img").attr("src");
+
+        if (src.indexOf("http://") > -1) {
+            src = src.substring(src.indexOf("/Files"));
+        }
+        var dataToSend = { filePath: src,type:2, x1: obj.attr('x1'), y1: obj.attr('y1'), x2: obj.attr('x2'), y2: obj.attr('y2') };
+        $.ajax({
+            url: "${ctx}/avatar/cut",
+            data: dataToSend,
+            dataType: "json",
+            type: "POST",
+            success: function (res) {
+                console.log(res);
+                if (res.Suc) {
+                    layer.msg("裁剪图片成功",{icon:6,offset:'110px'});
+                }
+                else
+                    layer.msg(res.Msg, 2,{icon:5,offset:'110px'});
+            },
+            error: function (data, status, e) {
+                layer.msg("裁剪图片失败",{icon:5,offset:'110px'});
+            },
+            complete: function (data, status) {
+                layer.closeAll();
+            }
+        });
+    }
 </script>
 
 </body>

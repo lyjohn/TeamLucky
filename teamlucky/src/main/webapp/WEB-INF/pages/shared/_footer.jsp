@@ -17,17 +17,17 @@
                         <div class="grid-col-6 grid-col--no-padding">
                             <h5 class="margin-top--1"><strong>指导老师</strong></h5>
                             <ul>
-                                <li><a href="/joinus/jjd" class="undo">贾经冬</a></li>
+                                <li><small><a href="/joinus/jjd" class="undo">贾经冬</a></small></li>
                             </ul>
                         </div>
 
                         <div class="grid-col-6  grid-col--no-padding">
                             <h5 class="margin-top--1"><strong>我们的团队</strong></h5>
                             <ul>
-                                <li><a href="/joinus/lgq" class="undo">赖国强</a></li>
-                                <li><a href="/joinus/ljt" class="undo">吕骏腾</a></li>
-                                <li><a href="/joinus/jzg" class="undo">金子刚</a></li>
-                                <li><a href="/joinus/hys" class="undo">侯祎莎</a></li>
+                                <li><small><a href="/joinus/lgq" class="undo">赖国强 ZY14211 22</a></small></li>
+                                <li><small><a href="/joinus/ljt" class="undo">吕骏腾 ZY14211 30</a></small></li>
+                                <li><small><a href="/joinus/jzg" class="undo">金子刚 ZY14211 18</a></small></li>
+                                <li><small><a href="/joinus/hys" class="undo">侯祎莎 ZY14211 12</a></small></li>
                             </ul>
                         </div>
                     </div>
@@ -52,34 +52,8 @@
                             Copyright Made in China © 2015 校缘派 版权所有
                         </small>
                     </div>
-                    <div id="footer__locale"
-                         class="grid-col-3 grid-col--no-spacing margin-top-bottom--none grid-col--align-right">
-                        <div class="field field--select field-select--small field-select--transparent">
-                            <select class="locales" id="">
-                                <option value="/?locale_code=ch-Zh" selected="selected">
-                                    中文版
-                                </option>
-                                <option value="/?locale_code=ch-Zh">
-                                    还是中文版
-                                </option>
-                                <option value="/?locale_code=ch-Zh">
-                                    只有中文版
-                                </option>
-                                <option value="/?locale_code=ch-Zh">
-                                    没有其他版
-                                </option>
-                            </select>
-
-                            <div class="field-select__down-arrow-icon">
-                                <span class="new-cc-icon icon-downarrow icon--"></span>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
-
             </div>
         </article>
     </footer>
 </div>
-

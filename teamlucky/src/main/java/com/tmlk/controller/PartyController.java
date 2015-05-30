@@ -6,11 +6,13 @@ package com.tmlk.controller;
 
 import com.tmlk.framework.mybatis.EqCondition;
 import com.tmlk.framework.mybatis.ICondition;
+import com.tmlk.framework.mybatis.Order;
 import com.tmlk.framework.session.SessionStatus;
 import com.tmlk.framework.session.SessionUser;
 import com.tmlk.framework.util.Constants;
 import com.tmlk.framework.util.FormatUtils;
 import com.tmlk.framework.util.JsonResult;
+import com.tmlk.framework.util.Pagination;
 import com.tmlk.model.*;
 import com.tmlk.po.PartyExt;
 import com.tmlk.po.PartyUserExt;
@@ -81,9 +83,6 @@ public class PartyController {
                 partyService.launch(partyExt, request);
 
                 result.setStatus(0);
-
-                //测试
-                result.setData(partyExt);
             }
             else{
                 result.setMessage("识别码已存在，请修改重新提交");
@@ -91,6 +90,23 @@ public class PartyController {
         }catch (Exception ex){
             result.setMessage("服务器异常，请重新提交");
             logger.error(ex);
+        }
+        return result;
+    }
+
+    /**
+     * 检测活动识别码是否已被注册
+     * @param partyCode
+     * @return true:未被注册，可以通过，false:已被注册，不能通过
+     */
+    @RequestMapping(value = "/checkPartyCode")
+    @ResponseBody
+    public boolean checkPartyCode(@RequestParam(value="partyCode",required=true) String partyCode){
+        boolean result;
+        try{
+            result = !partyService.existParty(partyCode);
+        }catch (Exception ex){
+            result = false;
         }
         return result;
     }
@@ -105,7 +121,9 @@ public class PartyController {
 
         //只有活动创建者才能进入管理页面
         PartyExt partyExt = partyService.load(sessionUser.getPartyId());
-        if(partyExt.getPartyStatus() == 16 && partyExt.getCreateBy().equals(sessionUser.getSysUserId())){ //16才是管理员
+        PartyUserExt partyUserExt = partyUserService.load(sessionUser.getPartyUserId());
+
+        if(partyUserExt.getUserStatus() == 16 && partyExt.getCreateBy().equals(sessionUser.getSysUserId())){ //16才是管理员
 
             partyModel.setPartyExt(partyExt);
 
@@ -265,6 +283,28 @@ public class PartyController {
             model.addAttribute("model",partyModel);
             return "/party/index";
         }
+    }
+
+    @RequestMapping(value = "/list")
+    public String goList(@ModelAttribute PartyModel partyModel,HttpServletRequest request, ModelMap model){
+        List<ICondition> conditions = new ArrayList<ICondition>();
+        conditions.add(new EqCondition("isPublic",true));
+
+        List<Order> orders = new ArrayList<Order>();
+        orders.add(Order.desc("createTime"));
+
+        int count = partyService.count(conditions);
+        Pagination pp = partyModel.getPp();
+        if (pp == null) {
+            pp = new Pagination();
+        }
+        pp.checkPagination(count);
+
+        partyModel.setItems(partyService.criteriaQuery(conditions,orders,pp));
+
+        model.addAttribute("model", partyModel);
+
+        return "/party/list";
     }
 
     @RequestMapping(value = "/doEdit", method = RequestMethod.POST)

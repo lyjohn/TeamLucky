@@ -1,6 +1,8 @@
 package com.tmlk.framework.util;
 
 
+import com.tmlk.po.SysPartyUserLink;
+
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReadParam;
 import javax.imageio.ImageReader;
@@ -36,6 +38,13 @@ public class ImageUtils {
     public ImageUtils() {
     }
 
+    /**
+     * 剪切图片的位置
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     */
     public ImageUtils(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
@@ -58,8 +67,6 @@ public class ImageUtils {
 
             int begin = srcpath.lastIndexOf(".") + 1;
             String extName = srcpath.substring(begin);
-
-            System.out.println(extName);
 
             Iterator<ImageReader> it = ImageIO.getImageReadersByFormatName(new String(extName.getBytes(), "utf-8"));
             ImageReader reader = it.next();
@@ -93,6 +100,54 @@ public class ImageUtils {
         }
     }
 
+    public static void resize(String srcpath,int border) throws IOException {
+        FileInputStream is = null;
+        ImageInputStream iis = null;
+        try {
+            // 读取图片文件
+            is = new FileInputStream(srcpath);
+
+            int begin = srcpath.lastIndexOf(".") + 1;
+            String extName = srcpath.substring(begin);
+
+            Iterator<ImageReader> it = ImageIO.getImageReadersByFormatName(new String(extName.getBytes(), "utf-8"));
+            ImageReader reader = it.next();
+
+            // 获取图片流
+            iis = ImageIO.createImageInputStream(is);
+
+            reader.setInput(iis, true);
+
+            ImageReadParam param = reader.getDefaultReadParam();
+
+            BufferedImage bi = reader.read(0, param);
+
+            int width = bi.getWidth();
+            int height = bi.getHeight();
+            if(height > width){ //高比宽大
+                width = (width * border / height);
+                height = border;
+            }
+            else{
+                height = (height * border / width);
+                width = border;
+            }
+
+            System.out.println(width+"."+height);
+
+            //压缩
+            BufferedImage bb = resize(bi, width, height);
+            // 保存新图片
+            ImageIO.write(bb, extName, new File(srcpath));
+        } catch (Exception ex) {
+            ex.getStackTrace();
+        } finally {
+            if (is != null)
+                is.close();
+            if (iis != null)
+                iis.close();
+        }
+    }
 
 
     public static BufferedImage resize(BufferedImage srcBufImage, int width, int height) {
