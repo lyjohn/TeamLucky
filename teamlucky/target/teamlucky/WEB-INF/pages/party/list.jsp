@@ -27,7 +27,10 @@
     <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/fwslider.css" />
     <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/allinone_carousel.css" />
 
-    <title>首页 - 校缘派</title>
+    <link rel="icon" href="${ctx}/favicon.ico" mce_href="${ctx}/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="${ctx}/favicon.ico" mce_href="${ctx}/favicon.ico" type="image/x-icon">
+
+    <title>公共活动列表 - 校缘派</title>
 </head>
 
 <body>

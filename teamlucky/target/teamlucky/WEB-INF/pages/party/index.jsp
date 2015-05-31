@@ -32,6 +32,9 @@
 
     <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/datepicker.css" />
 
+    <link rel="icon" href="${ctx}/favicon.ico" mce_href="${ctx}/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="${ctx}/favicon.ico" mce_href="${ctx}/favicon.ico" type="image/x-icon">
+
     <title>${model.partyExt.partyName} - 校缘派</title>
 </head>
 <body>

@@ -41,7 +41,7 @@
             <% if(sessionUser.getGroupId() == 0) {%>
             <li class="js_groupcreate"><a href="${ctx}/group/create">创建小组</a></li>
             <% } else {%>
-            <li class="js_groupindex"><a href="${ctx}/group/index%>">我的团队</a></li>
+            <li class="js_groupindex"><a href="${ctx}/group/index">我的团队</a></li>
             <% } %>
             <% if(sessionUser.isPartyAdmin()){%>
             <li class="js_partyconf"><a href="${ctx}/party/conf/info">管理活动</a></li>

@@ -14,13 +14,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
-  <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/blue.css"/>
-  <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/fwslider.css">
-  <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/allinone_carousel.css" >
+  <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/codecademy.css" />
 
-  <title>创建团队 - 校缘派</title>
+  <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/blue.css" />
+  <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/font-awesome.min.css" />
+  <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/fwslider.css" />
+  <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/allinone_carousel.css" />
+
+  <title>${model.partyGroupExt.groupName} - 校缘派</title>
 </head>
 <body>
 <div class="header_bg">
