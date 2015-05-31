@@ -9,10 +9,7 @@ import com.tmlk.framework.mybatis.ICondition;
 import com.tmlk.framework.mybatis.Order;
 import com.tmlk.framework.session.SessionStatus;
 import com.tmlk.framework.session.SessionUser;
-import com.tmlk.framework.util.Constants;
-import com.tmlk.framework.util.FormatUtils;
-import com.tmlk.framework.util.JsonResult;
-import com.tmlk.framework.util.Pagination;
+import com.tmlk.framework.util.*;
 import com.tmlk.model.*;
 import com.tmlk.po.PartyExt;
 import com.tmlk.po.PartyUserExt;
@@ -41,6 +38,9 @@ public class PartyController {
     private static SessionStatus sessionStatus = SessionStatus.getInstance();
 
     private static final Logger logger = Logger.getLogger(PartyController.class);
+
+    @Autowired
+    private ISysUserServiceExt sysUserService;
 
     @Autowired
     private IPartyServiceExt partyService;
@@ -227,6 +227,7 @@ public class PartyController {
             return "/errors/error/21";
         }
     }
+
     //管理文档
     @RequestMapping(value = "/conf/doc")
     public String confDocs(@ModelAttribute PartyModel partyModel,HttpServletRequest request,HttpSession session,ModelMap model){
@@ -299,13 +300,54 @@ public class PartyController {
         if (pp == null) {
             pp = new Pagination();
         }
+        pp.setPageSize(16);
         pp.checkPagination(count);
 
-        partyModel.setItems(partyService.criteriaQuery(conditions,orders,pp));
+        List<PartyExt> partyExtList = partyService.criteriaQuery(conditions, orders, pp);
+        for (PartyExt partyExt : partyExtList){
+            partyExt.setPartyAuthor(sysUserService.load(partyExt.getCreateBy()));
+            partyExt.setCreateTimeString(RelativeDateUtils.format(partyExt.getCreateTime()));
+        }
+        partyModel.setItems(partyExtList);
 
         model.addAttribute("model", partyModel);
 
         return "/party/list";
+    }
+
+    @RequestMapping(value = "/list/next")
+    @ResponseBody
+    public JsonResult goListNext(@RequestParam(value="currentPage",required=true) int currentPage, @RequestParam(value="pageSize",required=true) int pageSize){
+        JsonResult result = new JsonResult();
+
+        try {
+            List<ICondition> conditions = new ArrayList<ICondition>();
+            conditions.add(new EqCondition("isPublic", true));
+
+            List<Order> orders = new ArrayList<Order>();
+            orders.add(Order.desc("createTime"));
+
+            int count = partyService.count(conditions);
+
+            Pagination pp = new Pagination();
+            pp.setPageSize(pageSize);
+            pp.setCurrentPage(currentPage+1);
+
+            pp.checkPagination(count);
+
+            List<PartyExt> partyExtList = partyService.criteriaQuery(conditions, orders, pp);
+            for (PartyExt partyExt : partyExtList){
+                partyExt.setPartyAuthor(sysUserService.load(partyExt.getCreateBy()));
+                partyExt.setCreateTimeString(RelativeDateUtils.format(partyExt.getCreateTime()));
+            }
+
+            result.setStatus(0);
+            result.setData(partyExtList);
+        }
+        catch (Exception ex){
+            result.setMessage(ex.getMessage());
+        }
+        return result;
     }
 
     @RequestMapping(value = "/doEdit", method = RequestMethod.POST)

@@ -19,11 +19,13 @@
         window.scrollTo(0, 1);
     } </script>
 
-    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/blue.css"/>
-    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/fwslider.css">
-    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/allinone_carousel.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/codecademy.css" />
+
+    <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/blue.css" />
+    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/fwslider.css" />
+    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/allinone_carousel.css" />
 
     <title>异常 - 校缘派</title>
 </head>
@@ -43,9 +45,9 @@
         </div>
     </div>
 </div>
-<div class="main_bg"><!-- start main -->
+<div class="main_bg" style="min-height: 500px">
     <div class="container">
-        <div class="alert alert-danger">
+        <div class="alert alert-danger" style="margin:40px auto;">
             <c:out value="${message}"></c:out>
         </div>
     </div>

@@ -66,6 +66,7 @@ public class MainController {
         List<PartyExt> partyExtList = partyService.criteriaQuery(conditions, orders, pp);
         for (PartyExt partyExt : partyExtList){
             partyExt.setPartyAuthor(sysUserService.load(partyExt.getCreateBy()));
+            partyExt.setCreateTimeString(RelativeDateUtils.format(partyExt.getCreateTime()));
         }
 
         partyModel.setItems(partyExtList);

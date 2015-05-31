@@ -65,7 +65,15 @@ public class SessionStatus {
                 sessionUser.setSysUserId(partyUser.getId());
                 sessionUser.setSysUserName(partyUser.getUserName());
                 sessionUser.setPartyId(partyUser.getPartyId());
-                sessionUser.setGroupId(partyUser.getGroupId());
+                if(partyUser.getUserStatus() < 8){ //2是未入组 4是待审核 8是在组 16是管理员
+                    sessionUser.setGroupId(0L);
+                }
+                else {
+                    sessionUser.setGroupId(partyUser.getGroupId());
+
+                    if(partyUser.getUserStatus() == 16)
+                        sessionUser.setPartyAdmin(true);
+                }
             }
 
             session.setAttribute(Constants.SESSION_USER, sessionUser);
@@ -103,6 +111,15 @@ public class SessionStatus {
                 sessionUser.setSysUserName(partyUser.getUserName());
                 sessionUser.setPartyId(partyUser.getPartyId());
                 sessionUser.setGroupId(partyUser.getGroupId());
+                if(partyUser.getUserStatus() < 8){ //2是未入组 4是待审核 8是在组 16是管理员
+                    sessionUser.setGroupId(0L);
+                }
+                else {
+                    sessionUser.setGroupId(partyUser.getGroupId());
+
+                    if(partyUser.getUserStatus() == 16)
+                        sessionUser.setPartyAdmin(true);
+                }
             }
 
             session.setAttribute(Constants.SESSION_USER, sessionUser);
@@ -130,7 +147,15 @@ public class SessionStatus {
         sessionUser.setPartyUserId(partyUser.getId());
         sessionUser.setPartyUserName(partyUser.getUserName());
         sessionUser.setPartyId(partyUser.getPartyId());
-        sessionUser.setGroupId(partyUser.getGroupId());
+        if(partyUser.getUserStatus() < 8){ //2是未入组 4是待审核 8是在组 16是管理员
+            sessionUser.setGroupId(0L);
+        }
+        else {
+            sessionUser.setGroupId(partyUser.getGroupId());
+
+            if(partyUser.getUserStatus() == 16)
+                sessionUser.setPartyAdmin(true);
+        }
         session.setAttribute(Constants.SESSION_USER, sessionUser);
 
         sessionMap.put(sessionUser.getSessionKey(), session);

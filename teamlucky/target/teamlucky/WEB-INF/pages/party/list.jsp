@@ -19,14 +19,15 @@
         window.scrollTo(0, 1);
     } </script>
 
-    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/blue.css"/>
-    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/fwslider.css">
-    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/allinone_carousel.css">
-    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/datepicker.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/codecademy.css" />
 
-    <title>发起活动 - 校缘派</title>
+    <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/blue.css" />
+    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/fwslider.css" />
+    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/allinone_carousel.css" />
+
+    <title>首页 - 校缘派</title>
 </head>
 
 <body>
@@ -38,266 +39,199 @@
             </div>
             <jsp:include page="../shared/_header.jsp">
                 <jsp:param value="0" name="type"/>
-                <jsp:param value="partycreate" name="cur"/>
+                <jsp:param value="null" name="cur"/>
             </jsp:include>
             <div class="clearfix"></div>
         </div>
     </div>
 </div>
 
-<div class="container">
+<div class="main_bg">
+    <div class="container">
 
-    <div class="jumbotron">
-        <h2>创建活动</h2>
+        <div class="grid-row">
+            <div class="grid-col-12 grid-col--align-center grid-col--no-margin dynamic-container margin-top--1">
+                <div class="grid-col-12">
+                    <h2>公共活动</h2>
+                    <p>可以自由查看活动，并参与其中.</p>
+                </div>
+            </div>
+            <c:if test="${!empty model.items}">
+                <c:forEach items="${ model.items }" var="var" varStatus="status">
+                    <div class="grid-col-3 grid-col--no--padding grid-col--no-margin">
+                        <div class="card card--link color-scheme--white">
+                            <div class="grid-row card__info">
+                        <span exclude="phone">
+                            <div class="avatar avatar--large">
+                                <img alt="<c:out value="${ var.partyName }" escapeXml="true"></c:out>" src="${ctx}/avatar/party/<c:out value='${var.id}'></c:out>">
+                            </div>
+                        </span>
+                                <div exclude="desktop tablet" class="grid-col-4">
+                                    <div class="avatar avatar--medium">
+                                        <img alt="<c:out value="${ var.partyName }" escapeXml="true"></c:out>" src="${ctx}/avatar/party/<c:out value='${var.id}'></c:out>">
+                                    </div>
+                                </div>
+                                <div exclude="desktop tablet" class="grid-col-4">
+                                    <div class="card__headings">
+                                        <h5 class="text--ellipsis"><c:out value="${ var.partyName }" escapeXml="true"></c:out></h5>
+                                    </div>
+                                </div>
+                                <div exclude="phone" class="card__headings">
+                                    <h5><c:out value="${ var.partyName }" escapeXml="true"></c:out></h5>
+                                </div>
+                                <div class="grid-row card__text">
+                                    <div class="grid-col-12">
+                                        <c:out value="${ var.partyRemark }" escapeXml="true"></c:out>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="grid-row  card__author grid-col--align-left grid-col--no-margin">
+                                    <img class="img-circle" src="${ctx}/avatar/user/1/<c:out value='${var.partyAuthor.id}'></c:out>" />
+                                    <span><c:out value="${var.partyAuthor.userName}"></c:out></span>
+                                    <span><c:out value="${var.createTimeString}"></c:out></span>
+                                </div>
+                            </div>
+                            <a href="${ctx}/party/index/${var.id}" class="link--target"></a>
+                        </div>
+                    </div>
 
-        <form id="partyCreateForm" action="" onsubmit="return false;">
-            <div class="form-group has-feedback">
-                <label class="control-label" for="partyName">活动名称</label>
-                <input type="text" class="form-control" name="partyName" id="partyName" placeholder="活动名称">
-                <span class="glyphicon form-control-feedback hide" aria-hidden="true"></span>
-            </div>
-            <div class="form-group has-feedback">
-                <label class="control-label" for="partyRemark">活动简介</label>
-                <textarea class="form-control" rows="3" name="partyRemark" id="partyRemark"
-                          placeholder="活动简介"></textarea>
-                <span class="glyphicon form-control-feedback hide" aria-hidden="true"></span>
-            </div>
-            <div class="form-group has-feedback">
-                <label class="control-label" for="partyCode">识别码</label>
-                <input type="text" class="form-control" name="partyCode" id="partyCode" placeholder="活动识别码，活动用户的用户名前缀">
-                <span class="glyphicon form-control-feedback hide" aria-hidden="true"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label" for="partyCode">封面</label>
-                <input type="file" class="form-control" name="file" id="partyCover" placeholder="文件路径...">
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" id="public"> 公共活动
-                </label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" id="group" checked> 是否分组
-                </label>
-            </div>
-            <div class="checkbox for-group">
-                <label>
-                    <input type="checkbox" id="autoBuild"> 允许自行组队
-                </label>
-            </div>
-            <div class="form-group for-group has-feedback">
-                <label class="control-label" for="memberMin">每组最少人数</label>
-                <input type="number" class="form-control" name="memberMin" min="0" id="memberMin" placeholder="每组最少人数">
-                <span class="glyphicon form-control-feedback hide" aria-hidden="true"></span>
-            </div>
-            <div class="form-group for-group has-feedback">
-                <label class="control-label" for="memberMax">每组最多人数</label>
-                <input type="number" class="form-control" name="memberMax" min="0" id="memberMax" placeholder="每组最多人数">
-                <span class="glyphicon form-control-feedback hide" aria-hidden="true"></span>
-            </div>
-            <div class="form-group for-group has-feedback">
-                <label class="control-label" for="endTime">分组截止日期</label>
-                <input type="text" class="form-control" name="endTime" id="endTime" placeholder="分组截止日期">
-                <span class="glyphicon form-control-feedback hide" aria-hidden="true"></span>
-            </div>
+                    <div id="before-container" class="grid-col-12 grid-col--align-center">
+                        <div class="grid-col-12 grid-col--center grid-col--no-margin grid-col--no-padding">
+                            <c:if test="${ fn:length(model.items) == model.pp.pageSize}">
+                                <div class="js-show-more show-more">
+                                    <div><small><a href="#" class="cta">查看更多</a></small></div>
+                                    <div><span class="new-cc-icon icon-downarrow icon--"></span></div>
+                                </div>
+                            </c:if>
+                        </div>
+                    </div>
 
-            <button id="js-create" type="submit" class="btn btn-info">创建</button>
-        </form>
 
+                    <form:input type="hidden" name="model.pp.currentPage" path="model.pp.currentPage" />
+                    <form:input type="hidden" name="model.pp.pageSize" path="model.pp.pageSize" />
+
+                </c:forEach>
+            </c:if>
+        </div>
     </div>
-
 </div>
-<!-- /container -->
+
+<div id="content"></div>
 
 <jsp:include page="../shared/_footer.jsp"/>
 
 <script type="text/javascript" src="${ctx}/resource/js/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${ctx}/resource/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/plugins/layer/layer.js"></script>
-<script type="text/javascript" src="${ctx}/resource/js/common.js"></script>
-<script type="text/javascript" src="${ctx}/resource/js/ajaxfileupload.js"></script>
+
+<script type="text/javascript" src="${ctx}/resource/js/css3-mediaqueries.js"></script>
+<script type="text/javascript" src="${ctx}/resource/js/fwslider.js"></script>
+
+<script type="text/javascript" src="${ctx}/resource/js/menu.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="${ctx}/resource/js/jquery.validate.ext.js"></script>
 
-<script type="text/javascript" src="${ctx}/resource/js/json2.js"></script>
+<script type="text/javascript" src="${ctx}/resource/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="${ctx}/resource/js/jquery.ui.touch-punch.min.js"></script>
+<script type="text/javascript" src="${ctx}/resource/js/allinone_carousel.js"></script>
 
-<script type="text/javascript" src="${ctx}/resource/plugins/datetime/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="${ctx}/resource/plugins/datetime/locales/bootstrap-datepicker.zh-CN.js"></script>
+
+<script type="text/javascript" src="${ctx}/resource/js/template-native.js"></script>
+
+<script type="text/javascript" src="${ctx}/resource/js/common.js"></script>
+
+<script id="partylist" type="text/html">
+    <div class="grid-col-3 grid-col--no--padding grid-col--no-margin">
+        <div class="card card--link color-scheme--white">
+            ${'<'}% for(var i = 0; i < list.length; i++) { %${'>'}
+            <div class="grid-row card__info">
+                <span exclude="phone">
+                    <div class="avatar avatar--large">
+                        <img alt="${'<'}%= list[i].partyName %${'>'}" src="${ctx}/avatar/party/${'<'}%= list[i].id %${'>'}">
+                    </div>
+                </span>
+                <div exclude="desktop tablet" class="grid-col-4">
+                    <div class="avatar avatar--medium">
+                        <img alt="${'<'}%= list[i].partyName %${'>'}" src="${ctx}/avatar/party/${'<'}%= list[i].id %${'>'}">
+                    </div>
+                </div>
+                <div exclude="desktop tablet" class="grid-col-4">
+                    <div class="card__headings">
+                        <h5 class="text--ellipsis">${'<'}%= list[i].partyName %${'>'}</h5>
+                    </div>
+                </div>
+                <div exclude="phone" class="card__headings">
+                    <h5>${'<'}%= list[i].partyName %${'>'}</h5>
+                </div>
+                <div class="grid-row card__text">
+                    <div class="grid-col-12">
+                        ${'<'}%= list[i].partyRemark %${'>'}
+                    </div>
+                </div>
+                <hr>
+                <div class="grid-row  card__author grid-col--align-left grid-col--no-margin">
+                    <img class="img-circle" src="${ctx}/avatar/user/1/${'<'}%= list[i].partyAuthor.id%${'>'}" />
+                    <span>${'<'}%= list[i].partyAuthor.userName %${'>'}</span>
+                    <span>${'<'}%= list[i].createTimeString %${'>'}</span>
+                </div>
+            </div>
+            <a href="${ctx}/party/index/${'<'}%= list[i].id%${'>'}" class="link--target"></a>
+            ${'<'}% } %${'>'}
+        </div>
+    </div>
+</script>
+
 <script type="text/javascript">
+    var layerLoadIndex=0;
     $(function () {
-        $('#endTime').datepicker({
-            autoclose: true,
-            format: "yyyy-mm-dd",
-            language: 'zh-CN'
-        });
-
-        var validator = $('#partyCreateForm').validate({
-            errorElement: 'span', //错误的html元素
-            errorClass: 'help-block', // 错误的class样式
-            focusInvalid: false,
-            focusCleanup: true, //移进来，把错误消掉
-            onsubmit: false,
-            onfocusout: function (element) {
-                $(element).valid();
-            },
-            rules: {
-                "partyName": {
-                    required: true
-                },
-                "partyRemark": {
-                    required: true
-                },
-                "partyCode": {
-                    required: true,
-                    alphanumber: true,
-                    minlength: 2
-                },
-                "memberMin": {
-                    required: true,
-                    digits: true
-                },
-                "memberMax": {
-                    required: true,
-                    digits: true
-                },
-                "endTime": {
-                    date: true
-                }
-            },
-            messages: {
-                "partyName": {
-                    required: "活动名词不能为空"
-                },
-                "partyRemark": {
-                    required: "活动描述不能为空"
-                },
-                "partyCode": {
-                    required: "活动识别码不能为空，且只能是字母或数字，用于创建活动用户名的前缀.",
-                    minlength: "识别码最少是2位有效字母或数字",
-                    alphanumber: "活动识别码只能包含字母和数字"
-                },
-                "memberMin": {
-                    required: "小组最少人数不能为空，无限制请输入0",
-                    digits: "只能填写数字"
-                },
-                "memberMax": {
-                    required: "小组最多人数不能为空，无限制请输入0",
-                    digits: "只能填写数字"
-                },
-                "endTime": {
-                    date: "日期格式不正确"
-                }
-            },
-            invalidHandler: function (event, validator) {
-                //总体错误，就来执行这
-            },
-            highlight: function (element) {
-                $(element).closest('.form-group').addClass('has-error');
-                $(element).closest('.form-group').find(".glyphicon").addClass("glyphicon-remove").removeClass("hide");
-            },
-            success: function (label) {
-                label.closest('.form-group').removeClass('has-error').addClass("has-success");
-                label.closest('.form-group').find(".glyphicon").addClass("glyphicon-ok").removeClass("hide glyphicon-remove");
-                label.remove();
-            },
-            errorPlacement: function (error, element) {
-                element.after(error);
-            }
-        });
-
-        $(document).on("click", "#js-create", function () {
-
-            var isSuc = validator.form();
-            if (!isSuc) {
-                layer.msg("有错误项，还不能提交", {icon: 5, offset: '110px'});
-                return false;
-            }
-
-            var pName = $("#partyName").val();
-            var pRamark = $("#partyRemark").val();
-            var pCode = $("#partyCode").val();
-            var pIsGroup = $("#group").prop("checked");
-            var pIsPublic = $("#public").prop("checked");
-            var pIsAuto = $("#autoBuild").prop("checked");
-            var pMemberMin = $("#memberMin").val();
-            var pMemberMax = $("#memberMax").val();
-            var pEndTime = $("#endTime").val();
-            var postData = {
-                partyName: pName,
-                partyRemark: pRamark,
-                partyCode: pCode,
-                isGroup: pIsGroup,
-                isPublic: pIsPublic,
-                isCustomBuild: pIsAuto,
-                memberNumMin: pMemberMin,
-                memberNumMax: pMemberMax
-            };
-
-            if (pEndTime != "")
-                postData.buildEndTime = new Date(pEndTime);
+        $(document).on("click",".js-show-more a",function() {
+            var currentPage = $("input[name='pp.currentPage']").val();
+            var pageSize =$("input[name='pp.pageSize']").val();
 
             $.ajax({
-                url: "${ctx}/party/doCreate",
-                data: postData,
-                type: "Post",
-                dataType: "json",
-                success: function (data, textStatus, jqXHR) {
-                    layer.closeAll('loading');
-                    if (data.status == 0) {
-                        layer.msg("创建成功，马上去设置吧", {icon: 6, offset: '110px'}, function () {
-                            window.location.href = "${ctx}/party/conf/info";
-                        })
-                    } else {
-                        layer.msg(data.message, {icon: 5, offset: '110px'});
-                    }
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    layer.closeAll('loading');
-                    layer.msg("JS错误，Chrome浏览器最佳", {icon: 5, offset: '110px'});
+                url:"${ctx}/party/list/next",
+                dataType:"json",
+                data:{currentPage:currentPage,pageSize:pageSize},
+                type:"post",
+                success:function(result){
+                    if(result.status==0){
+                        var datas = result.data;
+                        if(datas.length == 0){
+                            layer.msg("没有更多公共活动了...",{offset: '110px'});
+                            $(".js-show-more").fadeOut();
+                        }
+                        else
+                        {
+                            var data = {list:datas};
+                            var html = template('partylist',data);
 
+                            $("#before-container").before(html);
+
+                            if(datas.length < pageSize)
+                                $(".js-show-more").fadeOut();
+                            else
+                                $("input[name='pp.currentPage']").val(currentPage+1);
+                        }
+                    }else
+                        layer.msg(result.message,{icon:5,offset:'110px'});
                 },
                 complete: function (XHR, TS) {
-
+                    layer.close(layerLoadIndex);
                 },
                 beforeSend: function (XHR) {
-                    layer.load(2);
+                    layerLoadIndex = layer.load(2);
                 }
             });
-        }).on("click", "#group", function () { //切换是否分组
-            if ($(this).prop("checked")) {
-                $(".for-group").slideDown();
-            } else {
-                $(".for-group input").val("");
-                $(".for-group").slideUp();
-            }
-        }).on("change", "#partyCover", function () {
-            var ths = $(this);
-            $.ajaxFileUpload({
-                url: "${ctx}/doc/upload/avatar",
-                fileElementId: $(this).attr("id"),
-                dataType: "text",
-                type: "post",
-                success: function (res) {
-                    var resStr = $(res).text();
-
-                    var bak = JSON.parse(resStr);
-                    bak = JSON.parse(bak);
-                    if (bak.status == 0) {
-                        ths.parent().append("<img src='${ctx}/" + bak.data + "' />");
-                        layer.msg("logo", {icon: 6, offset: '110px'});
-                    } else {
-                        layer.msg("logo上传失败，请重试", {icon: 5, offset: '110px'});
-                    }
-                },
-                complete: function (XHR, TS) {
-                    layer.closeAll();
-                },
-                beforeSend: function (XHR) {
-                    layer.load(2);
-                }
-            });
+            return false;
+        }).on("click",".link--target",function(){
+            <% if (sessionUser != null) {%>
+            return true;
+            <% } else {%>
+            layer.msg("您需要先登录", { offset: '110px'});
+            return false;
+            <% } %>
         })
+
     });
 </script>
 

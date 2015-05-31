@@ -19,15 +19,15 @@
         window.scrollTo(0, 1);
     } </script>
 
-    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/codecademy.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/codecademy.css" />
 
-    <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/blue.css"/>
-    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/fwslider.css">
-    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/allinone_carousel.css">
-    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/datepicker.css">
+    <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/blue.css" />
+    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/fwslider.css" />
+    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/allinone_carousel.css" />
 
+    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/datepicker.css" />
     <title>发起活动 - 校缘派</title>
 </head>
 
@@ -131,9 +131,9 @@
 
 <script type="text/javascript" src="${ctx}/resource/js/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${ctx}/resource/plugins/layer/layer.js"></script>
-<script type="text/javascript" src="${ctx}/resource/js/common.js"></script>
+
 <script type="text/javascript" src="${ctx}/resource/js/ajaxfileupload.js"></script>
+
 <script type="text/javascript" src="${ctx}/resource/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/jquery.validate.ext.js"></script>
 
@@ -141,14 +141,26 @@
 
 <script type="text/javascript" src="${ctx}/resource/js/jquery.imgareaselect.min.js"></script>
 
+<script type="text/javascript" src="${ctx}/resource/plugins/layer/layer.js"></script>
+
 <script type="text/javascript" src="${ctx}/resource/plugins/datetime/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/plugins/datetime/locales/bootstrap-datepicker.zh-CN.js"></script>
+
+
+<script type="text/javascript" src="${ctx}/resource/js/menu.js"></script>
+<script type="text/javascript" src="${ctx}/resource/js/jquery-ui.min.js" ></script>
+<script type="text/javascript" src="${ctx}/resource/js/jquery.ui.touch-punch.min.js"></script>
+<script type="text/javascript" src="${ctx}/resource/js/allinone_carousel.js"></script>
+
+<script type="text/javascript" src="${ctx}/resource/js/common.js"></script>
+
 <script type="text/javascript">
     $(function () {
         $('#endTime').datepicker({
             autoclose: true,
             format: "yyyy-mm-dd",
-            language: 'zh-CN'
+            language: 'zh-CN',
+            startDate: "today"
         });
 
         var validator = $('#partyCreateForm').validate({

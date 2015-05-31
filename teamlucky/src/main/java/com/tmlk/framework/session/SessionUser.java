@@ -31,6 +31,10 @@ public class SessionUser {
 
     private Long groupId;
 
+    private boolean isPartyAdmin;
+
+    private boolean isGroupAdmin;
+
     public int getUserType() {
         return userType;
     }
@@ -109,5 +113,21 @@ public class SessionUser {
 
     public void setGroupId(Long groupId) {
         this.groupId = groupId;
+    }
+
+    public boolean isPartyAdmin() {
+        return isPartyAdmin;
+    }
+
+    public void setPartyAdmin(boolean isPartyAdmin) {
+        this.isPartyAdmin = isPartyAdmin;
+    }
+
+    public boolean isGroupAdmin() {
+        return isGroupAdmin;
+    }
+
+    public void setGroupAdmin(boolean isGroupAdmin) {
+        this.isGroupAdmin = isGroupAdmin;
     }
 }

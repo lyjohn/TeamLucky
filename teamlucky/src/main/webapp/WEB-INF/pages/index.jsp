@@ -190,10 +190,11 @@
                         <hr>
                         <div class="grid-row  card__author grid-col--align-left grid-col--no-margin">
                             <img class="img-circle" src="${ctx}/avatar/user/1/<c:out value='${var.partyAuthor.id}'></c:out>" />
-                            <span style=""><c:out value="${var.partyAuthor.userName}"></c:out></span>
+                            <span><c:out value="${var.partyAuthor.userName}"></c:out></span>
+                            <span><c:out value="${var.createTimeString}"></c:out></span>
                         </div>
                     </div>
-                    <a href="${ctx}/party/index/${var.id}" class="link--target "></a>
+                    <a href="${ctx}/party/index/${var.id}" class="link--target"></a>
 
                 </div>
             </div>
@@ -427,6 +428,13 @@
             $("."+oldtype+"-body").attr("data-state-body","inactive");
 
             return false;
+        }).on("click",".link--target",function(){
+            <% if (sessionUser != null) {%>
+            return true;
+            <% } else {%>
+            layer.msg("您需要先登录", { offset: '110px'});
+            return false;
+            <% } %>
         })
     })
 

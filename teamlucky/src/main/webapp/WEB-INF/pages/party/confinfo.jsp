@@ -12,16 +12,24 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+  <script type="application/x-javascript"> addEventListener("load", function () {
+    setTimeout(hideURLbar, 0);
+  }, false);
+  function hideURLbar() {
+    window.scrollTo(0, 1);
+  } </script>
 
-  <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/codecademy.css">
-  <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/blue.css"/>
-  <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/fwslider.css">
-  <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/allinone_carousel.css" >
+  <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/codecademy.css" />
 
-  <title>配置信息 - 校缘派</title>
+  <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/blue.css" />
+  <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/font-awesome.min.css" />
+  <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/fwslider.css" />
+  <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/allinone_carousel.css" />
+
+  <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/datepicker.css" />
+
+  <title>${model.partyExt.partyName} - 校缘派</title>
 </head>
 <body>
 <div class="header_bg">
@@ -86,8 +94,8 @@
         <form:input type="number" class="form-control" path="model.partyExt.memberNumMax" placeholder="每组最少人数" />
       </div>
       <%--<div class="form-group for-group">--%>
-        <%--<label for="endTime">分组截止日期</label>--%>
-        <%--<form:input type="date" class="form-control" path="model.partyExt.buildEndTime" placeholder="分组截止日期" />--%>
+      <%--<label for="endTime">分组截止日期</label>--%>
+      <%--<form:input type="date" class="form-control" path="model.partyExt.buildEndTime" placeholder="分组截止日期" />--%>
       <%--</div>--%>
       <form:input type="hidden" name="model.partyExt.id" path="model.partyExt.id"/>
 
