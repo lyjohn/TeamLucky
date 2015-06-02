@@ -11,4 +11,8 @@ public interface IPartyUserServiceExt extends IPartyUserService{
     public JsonResult login(String loginName, String loginPwd, HttpServletRequest request);
 
     public PartyUserExt register(PartyUserExt partyUserExt);
+
+    public PartyUserExt uploadAvatar(String filePath,String partyUserId);
+
+    public PartyUserExt updateProfile(PartyUserExt partyUserExt,int updateType);
 }

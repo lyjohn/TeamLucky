@@ -66,4 +66,54 @@ public class PartyUserServiceExt extends PartyUserService implements IPartyUserS
 
         return this.create(partyUserExt);
     }
+
+    @Override
+    @SysServiceLog(description = "上传活动用户头像头像",code = 105)
+    public PartyUserExt uploadAvatar(String filePath, String partyUserId) {
+        PartyUserExt partyUserExt = this.load(partyUserId);
+
+        if (partyUserExt == null)
+            return null;
+
+        partyUserExt.setUserAvatar(filePath);
+        this.update(partyUserExt);
+
+        return partyUserExt;
+    }
+
+    /**
+     * 修改用户基本in洗
+     * @param partyUserExt 用户实体，承载需要变更的内容，某些项是空的
+     * @param updateType 更新类型 1:基本信息(username sex birthday remark) 2:通讯录(email tel qq weixin)  3:密码)
+     * @return
+     */
+    @Override
+    @SysServiceLog(description = "编辑了活动用户资料",code = 107)
+    public PartyUserExt updateProfile(PartyUserExt partyUserExt,int updateType) {
+        PartyUserExt partyUserExtPer = this.load(partyUserExt.getId());
+        if (partyUserExtPer == null)
+            return null;
+
+
+        if(updateType == 1){
+            partyUserExtPer.setUserName(partyUserExt.getUserName());
+            if(partyUserExt.getBirthDay()!=null)
+                partyUserExtPer.setBirthDay(partyUserExt.getBirthDay());
+            partyUserExtPer.setSex(partyUserExt.getSex());
+            partyUserExtPer.setUserRemark(partyUserExt.getUserRemark());
+        }else if(updateType == 2){
+            partyUserExtPer.setEmail(partyUserExt.getEmail());
+            partyUserExtPer.setTel(partyUserExt.getTel());
+            partyUserExtPer.setQq(partyUserExt.getQq());
+            partyUserExtPer.setWeiXin(partyUserExt.getWeiXin());
+        }else if(updateType == 3){
+            partyUserExtPer.setLoginPwd(partyUserExt.getLoginPwd());
+        }
+        else
+            return partyUserExtPer;
+
+        this.update(partyUserExtPer);
+
+        return partyUserExtPer;
+    }
 }

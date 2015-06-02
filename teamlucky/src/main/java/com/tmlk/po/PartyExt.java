@@ -30,4 +30,17 @@ public class PartyExt extends Party  implements Serializable{
 	public void setCreateTimeString(String createTimeString) {
 		this.createTimeString = createTimeString;
 	}
+
+	/**
+	 * 记录用户在这个活动中所在的组
+	 */
+	private PartyGroupExt group;
+
+	public PartyGroupExt getGroup() {
+		return group;
+	}
+
+	public void setGroup(PartyGroupExt group) {
+		this.group = group;
+	}
 }

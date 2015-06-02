@@ -111,7 +111,7 @@ public class GroupController {
 
         PartyGroupExt partyGroupExt = partyGroupService.load(id);
         if(partyGroupExt == null){
-            return "/errors/error/30";
+            return "redirect:/errors/error/30";
         }else{
             List<ICondition> conditions = new ArrayList<ICondition>();
             conditions.add(new EqCondition("groupId",partyGroupExt.getId()));
@@ -132,7 +132,7 @@ public class GroupController {
 
         PartyGroupExt partyGroupExt = partyGroupService.load(sessionUser.getGroupId());
         if(partyGroupExt == null){
-            return "/errors/error/30";
+            return "redirect:/errors/error/30";
         }else{
             List<ICondition> conditions = new ArrayList<ICondition>();
             conditions.add(new EqCondition("groupId",partyGroupExt.getId()));
@@ -166,7 +166,7 @@ public class GroupController {
             return "/group/confinfo";
         }
         else
-            return "/errors/error/31";
+            return "redirect:/errors/error/31";
     }
 
     //管理活动成员
@@ -191,7 +191,7 @@ public class GroupController {
             return "/group/confmember";
         }
         else
-            return "/errors/error/31";
+            return "redirect:/errors/error/31";
     }
 
     //管理通知
@@ -222,7 +222,7 @@ public class GroupController {
             return "/group/confnews";
         }
         else
-            return "/errors/error/31";
+            return "redirect:/errors/error/31";
     }
 
     //管理论坛
@@ -253,7 +253,7 @@ public class GroupController {
             return "/group/confdocs";
         }
         else
-            return "/errors/error/31";
+            return "redirect:/errors/error/31";
     }
     //管理文档
     @RequestMapping(value = "/conf/doc")
@@ -283,7 +283,7 @@ public class GroupController {
             return "/group/confforums";
         }
         else
-            return "/errors/error/31";
+            return "redirect:/errors/error/31";
     }
 
     /*

@@ -27,8 +27,9 @@
     <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/fwslider.css">
     <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/allinone_carousel.css">
 
-    <link rel="icon" href="${ctx}/favicon.ico" mce_href="${ctx}/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="${ctx}/favicon.ico" mce_href="${ctx}/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="${ctx}/resource/images/favicon.ico" mce_href="${ctx}/resource/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="${ctx}/resource/images/favicon.ico" mce_href="${ctx}/resource/images/favicon.ico" type="image/x-icon">
+
     <title>首页 - 校缘派</title>
 </head>
 
@@ -246,6 +247,7 @@
 
 
 <script type="text/javascript">
+    var logined = false;
     $(function () {
         $('#allinone_carousel_charming').allinone_carousel({
             skin: 'charming',
@@ -401,7 +403,7 @@
                 if (res.status == 0) {
                     $(".slide_content").remove();
                     layer.msg("欢迎回来，我的朋友~", {icon: 6, offset: '110px'});
-
+                    logined = true;
                     if (res.data == "1") {
                         $(".js_userset,.js_partycreate,.js_logout").removeClass("hide");
                         $(".js_userset a").attr("href", "${ctx}/user/sprofile");
@@ -431,6 +433,9 @@
 
             return false;
         }).on("click",".link--target",function(){
+            if(logined)
+                return logined;
+
             <% if (sessionUser != null) {%>
             return true;
             <% } else {%>

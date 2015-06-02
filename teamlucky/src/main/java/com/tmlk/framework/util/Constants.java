@@ -22,6 +22,10 @@ public class Constants {
         SYS_LOG_MAP.put(101,"登录系统");
         SYS_LOG_MAP.put(102,"退出系统");
         SYS_LOG_MAP.put(103,"注册系统用户");
+        SYS_LOG_MAP.put(104,"上传系统用户头像头像");
+        SYS_LOG_MAP.put(105,"上传活动用户头像头像");
+        SYS_LOG_MAP.put(106,"编辑系统用户资料");
+        SYS_LOG_MAP.put(107,"编辑活动用户资料");
 
         SYS_LOG_MAP.put(201,"创建活动");
         SYS_LOG_MAP.put(202,"创建活动用户");

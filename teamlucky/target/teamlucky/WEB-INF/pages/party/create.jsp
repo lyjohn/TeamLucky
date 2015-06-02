@@ -288,7 +288,7 @@
                     layer.closeAll('loading');
                     if (data.status == 0) {
                         layer.msg("创建成功，马上去设置吧", {icon: 6, offset: '110px'}, function () {
-                            window.location.href = "${ctx}/party/conf/info";
+                            window.location.href = "${ctx}/party/conf";
                         })
                     } else {
                         layer.msg(data.message, {icon: 5, offset: '110px'});

@@ -115,6 +115,54 @@ public class PartyController {
     /*
     *  下面是活动管理功能模块
     */
+    @RequestMapping(value = "/conf")
+    public String confIndex(@ModelAttribute PartyModel partyModel,HttpServletRequest request,HttpSession session,ModelMap model){
+        SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+
+        //只有活动创建者才能进入管理页面
+        PartyExt partyExt = partyService.load(sessionUser.getPartyId());
+        PartyUserExt partyUserExt = partyUserService.load(sessionUser.getPartyUserId());
+        if(partyUserExt.getUserStatus() == 16 && partyExt.getCreateBy().equals(sessionUser.getSysUserId())){ //16才是管理员
+
+            partyModel.setPartyExt(partyExt);
+
+            List<ICondition> conditions = new ArrayList<ICondition>();
+            conditions.add(new EqCondition("partyId",partyExt.getId()));
+            partyModel.setPartyUsers(partyUserService.criteriaQuery(conditions));
+
+            model.addAttribute("model",partyModel);
+            return "/party/conf";
+        }
+        else{
+            return "redirect:/errors/error/21";
+        }
+    }
+
+
+    //管理活动成员
+    @RequestMapping(value = "/conf/member")
+    public String confMember(@ModelAttribute PartyModel partyModel,HttpServletRequest request,HttpSession session,ModelMap model){
+        SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+
+        //只有活动创建者才能进入管理页面
+        PartyExt partyExt = partyService.load(sessionUser.getPartyId());
+        PartyUserExt partyUserExt = partyUserService.load(sessionUser.getPartyUserId());
+        if(partyUserExt.getUserStatus() == 16 && partyExt.getCreateBy().equals(sessionUser.getSysUserId())){ //16才是管理员
+
+            partyModel.setPartyExt(partyExt);
+
+            List<ICondition> conditions = new ArrayList<ICondition>();
+            conditions.add(new EqCondition("partyId",partyExt.getId()));
+            partyModel.setPartyUsers(partyUserService.criteriaQuery(conditions));
+
+            model.addAttribute("model",partyModel);
+            return "/party/confmember";
+        }
+        else{
+            return "redirect:/errors/error/21";
+        }
+    }
+
     //管理活动基本信息
     @RequestMapping(value = "/conf/info")
     public String confInfo(@ModelAttribute PartyModel partyModel, HttpServletRequest request,HttpSession session, ModelMap model) {
@@ -132,30 +180,7 @@ public class PartyController {
             return "/party/confinfo";
         }
         else{
-            return "/errors/error/21";
-        }
-    }
-
-    //管理活动成员
-    @RequestMapping(value = "/conf/member")
-    public String confMember(@ModelAttribute PartyModel partyModel,HttpServletRequest request,HttpSession session,ModelMap model){
-        SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
-
-        //只有活动创建者才能进入管理页面
-        PartyExt partyExt = partyService.load(sessionUser.getPartyId());
-        if(partyExt.getPartyStatus() == 16 && partyExt.getCreateBy().equals(sessionUser.getSysUserId())){ //16才是管理员
-
-            partyModel.setPartyExt(partyExt);
-
-            List<ICondition> conditions = new ArrayList<ICondition>();
-            conditions.add(new EqCondition("partyId",partyExt.getId()));
-            partyModel.setPartyUsers(partyUserService.criteriaQuery(conditions));
-
-            model.addAttribute("model",partyModel);
-            return "/party/confmember";
-        }
-        else{
-            return "/errors/error/21";
+            return "redirect:/errors/error/21";
         }
     }
 
@@ -178,7 +203,7 @@ public class PartyController {
             return "/party/confgroup";
         }
         else{
-            return "/errors/error/21";
+            return "redirect:/errors/error/21";
         }
     }
 
@@ -201,7 +226,7 @@ public class PartyController {
             return "/party/confnews";
         }
         else{
-            return "/errors/error/21";
+            return "redirect:/errors/error/21";
         }
     }
 
@@ -224,7 +249,7 @@ public class PartyController {
             return "/party/confforum";
         }
         else{
-            return "/errors/error/21";
+            return "redirect:/errors/error/21";
         }
     }
 
@@ -248,7 +273,7 @@ public class PartyController {
             return "/party/confdocs";
         }
         else{
-            return "/errors/error/21";
+            return "redirect:/errors/error/21";
         }
     }
 
@@ -260,7 +285,7 @@ public class PartyController {
     public String index(@PathVariable("id") Long id, HttpSession session,HttpServletRequest request,@ModelAttribute PartyModel partyModel, ModelMap model){
         PartyExt partyExt = partyService.load(id);
         if(partyExt == null){
-            return "/errors/error/2";
+            return "redirect:/errors/error/2";
         }else{
             SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
 
@@ -272,7 +297,7 @@ public class PartyController {
                 if(partyExt.getIsPublic()){
                     //TODO 公共活动用户可以参观
                 }else{
-                    return "/errors/error/3";
+                    return "redirect:/errors/error/3";
                 }
             }else{
                 //TODO 用户进入活动 活动 小组 活跃度+1

@@ -247,6 +247,7 @@
 
 
 <script type="text/javascript">
+    var logined = false;
     $(function () {
         $('#allinone_carousel_charming').allinone_carousel({
             skin: 'charming',
@@ -402,7 +403,7 @@
                 if (res.status == 0) {
                     $(".slide_content").remove();
                     layer.msg("欢迎回来，我的朋友~", {icon: 6, offset: '110px'});
-
+                    logined = true;
                     if (res.data == "1") {
                         $(".js_userset,.js_partycreate,.js_logout").removeClass("hide");
                         $(".js_userset a").attr("href", "${ctx}/user/sprofile");
@@ -432,6 +433,9 @@
 
             return false;
         }).on("click",".link--target",function(){
+            if(logined)
+                return logined;
+
             <% if (sessionUser != null) {%>
             return true;
             <% } else {%>

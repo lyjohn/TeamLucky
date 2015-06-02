@@ -78,4 +78,52 @@ public class SysUserServiceExt extends SysUserService implements ISysUserService
 
         return this.create(sysUserExt);
     }
+
+    @Override
+    @SysServiceLog(description = "上传系统用户头像头像",code = 104)
+    public SysUserExt uploadAvatar(String filePath, String sysUserId) {
+        SysUserExt sysUserExt = this.load(sysUserId);
+
+        if (sysUserExt == null)
+            return null;
+
+        sysUserExt.setUserAvatar(filePath);
+        this.update(sysUserExt);
+
+        return sysUserExt;
+    }
+
+    /**
+     * 修改用户基本in洗
+     * @param sysUserExt 用户实体，承载需要变更的内容，某些项是空的
+     * @param updateType 更新类型 1:基本信息(username sex birthday remark) 2:通讯录(email tel qq weixin)  3:密码)
+     * @return
+     */
+    @Override
+    @SysServiceLog(description = "编辑了系统用户资料",code = 106)
+    public SysUserExt updateProfile(SysUserExt sysUserExt,int updateType) {
+        SysUserExt sysUserExtPer = this.load(sysUserExt.getId());
+        if (sysUserExt == null)
+            return null;
+
+        if(updateType == 1){
+            sysUserExtPer.setUserName(sysUserExt.getUserName());
+            if(sysUserExt.getBirthDay()!=null)
+                sysUserExtPer.setBirthDay(sysUserExt.getBirthDay());
+            sysUserExtPer.setSex(sysUserExt.getSex());
+            sysUserExtPer.setUserRemark(sysUserExt.getUserRemark());
+        }else if(updateType == 2){
+            sysUserExtPer.setEmail(sysUserExt.getEmail());
+            sysUserExtPer.setTel(sysUserExt.getTel());
+            sysUserExtPer.setQq(sysUserExt.getQq());
+            sysUserExtPer.setWeiXin(sysUserExt.getWeiXin());
+        }else if(updateType == 3){
+            sysUserExtPer.setLoginPwd(sysUserExt.getLoginPwd());
+        }else
+            return sysUserExtPer;
+
+        this.update(sysUserExtPer);
+
+        return sysUserExtPer;
+    }
 }

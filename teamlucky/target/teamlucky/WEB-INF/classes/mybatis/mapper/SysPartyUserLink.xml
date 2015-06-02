@@ -6,6 +6,7 @@
 		<result property="sysUserId" column="sysUserId" />
 		<result property="partyUserId" column="partyUserId" />
 		<result property="partyId" column="partyId" />
+		<result property="joinTime" column="joinTime" />
 	</resultMap>
 
 	<insert id="create" parameterType="com.tmlk.po.SysPartyUserLinkExt" useGeneratedKeys="true" keyProperty="id">
@@ -14,13 +15,15 @@
 			id,
 			sysUserId,
 			partyUserId,
-			partyId
+			partyId,
+			joinTime,
 		)  
 		VALUES(
 			#{id},
 			#{sysUserId},
 			#{partyUserId},
-			#{partyId}
+			#{partyId},
+			#{joinTime}
 		)
 		]]>
 	</insert>
@@ -31,7 +34,8 @@
 		SET
 		sysUserId = #{sysUserId},
 		partyUserId = #{partyUserId},
-		partyId = #{partyId}
+		partyId = #{partyId},
+		joinTime = #{joinTime}
 		WHERE id = #{id}
 		]]>
 	</update>

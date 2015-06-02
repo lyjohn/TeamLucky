@@ -138,6 +138,7 @@ public class PartyServiceExt extends PartyService implements IPartyServiceExt {
 			sysPartyUserLinkExt.setPartyId(party.getId());
 			sysPartyUserLinkExt.setPartyUserId(partyUser.getId());
 			sysPartyUserLinkExt.setSysUserId(author.getId());
+			sysPartyUserLinkExt.setJoinTime(new Date());
 			sysPartyUserLinkService.create(sysPartyUserLinkExt);
 
 			return partyUser;

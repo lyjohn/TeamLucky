@@ -48,7 +48,7 @@
             </div>
             <jsp:include page="../shared/_header.jsp">
                 <jsp:param value="1" name="type"/>
-                <jsp:param value="userset" name="cur"/>
+                <jsp:param value="partyconf" name="cur"/>
             </jsp:include>
             <div class="clearfix"></div>
         </div>
@@ -61,7 +61,7 @@
             <dl class="person-photo">
                 <dt>
                     <a href="javascript:;">
-                        <img src="${ctx}/avatar/user/2/${model.partyUserExt.id}" class="header">
+                        <img src="${ctx}/avatar/party/${model.partyExt.id}" class="header">
 	                	<span class="edit_person_pic" style="overflow:hidden;">
 	                		<input id="user_avatar" name="file" type="file"
                                    style="opacity:0; width:200px;height:200px;position:absolute;left:-50px;"/>
@@ -71,34 +71,20 @@
             </dl>
             <dl class="person-info">
                 <dt class="person-nick-name">
-                    <span>${model.partyUserExt.userName}</span>
-                    <span title="修改密码"><i class="fa fa-key password-edit" style="color:#999;cursor:pointer; margin-left:10px;"></i></span>
+                    <span>${model.partyExt.partyName}</span>
                 </dt>
                 <dd class="person-detail">
-                    <span class="info_null">${model.partyUserExt.loginName}</span>
+                    <span class="info_null">${model.partyExt.partyCode}</span>
                     <span>|</span>
-                    <c:if test="${empty model.partyUserExt.sex}">
-                        <span class="info_null sex_view">未填写性别</span>
+                    <c:if test="${model.partyExt.isPublic}">
+                        <span class="">公开活动</span>
                     </c:if>
-                    <c:if test="${!empty model.partyUserExt.sex}">
-                        <span class="sex_view"><c:out value="${model.partyUserExt.sex}"></c:out></span>
-                    </c:if>
-                    <span>|</span>
-                    <c:if test="${empty model.partyUserExt.birthDay}">
-                        <span class="info_null birthday_view">未填写生日</span>
-                    </c:if>
-                    <c:if test="${!empty model.partyUserExt.birthDay}">
-                        <span class="birthday_view"><fmt:formatDate value="${model.partyUserExt.birthDay}"
-                                                                    pattern="yyyy-MM-dd"></fmt:formatDate></span>
+                    <c:if test="${!model.partyExt.isPublic}">
+                        <span class="info_null">私密活动</span>
                     </c:if>
                 </dd>
                 <dd class="person-sign">
-                    <c:if test="${empty model.partyUserExt.userRemark}">
-                        <span class="info_null">开始是一片空白...</span>
-                    </c:if>
-                    <c:if test="${!empty model.partyUserExt.userRemark}">
-                        <span><c:out value="${model.partyUserExt.userRemark}"></c:out></span>
-                    </c:if>
+                    <span><c:out value="${model.partyExt.partyRemark}"></c:out></span>
                 </dd>
             </dl>
 
@@ -106,11 +92,16 @@
     </div>
 
     <div class="persion_section">
-        <div class="person_detail_tab">
+        <div class="person_detail_tab party_tab">
             <ul>
-                <li data-modal="tab" data-tab="myDetails" class="current_detail">联系方式</li>
-                <li data-modal="tab" data-tab="myNews">我的动态</li>
-                <li data-modal="tab" data-tab="myMessages">我的消息</li>
+                <li data-modal="tab" data-tab="myDetails" class="current_detail">基本配置</li>
+                <li data-modal="tab" data-tab="myNews">成员管理</li>
+                <c:if test="${model.partyExt.isGroup}">
+                    <li data-modal="tab" data-tab="myMessages">小组管理</li>
+                </c:if>
+                <li data-modal="tab" data-tab="myMessages">新闻通知</li>
+                <li data-modal="tab" data-tab="myMessages">文档维护</li>
+                <li data-modal="tab" data-tab="myMessages">论坛维护</li>
             </ul>
         </div>
         <div class="aboutMe">
@@ -118,21 +109,62 @@
                 <div class="mod_contact">
                     <a href="#" nodetype="contact-modify" class="modify fa fa-edit fa-2x"></a>
                     <ul class="clearfix">
-                        <li><span class="li_title">电子邮箱：</span><span nodetype="mail" class="email mail" title=""><c:out
-                                value="${model.partyUserExt.email}"></c:out></span></li>
-                        <li><span class="li_title">手机号码：</span><span nodetype="mobile" class="mobile" title=""><c:out
-                                value="${model.partyUserExt.tel}"></c:out></span></li>
-                        <li><span class="li_title">QQ号码：</span><span nodetype="qq" class="qq" title="357431972"><c:out
-                                value="${model.partyUserExt.qq}"></c:out></span></li>
-                        <li><span class="li_title">微信号：</span><span nodetype="weixin" class="weixin"><c:out
-                                value="${model.partyUserExt.weiXin}"></c:out></span></li>
+                        <li><span class="li_title">是否分组：</span>
+                            <span nodetype="isGroup" class="">
+                                <c:if test="${!model.partyExt.isGroup}">
+                                    禁用分组
+                                </c:if>
+                                <c:if test="${model.partyExt.isGroup}">
+                                    允许分组
+                                </c:if>
+                            </span>
+                        </li>
+                        <li><span class="li_title">每组最少人数：</span>
+                            <span nodetype="memberMinNum">
+                                <c:if test="${model.partyExt.memberNumMin == 0}">
+                                    不限制
+                                </c:if>
+                                <c:if test="${model.partyExt.memberNumMin > 0}">
+                                    <c:out value="${model.partyExt.memberNumMin}"></c:out> 人
+                                </c:if>
+                            </span>
+                        </li>
+                        <li><span class="li_title">每组最多人数：</span>
+                            <span nodetype="memberNumMax">
+                                <c:if test="${model.partyExt.memberNumMax == 0}">
+                                    不限制
+                                </c:if>
+                                <c:if test="${model.partyExt.memberNumMax > 0}">
+                                    <c:out value="${model.partyExt.memberNumMax}"></c:out> 人
+                                </c:if>
+                            </span>
+                        </li>
+                        <li><span class="li_title">是否自行组队：</span>
+                            <span nodetype="customBuild">
+                                <c:if test="${!model.partyExt.isCustomBuild}">
+                                    成员自行分组
+                                </c:if>
+                                <c:if test="${model.partyExt.isCustomBuild}">
+                                    管理员分组
+                                </c:if>
+                            </span>
+                        </li>
+                        <li><span class="li_title">分组截止日期：</span>
+                            <span nodetype="buildEndTime">
+                                <c:if test="${!empty model.partyExt.buildEndTime}">
+                                    <fmt:formatDate value="${model.partyExt.buildEndTime}"
+                                                    pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></span>
+                            </c:if>
+                            <c:if test="${empty model.partyExt.buildEndTime}">
+                                不限制
+                            </c:if>
+                            </span>
+                        </li>
                     </ul>
                 </div>
             </div>
             <div nodetype="myNews" nodeindex="my2" data-modal="tab-layer" class="myNews">
-                <div class="connection_title_con">
-                    <!-- 显示我的操作日志 -->
-                </div>
+
             </div>
             <div nodetype="myMessages" nodeindex="my3" data-modal="tab-layer" class="myMessages">
                 <div data-bind="collect" class="mod-my-collect">
@@ -148,72 +180,35 @@
             </div>
         </div>
     </div>
-
-    <div class="pop_edit edit_password">
-        <h3>修改密码</h3>
-        <div class="context">
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <label for="inputOldPwd" class="col-sm-4 control-label">旧密码</label>
-                    <div class="col-sm-8">
-                        <input type="password" class="form-control" id="inputOldPwd" name="inputOldPwd" placeholder="输入旧密码" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputNewPwd" class="col-sm-4 control-label">新密码</label>
-                    <div class="col-sm-8">
-                        <input type="password" class="form-control" id="inputNewPwd" name="inputNewPwd" placeholder="输入新密码，6位以上" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputNewPwd" class="col-sm-4 control-label">新密码确认</label>
-                    <div class="col-sm-8">
-                        <input type="password" class="form-control" id="inputReNewPwd" name="inputReNewPwd" placeholder="请重复新密码" />
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="success">
-            <a class="js_show_pwd" href="#" style="background-color:#ddd;" rel="nofollow" data-show=false>显示密码</a>
-            <a href="#" nodetype="cancel" class="button">取消</a>
-            <a class="js_save button button--secondary" href="#" data-method="post" rel="nofollow">确定</a>
-        </div>
-    </div>
     <div class="pop_edit edit_intro">
         <h3>编辑简介</h3>
+
         <div style="background: #f3f3f3; border:1px solid #DCDCDC; margin-bottom:30px; padding:0 17px; color:#333; font-size:16px; line-height:30px;">
-            <span>用户名 :</span><span style="color: #666666; margin-left:15px;"><c:out value="${model.partyUserExt.loginName}"></c:out></span>
+            <span>活动识别码 :</span><span style="color: #666666; margin-left:15px;"><c:out
+                value="${model.partyExt.partyCode}"></c:out></span>
         </div>
         <div class="context">
             <form id="form" nodetype="form-popup" class="form">
                 <ul>
-                    <li class="mp_dl"><em class="red">*</em><span>昵称：
-                  <input name="nickname" nodetype="nickName" important="yes" type="text" placeholder="支持中文、英文、数字"
-                         value="<c:out value='${model.partyUserExt.userName}'></c:out>" maxlen="20"
+                    <li class="mp_dl"><em class="red">*</em><span>活动名称：
+                  <input name="partyName" nodetype="partyName" important="yes" type="text" placeholder="支持中文、英文、数字"
+                         value="<c:out value='${model.partyExt.partyName}'></c:out>" maxlen="20"
                          class="nick_name mp_field1">
                   </span></li>
-                    <li><span class="mp_label">性别：
-                    <c:if test="${model.partyUserExt.sex == '男'}">
-                        <input name="gender" type="radio" value="男" class="radio_sex" checked><span>男</span>
+                    <li><span class="mp_label">是否公开：
+                    <c:if test="${model.partyExt.isPublic}">
+                        <input name="public" type="radio" value="true" class="radio_public" checked><span>公开</span>
+                        <input name="public" type="radio" value="false" class="radio_public"><span>私有</span>
                     </c:if>
-                    <c:if test="${model.partyUserExt.sex != '男'}">
-                        <input name="gender" type="radio" value="男" class="radio_sex"><span>男</span>
-                    </c:if>
-                    <c:if test="${model.partyUserExt.sex == '女'}">
-                        <input name="gender" type="radio" value="女" class="radio_sex" checked><span>女</span>
-                    </c:if>
-                    <c:if test="${model.partyUserExt.sex != '女'}">
-                        <input name="gender" type="radio" value="女" class="radio_sex"><span>女</span>
+                    <c:if test="${!model.partyExt.isPublic}">
+                        <input name="public" type="radio" value="true" class="radio_public"><span>公开</span>
+                        <input name="public" type="radio" value="false" class="radio_public" checked><span>私有</span>
                     </c:if>
                     </li>
-                    <li><span>生日：
-                  <input name="birthday" nodetype="birthday" type="text" class="birthday mp_field1"
-                         value="<fmt:formatDate value='${model.partyUserExt.birthDay}' pattern='yyyy-MM-dd'></fmt:formatDate>"></span>
-                    </li>
-                    <li>简述：
-                        <textarea name="selfdesc" nodetype="selfdesc" placeholder="200字以内" maxlen="200"
-                                  class="intro_info mp_wid" style="width:560px"><c:out
-                                value='${model.partyUserExt.userRemark}'></c:out></textarea>
+                    <li class="mp_dl"><em class="red">*</em>活动描述：
+                        <textarea name="partyRemark" nodetype="selfdesc" placeholder="200字以内" maxlen="200"
+                                  class="intro_info mp_wid" style="width:525px"><c:out
+                                value='${model.partyExt.partyRemark}'></c:out></textarea>
                     </li>
                 </ul>
             </form>
@@ -224,6 +219,7 @@
     </div>
     <div class="pop_edit edit_contact">
         <h3>编辑联系方式</h3>
+
         <div class="context">
             <form class="form-horizontal">
                 <div class="form-group">
@@ -231,23 +227,25 @@
 
                     <div class="col-sm-10">
                         <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="电子邮箱"
-                               value="<c:out value='${model.partyUserExt.email}'></c:out>"/>
+                               value=""/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputTel" class="col-sm-2 control-label">手机</label>
 
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputTel" maxlength="11" name="inputTel" placeholder="手机号码"
-                               value="<c:out value='${model.partyUserExt.tel}'></c:out>"/>
+                        <input type="text" class="form-control" id="inputTel" maxlength="11" name="inputTel"
+                               placeholder="手机号码"
+                               value=""/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputQq" class="col-sm-2 control-label">QQ</label>
 
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputQq" maxlength="11" name="inputQq" placeholder="QQ号"
-                               value="<c:out value='${model.partyUserExt.qq}'></c:out>"/>
+                        <input type="text" class="form-control" id="inputQq" maxlength="11" name="inputQq"
+                               placeholder="QQ号"
+                               value=""/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -255,7 +253,7 @@
 
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="inputWeixin" name="inputWeixin" placeholder="微信号"
-                               value="<c:out value='${model.partyUserExt.weiXin}'></c:out>"/>
+                               value=""/>
                     </div>
                 </div>
             </form>
@@ -310,25 +308,13 @@
     var layerLoadIndex = 0;
     $(function () {
 
-        $(".birthday").datepicker({
+        $(".endtime").datepicker({
             autoclose: true,
             format: "yyyy-mm-dd",
             language: 'zh-CN'
         });
 
-        $(document).on("click",".password-edit",function(){//修改密码
-            $(".edit_password").show();
-            var width = $(".edit_password").width();
-            var height = $(".edit_password").height();
-            layer.open({
-                zIndex: 1000,
-                type: 1,
-                title: false,
-                offset: '110px',
-                area: [width+'px', height+'px'],
-                content: $(".edit_password")
-            });
-        }).on("click", ".modify", function () {//修改联系方式
+        $(document).on("click", ".modify", function () {//修改联系方式
             $(".edit_contact").show();
             var width = $(".edit_contact").width();
             var height = $(".edit_contact").height();
@@ -352,49 +338,49 @@
             });
         }).on("click", ".pop_edit a[nodetype='cancel']", function () { //取消按钮
             layer.closeAll();
-        }).on("click",".edit_password .js_show_pwd",function(){ //切换密码显示
+        }).on("click", ".edit_password .js_show_pwd", function () { //切换密码显示
             var shown = $(this).data("show");
-            if(shown){
-                $(".edit_password form input").attr("type","password");
+            if (shown) {
+                $(".edit_password form input").attr("type", "password");
                 $(this).text("显示密码");
             }
-            else{
-                $(".edit_password form input").attr("type","text");
+            else {
+                $(".edit_password form input").attr("type", "text");
                 $(this).text("隐藏密码");
             }
-            $(this).data("show",!shown);
-        }).on("click",".edit_password .js_save",function(){ //保存密码
+            $(this).data("show", !shown);
+        }).on("click", ".edit_password .js_save", function () { //保存密码
             var oldpwd = $("#inputOldPwd").val();
             var newpwd = $("#inputNewPwd").val();
             var newRepwd = $("#inputReNewPwd").val();
 
-            if(oldpwd.length < 6 || newpwd.length<6 || newRepwd<6){
-                layer.msg("密码长度必须是6位以上",{icon:5,offset:'110px'});
+            if (oldpwd.length < 6 || newpwd.length < 6 || newRepwd < 6) {
+                layer.msg("密码长度必须是6位以上", {icon: 5, offset: '110px'});
                 return false;
             }
-            if(newpwd != newRepwd){
-                layer.msg("两次输入密码不一致",{icon:5,offset:'110px'});
+            if (newpwd != newRepwd) {
+                layer.msg("两次输入密码不一致", {icon: 5, offset: '110px'});
                 return false;
             }
 
             $.ajax({
-                url:"${ctx}/user/ppwd",
-                dataType:"json",
-                data:{oldPwd:oldpwd,newPwd:newpwd},
-                type:"post",
+                url: "${ctx}/user/ppwd",
+                dataType: "json",
+                data: {oldPwd: oldpwd, newPwd: newpwd},
+                type: "post",
                 success: function (res) {
                     if (res.status == 0) {
                         layer.closeAll();
 
-                        layer.msg("修改密码成功",{icon:6,offset:'110px'});
+                        layer.msg("修改密码成功", {icon: 6, offset: '110px'});
                         $(".edit_password form input").val("");
                     }
                     else
-                        layer.msg(res.message,{icon:5,offset:'110px'});
+                        layer.msg(res.message, {icon: 5, offset: '110px'});
                 },
                 error: function (data, status, e) {
                     layer.closeAll();
-                    layer.msg("保存失败",{icon:5,offset:'110px'});
+                    layer.msg("保存失败", {icon: 5, offset: '110px'});
                 }
             })
         }).on("click", ".edit_contact .js_save", function () { //保存联系方式
@@ -480,7 +466,7 @@
                 fileElementId: $(this).attr("id"),
                 secureuri: false,
                 dataType: "text",
-                data: {type: 1},
+                data: {type: 2},
                 type: "post",
                 success: function (res) {
                     layer.closeAll();
@@ -621,8 +607,8 @@
 
         var dataToSend = {
             filePath: src,
-            type: 1,
-            user: 2,
+            type: 2,
+            user: 3,
             x1: obj.attr('x1'),
             y1: obj.attr('y1'),
             x2: obj.attr('x2'),

@@ -47,6 +47,16 @@ public class SysPartyUserLink{
 		this.partyId = partyId;
 	}
 
+	private Date joinTime;
+
+	public Date getJoinTime() {
+		return joinTime;
+	}
+
+	public void setJoinTime(Date joinTime) {
+		this.joinTime = joinTime;
+	}
+
 	public boolean equals(Object object)
     {
         if (this == object)

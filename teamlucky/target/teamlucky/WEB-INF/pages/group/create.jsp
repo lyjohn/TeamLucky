@@ -27,7 +27,7 @@
   <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/fwslider.css" />
   <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/allinone_carousel.css" />
 
-  <title>发起活动 - 校缘派</title>
+  <title>创建小组 - 校缘派</title>
 </head>
 
 <body>

@@ -11,6 +11,8 @@ import com.tmlk.framework.mybatis.Order;
 import com.tmlk.framework.session.SessionUser;
 import com.tmlk.framework.util.Constants;
 import com.tmlk.framework.util.FormatUtils;
+import com.tmlk.framework.util.JsonResult;
+import com.tmlk.framework.util.MD5Util;
 import com.tmlk.model.MessageModel;
 import com.tmlk.model.PartyModel;
 import com.tmlk.model.PartyUserModel;
@@ -23,10 +25,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,6 +45,9 @@ public class UserController {
 
     @Autowired
     private IPartyUserServiceExt partyUserService;
+
+    @Autowired
+    private IPartyGroupServiceExt partyGroupService;
 
     @Autowired
     private ISysPartyUserLinkServiceExt sysPartyUserLinkService;
@@ -80,6 +82,67 @@ public class UserController {
         return "/user/sprofile";
     }
 
+    @RequestMapping(value = "/scontact")
+    @ResponseBody
+    public JsonResult doContactSave(@ModelAttribute SysUserExt sysUserExt, ModelMap model, HttpSession session){
+        JsonResult result = new JsonResult();
+        try{
+            SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+            sysUserExt.setId(sessionUser.getSysUserId());
+
+            sysUserService.updateProfile(sysUserExt,2);
+
+            result.setStatus(0);
+        }catch (Exception ex){
+            logger.trace(ex);
+            result.setMessage("保存失败");
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/sintro")
+    @ResponseBody
+    public JsonResult doIntroSave(@ModelAttribute SysUserExt sysUserExt, ModelMap model, HttpSession session){
+        JsonResult result = new JsonResult();
+        try{
+            SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+            sysUserExt.setId(sessionUser.getSysUserId());
+
+            sysUserService.updateProfile(sysUserExt,1);
+
+            result.setStatus(0);
+        }catch (Exception ex){
+            logger.trace(ex);
+            result.setMessage("保存失败");
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/spwd")
+    @ResponseBody
+    public JsonResult doPwdSave(@RequestParam(value = "oldPwd",required = true) String oldPwd,@RequestParam(value = "newPwd",required = true) String newPwd, HttpSession session){
+        JsonResult result = new JsonResult();
+        try{
+            SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+
+            SysUserExt sysUserExt = sysUserService.load(sessionUser.getSysUserId());
+
+            if(MD5Util.MD5(oldPwd).equals(sysUserExt.getLoginPwd())){
+                sysUserExt.setLoginPwd(MD5Util.MD5(newPwd));
+                sysUserService.updateProfile(sysUserExt,3);
+
+                result.setStatus(0);
+                result.setMessage("修改密码成功");
+            }else{
+                result.setMessage("旧密码不不正确");
+            }
+        }catch (Exception ex){
+            logger.trace(ex);
+            result.setMessage("保存失败");
+        }
+        return result;
+    }
+
     @RequestMapping(value = "/pprofile")
     public String goPartyUserProfile(@ModelAttribute PartyUserModel partyUserModel, ModelMap model, HttpSession session){
         SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
@@ -87,74 +150,152 @@ public class UserController {
         PartyUserExt partyUserExt = partyUserService.load(sessionUser.getPartyUserId());
 
         partyUserModel.setPartyUserExt(partyUserExt);
-        model.addAttribute("model", partyUserExt);
+
+        model.addAttribute("model", partyUserModel);
 
         return "/user/pprofile";
     }
 
-    @RequestMapping(value = "/partylist")
-    public String goPartyList(@ModelAttribute PartyModel partyModel,ModelMap model, HttpSession session){
-        SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
+    @RequestMapping(value = "/pcontact")
+    @ResponseBody
+    public JsonResult doContactSave(@ModelAttribute PartyUserExt partyUserExt, ModelMap model, HttpSession session){
+        JsonResult result = new JsonResult();
+        try{
+            SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+            partyUserExt.setId(sessionUser.getPartyUserId());
 
-        List<ICondition> conditions = new ArrayList<ICondition>();
-        conditions.add(new EqCondition("sysUserId",sessionUser.getSysUserId()));
+            partyUserService.updateProfile(partyUserExt, 2);
 
-        //系统用户和活动用户的关联表
-        List<SysPartyUserLinkExt> sysPartyUserLinkExts = sysPartyUserLinkService.criteriaQuery(conditions);
-
-        List<PartyExt> partyExts = new ArrayList<PartyExt>();
-
-        for(SysPartyUserLinkExt sysPartyUserLinkExt : sysPartyUserLinkExts){
-            partyExts.add(partyService.load(sysPartyUserLinkExt.getPartyId()));
+            result.setStatus(0);
+        }catch (Exception ex){
+            logger.trace(ex);
+            result.setMessage("保存失败");
         }
+        return result;
+    }
 
-        partyModel.setItems(partyExts);
+    @RequestMapping(value = "/pintro")
+    @ResponseBody
+    public JsonResult doIntroSave(@ModelAttribute PartyUserExt partyUserExt, ModelMap model, HttpSession session){
+        JsonResult result = new JsonResult();
+        try{
+            SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+            partyUserExt.setId(sessionUser.getPartyUserId());
 
-        model.addAttribute("model",partyModel);
+            partyUserService.updateProfile(partyUserExt, 1);
 
-        return "/user/partylist";
+            result.setStatus(0);
+        }catch (Exception ex){
+            logger.trace(ex);
+            result.setMessage("保存失败");
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/ppwd")
+    @ResponseBody
+    public JsonResult doPPwdSave(@RequestParam(value = "oldPwd",required = true) String oldPwd,@RequestParam(value = "newPwd",required = true) String newPwd, HttpSession session){
+        JsonResult result = new JsonResult();
+        try{
+            SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+
+            PartyUserExt partyUserExt = partyUserService.load(sessionUser.getPartyUserId());
+
+            if(MD5Util.MD5(oldPwd).equals(partyUserExt.getLoginPwd())){
+                partyUserExt.setLoginPwd(MD5Util.MD5(newPwd));
+                partyUserService.updateProfile(partyUserExt,3);
+
+                result.setStatus(0);
+                result.setMessage("修改密码成功");
+            }else{
+                result.setMessage("旧密码不不正确");
+            }
+        }catch (Exception ex){
+            logger.trace(ex);
+            result.setMessage("保存失败");
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/partylist")
+    @ResponseBody
+    public JsonResult goPartyList(HttpSession session){
+        JsonResult result = new JsonResult();
+        try {
+            SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
+
+            List<ICondition> conditions = new ArrayList<ICondition>();
+            conditions.add(new EqCondition("sysUserId",sessionUser.getSysUserId()));
+
+            List<Order> orders = new ArrayList<Order>();
+            orders.add(Order.desc("joinTime"));
+
+            //系统用户和活动用户的关联表
+            List<SysPartyUserLinkExt> sysPartyUserLinkExts = sysPartyUserLinkService.criteriaQuery(conditions,orders);
+
+            List<PartyExt> partyExts = new ArrayList<PartyExt>();
+
+            for(SysPartyUserLinkExt sysPartyUserLinkExt : sysPartyUserLinkExts){
+                PartyExt partyExt = partyService.load(sysPartyUserLinkExt.getPartyId());
+
+                PartyUserExt partyUserExt = partyUserService.load(sysPartyUserLinkExt.getPartyUserId());
+                if(partyUserExt.getGroupId() != 0 && partyUserExt.getUserStatus() > 6)//即已成功分配了团队小组
+                {
+                    partyExt.setGroup(partyGroupService.load(partyUserExt.getGroupId()));
+                }
+
+                partyExts.add(partyExt);
+            }
+
+            result.setData(partyExts);
+            result.setStatus(0);
+        }catch (Exception ex){
+            result.setMessage(ex.getMessage());
+        }
+        return result;
     }
 
     @RequestMapping(value = "/message")
-    public String go(@ModelAttribute MessageModel messageModel ,ModelMap model, HttpSession session){
-        SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
+    @ResponseBody
+    public JsonResult go(@ModelAttribute MessageModel messageModel ,ModelMap model, HttpSession session){
+        JsonResult result = new JsonResult();
+        try {
+            SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
 
-        //存储 消息接受人  可能是系统用户  可能是活动用户
-        List<String> messageToList = new ArrayList<String>();
-        //如果Session里面没有SysUserId  那肯定是活动用户
-        if(FormatUtils.isEmpty(sessionUser.getSysUserId())){
-            messageToList.add(sessionUser.getPartyUserId());
-        }
-        else{
-            //把系统用户的ID加入List
-            messageToList.add(sessionUser.getSysUserId());
+            //存储 消息接受人  可能是系统用户  可能是活动用户
+            List<String> messageToList = new ArrayList<String>();
+            //如果Session里面没有SysUserId  那肯定是活动用户
+            if (FormatUtils.isEmpty(sessionUser.getSysUserId())) {
+                messageToList.add(sessionUser.getPartyUserId());
+            } else {
+                //把系统用户的ID加入List
+                messageToList.add(sessionUser.getSysUserId());
 
-            List<ICondition> inconditions = new ArrayList<ICondition>();
-            inconditions.add(new EqCondition("sysUserId",sessionUser.getSysUserId()));
+                List<ICondition> inconditions = new ArrayList<ICondition>();
+                inconditions.add(new EqCondition("sysUserId", sessionUser.getSysUserId()));
 
-            //系统用户和活动用户的关联表
-            List<SysPartyUserLinkExt> sysPartyUserLinkExts = sysPartyUserLinkService.criteriaQuery(inconditions);
+                //系统用户和活动用户的关联表
+                List<SysPartyUserLinkExt> sysPartyUserLinkExts = sysPartyUserLinkService.criteriaQuery(inconditions);
 
-            //添加活动用户的ID到List
-            for(SysPartyUserLinkExt sysPartyUserLinkExt : sysPartyUserLinkExts){
-                messageToList.add(sysPartyUserLinkExt.getPartyUserId());
+                //添加活动用户的ID到List
+                for (SysPartyUserLinkExt sysPartyUserLinkExt : sysPartyUserLinkExts) {
+                    messageToList.add(sysPartyUserLinkExt.getPartyUserId());
+                }
             }
+
+            List<ICondition> conditions = new ArrayList<ICondition>();
+            conditions.add(new InCondition("messageTo", messageToList));
+            List<Order> orders = new ArrayList<Order>();
+            orders.add(Order.desc("messageTime"));
+
+            List<MessageExt> messageExtList = messageService.criteriaQuery(conditions,orders);
+
+            result.setData(messageExtList);
+            result.setStatus(0);
+        }catch (Exception ex){
+            result.setMessage(ex.getMessage());
         }
-
-        List<PartyExt> partyExts = new ArrayList<PartyExt>();
-
-        List<ICondition> conditions = new ArrayList<ICondition>();
-        conditions.add(new InCondition("messageTo",messageToList));
-
-        List<Order> orders = new ArrayList<Order>();
-        orders.add(Order.desc("messageTime"));
-
-
-        messageModel.setItems(messageService.criteriaQuery(conditions,orders));
-
-        model.addAttribute("model",messageModel);
-
-        return "/user/message";
+        return result;
     }
 
 

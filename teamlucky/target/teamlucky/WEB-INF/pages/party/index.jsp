@@ -21,8 +21,7 @@
 
     <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/codecademy.css" />
-    <!-- start light_box -->
-    <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/jquery.fancybox.css" media="screen"/>
+
     <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/fwslider.css" media="all">
 
     <link rel="stylesheet" type="text/css" media="all" href="${ctx}/resource/css/blue.css" />
@@ -32,8 +31,8 @@
 
     <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/datepicker.css" />
 
-    <link rel="icon" href="${ctx}/favicon.ico" mce_href="${ctx}/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="${ctx}/favicon.ico" mce_href="${ctx}/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="${ctx}/resource/images/favicon.ico" mce_href="${ctx}/resource/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="${ctx}/resource/images/favicon.ico" mce_href="${ctx}/resource/images/favicon.ico" type="image/x-icon">
 
     <title>${model.partyExt.partyName} - 校缘派</title>
 </head>
@@ -53,173 +52,174 @@
     </div>
 </div>
 
-<div class="container">
-    <div class="col-md-8">
-        <div class="portfolio_main">
-            <ul id="filters" class="clearfix">
-                <li>
-                    <span class="filter active" data-filter="member">所有成员</span>
-                </li>
-                <li>
-                    <span class="filter" data-filter="news">新闻通知</span>
-                </li>
-                <li>
-                    <span class="filter" data-filter="result">文档展示</span>
-                </li>
-                <li>
-                    <span class="filter" data-filter="talk ">讨论区</span>
-                </li>
-            </ul>
-            <div id="portfoliolist">
-                <div class="portfolio logo1" data-cat="logo">
-                    <div class="portfolio-wrapper">
-                        <div class="col-md-7 pull-right m-info">
-                            <h4>姓名</h4>
-                            <p>个人描述信息</p>
-                        </div>
-                        <img src="${ctx}/resource/avatar/default/user.png" alt="" class="img-responsive"/>
-                        <h5>联系方式</h5>
-                        <hr/>
-                        <p>邮箱</p>
+<div class="body_bg">
+    <article class="fit-fixed">
+        <div class="grid-row padding-top--half">
+            <div class="grid-col-12 grid-row grid-col--no-margin grid-col--no-padding">
+                <div class="grid-col-9 grid-col--no-padding grid-col--no-margin ">
+                    <div class="portfolio_main">
+                        <ul id="filters" class="clearfix">
+                            <li>
+                                <span class="filter active" data-filter="member">所有成员</span>
+                            </li>
+                            <li>
+                                <span class="filter" data-filter="news">新闻通知</span>
+                            </li>
+                            <li>
+                                <span class="filter" data-filter="result">文档展示</span>
+                            </li>
+                            <li>
+                                <span class="filter" data-filter="talk ">讨论区</span>
+                            </li>
+                        </ul>
+                        <div id="portfoliolist">
+                            <div class="portfolio logo1" data-cat="logo">
+                                <div class="portfolio-wrapper">
+                                    <div class="col-md-7 pull-right m-info">
+                                        <h4>姓名</h4>
+                                        <p>个人描述信息</p>
+                                    </div>
+                                    <img src="${ctx}/resource/avatar/default/user.png" alt="" class="img-responsive"/>
+                                    <h5>联系方式</h5>
+                                    <hr/>
+                                    <p>邮箱</p>
 
-                        <p>手机</p>
+                                    <p>手机</p>
 
-                        <p>微信</p>
+                                    <p>微信</p>
 
-                        <p>QQ</p>
-                        <div class="label">
-                            <div class="label-text">
-                                <span><input type="submit" value="邀请" /></span>
+                                    <p>QQ</p>
+                                    <div class="label">
+                                        <div class="label-text">
+                                            <span><input type="submit" value="邀请" /></span>
+                                        </div>
+                                        <div class="label-bg"></div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="label-bg"></div>
+                            <div class="portfolio logo1" data-cat="logo">
+                                <div class="portfolio-wrapper">
+                                    <div class="col-md-7 pull-right m-info">
+                                        <h4>姓名</h4>
+                                        <p>个人描述信息</p>
+                                    </div>
+                                    <img src="${ctx}/resource/avatar/default/user.png" alt="" class="img-responsive"/>
+                                    <h5>联系方式</h5>
+                                    <hr/>
+                                    <p>邮箱</p>
+
+                                    <p>手机</p>
+
+                                    <p>微信</p>
+
+                                    <p>QQ</p>
+                                    <div class="label">
+                                        <div class="label-text">
+                                            <span><input type="submit" value="邀请" /></span>
+                                        </div>
+                                        <div class="label-bg"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="portfolio logo1" data-cat="logo">
+                                <div class="portfolio-wrapper">
+                                    <div class="col-md-7 pull-right m-info">
+                                        <h4>姓名</h4>
+                                        <p>个人描述信息</p>
+                                    </div>
+                                    <img src="${ctx}/resource/avatar/default/user.png" alt="" class="img-responsive"/>
+                                    <h5>联系方式</h5>
+                                    <hr/>
+                                    <p>邮箱</p>
+
+                                    <p>手机</p>
+
+                                    <p>微信</p>
+
+                                    <p>QQ</p>
+                                    <div class="label">
+                                        <div class="label-text">
+                                            <span><input type="submit" value="邀请" /></span>
+                                        </div>
+                                        <div class="label-bg"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="portfolio logo1" data-cat="logo">
+                                <div class="portfolio-wrapper">
+                                    <div class="col-md-7 pull-right m-info">
+                                        <h4>姓名</h4>
+                                        <p>个人描述信息</p>
+                                    </div>
+                                    <img src="${ctx}/resource/avatar/default/user.png" alt="" class="img-responsive"/>
+                                    <h5>联系方式</h5>
+                                    <hr/>
+                                    <p>邮箱</p>
+
+                                    <p>手机</p>
+
+                                    <p>微信</p>
+
+                                    <p>QQ</p>
+                                    <div class="label">
+                                        <div class="label-text">
+                                            <span><input type="submit" value="邀请" /></span>
+                                        </div>
+                                        <div class="label-bg"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <ul class="pagination">
+                            <li><a href="#">上一页</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li class="cau_hide"><a href="#">4</a></li>
+                            <li class="cau_hide"><a href="#">5</a></li>
+                            <li class="cau_hide"><a href="#">6</a></li>
+                            <li class="cau_hide"><a href="#">7</a></li>
+                            <li><a href="#">下一页</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="grid-col-3 grid-col--no-padding grid-col--no-margin ">
+                    <div class="grouplist_main">
+                        <div class="grouplist_header">
+                            <h4><i class="fa fa-group"></i>在建团队</h4>
+                        </div>
+                        <div class="grouplist_body">
+                            <ul class="grouplist_ul">
+                                <li><a href=""><span style="display:inline-block;width:40px;height:40px;border-radius:20px;background-color:#EA6060"></span>
+                                    <span>二级工程实践</span> BY <span>赖国强</span>
+                                </a></li>
+                                <li><a href=""><span style="display:inline-block;width:40px;height:40px;border-radius:20px;background-color:#EA6060"></span>
+                                    <span>二级工程实践</span> BY <span>赖国强</span>
+                                </a></li>
+                                <li><a href=""><span style="display:inline-block;width:40px;height:40px;border-radius:20px;background-color:#EA6060"></span>
+                                    <span>二级工程实践</span> BY <span>赖国强</span>
+                                </a></li>
+                                <li><a href=""><span style="display:inline-block;width:40px;height:40px;border-radius:20px;background-color:#EA6060"></span>
+                                    <span>二级工程实践</span> BY <span>赖国强</span>
+                                </a></li>
+                                <li><a href=""><span style="display:inline-block;width:40px;height:40px;border-radius:20px;background-color:#EA6060"></span>
+                                    <span>二级工程实践</span> BY <span>赖国强</span>
+                                </a></li>
+                                <li><a href=""><span style="display:inline-block;width:40px;height:40px;border-radius:20px;background-color:#EA6060"></span>
+                                    <span>二级工程实践</span> BY <span>赖国强</span>
+                                </a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <div class="portfolio logo1" data-cat="logo">
-                    <div class="portfolio-wrapper">
-                        <div class="col-md-7 pull-right m-info">
-                            <h4>姓名</h4>
-                            <p>个人描述信息</p>
-                        </div>
-                        <img src="${ctx}/resource/avatar/default/user.png" alt="" class="img-responsive"/>
-                        <h5>联系方式</h5>
-                        <hr/>
-                        <p>邮箱</p>
-
-                        <p>手机</p>
-
-                        <p>微信</p>
-
-                        <p>QQ</p>
-                        <div class="label">
-                            <div class="label-text">
-                                <span><input type="submit" value="邀请" /></span>
-                            </div>
-                            <div class="label-bg"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio logo1" data-cat="logo">
-                    <div class="portfolio-wrapper">
-                        <div class="col-md-7 pull-right m-info">
-                            <h4>姓名</h4>
-                            <p>个人描述信息</p>
-                        </div>
-                        <img src="${ctx}/resource/avatar/default/user.png" alt="" class="img-responsive"/>
-                        <h5>联系方式</h5>
-                        <hr/>
-                        <p>邮箱</p>
-
-                        <p>手机</p>
-
-                        <p>微信</p>
-
-                        <p>QQ</p>
-                        <div class="label">
-                            <div class="label-text">
-                                <span><input type="submit" value="邀请" /></span>
-                            </div>
-                            <div class="label-bg"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio logo1" data-cat="logo">
-                    <div class="portfolio-wrapper">
-                        <div class="col-md-7 pull-right m-info">
-                            <h4>姓名</h4>
-                            <p>个人描述信息</p>
-                        </div>
-                        <img src="${ctx}/resource/avatar/default/user.png" alt="" class="img-responsive"/>
-                        <h5>联系方式</h5>
-                        <hr/>
-                        <p>邮箱</p>
-
-                        <p>手机</p>
-
-                        <p>微信</p>
-
-                        <p>QQ</p>
-                        <div class="label">
-                            <div class="label-text">
-                                <span><input type="submit" value="邀请" /></span>
-                            </div>
-                            <div class="label-bg"></div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-
-            <div class="clearfix"></div>
-            <ul class="pagination">
-                <li><a href="#">上一页</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li class="cau_hide"><a href="#">4</a></li>
-                <li class="cau_hide"><a href="#">5</a></li>
-                <li class="cau_hide"><a href="#">6</a></li>
-                <li class="cau_hide"><a href="#">7</a></li>
-                <li><a href="#">下一页</a></li>
-            </ul>
         </div>
-    </div>
-    <div class="col-md-4 blog_right">
-        <ul class="widgets">
-            <li class="upcoming-widget">
-                <h4>已建团队</h4>
-
-                <div class="container">
-                    <ul class="slides">
-                        <li><a href="#"><span class="icon"><img src="images/clock.png" alt=""/></span> <span
-                                class="right">´´½¨ÈË£ºÄ³Ä³Ä³</span> <strong>¶þ¼¶¹¤³ÌÊµ¼ù</strong></a></li>
-                        <li><a href="#"><span class="icon"><img src="images/clock.png" alt=""/></span> <span
-                                class="right">´´½¨ÈË£ºÄ³Ä³Ä³</span> <strong>¶þ¼¶¹¤³ÌÊµ¼ù</strong></a></li>
-                        <li><a href="#"><span class="icon"><img src="images/clock.png" alt=""/></span> <span
-                                class="right">´´½¨ÈË£ºÄ³Ä³Ä³</span> <strong>¶þ¼¶¹¤³ÌÊµ¼ù</strong></a></li>
-                        <li><a href="#"><span class="icon"><img src="images/clock.png" alt=""/></span> <span
-                                class="right">´´½¨ÈË£ºÄ³Ä³Ä³</span> <strong>¶þ¼¶¹¤³ÌÊµ¼ù</strong></a></li>
-                        <li><a href="#"><span class="icon"><img src="images/clock.png" alt=""/></span> <span
-                                class="right">´´½¨ÈË£ºÄ³Ä³Ä³</span> <strong>¶þ¼¶¹¤³ÌÊµ¼ù</strong></a></li>
-                        <li><a href="#"><span class="icon"><img src="images/clock.png" alt=""/></span> <span
-                                class="right">´´½¨ÈË£ºÄ³Ä³Ä³</span> <strong>¶þ¼¶¹¤³ÌÊµ¼ù</strong></a></li>
-                        <li><a href="#"><span class="icon"><img src="images/clock.png" alt=""/></span> <span
-                                class="right">´´½¨ÈË£ºÄ³Ä³Ä³</span> <strong>¶þ¼¶¹¤³ÌÊµ¼ù</strong></a></li>
-                        <li><a href="#"><span class="icon"><img src="images/clock.png" alt=""/></span> <span
-                                class="right">´´½¨ÈË£ºÄ³Ä³Ä³</span> <strong>¶þ¼¶¹¤³ÌÊµ¼ù</strong></a></li>
-                        <li><a href="#"><span class="icon"><img src="images/clock.png" alt=""/></span> <span
-                                class="right">´´½¨ÈË£ºÄ³Ä³Ä³</span> <strong>¶þ¼¶¹¤³ÌÊµ¼ù</strong></a></li>
-                        <li><a href="#"><span class="icon"><img src="images/clock.png" alt=""/></span> <span
-                                class="right">´´½¨ÈË£ºÄ³Ä³Ä³</span> <strong>¶þ¼¶¹¤³ÌÊµ¼ù</strong></a></li>
-                        <li><a href="#"><span class="icon"><img src="images/clock.png" alt=""/></span> <span
-                                class="right">´´½¨ÈË£ºÄ³Ä³Ä³</span> <strong>¶þ¼¶¹¤³ÌÊµ¼ù</strong></a></li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-    </div>
-
+    </article>
 </div>
+
 
 <jsp:include page="../shared/_footer.jsp" />
 
@@ -283,12 +283,6 @@
 
     });
 </script>
-<script type="text/javascript" src="${ctx}/resource/js/jquery.fancybox-1.2.1.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("div.fancyDemo a").fancybox();
-    });
-</script>
 
 <script type="text/javascript" src="${ctx}/resource/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/css3-mediaqueries.js"></script>
@@ -309,7 +303,7 @@
             showElementTitle:false,
             verticalAdjustment:50,
             showPreviewThumbs:false,
-            //easing:'easeOutBounce',
+            easing:'easeOutBounce',
             numberOfVisibleItems:5,
             nextPrevMarginTop:23,
             playMovieMarginTop:0,

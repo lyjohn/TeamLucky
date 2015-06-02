@@ -6469,6 +6469,76 @@ header#header.header--special-for-argentina {
     right: 33.33333%
 }
 
+
+.coming-soon-card {
+    height: 23rem;
+    overflow: hidden
+}
+
+.coming-soon-card h1, .coming-soon-card h3, .coming-soon-card p {
+    opacity: .5;
+    color: #4a4a4c !important
+}
+
+.coming-soon-card .coming-soon-card__card-header {
+    height: 10rem
+}
+
+.coming-soon-card .coming-soon-card__card-header img {
+    height: 8rem
+}
+
+.coming-soon-card .coming-soon-card__title {
+    height: 4rem
+}
+
+.coming-soon-card .coming-soon-card__description {
+    height: 6.7rem
+}
+
+.coming-soon-card .coming-soon-card__card-corner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 36px;
+    height: 36px;
+    background-color: #e6e7e8
+}
+
+.coming-soon-card .coming-soon-card__card-corner .card__corner-triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 36px 36px 0;
+    border-color: transparent #f1f2f2 transparent transparent
+}
+
+.api-card__tagline {
+    height: 85px
+}
+
+.api-card__timeago {
+    margin-top: 4rem
+}
+
+.api-card__padded-progress {
+    padding-top: 19px !important;
+    padding-bottom: 19px !important
+}
+
+.api-card .api-card__logo--light {
+    display: none
+}
+
+.api-card:hover .api-card__logo--dark {
+    display: none
+}
+
+.api-card:hover .api-card__logo--light {
+    display: inline
+}
+
 .color-scheme--white {
     color: #4a4a4c;
     background-color: #fff
@@ -15994,4 +16064,48 @@ input[id="user_password"] {
 }
 .preview-avatar img{
     width:120px;height:120px;
+}
+
+.party-card{
+    background-color: #f5f5f5;
+}
+.party-card__tagline {
+    height: 50px
+}
+
+.party-card__timeago {
+    margin-top: 4rem
+}
+
+.party-card__padded-progress {
+    padding-top: 19px !important;
+    padding-bottom: 19px !important
+}
+.party-card img{
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+}
+.party-card h6{
+    height: 54px;
+    overflow: hidden;
+    line-height: 18px;
+}
+.party-card p{
+    height: 22px;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+.party-card .party-card__logo--group,.party-card h6.head--group,.party-card p.name--group {
+    display: none
+}
+
+.party-card:hover .party-card__logo--party,.party-card:hover h6.head--party,.party-card:hover p.name--party {
+    display: none
+}
+.party-card:hover h6.head--group{
+    display: block;
+}
+.party-card:hover .party-card__logo--group,.party-card:hover p.name--group {
+    display: inline
 }
