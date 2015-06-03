@@ -16,7 +16,7 @@
 			sysUserId,
 			partyUserId,
 			partyId,
-			joinTime,
+			joinTime
 		)  
 		VALUES(
 			#{id},

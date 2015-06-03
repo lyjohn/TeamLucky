@@ -20,4 +20,22 @@ public class PartyGroupServiceExt extends PartyGroupService implements IPartyGro
 
 		return partyGroup;
 	}
+
+	@Override
+	@SysServiceLog(description = "编辑小组基本信息", code = 303)
+	public PartyGroupExt updateGroup(PartyGroupExt partyGroupExt) {
+		PartyGroupExt partyGroupExtPer = this.load(partyGroupExt.getId());
+		if (partyGroupExtPer == null)
+			return null;
+
+		partyGroupExtPer.setGroupName(partyGroupExt.getGroupName());
+		partyGroupExtPer.setGroupRemark(partyGroupExt.getGroupRemark());
+		partyGroupExtPer.setIsCustomJoin(partyGroupExt.getIsCustomJoin());
+		partyGroupExtPer.setIsSourcePublic(partyGroupExt.getIsSourcePublic());
+
+		this.update(partyGroupExtPer);
+
+		return partyGroupExtPer;
+
+	}
 }

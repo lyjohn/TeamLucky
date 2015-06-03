@@ -154,22 +154,6 @@ public class PartyServiceExt extends PartyService implements IPartyServiceExt {
 	}
 
 	@Override
-	public List<PartyUserExt> getPartyUsers(String partyId) {
-
-		List<ICondition> conditions = new ArrayList<ICondition>();
-
-		conditions.add(new EqCondition("partyId",partyId));
-
-		List<Order> orders = new ArrayList<Order>();
-
-		orders.add(Order.asc("userName"));
-
-		List<PartyUserExt> partyUsers = partyUserService.criteriaQuery(conditions, orders);
-
-		return partyUsers;
-	}
-
-	@Override
 	public boolean existParty(String partyCode) {
 
 		PartyExt partyExt = getPartyDao().loadByCode(partyCode);
@@ -178,5 +162,29 @@ public class PartyServiceExt extends PartyService implements IPartyServiceExt {
 			return  false;
 		else
 			return true;
+	}
+
+	@Override
+	@SysServiceLog(description = "编辑活动基本信息",code = 203)
+	public PartyExt updateParty(PartyExt partyExt, int updateType) {
+		PartyExt partyExtPer = this.load(partyExt.getId());
+		if (partyExtPer == null)
+			return null;
+
+		if(updateType == 1){//只编辑了 名称 描述  是否公共
+			partyExtPer.setPartyName(partyExt.getPartyName());
+			partyExtPer.setIsPublic(partyExt.getIsPublic());
+			partyExtPer.setPartyRemark(partyExt.getPartyRemark());
+		}else if(updateType == 2){//编辑了分组配置  不能修改是否分组这个属性
+			partyExtPer.setMemberNumMin(partyExt.getMemberNumMin());
+			partyExtPer.setMemberNumMax(partyExt.getMemberNumMax());
+			partyExtPer.setIsCustomBuild(partyExt.getIsCustomBuild());
+			partyExtPer.setBuildEndTime(partyExt.getBuildEndTime());
+		}else
+			return partyExtPer;
+
+		this.update(partyExtPer);
+
+		return partyExtPer;
 	}
 }

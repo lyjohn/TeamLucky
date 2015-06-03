@@ -12,8 +12,7 @@ public interface IPartyServiceExt extends IPartyService{
 
     void edit(PartyExt partyExt);
 
-    List<PartyUserExt> getPartyUsers(String partyId);
-
     boolean existParty(String partyCode);
 
+    public PartyExt updateParty(PartyExt partyExt,int updateType);
 }

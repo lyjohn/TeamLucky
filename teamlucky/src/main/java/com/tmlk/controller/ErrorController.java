@@ -63,6 +63,9 @@ public class ErrorController {
             case 31:
                 message = "团队创建人才能管理团队哦";
                 break;
+            case 32:
+                message = "您不是该团队的成员，不能进入该页面";
+                break;
             default:
                 message = "系统错误，程序猿加班改BUG~";
                 break;

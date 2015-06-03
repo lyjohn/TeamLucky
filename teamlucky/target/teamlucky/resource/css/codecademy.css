@@ -16083,6 +16083,8 @@ input[id="user_password"] {
 }
 .party-card img{
     width: 48px;
+    height: 48px;
+    overflow: hidden;
 }
 .party-card h6{
     height: 54px;

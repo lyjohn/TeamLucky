@@ -81,7 +81,7 @@
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" id="group" checked> 是否分组
+                    <input type="checkbox" id="group" checked> 是否分组，这个属性本次设定，不能修改
                 </label>
             </div>
             <div class="checkbox for-group">
@@ -143,14 +143,13 @@
 
 <script type="text/javascript" src="${ctx}/resource/plugins/layer/layer.js"></script>
 
-<script type="text/javascript" src="${ctx}/resource/plugins/datetime/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="${ctx}/resource/plugins/datetime/locales/bootstrap-datepicker.zh-CN.js"></script>
-
-
 <script type="text/javascript" src="${ctx}/resource/js/menu.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/jquery-ui.min.js" ></script>
 <script type="text/javascript" src="${ctx}/resource/js/jquery.ui.touch-punch.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/allinone_carousel.js"></script>
+
+<script type="text/javascript" src="${ctx}/resource/plugins/datetime/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="${ctx}/resource/plugins/datetime/locales/bootstrap-datepicker.zh-CN.js"></script>
 
 <script type="text/javascript" src="${ctx}/resource/js/common.js"></script>
 

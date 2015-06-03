@@ -37,7 +37,6 @@
 }
 
 .datepicker-dropdown:before {
-    content: '';
     display: inline-block;
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
@@ -49,7 +48,6 @@
 }
 
 .datepicker-dropdown:after {
-    content: '';
     display: inline-block;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;

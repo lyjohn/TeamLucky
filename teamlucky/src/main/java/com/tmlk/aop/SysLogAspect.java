@@ -215,7 +215,7 @@ public class SysLogAspect {
 
                 sysLogExt.setLogObjId(0L);
                 sysLogExt.setLogContent(JSONUtil.object2JsonString(partyUserExt));
-            }else if(code == 301){//创建小组
+            }else if(code == 301 || code == 303){//创建小组
                 PartyGroupExt partyGroupExt = (PartyGroupExt)returnValue;
 
                 sysLogExt.setLogObjId(partyGroupExt.getId());
@@ -234,7 +234,7 @@ public class SysLogAspect {
         } catch (Exception ex)
         {
             //记录本地异常日志
-            logger.error("AOP Service AfterReturn 异常信息:{}", ex.getMessage());
+            logger.error("AOP Service AfterReturn 异常信息:{}", ex.getStackTrace());
         }
 
     }

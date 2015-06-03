@@ -752,7 +752,7 @@
   color: #000;
   background: #eee;
   padding: 0px;
-  margin-right:0px 0.1%;
+  margin:0px 0.1%;
   cursor: pointer;
 }
 .main_bg .persion_section .person_detail_tab li:last-child{
@@ -1360,7 +1360,7 @@
 }
 .main_bg .persion_section .mod_contact li span.li_title {
   display: inline-block;
-  width: 100px;
+  width: 140px;
   text-align: right;
 }
 .main_bg .persion_section .person_job {
@@ -2125,7 +2125,7 @@
   position: absolute;
   display: inline-block;
   left: -11px;
-  top: 50%;
+  top: 12px;
   margin-top: -10px;
   padding: 0;
   color: #f00;
@@ -2315,11 +2315,25 @@
 
 .main_bg .edit_contact input {
   width: 454px;
-  height: 28px;
+  height: 32px;
   width: 460px\9;
   border: 1px solid #ddd;
 }
 .main_bg .edit_contact ul li {
+  margin-right: -3px;
+  text-align: right;
+}
+.main_bg .edit_partyseting {
+  width: 590px;
+}
+
+.main_bg .edit_partyseting input {
+  width: 390px;
+  height: 32px;
+  width: 390px\9;
+  border: 1px solid #ddd;
+}
+.main_bg .edit_partyseting ul li {
   margin-right: -3px;
   text-align: right;
 }
@@ -2330,8 +2344,8 @@
 
 .main_bg .edit_password input {
   width: 230px;
-  height: 28px;
-  width: 2700px\9;
+  height: 32px;
+  width: 270px\9;
   border: 1px solid #ddd;
 }
 .main_bg .edit_password ul li {
@@ -2942,4 +2956,42 @@
 .main_bg .success .del {
   background: #999;
   display: none;
+}
+
+.main_bg .persion_section .party_tab li{
+  width: 16.5%;
+  height: 48px;
+  line-height: 48px;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  color: #000;
+  background: #eee;
+  padding: 0px;
+  margin: 0;
+  margin-right: .2%;
+  cursor: pointer;
+}
+.main_bg .persion_section .party_tab li:last-child {
+  margin-right: 0;
+}
+.main_bg .persional_property .person-photo.short-photo{
+  margin-bottom: 0;
+  height: 170px;
+}
+
+.person-detail i.fa{
+  margin-left: 5px;
+  color: #079;
+  cursor: pointer;
+}
+.main_bg .pop_edit input[type='checkbox']{
+  margin-top: -4px;
+}
+
+.main_bg .pop_edit li label{
+  font-weight: 300;
+  font-size: 12px;
+  margin-right: 5px;
+  cursor: pointer;
 }

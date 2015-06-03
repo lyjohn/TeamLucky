@@ -4,6 +4,7 @@ package com.tmlk.controller;
  * Created by LaiGuoqiang on 2015/5/14.
  */
 
+import com.alibaba.fastjson.JSON;
 import com.tmlk.framework.mybatis.EqCondition;
 import com.tmlk.framework.mybatis.ICondition;
 import com.tmlk.framework.mybatis.Order;
@@ -375,41 +376,28 @@ public class PartyController {
         return result;
     }
 
-    @RequestMapping(value = "/doEdit", method = RequestMethod.POST)
-    public String doEdit(@ModelAttribute PartyModel partyModel, HttpServletRequest request, ModelMap model) {
-        try {
-            PartyExt partyExt = partyModel.getPartyExt();
-            PartyExt partyExtPer = partyService.load(partyExt.getId());
+    /**
+     * 保存设置信息
+     */
+    @RequestMapping(value = "/edit")
+    @ResponseBody
+    public JsonResult saveInto(@ModelAttribute PartyExt partyExt, ModelMap model, HttpSession session){
+        JsonResult result = new JsonResult();
+        try{
+            SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+            partyExt.setId(sessionUser.getPartyId());
 
-            partyExtPer.setPartyName(partyExt.getPartyName());
-            partyExtPer.setPartyRemark(partyExt.getPartyRemark());
-            partyExtPer.setIsCustomBuild(partyExt.getIsCustomBuild());
-            partyExtPer.setMemberNumMax(partyExt.getMemberNumMax());
-            partyExtPer.setMemberNumMin(partyExt.getMemberNumMin());
-//            partyExtPer.setBuildEndTime(partyExt.getBuildEndTime());
-
-            partyService.edit(partyExtPer);
-
-            partyModel.setPartyExt(partyExtPer);
-            model.addAttribute("model",partyModel);
-
-            JsonResult result = new JsonResult();
+            if(!FormatUtils.isEmpty(partyExt.getPartyName())){
+                partyService.updateParty(partyExt,1);
+            }else{
+                partyService.updateParty(partyExt,2);
+            }
             result.setStatus(0);
-            result.setMessage("保存成功");
-            model.addAttribute("result", result);
-
-            return "/party/index";
-        } catch (Exception ex){
-            partyModel.setPartyExt(partyModel.getPartyExt());
-            model.addAttribute("model",partyModel);
-
-            JsonResult result = new JsonResult();
-            result.setMessage("保存活动失败");
-            model.addAttribute("result", result);
-
-            logger.error(ex.getStackTrace());
-            return "/party/index";
+        }catch (Exception ex)
+        {
+            result.setMessage(ex.getMessage());
+            logger.trace(ex);
         }
+        return result;
     }
-
 }

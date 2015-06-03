@@ -101,9 +101,22 @@ public class PartyGroupModel {
 	
 	/************************自定义字段区域开始*****************************/
 
-	/*
-	小组成员列表
+	/**
+	 * 是否小组创建者
 	 */
+	private boolean isCreater;
+
+	public boolean isCreater() {
+		return isCreater;
+	}
+
+	public void setCreater(boolean isCreater) {
+		this.isCreater = isCreater;
+	}
+
+	/*
+        小组成员列表
+         */
 	private List<PartyUserExt> groupUsers;
 
 	public List<PartyUserExt> getGroupUsers() {

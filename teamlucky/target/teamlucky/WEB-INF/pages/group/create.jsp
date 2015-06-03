@@ -70,12 +70,12 @@
       </div>
       <div class="checkbox">
         <label>
-          <input type="checkbox" id="autoJoin" checked> 允许他人自动加入
+          <input type="checkbox" id="autoJoin" checked> 自动加入：允许他人自动加入，不需要创建者审核
         </label>
       </div>
       <div class="checkbox">
         <label>
-          <input type="checkbox" id="public" checked> 允许他人查看小组内容
+          <input type="checkbox" id="public" checked> 资源共享：允许其他组成员 查看 本小组内容
         </label>
       </div>
       <button id="js-create" type="submit" class="btn btn-info">创建</button>
@@ -197,7 +197,7 @@
           layer.closeAll('loading');
           if (data.status == 0) {
             layer.msg("创建成功，马上去设置吧", {icon: 6, offset: '110px'}, function () {
-              window.location.href = "${ctx}/group/conf/info";
+              window.location.href = "${ctx}/group/index";
             })
           } else {
             layer.msg(data.message, {icon: 5, offset: '110px'});

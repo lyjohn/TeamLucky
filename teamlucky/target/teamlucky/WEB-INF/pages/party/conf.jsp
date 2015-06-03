@@ -36,7 +36,8 @@
           type="image/x-icon">
 
     <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/datepicker.css"/>
-    <title>个人设置 - 校缘派</title>
+
+    <title> ${model.partyExt.partyName} - 管理后台 - 校缘派</title>
 </head>
 
 <body>
@@ -58,7 +59,7 @@
 <div class="main_bg" style="background-color: #fff;">
     <div class="persional_property">
         <div class="person_info_con"><i class="fa fa-edit fa-2x person-info-edit"></i><a name="M_base"></a>
-            <dl class="person-photo">
+            <dl class="person-photo short-photo">
                 <dt>
                     <a href="javascript:;">
                         <img src="${ctx}/avatar/party/${model.partyExt.id}" class="header">
@@ -77,10 +78,10 @@
                     <span class="info_null">${model.partyExt.partyCode}</span>
                     <span>|</span>
                     <c:if test="${model.partyExt.isPublic}">
-                        <span class="">公开活动</span>
+                        <span class="public_view">公开活动</span>
                     </c:if>
                     <c:if test="${!model.partyExt.isPublic}">
-                        <span class="info_null">私密活动</span>
+                        <span class="info_null public_view">私密活动</span>
                     </c:if>
                 </dd>
                 <dd class="person-sign">
@@ -92,11 +93,11 @@
     </div>
 
     <div class="persion_section">
-        <div class="person_detail_tab">
+        <div class="person_detail_tab party_tab">
             <ul>
                 <li data-modal="tab" data-tab="myDetails" class="current_detail">基本配置</li>
                 <li data-modal="tab" data-tab="myNews">成员管理</li>
-                <c:if test="${mode.partyExt.isGroup}">
+                <c:if test="${model.partyExt.isGroup}">
                     <li data-modal="tab" data-tab="myMessages">小组管理</li>
                 </c:if>
                 <li data-modal="tab" data-tab="myMessages">新闻通知</li>
@@ -107,10 +108,12 @@
         <div class="aboutMe">
             <div nodetype="myDetails" nodeindex="my0" data-modal="tab-layer" class="myDetails current_content">
                 <div class="mod_contact">
-                    <a href="#" nodetype="contact-modify" class="modify fa fa-edit fa-2x"></a>
+                    <c:if test="${model.partyExt.isGroup}">
+                        <a href="#" nodetype="contact-modify" class="modify fa fa-edit fa-2x"></a>
+                    </c:if>
                     <ul class="clearfix">
                         <li><span class="li_title">是否分组：</span>
-                            <span nodetype="isGroup" class="">
+                            <span nodetype="isGroup" class="isGroup">
                                 <c:if test="${!model.partyExt.isGroup}">
                                     禁用分组
                                 </c:if>
@@ -119,8 +122,9 @@
                                 </c:if>
                             </span>
                         </li>
-                        <li><span class="li_title">每组最少人数：</span>
-                            <span nodetype="memberMinNum">
+                        <c:if test="${model.partyExt.isGroup}">
+                            <li><span class="li_title">每组最少人数：</span>
+                            <span nodetype="memberNumMin" class="memberNumMin">
                                 <c:if test="${model.partyExt.memberNumMin == 0}">
                                     不限制
                                 </c:if>
@@ -128,9 +132,9 @@
                                     <c:out value="${model.partyExt.memberNumMin}"></c:out> 人
                                 </c:if>
                             </span>
-                        </li>
-                        <li><span class="li_title">每组最多人数：</span>
-                            <span nodetype="memberNumMax">
+                            </li>
+                            <li><span class="li_title">每组最多人数：</span>
+                            <span nodetype="memberNumMax" class="memberNumMax">
                                 <c:if test="${model.partyExt.memberNumMax == 0}">
                                     不限制
                                 </c:if>
@@ -138,9 +142,9 @@
                                     <c:out value="${model.partyExt.memberNumMax}"></c:out> 人
                                 </c:if>
                             </span>
-                        </li>
-                        <li><span class="li_title">是否自行组队：</span>
-                            <span nodetype="customBuild">
+                            </li>
+                            <li><span class="li_title">是否自行组队：</span>
+                            <span nodetype="customBuild" class="customBuild">
                                 <c:if test="${!model.partyExt.isCustomBuild}">
                                     成员自行分组
                                 </c:if>
@@ -148,18 +152,19 @@
                                     管理员分组
                                 </c:if>
                             </span>
-                        </li>
-                        <li><span class="li_title">分组截止日期：</span>
-                            <span nodetype="buildEndTime">
+                            </li>
+                            <li><span class="li_title">分组截止日期：</span>
+                            <span nodetype="buildEndTime" class="buildEndTime">
                                 <c:if test="${!empty model.partyExt.buildEndTime}">
                                     <fmt:formatDate value="${model.partyExt.buildEndTime}"
-                                                    pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></span>
+                                                    pattern="yyyy-MM-dd 23:59"></fmt:formatDate></span>
                                 </c:if>
                                 <c:if test="${empty model.partyExt.buildEndTime}">
                                     不限制
                                 </c:if>
-                            </span>
-                        </li>
+                                </span>
+                            </li>
+                        </c:if>
                     </ul>
                 </div>
             </div>
@@ -193,16 +198,11 @@
                     <li class="mp_dl"><em class="red">*</em><span>活动名称：
                   <input name="partyName" nodetype="partyName" important="yes" type="text" placeholder="支持中文、英文、数字"
                          value="<c:out value='${model.partyExt.partyName}'></c:out>" maxlen="20"
-                         class="nick_name mp_field1">
+                         class="partyName mp_field1">
                   </span></li>
                     <li><span class="mp_label">是否公开：
                     <c:if test="${model.partyExt.isPublic}">
-                        <input name="public" type="radio" value="true" class="radio_public" checked><span>公开</span>
-                        <input name="public" type="radio" value="false" class="radio_public"><span>私有</span>
-                    </c:if>
-                    <c:if test="${!model.partyExt.isPublic}">
-                        <input name="public" type="radio" value="true" class="radio_public"><span>公开</span>
-                        <input name="public" type="radio" value="false" class="radio_public" checked><span>私有</span>
+                        <input type="checkbox" name="isPublic" checked="">
                     </c:if>
                     </li>
                     <li class="mp_dl"><em class="red">*</em>活动描述：
@@ -217,43 +217,37 @@
             <a class="js_save button button--secondary" href="#" data-method="post" rel="nofollow">确定</a>
         </div>
     </div>
-    <div class="pop_edit edit_contact">
-        <h3>编辑联系方式</h3>
-
+    <div class="pop_edit edit_partyseting">
+        <h3>配置组队设置</h3>
         <div class="context">
             <form class="form-horizontal">
                 <div class="form-group">
-                    <label for="inputEmail" class="col-sm-2 control-label">邮箱</label>
+                    <label for="inputMinNum" class="col-sm-3 control-label">每队最少人数</label>
 
-                    <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="电子邮箱"
-                               value=""/>
+                    <div class="col-sm-9">
+                        <input type="number" min="0" class="form-control" id="inputMinNum" name="inputMinNum" placeholder="最少人数"
+                               value= '<c:out value="${model.partyExt.memberNumMin}"></c:out>' />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputTel" class="col-sm-2 control-label">手机</label>
-
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputTel" maxlength="11" name="inputTel"
-                               placeholder="手机号码"
-                               value=""/>
+                    <label for="inputMaxNum" class="col-sm-3 control-label">每队最多人数</label>
+                    <div class="col-sm-9">
+                        <input type="number" min="0" class="form-control" id="inputMaxNum" name="inputMaxNum" placeholder="最多人数"
+                               value= '<c:out value="${model.partyExt.memberNumMax}"></c:out>' />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputQq" class="col-sm-2 control-label">QQ</label>
-
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputQq" maxlength="11" name="inputQq"
-                               placeholder="QQ号"
-                               value=""/>
+                    <label for="inputCustom" class="col-sm-3 control-label">允许自行组队</label>
+                    <div class="col-sm-9">
+                        <input type="checkbox" name="inputCustom" id="inputCustom"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputWeixin" class="col-sm-2 control-label">微信</label>
+                    <label for="inputEndTime" class="col-sm-3 control-label">截止日期</label>
 
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputWeixin" name="inputWeixin" placeholder="微信号"
-                               value=""/>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputEndTime" name="inputEndTime" placeholder="组队截止日期"
+                               value="<fmt:formatDate value='${model.partyExt.buildEndTime}' pattern='yyyy-MM-dd'></fmt:formatDate>" />
                     </div>
                 </div>
             </form>
@@ -294,36 +288,35 @@
 
 <script type="text/javascript" src="${ctx}/resource/plugins/layer/layer.js"></script>
 
-<script type="text/javascript" src="${ctx}/resource/plugins/datetime/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="${ctx}/resource/plugins/datetime/locales/bootstrap-datepicker.zh-CN.js"></script>
-
 <script type="text/javascript" src="${ctx}/resource/js/menu.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/jquery.ui.touch-punch.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/allinone_carousel.js"></script>
+
+<script type="text/javascript" src="${ctx}/resource/plugins/datetime/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="${ctx}/resource/plugins/datetime/locales/bootstrap-datepicker.zh-CN.js"></script>
 
 <script type="text/javascript" src="${ctx}/resource/js/common.js"></script>
 
 <script type="text/javascript">
     var layerLoadIndex = 0;
     $(function () {
-
-        $(".endtime").datepicker({
+        $("#inputEndTime").datepicker({
             autoclose: true,
             format: "yyyy-mm-dd",
             language: 'zh-CN'
         });
 
-        $(document).on("click", ".modify", function () {//修改联系方式
-            $(".edit_contact").show();
-            var width = $(".edit_contact").width();
-            var height = $(".edit_contact").height();
+        $(document).on("click", ".modify", function () {//修改配置信息
+            $(".edit_partyseting").show();
+            var width = $(".edit_partyseting").width();
+            var height = $(".edit_partyseting").height();
             layer.open({
                 zIndex: 1000,
                 type: 1,
                 title: false,
                 area: [width + 'px', height + 'px'],
-                content: $(".edit_contact")
+                content: $(".edit_partyseting")
             });
         }).on("click", ".person-info-edit", function () {//修改基本信息
             $(".edit_intro").show();
@@ -338,72 +331,35 @@
             });
         }).on("click", ".pop_edit a[nodetype='cancel']", function () { //取消按钮
             layer.closeAll();
-        }).on("click", ".edit_password .js_show_pwd", function () { //切换密码显示
-            var shown = $(this).data("show");
-            if (shown) {
-                $(".edit_password form input").attr("type", "password");
-                $(this).text("显示密码");
-            }
-            else {
-                $(".edit_password form input").attr("type", "text");
-                $(this).text("隐藏密码");
-            }
-            $(this).data("show", !shown);
-        }).on("click", ".edit_password .js_save", function () { //保存密码
-            var oldpwd = $("#inputOldPwd").val();
-            var newpwd = $("#inputNewPwd").val();
-            var newRepwd = $("#inputReNewPwd").val();
+        }).on("click", ".edit_partyseting .js_save", function () { //保存联系方式
+            var minNum = $("#inputMinNum").val();
+            var maxNum = $("#inputMaxNum").val();
+            var isCustom = $("#inputCustom").prop("checked");
+            var endTime = $("#inputEndTime").val();
 
-            if (oldpwd.length < 6 || newpwd.length < 6 || newRepwd < 6) {
-                layer.msg("密码长度必须是6位以上", {icon: 5, offset: '110px'});
-                return false;
-            }
-            if (newpwd != newRepwd) {
-                layer.msg("两次输入密码不一致", {icon: 5, offset: '110px'});
-                return false;
-            }
+            var postDate = { memberNumMin: minNum,memberNumMax:maxNum, isCustomBuild: isCustom};
+            if(endTime != "")
+                postDate.buildEndTime = new Date(endTime);
 
             $.ajax({
-                url: "${ctx}/user/ppwd",
+                url: "${ctx}/party/edit",
                 dataType: "json",
-                data: {oldPwd: oldpwd, newPwd: newpwd},
+                data: postDate,
                 type: "post",
                 success: function (res) {
                     if (res.status == 0) {
                         layer.closeAll();
 
-                        layer.msg("修改密码成功", {icon: 6, offset: '110px'});
-                        $(".edit_password form input").val("");
-                    }
-                    else
-                        layer.msg(res.message, {icon: 5, offset: '110px'});
-                },
-                error: function (data, status, e) {
-                    layer.closeAll();
-                    layer.msg("保存失败", {icon: 5, offset: '110px'});
-                }
-            })
-        }).on("click", ".edit_contact .js_save", function () { //保存联系方式
-            var email = $("#inputEmail").val();
-            var tel = $("#inputTel").val();
-            var qq = $("#inputQq").val();
-            var weixin = $("#inputWeixin").val();
+                        layer.msg("组队配置保存成功", {icon: 6, offset: '110px'});
 
-            $.ajax({
-                url: "${ctx}/user/pcontact",
-                dataType: "json",
-                data: {email: email, tel: tel, qq: qq, weiXin: weixin},
-                type: "post",
-                success: function (res) {
-                    if (res.status == 0) {
-                        layer.closeAll();
+                        $(".mod_contact .memberNumMin").text(minNum);
+                        $(".mod_contact .memberNumMax").text(maxNum);
+                        $(".mod_contact .buildEndTime").text(endTime);
 
-                        layer.msg("联系方式保存成功", {icon: 6, offset: '110px'});
-
-                        $(".mod_contact .email").text(email);
-                        $(".mod_contact .mobile").text(tel);
-                        $(".mod_contact .qq").text(qq);
-                        $(".mod_contact .weixin").text(weixin);
+                        if(isCustom)
+                            $(".mod_contact .customBuild").text("成员自行分组");
+                        else
+                            $(".mod_contact .customBuild").text("管理员分组");
                     }
                     else
                         layer.msg(res.message, {icon: 5, offset: '110px'});
@@ -414,21 +370,23 @@
                 }
             })
         }).on("click", ".edit_intro .js_save", function () {//保存基本信息
-            var username = $(".nick_name").val();
-            var sex = $(".edit_intro :radio").val();
-            var birthday = $(".birthday").val();
-            var userRemark = $(".edit_intro textarea").val();
+            var pName = $(".edit_intro .partyName").val();
+            var pPublic = $(".edit_intro :checkbox").prop("checked");
+            var pRemark = $(".edit_intro textarea").val();
 
-            if (username == "") {
-                layer.msg("昵称不能为空", {icon: 5, offset: "110px"});
+            if (pName == "") {
+                layer.msg("活动名称不能为空", {icon: 5, offset: "110px"});
                 return false;
             }
-            var postDate = {userName: username, sex: sex, userRemark: userRemark};
-            if (birthday != "")
-                postDate.birthDay = new Date(birthday);
 
+            if (pRemark == "") {
+                layer.msg("活动描述不能为空", {icon: 5, offset: "110px"});
+                return false;
+            }
+
+            var postDate = {partyName: pName, isPublic: pPublic, partyRemark: pRemark};
             $.ajax({
-                url: "${ctx}/user/pintro",
+                url: "${ctx}/party/edit",
                 dataType: "json",
                 data: postDate,
                 type: "post",
@@ -438,18 +396,13 @@
 
                         layer.msg("基本信息保存成功", {icon: 6, offset: '110px'});
 
-                        $(".person-nick-name span").text(username);
-                        $(".sex_view").text(sex).removeClass("info_null");
-
-                        if (birthday != "")
-                            $(".birthday_view").text(birthday).removeClass("info_null");
+                        $(".person-nick-name span").text(pName);
+                        if(pPublic)
+                            $(".public_view").text("公开活动").removeClass("info_null");
                         else
-                            $(".birthday_view").text("未填写生日").addClass("info_null");
+                            $(".public_view").text("私密活动").addClass("info_null");
 
-                        if (userRemark != "")
-                            $(".person-sign span").text(userRemark).removeClass("info_null");
-                        else
-                            $(".person-sign span").text("开始是一片空白...").addClass("info_null");
+                        $(".person-sign span").text(pRemark);
                     }
                     else
                         layer.msg(res.message, {icon: 5, offset: '110px'});
