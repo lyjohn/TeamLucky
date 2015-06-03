@@ -17,16 +17,25 @@ import com.tmlk.po.PartyUserExt;
 import com.tmlk.po.SysPartyUserLinkExt;
 import com.tmlk.po.SysUserExt;
 import com.tmlk.service.*;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -400,4 +409,72 @@ public class PartyController {
         }
         return result;
     }
+
+    /*下面和用户导入相关*/
+
+    @RequestMapping(value = "importuser")
+    @ResponseBody
+    public String importUser(@RequestParam(value = "file",required = true) MultipartFile file,HttpServletRequest request,HttpSession session) {
+        JsonResult result = new JsonResult();
+        try {
+            SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+
+            String fileName = file.getOriginalFilename();
+
+            String[] str = { ".cvs", ".xls", ".xlsx"};
+
+            boolean isExcel = false;
+            for (String s : str) {
+                if (fileName.endsWith(s)) {
+                    isExcel = true;
+                    break;
+                }
+            }
+
+            if(!isExcel)
+                throw new Exception("上传的文件不是支持的格式: xls xlsx");
+
+            //获取数据
+            Workbook wb = ExcelUtils.readWorkbook(file.getOriginalFilename(), file.getInputStream());
+            Sheet sheet = wb.getSheetAt(0);
+
+            List<PartyUserExt> partyUserExtList = partyService.importMember(sheet,sessionUser.getPartyId(),request);
+
+            result.setData(partyUserExtList);
+            result.setStatus(0);
+        }catch(Exception e) {
+            result.setStatus(1);
+            result.setMessage(e.getMessage());
+        }
+        String str = JSONUtil.object2JsonString(result);
+
+        return str;
+    }
+
+    @RequestMapping(value="/exportModel")
+    public void exportModel(HttpServletResponse response,HttpSession session) {
+        OutputStream outputStream = null;
+        try {
+            String filePath = session.getServletContext().getRealPath("resource/model/memberImport.xlsx");
+            String filename ="活动成员导入模板.xlsx";
+            response.setContentType("application/vnd.ms-excel");
+            response.setHeader("Content-disposition", "attachment;filename="+ URLEncoder.encode(filename, "UTF-8"));
+            outputStream = response.getOutputStream();
+            FileUtils.copyFile(new File(filePath), outputStream);
+            outputStream.flush();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally {
+            if(outputStream!=null) {
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    /* 用户导入结束 */
 }

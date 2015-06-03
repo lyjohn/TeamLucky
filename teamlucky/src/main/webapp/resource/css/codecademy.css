@@ -12259,9 +12259,14 @@ small, .text--small {
     width: 50px;
 }
 .card__author span{
-    margin-left: 20px;font-size: 16px;
+    margin-left: 20px;
+    font-size: 16px;
 }
-
+.card__author span.time_create{
+    position: absolute;
+    right: 20px;
+    bottom: 39px;
+}
 
 @media screen and (min-width: 0) and (max-width: 735px) {
     .card .card__info {

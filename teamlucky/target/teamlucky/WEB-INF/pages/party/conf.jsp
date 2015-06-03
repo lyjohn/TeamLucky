@@ -96,13 +96,13 @@
         <div class="person_detail_tab party_tab">
             <ul>
                 <li data-modal="tab" data-tab="myDetails" class="current_detail">基本配置</li>
-                <li data-modal="tab" data-tab="myNews">成员管理</li>
+                <li data-modal="tab" data-tab="myMembers">成员管理</li>
                 <c:if test="${model.partyExt.isGroup}">
-                    <li data-modal="tab" data-tab="myMessages">小组管理</li>
+                    <li data-modal="tab" data-tab="myGroups">小组管理</li>
                 </c:if>
-                <li data-modal="tab" data-tab="myMessages">新闻通知</li>
-                <li data-modal="tab" data-tab="myMessages">文档维护</li>
-                <li data-modal="tab" data-tab="myMessages">论坛维护</li>
+                <li data-modal="tab" data-tab="myNews">新闻通知</li>
+                <li data-modal="tab" data-tab="myDocuments">文档维护</li>
+                <li data-modal="tab" data-tab="myForums">论坛维护</li>
             </ul>
         </div>
         <div class="aboutMe">
@@ -168,10 +168,67 @@
                     </ul>
                 </div>
             </div>
-            <div nodetype="myNews" nodeindex="my2" data-modal="tab-layer" class="myNews">
+            <div nodetype="myMembers" nodeindex="my2" data-modal="tab-layer" class="myMembers">
+                <div class="connection_title_con">
+                    <ul>
+                        <li id="btnAllMember" class="current_foucus">所有成员(1)</li>
+                        <li class="interval_line"></li>
+                        <li id="btnInValid" class="">已禁用(0)</li>
+                        <li class="interval_line"></li>
+                        <li id="btnGrouped" class="">已分组(0)</li>
+                        <li class="interval_line"></li>
+                        <li id="btnNoGrouped" class="">未分组(0)</li>
+                    </ul>
+                    <div class="connection_action_form">
+                        <a class="download" href="${ctx}/party/exportModel" target="_blank">活动成员导入模板.xlsx</a>
+                        <a class="import_member button button--secondary" href="#" data-method="post" rel="nofollow" style="overflow:hidden;position: relative;">导入成员
+                            <input id="import_user" name="file" type="file" style="opacity:0; width:200px;height:200px;position:absolute;right: 0;top: 0;">
+                        </a>
+                    </div>
+                </div>
+                <div class="connection_list_con clearfix">
 
+                </div>
             </div>
-            <div nodetype="myMessages" nodeindex="my3" data-modal="tab-layer" class="myMessages">
+            <c:if test="${model.partyExt.isGroup}">
+                <div nodetype="myGroups" nodeindex="my2" data-modal="tab-layer" class="myGroups">
+                    <div data-bind="collect" class="mod-my-collect">
+                        <div class="silder-wraper">
+
+                            <div class="operate clearfix"></div>
+                        </div>
+                        <div class="silder-content">
+                            <ul class="J-more"></ul>
+                        </div>
+                        <a href="#" class="more" style="display: none;">显示更多<i class="icon-angle-down"></i></a>
+                    </div>
+                </div>
+            </c:if>
+            <div nodetype="myNews" nodeindex="my2" data-modal="tab-layer" class="myNews">
+                <div data-bind="collect" class="mod-my-collect">
+                    <div class="silder-wraper">
+
+                        <div class="operate clearfix"></div>
+                    </div>
+                    <div class="silder-content">
+                        <ul class="J-more"></ul>
+                    </div>
+                    <a href="#" class="more" style="display: none;">显示更多<i class="icon-angle-down"></i></a>
+                </div>
+            </div>
+            <div nodetype="myDocuments" nodeindex="my3" data-modal="tab-layer" class="myDocuments">
+                <div data-bind="collect" class="mod-my-collect">
+                    <div class="silder-wraper">
+
+                        <div class="operate clearfix"></div>
+                    </div>
+                    <div class="silder-content">
+                        <ul class="J-more"></ul>
+                    </div>
+                    <a href="#" class="more" style="display: none;">显示更多<i class="icon-angle-down"></i></a>
+                </div>
+            </div>
+            <div nodetype="myForums" nodeindex="my3" data-modal="tab-layer" class="myForums">
                 <div data-bind="collect" class="mod-my-collect">
                     <div class="silder-wraper">
 
@@ -412,7 +469,7 @@
                     layer.msg("保存失败", {icon: 5, offset: '110px'});
                 }
             })
-        }).on("change", ".edit_person_pic input[type='file']", function () {
+        }).on("change", ".edit_person_pic input[type='file']", function () { //上传图片
             var ths = $(this);
             $.ajaxFileUpload({
                 url: "${ctx}/avatar/upload",
@@ -448,6 +505,33 @@
                             "x2": "80",
                             "y2": "80"
                         }).data("path", bak.data);
+                    } else {
+                        layer.msg(bak.message, {icon: 5, offset: '110px'});
+                    }
+                },
+                complete: function (XHR, TS) {
+                },
+                beforeSend: function (XHR) {
+                    layer.load(2);
+                }
+            });
+        }).on("change", ".import_member input[type='file']", function () {//上传成员名单
+            var ths = $(this);
+            $.ajaxFileUpload({
+                url: "${ctx}/party/importuser",
+                fileElementId: $(this).attr("id"),
+                secureuri: false,
+                dataType: "text",
+                data: {},
+                type: "post",
+                success: function (res) {
+                    layer.closeAll();
+
+                    var resStr = $(res).text();
+                    var bak = JSON.parse(resStr);
+                    bak = JSON.parse(bak);
+                    if (bak.status == 0) {
+
                     } else {
                         layer.msg(bak.message, {icon: 5, offset: '110px'});
                     }

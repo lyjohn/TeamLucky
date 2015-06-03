@@ -6,13 +6,11 @@ import com.tmlk.framework.mybatis.ICondition;
 import com.tmlk.framework.mybatis.Order;
 import com.tmlk.framework.session.SessionStatus;
 import com.tmlk.framework.session.SessionUser;
-import com.tmlk.framework.util.*;
-import com.tmlk.model.PartyModel;
-import com.tmlk.po.SysUserExt;
 import com.tmlk.service.IDocumentServiceExt;
 import com.tmlk.service.IPartyServiceExt;
 import com.tmlk.service.IPartyUserServiceExt;
 import com.tmlk.service.ISysUserServiceExt;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +18,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -57,27 +53,6 @@ public class DocmentController {
     @Autowired
     private IPartyServiceExt partyService;
 
-    //下面是头像相关的页面
 
-    @RequestMapping(value = "/upload/avatar")
-    @ResponseBody
-    public String uploadAvatar(@RequestParam(value = "file",required = true) MultipartFile file,HttpServletRequest request,HttpSession session) {
-        JsonResult result = new JsonResult();
-        SessionUser user = (SessionUser) session.getAttribute(Constants.SESSION_USER);
-
-        try {
-            //上传头像
-            String filePath = documentService.doAvatarSave(request, file, 1);
-
-            result.setData(filePath);
-            result.setStatus(0);
-        }catch(Exception e) {
-            result.setStatus(1);
-            result.setMessage(e.getMessage());
-        }
-        String str = JSONUtil.object2JsonString(result);
-
-        return str;
-    }
 
 }

@@ -61,9 +61,9 @@ public class SessionStatus {
                 PartyUserExt partyUser = (PartyUserExt) user;
                 sessionUser.setUserType(2);
                 sessionUser.setSessionKey(sessionKey);
-                sessionUser.setSysUserAvatar(partyUser.getUserAvatar());
-                sessionUser.setSysUserId(partyUser.getId());
-                sessionUser.setSysUserName(partyUser.getUserName());
+                sessionUser.setPartyUserAvatar(partyUser.getUserAvatar());
+                sessionUser.setPartyUserId(partyUser.getId());
+                sessionUser.setPartyUserName(partyUser.getUserName());
                 sessionUser.setPartyId(partyUser.getPartyId());
                 if(partyUser.getUserStatus() < 8){ //2是未入组 4是待审核 8是在组 16是管理员
                     sessionUser.setGroupId(0L);
@@ -106,9 +106,9 @@ public class SessionStatus {
                 PartyUserExt partyUser = (PartyUserExt) user;
                 sessionUser.setUserType(2);
                 sessionUser.setSessionKey(sessionKey);
-                sessionUser.setSysUserAvatar(partyUser.getUserAvatar());
-                sessionUser.setSysUserId(partyUser.getId());
-                sessionUser.setSysUserName(partyUser.getUserName());
+                sessionUser.setPartyUserAvatar(partyUser.getUserAvatar());
+                sessionUser.setPartyUserId(partyUser.getId());
+                sessionUser.setPartyUserName(partyUser.getUserName());
                 sessionUser.setPartyId(partyUser.getPartyId());
                 sessionUser.setGroupId(partyUser.getGroupId());
                 if(partyUser.getUserStatus() < 8){ //2是未入组 4是待审核 8是在组 16是管理员

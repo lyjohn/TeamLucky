@@ -28,6 +28,10 @@
           <element id="library" level="project" name="Maven: commons-io:commons-io:2.4" />
           <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.3.1" />
           <element id="library" level="project" name="Maven: org.apache.geronimo.bundles:jstl:1.2_1" />
+          <element id="library" level="project" name="Maven: org.apache.poi:poi:3.12" />
+          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.9" />
+          <element id="library" level="project" name="Maven: org.apache.poi:poi-ooxml:3.12" />
+          <element id="library" level="project" name="Maven: org.apache.poi:poi-ooxml-schemas:3.12" />
           <element id="library" level="project" name="Maven: taglibs:standard:1.1.2" />
           <element id="library" level="project" name="Maven: org.springframework:spring-test:4.1.1.RELEASE" />
           <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
@@ -67,7 +71,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/teamlucky/target/teamlucky/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/teamlucky/target/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="teamlucky/web/Web" />
     </root>

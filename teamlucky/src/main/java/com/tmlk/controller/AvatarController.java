@@ -101,27 +101,27 @@ public class AvatarController {
 
             if(userTye == 1){//是系统用户， 直接把头像存了
                 SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
-                sysUserService.uploadAvatar(filePath,sessionUser.getSysUserId());
+                sysUserService.uploadAvatar(savePath,sessionUser.getSysUserId());
             }else if(userTye == 2){//是活动用户，直接把头像存了
                 SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
-                partyUserService.uploadAvatar(filePath,sessionUser.getPartyUserId());
+                partyUserService.uploadAvatar(savePath,sessionUser.getPartyUserId());
             }
             else if(userTye == 3) {//主要和创建活动或小组的情况区分
                 if (type == 2) {
                     SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
 
                     PartyExt partyExt = partyService.load(sessionUser.getPartyId());
-                    partyExt.setPartyCover(filePath);
+                    partyExt.setPartyCover(savePath);
                     partyService.update(partyExt);
                 } else if (type == 3) {
                     SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
 
                     PartyGroupExt partyGroupExt = partyGroupService.load(sessionUser.getGroupId());
-                    partyGroupExt.setGroupCover(filePath);
+                    partyGroupExt.setGroupCover(savePath);
                     partyGroupService.update(partyGroupExt);
                 }
             }
-            result.setData(savePath);
+            result.setData("resource"+File.separator+savePath);
             result.setStatus(0);
         }catch(Exception e) {
             result.setStatus(1);
@@ -141,7 +141,7 @@ public class AvatarController {
      * @return
      */
     @RequestMapping(value = "/user/{t}/{id}")
-    public String getUserAvatar(@PathVariable("t") int t,@PathVariable("id") String id, HttpServletResponse response,HttpServletRequest request){
+    public void getUserAvatar(@PathVariable("t") int t,@PathVariable("id") String id, HttpServletResponse response,HttpServletRequest request){
         try{
             String avatarPath = "";
             if(t==1) {
@@ -156,27 +156,29 @@ public class AvatarController {
             }
 
             if(FormatUtils.isEmpty(avatarPath))
-                avatarPath = "resource"+File.separator+"avatar"+File.separator+"default"+File.separator+"user.png";
+                avatarPath = "avatar"+File.separator+"default"+File.separator+"user.png";
 
-            avatarPath = request.getSession().getServletContext().getRealPath(avatarPath);
+            documentService.doAvatarShow(response,avatarPath);
 
-            File file = new File(avatarPath);
-
-            response.setContentType("image/jpeg; charset=GBK");
-            ServletOutputStream outputStream = response.getOutputStream();
-            FileInputStream inputStream = new FileInputStream(file);
-            byte[] buffer = new byte[1024];
-            int i = -1;
-            while ((i = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, i);
-            }
-            outputStream.flush();
-            outputStream.close();
-            inputStream.close();
-            outputStream = null;
-            return null;
+//            avatarPath = request.getSession().getServletContext().getRealPath(avatarPath);
+//
+//            File file = new File(avatarPath);
+//
+//            response.setContentType("image/jpeg; charset=GBK");
+//            ServletOutputStream outputStream = response.getOutputStream();
+//            FileInputStream inputStream = new FileInputStream(file);
+//            byte[] buffer = new byte[1024];
+//            int i = -1;
+//            while ((i = inputStream.read(buffer)) != -1) {
+//                outputStream.write(buffer, 0, i);
+//            }
+//            outputStream.flush();
+//            outputStream.close();
+//            inputStream.close();
+//            outputStream = null;
+//            return null;
         }catch(Exception e){
-            return null;
+//            return null;
         }
     }
 
@@ -188,7 +190,7 @@ public class AvatarController {
      * @return
      */
     @RequestMapping(value = "/party/{id}")
-    public String getPartyAvatar(@PathVariable("id") Long id, HttpServletResponse response,HttpServletRequest request){
+    public void getPartyAvatar(@PathVariable("id") Long id, HttpServletResponse response,HttpServletRequest request){
         try{
             String avatarPath = "";
             PartyExt partyExt = partyService.load(id);
@@ -197,27 +199,30 @@ public class AvatarController {
             if(FormatUtils.isEmpty(avatarPath)) {
                 int rdn = (int)Math.round(Math.random()*5);
                 System.out.println(rdn);
-                avatarPath = "resource" + File.separator + "avatar" + File.separator + "default" + File.separator + "party"+rdn+".png";
+                avatarPath = "avatar" + File.separator + "default" + File.separator + "party"+rdn+".png";
             }
-            avatarPath = request.getSession().getServletContext().getRealPath(avatarPath);
 
-            File file = new File(avatarPath);
-
-            response.setContentType("image/jpeg; charset=GBK");
-            ServletOutputStream outputStream = response.getOutputStream();
-            FileInputStream inputStream = new FileInputStream(file);
-            byte[] buffer = new byte[1024];
-            int i = -1;
-            while ((i = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, i);
-            }
-            outputStream.flush();
-            outputStream.close();
-            inputStream.close();
-            outputStream = null;
-            return null;
+            documentService.doAvatarShow(response,avatarPath);
+//
+//            avatarPath = request.getSession().getServletContext().getRealPath(avatarPath);
+//
+//            File file = new File(avatarPath);
+//
+//            response.setContentType("image/jpeg; charset=GBK");
+//            ServletOutputStream outputStream = response.getOutputStream();
+//            FileInputStream inputStream = new FileInputStream(file);
+//            byte[] buffer = new byte[1024];
+//            int i = -1;
+//            while ((i = inputStream.read(buffer)) != -1) {
+//                outputStream.write(buffer, 0, i);
+//            }
+//            outputStream.flush();
+//            outputStream.close();
+//            inputStream.close();
+//            outputStream = null;
+//            return null;
         }catch(Exception e){
-            return null;
+//            return null;
         }
     }
 
@@ -228,7 +233,7 @@ public class AvatarController {
      * @return
      */
     @RequestMapping(value = "/group/{id}")
-    public String getGroupAvatar(@PathVariable("id") Long id, HttpServletResponse response,HttpServletRequest request){
+    public void getGroupAvatar(@PathVariable("id") Long id, HttpServletResponse response,HttpServletRequest request){
         try{
             String avatarPath = "";
             PartyGroupExt partyGroupExt = partyGroupService.load(id);
@@ -237,25 +242,27 @@ public class AvatarController {
             if(FormatUtils.isEmpty(avatarPath))
                 avatarPath = "resource"+File.separator+"avatar"+File.separator+"default"+File.separator+"group.png";
 
-            avatarPath = request.getSession().getServletContext().getRealPath(avatarPath);
-
-            File file = new File(avatarPath);
-
-            response.setContentType("image/jpeg; charset=GBK");
-            ServletOutputStream outputStream = response.getOutputStream();
-            FileInputStream inputStream = new FileInputStream(file);
-            byte[] buffer = new byte[1024];
-            int i = -1;
-            while ((i = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, i);
-            }
-            outputStream.flush();
-            outputStream.close();
-            inputStream.close();
-            outputStream = null;
-            return null;
+            documentService.doAvatarShow(response,avatarPath);
+//
+//            avatarPath = request.getSession().getServletContext().getRealPath(avatarPath);
+//
+//            File file = new File(avatarPath);
+//
+//            response.setContentType("image/jpeg; charset=GBK");
+//            ServletOutputStream outputStream = response.getOutputStream();
+//            FileInputStream inputStream = new FileInputStream(file);
+//            byte[] buffer = new byte[1024];
+//            int i = -1;
+//            while ((i = inputStream.read(buffer)) != -1) {
+//                outputStream.write(buffer, 0, i);
+//            }
+//            outputStream.flush();
+//            outputStream.close();
+//            inputStream.close();
+//            outputStream = null;
+//            return null;
         }catch(Exception e){
-            return null;
+//            return null;
         }
     }
 }

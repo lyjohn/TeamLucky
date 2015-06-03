@@ -91,29 +91,29 @@
                                 <div class="grid-row  card__author grid-col--align-left grid-col--no-margin">
                                     <img class="img-circle" src="${ctx}/avatar/user/1/<c:out value='${var.partyAuthor.id}'></c:out>" />
                                     <span><c:out value="${var.partyAuthor.userName}"></c:out></span>
-                                    <span><c:out value="${var.createTimeString}"></c:out></span>
+                                    <span class="time_create"><c:out value="${var.createTimeString}"></c:out></span>
                                 </div>
                             </div>
                             <a href="${ctx}/party/index/${var.id}" class="link--target"></a>
                         </div>
                     </div>
-
-                    <div id="before-container" class="grid-col-12 grid-col--align-center">
-                        <div class="grid-col-12 grid-col--center grid-col--no-margin grid-col--no-padding">
-                            <c:if test="${ fn:length(model.items) == model.pp.pageSize}">
-                                <div class="js-show-more show-more">
-                                    <div><small><a href="#" class="cta">查看更多</a></small></div>
-                                    <div><span class="new-cc-icon icon-downarrow icon--"></span></div>
-                                </div>
-                            </c:if>
-                        </div>
-                    </div>
-
-
-                    <form:input type="hidden" name="model.pp.currentPage" path="model.pp.currentPage" />
-                    <form:input type="hidden" name="model.pp.pageSize" path="model.pp.pageSize" />
-
                 </c:forEach>
+
+                <div id="before-container" class="grid-col-12 grid-col--align-center">
+                    <div class="grid-col-12 grid-col--center grid-col--no-margin grid-col--no-padding">
+                        <c:if test="${ fn:length(model.items) == model.pp.pageSize}">
+                            <div class="js-show-more show-more">
+                                <div><small><a href="#" class="cta">查看更多</a></small></div>
+                                <div><span class="new-cc-icon icon-downarrow icon--"></span></div>
+                            </div>
+                        </c:if>
+                    </div>
+                </div>
+
+
+                <form:input type="hidden" name="model.pp.currentPage" path="model.pp.currentPage" />
+                <form:input type="hidden" name="model.pp.pageSize" path="model.pp.pageSize" />
+
             </c:if>
         </div>
     </div>
@@ -175,7 +175,7 @@
                 <div class="grid-row  card__author grid-col--align-left grid-col--no-margin">
                     <img class="img-circle" src="${ctx}/avatar/user/1/${'<'}%= list[i].partyAuthor.id%${'>'}" />
                     <span>${'<'}%= list[i].partyAuthor.userName %${'>'}</span>
-                    <span>${'<'}%= list[i].createTimeString %${'>'}</span>
+                    <span class="time_create">${'<'}%= list[i].createTimeString %${'>'}</span>
                 </div>
             </div>
             <a href="${ctx}/party/index/${'<'}%= list[i].id%${'>'}" class="link--target"></a>

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 
 public interface IPartyUserServiceExt extends IPartyUserService{
 
+    public PartyUserExt findUserByName(String loginName);
+
     public JsonResult login(String loginName, String loginPwd, HttpServletRequest request);
 
     public PartyUserExt register(PartyUserExt partyUserExt);

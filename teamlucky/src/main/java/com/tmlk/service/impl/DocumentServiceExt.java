@@ -12,9 +12,13 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class DocumentServiceExt extends DocumentService implements IDocumentServiceExt {
@@ -52,29 +56,38 @@ public class DocumentServiceExt extends DocumentService implements IDocumentServ
 //        sb.append(File.separator);
 //        sb.append(FormatUtils.getCurrentDateString("dd"));
 
-        String savePath = request.getSession().getServletContext().getRealPath(sb.toString());
 
+        String savePath = request.getSession().getServletContext().getRealPath(sb.toString());
         File directoryTmp = new File(savePath);
         if (!directoryTmp.exists()) {
             directoryTmp.mkdirs();
         }
 
-        sb.append(File.separator);
-        sb.append(UUID.randomUUID());
-        if (!StringUtils.isEmpty(fileExtName)) {
-            sb.append(".");
-            sb.append(fileExtName);
+        //这个其实可以在部署的时候建好  存放大的原图
+        String savePathSource = rootPath + "avatar"+File.separator+"source";
+        File directorySource = new File(savePathSource);
+        if (!directorySource.exists()) {
+            directorySource.mkdirs();
         }
 
+        sb.append(File.separator);
+        String fileName = UUID.randomUUID().toString();
+        if (!StringUtils.isEmpty(fileExtName)) {
+            fileName+= "."+fileExtName;
+        }
+        sb.append(fileName);
+
         String filePath = request.getSession().getServletContext().getRealPath(sb.toString());
+        String filePathSource = savePathSource +File.separator+ fileName;
+
         try {
             in = file.getInputStream();
-            out = new FileOutputStream(new File(filePath));
+            out = new FileOutputStream(new File(filePathSource));
             //保持图片
             FileCopyUtils.copy(in, out);
 
             //对图片进行压缩， 最长边为350
-            ImageUtils.resize(filePath,350);
+            ImageUtils.resize(filePathSource,350, filePath);
 
             isSuccess = true;
         } catch (FileNotFoundException e) {
@@ -97,18 +110,16 @@ public class DocumentServiceExt extends DocumentService implements IDocumentServ
             } catch (Exception e) {
             }
         }
-        if(isSuccess)
+        if (isSuccess)
             return sb.toString();
         return null;
     }
 
     @Override
-    public String doAvatarCut(HttpServletRequest request,HttpSession session, String filePath, int type, int x, int y, int width, int height) throws IOException {
-        boolean isSuccess =false;
+    public String doAvatarCut(HttpServletRequest request, HttpSession session, String filePath, int type, int x, int y, int width, int height) throws IOException {
+        boolean isSuccess = false;
 
         StringBuffer sbSave = new StringBuffer();
-        sbSave.append("resource");
-        sbSave.append(File.separator);
         sbSave.append("avatar");
         sbSave.append(File.separator);
         if (type == 1)
@@ -125,32 +136,79 @@ public class DocumentServiceExt extends DocumentService implements IDocumentServ
             if (!file.exists())
                 return null;
 
-
-            String savePath = request.getSession().getServletContext().getRealPath(sbSave.toString());
+            String savePath = request.getSession().getServletContext().getRealPath("resource"+File.separator+sbSave.toString());
             File directorySave = new File(savePath);
             if (!directorySave.exists()) {
                 directorySave.mkdirs();
             }
 
+            //这个是真的位置
+            String savePath1 = rootPath + sbSave.toString();
+            File directorySave1 = new File(savePath1);
+            if (!directorySave1.exists()) {
+                directorySave1.mkdirs();
+            }
+
             sbSave.append(File.separator);
-            sbSave.append(UUID.randomUUID());
-            sbSave.append(".");
-            String fileExtName = FilenameUtils.getExtension(file.getName());
-            sbSave.append(fileExtName);
+            sbSave.append(file.getName());
 
-            String destPath = request.getSession().getServletContext().getRealPath(sbSave.toString());
+//            sbSave.append(UUID.randomUUID());
+//            sbSave.append(".");
+//            String fileExtName = FilenameUtils.getExtension(file.getName());
+//            sbSave.append(fileExtName);
 
-            ImageUtils co = new ImageUtils(x,y,width,height);
+            String destPath = rootPath + sbSave.toString();
+            String destPath1 = request.getSession().getServletContext().getRealPath("resource"+File.separator+sbSave.toString());
+
+            ImageUtils co = new ImageUtils(x, y, width, height);
             co.setSrcpath(filePath);
-            co.setSavepath(destPath);
-            co.cut(120);
+
+            List<String> savePathList = new ArrayList<String>();
+            savePathList.add(destPath);
+            savePathList.add(destPath1);
+            co.cut(120,savePathList);
             isSuccess = true;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.trace(ex);
         }
-        if(isSuccess)
+        if (isSuccess)
             return sbSave.toString();
 
         return null;
+    }
+
+    @Override
+    public void doAvatarShow(HttpServletResponse response, String filePath) {
+        File file = new File(rootPath + filePath);
+        if (file.exists()) {
+
+            response.reset();
+            response.setContentType("image/jpeg; charset=GBK");
+            ServletOutputStream outputStream = null;
+            try {
+                outputStream = response.getOutputStream();
+                FileInputStream inputStream = new FileInputStream(file);
+                byte[] buffer = new byte[1024];
+                int i = -1;
+                while ((i = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, i);
+                }
+                outputStream.flush();
+                outputStream.close();
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }finally {
+                if(outputStream != null)
+                {
+                    try {
+                        outputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        } else {
+        }
     }
 }

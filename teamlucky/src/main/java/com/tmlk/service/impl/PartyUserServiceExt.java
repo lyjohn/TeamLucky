@@ -23,6 +23,19 @@ public class PartyUserServiceExt extends PartyUserService implements IPartyUserS
     private static final Logger logger = Logger.getLogger(PartyUserServiceExt.class);
 
     @Override
+    public PartyUserExt findUserByName(String loginName) {
+        List<ICondition> conditions = new ArrayList<ICondition>();
+        conditions.add(new EqCondition("loginName", loginName));
+
+        List<PartyUserExt> userList = this.criteriaQuery(conditions);
+
+        if(userList == null || userList.size() == 0)
+            return null;
+        else
+            return userList.get(0);
+    }
+
+    @Override
     @SysServiceLog(description = "登录系统", code = 101)
     public JsonResult login(String loginName, String loginPwd, HttpServletRequest request) {
         JsonResult result = new JsonResult();

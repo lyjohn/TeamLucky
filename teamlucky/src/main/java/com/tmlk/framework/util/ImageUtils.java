@@ -25,8 +25,6 @@ public class ImageUtils {
     // ===源图片路径名称如：c:\1.jpg
     private String srcpath;
 
-    // ===剪切图片存放路径名称。如：c:\2.jpg
-    private String savepath;
     // ===剪切点x坐标
     private int x;
     private int y;
@@ -40,6 +38,7 @@ public class ImageUtils {
 
     /**
      * 剪切图片的位置
+     *
      * @param x
      * @param y
      * @param width
@@ -56,9 +55,10 @@ public class ImageUtils {
      * 剪切图片 并压缩为 border 的边长的正方形
      *
      * @param border
+     * @param savePathList 存储文件的路径集合 可以多个哦
      * @throws IOException
      */
-    public void cut(int border) throws IOException {
+    public void cut(int border,java.util.List<String> savePathList) throws IOException {
         FileInputStream is = null;
         ImageInputStream iis = null;
         try {
@@ -89,7 +89,9 @@ public class ImageUtils {
             //压缩为 border * border
             BufferedImage bb = this.resize(bi, border, border);
             // 保存新图片
-            ImageIO.write(bb, extName, new File(savepath));
+            for(String savePath : savePathList){
+                ImageIO.write(bb, extName, new File(savePath));
+            }
         } catch (Exception ex) {
             ex.getStackTrace();
         } finally {
@@ -100,7 +102,57 @@ public class ImageUtils {
         }
     }
 
-    public static void resize(String srcpath,int border) throws IOException {
+    /**
+     * 剪切图片 并压缩为 border 的边长的正方形
+     *
+     * @param border
+     * @param savePath 存储文件的路径集合 可以一个
+     * @throws IOException
+     */
+    public void cut(int border,String savePath) throws IOException {
+        FileInputStream is = null;
+        ImageInputStream iis = null;
+        try {
+            // 读取图片文件
+            is = new FileInputStream(srcpath);
+
+            int begin = srcpath.lastIndexOf(".") + 1;
+            String extName = srcpath.substring(begin);
+
+            Iterator<ImageReader> it = ImageIO.getImageReadersByFormatName(new String(extName.getBytes(), "utf-8"));
+            ImageReader reader = it.next();
+
+            // 获取图片流
+            iis = ImageIO.createImageInputStream(is);
+
+            reader.setInput(iis, true);
+
+            ImageReadParam param = reader.getDefaultReadParam();
+
+            //剪切的方框
+            Rectangle rect = new Rectangle(x, y, width, height);
+
+            // 提供一个 BufferedImage，将其用作解码像素数据的目标。
+            param.setSourceRegion(rect);
+
+            BufferedImage bi = reader.read(0, param);
+
+            //压缩为 border * border
+            BufferedImage bb = this.resize(bi, border, border);
+            // 保存新图片
+            ImageIO.write(bb, extName, new File(savePath));
+
+        } catch (Exception ex) {
+            ex.getStackTrace();
+        } finally {
+            if (is != null)
+                is.close();
+            if (iis != null)
+                iis.close();
+        }
+    }
+
+    public static void resize(String srcpath, int border, String savepath) throws IOException {
         FileInputStream is = null;
         ImageInputStream iis = null;
         try {
@@ -124,21 +176,18 @@ public class ImageUtils {
 
             int width = bi.getWidth();
             int height = bi.getHeight();
-            if(height > width){ //高比宽大
+            if (height > width) { //高比宽大
                 width = (width * border / height);
                 height = border;
-            }
-            else{
+            } else {
                 height = (height * border / width);
                 width = border;
             }
 
-            System.out.println(width+"."+height);
-
             //压缩
             BufferedImage bb = resize(bi, width, height);
             // 保存新图片
-            ImageIO.write(bb, extName, new File(srcpath));
+            ImageIO.write(bb, extName, new File(savepath));
         } catch (Exception ex) {
             ex.getStackTrace();
         } finally {
@@ -187,14 +236,6 @@ public class ImageUtils {
 
     public void setSrcpath(String srcpath) {
         this.srcpath = srcpath;
-    }
-
-    public String getSavepath() {
-        return savepath;
-    }
-
-    public void setSavepath(String savepath) {
-        this.savepath = savepath;
     }
 
     public int getWidth() {

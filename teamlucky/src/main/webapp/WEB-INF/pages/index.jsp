@@ -194,7 +194,7 @@
                         <div class="grid-row  card__author grid-col--align-left grid-col--no-margin">
                             <img class="img-circle" src="${ctx}/avatar/user/1/<c:out value='${var.partyAuthor.id}'></c:out>" />
                             <span><c:out value="${var.partyAuthor.userName}"></c:out></span>
-                            <span><c:out value="${var.createTimeString}"></c:out></span>
+                            <span class="time_create"><c:out value="${var.createTimeString}"></c:out></span>
                         </div>
                     </div>
                     <a href="${ctx}/party/index/${var.id}" class="link--target"></a>

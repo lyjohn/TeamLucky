@@ -6,6 +6,7 @@ import com.tmlk.framework.util.JSONUtil;
 import com.tmlk.framework.util.JsonResult;
 import com.tmlk.po.*;
 import com.tmlk.service.ISysLogServiceExt;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by laiguoqiang on 15/5/23.
@@ -149,21 +151,21 @@ public class SysLogAspect {
         SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
         //获取请求ip
         String ip = request.getRemoteAddr();
-        //获取用户请求方法的参数并序列化为JSON格式字符串
-        String params = "";
-        if (joinPoint.getArgs() != null && joinPoint.getArgs().length > 0) {
-            for (int i = 0; i < joinPoint.getArgs().length; i++) {
-                //以Http开头的参数 不存储 例如 HttpServletRequest HttpServletResponse HttpSession 数据太长了
-                if (joinPoint.getArgs()[i].getClass() == request.getClass() || joinPoint.getArgs()[i].getClass() == session.getClass())
-                    continue;
-
-                if (joinPoint.getArgs()[i].getClass() == String.class || joinPoint.getArgs()[i].getClass() == Long.class || joinPoint.getArgs()[i].getClass() == Integer.class) {
-                    params += joinPoint.getArgs()[i] + ";";
-                } else {
-                    params += JSONUtil.object2JsonString(joinPoint.getArgs()[i]) + ";";
-                }
-            }
-        }
+//        获取用户请求方法的参数并序列化为JSON格式字符串,太容易出错了
+//        String params = "";
+//        if (joinPoint.getArgs() != null && joinPoint.getArgs().length > 0) {
+//            for (int i = 0; i < joinPoint.getArgs().length; i++) {
+//                //以Http开头的参数 不存储 例如 HttpServletRequest HttpServletResponse HttpSession 数据太长了
+//                if (joinPoint.getArgs()[i].getClass() == request.getClass() || joinPoint.getArgs()[i].getClass() == session.getClass() || joinPoint.getArgs()[i].getClass() == XSSFSheet.class)
+//                    continue;
+//
+//                if (joinPoint.getArgs()[i].getClass() == String.class || joinPoint.getArgs()[i].getClass() == Long.class || joinPoint.getArgs()[i].getClass() == Integer.class) {
+//                    params += joinPoint.getArgs()[i] + ";";
+//                } else {
+//                    params += JSONUtil.object2JsonString(joinPoint.getArgs()[i]) + ";";
+//                }
+//            }
+//        }
         try {
             String desc = getServiceMethodDescription(joinPoint);
             Integer code = getServiceMethodCode(joinPoint);
@@ -196,7 +198,7 @@ public class SysLogAspect {
                     sysLogExt.setLogContent("活动用户登录成功");
                     sysLogExt.setLogObjId(0L);
                 } else {
-                    sysLogExt.setLogContent(Constants.LOGIN_RESULT_MAP.get(loginStatus) + " : " + params);
+                    sysLogExt.setLogContent("登录的未知情况");
                     sysLogExt.setLogObjId(-1L);
                 }
             } else if (code == 103) {//注册系统用户
@@ -209,32 +211,38 @@ public class SysLogAspect {
                 PartyExt partyExt = (PartyExt)returnValue;
 
                 sysLogExt.setLogObjId(partyExt.getId());
-                sysLogExt.setLogContent(params);
+                sysLogExt.setLogContent(JSONUtil.object2JsonString(partyExt));
             } else if(code == 202){//创建活动用户
                 PartyUserExt partyUserExt = (PartyUserExt)returnValue;
 
                 sysLogExt.setLogObjId(0L);
                 sysLogExt.setLogContent(JSONUtil.object2JsonString(partyUserExt));
+            }else if(code == 204){//导入活动成员
+                List<PartyUserExt> partyUserExtList = (List<PartyUserExt>)returnValue;
+
+                sysLogExt.setLogObjId(0L);
+                sysLogExt.setLogContent("成功导入了"+partyUserExtList.size()+"个新成员");
             }else if(code == 301 || code == 303){//创建小组
                 PartyGroupExt partyGroupExt = (PartyGroupExt)returnValue;
 
                 sysLogExt.setLogObjId(partyGroupExt.getId());
-                sysLogExt.setLogContent(params);
+                sysLogExt.setLogContent(JSONUtil.object2JsonString(partyGroupExt));
             }else if(code == 401){
                 NewsExt newsExt = (NewsExt)returnValue;
 
                 sysLogExt.setLogObjId(newsExt.getId());
-                sysLogExt.setLogContent(params);
+                sysLogExt.setLogContent(JSONUtil.object2JsonString(newsExt));
             }else {
                 sysLogExt.setLogObjId(-1L);
-                sysLogExt.setLogContent(params);
+                sysLogExt.setLogContent("未处理的日志信息，请开发人员知悉");
             }
             //保存数据库
             sysLogService.create(sysLogExt);
         } catch (Exception ex)
         {
             //记录本地异常日志
-            logger.error("AOP Service AfterReturn 异常信息:{}", ex.getStackTrace());
+            logger.error("AOP Service AfterReturn 异常信息:{}", ex.getMessage());
+            ex.getStackTrace();
         }
 
     }

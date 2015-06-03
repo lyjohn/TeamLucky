@@ -17,6 +17,12 @@ public class Constants {
     //这儿做统一的管理，不要把编号重复了 代码中 不会用到这个
     public static final Map<Integer,String> SYS_LOG_MAP = new HashMap<Integer,String>();
 
+    public static final String DATA_TYPE_STRING = "字符串";
+    public static final String DATA_TYPE_INT = "整数";
+    public static final String DATA_TYPE_DOUBLE = "浮点";
+    public static final String DATA_TYPE_BOOL = "布尔";
+    public static final String DATA_TYPE_DATE = "日期";
+
     static {
         //用户模块
         SYS_LOG_MAP.put(101,"登录系统");

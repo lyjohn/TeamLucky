@@ -304,7 +304,7 @@
             <hr class="no-margin">
         </div>
         <article class="grid-col-12 grid-col--align-center">
-            <p class="name--party">${'<'}%= list[i].partyNamet%${'>'}</p>
+            <p class="name--party">${'<'}%= list[i].partyName%${'>'}</p>
             ${'<'}% if( list[i].group == null) { %${'>'}
             <p class="name--group">暂未加入小组</p>
             ${'<'}% }else{ %${'>'}
