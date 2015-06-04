@@ -76,6 +76,8 @@ public class SessionStatus {
                 }
             }
 
+            session.setAttribute(Constants.SESSION_AUTOCREATE,false);
+
             session.setAttribute(Constants.SESSION_USER, sessionUser);
 
             HttpSession s = sessionMap.get(sessionKey);

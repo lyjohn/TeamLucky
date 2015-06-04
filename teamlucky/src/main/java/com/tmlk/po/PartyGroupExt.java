@@ -16,4 +16,14 @@ public class PartyGroupExt extends PartyGroup  implements Serializable{
 	public void setGroupAuthor(PartyUserExt groupAuthor) {
 		this.groupAuthor = groupAuthor;
 	}
+
+	private String createTimeStr;
+
+	public String getCreateTimeStr() {
+		return createTimeStr;
+	}
+
+	public void setCreateTimeStr(String createTimeStr) {
+		this.createTimeStr = createTimeStr;
+	}
 }

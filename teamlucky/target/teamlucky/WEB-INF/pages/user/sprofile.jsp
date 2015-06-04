@@ -107,7 +107,7 @@
         <div class="person_detail_tab">
             <ul>
                 <li data-modal="tab" data-tab="myDetails" data-load=true class="current_detail">联系方式</li>
-                <li data-modal="tab" data-tab="myParties" data-load=false>我的活动</li>
+                <li data-modal="tab" data-tab="myParties" data-load=false>我的活动<a class="link_partyuser">绑定活动帐号</a></li>
                 <li data-modal="tab" data-tab="myNews" data-load=false>我的动态</li>
                 <li data-modal="tab" data-tab="myMessages" data-load=false>我的消息</li>
             </ul>
@@ -167,6 +167,29 @@
             <a class="js_show_pwd" href="#" style="background-color:#ddd;" rel="nofollow" data-show=false>显示密码</a>
             <a href="#" nodetype="cancel" class="button">取消</a>
             <a class="js_save button button--secondary" href="#" data-method="post" rel="nofollow">确定</a>
+        </div>
+    </div>
+    <div class="pop_edit login_partyuser">
+        <h3>绑定活动帐号</h3>
+        <div class="context">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="inputPartyUser" class="col-sm-4 control-label">活动用户帐号</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="inputPartyUser" name="inputPartyUser" placeholder="活动的登录帐号，需包含_" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPartyPwd" class="col-sm-4 control-label">活动用户密码</label>
+                    <div class="col-sm-8">
+                        <input type="password" class="form-control" id="inputPartyPwd" name="inputPartyPwd" placeholder="活动用户的密码" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="success">
+            <a href="#" nodetype="cancel" class="button">取消</a>
+            <a class="js_save button button--secondary" href="#" data-method="post" rel="nofollow">关联</a>
         </div>
     </div>
     <div class="pop_edit edit_intro">
@@ -360,6 +383,17 @@
                 area: [width+'px', height+'px'],
                 content: $(".edit_intro")
             });
+        }).on("click",".link_partyuser",function(){//关联活动账户
+            $(".login_partyuser").show();
+            var width = $(".login_partyuser").width();
+            var height = $(".login_partyuser").height();
+            layer.open({
+                zIndex: 1000,
+                type: 1,
+                title: false,
+                area: [width+'px', height+'px'],
+                content: $(".login_partyuser")
+            });
         }).on("click",".pop_edit a[nodetype='cancel']",function(){ //取消按钮
             layer.closeAll();
         }).on("click",".edit_password .js_show_pwd",function(){ //切换密码显示
@@ -481,6 +515,44 @@
                 error: function (data, status, e) {
                     layer.closeAll();
                     layer.msg("保存失败",{icon:5,offset:'110px'});
+                }
+            })
+        }).on("click",".login_partyuser .js_save",function(){ //绑定活动帐号
+            var puName = $("#inputPartyUser").val();
+            var puPwd = $("#inputPartyPwd").val();
+
+            if(puName.indexOf("_") == -1){
+                layer.msg("活动帐号必须有下划线，前面为活动识别码",{icon:5,offset:'110px'});
+                return false;
+            }
+            if(puPwd.length<6){
+                layer.msg("密码不能少于6位",{icon:5,offset:'110px'});
+                return false;
+            }
+
+            $.ajax({
+                url:"${ctx}/user/lkpartyuser",
+                dataType:"json",
+                data:{loginName:puName,loginPwd:puPwd},
+                type:"post",
+                success: function (res) {
+                    if (res.status == 0) {
+                        layer.closeAll();
+
+                        layer.msg("关联成功",{icon:6,offset:'110px'});
+                        var data = {list:result.data};
+                        var html = template('partylist',data);
+                        $(".myParties .grid-row").append(html);
+
+                        $(".login_partyuser form input").val("");
+
+                    }
+                    else
+                        layer.msg(res.message,{icon:5,offset:'110px'});
+                },
+                error: function (data, status, e) {
+                    layer.closeAll();
+                    layer.msg("关联失败",{icon:5,offset:'110px'});
                 }
             })
         }).on("change", ".edit_person_pic input[type='file']", function () {

@@ -111,6 +111,9 @@
                 <li data-modal="tab" data-tab="myDetails" class="current_detail">联系方式</li>
                 <li data-modal="tab" data-tab="myNews">我的动态</li>
                 <li data-modal="tab" data-tab="myMessages">我的消息</li>
+                <% if(sessionUser.getSysUserId() == null) {%>
+                <li data-modal="btn"><a class="button button--secondary link_sysuser">关联系统帐号</a></li>
+                <%}%>
             </ul>
         </div>
         <div class="aboutMe">
@@ -220,6 +223,29 @@
         </div>
         <div class="success"><a href="#" nodetype="cancel" class="button">取消</a>
             <a class="js_save button button--secondary" href="#" data-method="post" rel="nofollow">确定</a>
+        </div>
+    </div>
+    <div class="pop_edit login_sysuser">
+        <h3>关联系统帐号</h3>
+        <div class="context">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="inputSysUserName" class="col-sm-4 control-label">系统用户帐号</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="inputSysUserName" name="inputSysUserName" placeholder="系统登录帐号，没有_" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputSysUserpwd" class="col-sm-4 control-label">系统用户密码</label>
+                    <div class="col-sm-8">
+                        <input type="password" class="form-control" id="inputSysUserpwd" name="inputSysUserpwd" placeholder="系统用户的密码" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="success">
+            <a href="#" nodetype="cancel" class="button">取消</a>
+            <a class="js_save button button--secondary" href="#" data-method="post" rel="nofollow">关联</a>
         </div>
     </div>
     <div class="pop_edit edit_contact">
@@ -350,6 +376,17 @@
                 area: [width + 'px', height + 'px'],
                 content: $(".edit_intro")
             });
+        }).on("click",".link_sysuser",function(){//关联系统账户
+            $(".login_sysuser").show();
+            var width = $(".login_sysuser").width();
+            var height = $(".login_sysuser").height();
+            layer.open({
+                zIndex: 1000,
+                type: 1,
+                title: false,
+                area: [width+'px', height+'px'],
+                content: $(".login_sysuser")
+            });
         }).on("click", ".pop_edit a[nodetype='cancel']", function () { //取消按钮
             layer.closeAll();
         }).on("click",".edit_password .js_show_pwd",function(){ //切换密码显示
@@ -473,6 +510,41 @@
                     layer.msg("保存失败", {icon: 5, offset: '110px'});
                 }
             })
+        }).on("click",".login_sysuser .js_save",function(){ //关联系统账户
+            var suName = $("#inputSysUserName").val();
+            var suPwd = $("#inputSysUserpwd").val();
+
+            if(suName.indexOf("_") > -1){
+                layer.msg("系统帐号没有下划线",{icon:5,offset:'110px'});
+                return false;
+            }
+            if(suPwd.length<6){
+                layer.msg("密码不能少于6位",{icon:5,offset:'110px'});
+                return false;
+            }
+
+            $.ajax({
+                url:"${ctx}/user/lksysuser",
+                dataType:"json",
+                data:{loginName:suName,loginPwd:suPwd},
+                type:"post",
+                success: function (res) {
+                    if (res.status == 0) {
+                        layer.closeAll();
+
+                        layer.msg("关联成功",{icon:6,offset:'110px'});
+
+                        $(".login_partyuser form input").val("");
+
+                    }
+                    else
+                        layer.msg(res.message,{icon:5,offset:'110px'});
+                },
+                error: function (data, status, e) {
+                    layer.closeAll();
+                    layer.msg("关联失败",{icon:5,offset:'110px'});
+                }
+            })
         }).on("change", ".edit_person_pic input[type='file']", function () {
             var ths = $(this);
             $.ajaxFileUpload({
@@ -524,6 +596,10 @@
             return false;
         }).on("click", ".person_detail_tab li", function () {
             var nTab = $(this).data("tab");
+
+            if(nTab==undefined)
+                return false;
+
             var oTab = $(".aboutMe .current_content").attr("nodetype");
 
             $(".aboutMe .current_content").removeClass("current_content");

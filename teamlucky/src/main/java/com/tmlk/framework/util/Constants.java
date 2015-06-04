@@ -10,6 +10,7 @@ public class Constants {
 
     public static final String SESSION_USER = "session_user";
 
+    public static final String SESSION_AUTOCREATE = "session_creategroup";
 
     public static final int DEFAULT_PAGE_SIZE = 20;
 
@@ -50,5 +51,15 @@ public class Constants {
         LOGIN_RESULT_MAP.put(4,"活动用户不存在");
         LOGIN_RESULT_MAP.put(5,"登录密码不正确");
         LOGIN_RESULT_MAP.put(6,"活动用户被禁用，请联系活动组织者");
+    }
+
+    public static final Map<Integer,String> PARTY_USER_STATUS_MAP = new HashMap<Integer,String>();
+    static {
+        PARTY_USER_STATUS_MAP.put(1,"已禁用");
+        PARTY_USER_STATUS_MAP.put(2,"正常");
+        PARTY_USER_STATUS_MAP.put(4,"预备组员");
+        PARTY_USER_STATUS_MAP.put(8,"正式组员");
+        PARTY_USER_STATUS_MAP.put(10,"组长");
+        PARTY_USER_STATUS_MAP.put(16,"活动创建者");
     }
 }

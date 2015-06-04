@@ -86,7 +86,7 @@
             </div>
             <div class="checkbox for-group">
                 <label>
-                    <input type="checkbox" id="autoBuild"> 允许自行组队
+                    <input type="checkbox" id="autoBuild" checked> 允许自行组队
                 </label>
             </div>
             <div class="form-group for-group has-feedback">

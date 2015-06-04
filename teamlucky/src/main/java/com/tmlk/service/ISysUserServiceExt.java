@@ -4,14 +4,17 @@ import com.tmlk.framework.util.JsonResult;
 import com.tmlk.po.SysUserExt;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-public interface ISysUserServiceExt extends ISysUserService{
+public interface ISysUserServiceExt extends ISysUserService {
 
-    public JsonResult login(String loginName, String loginPwd,HttpServletRequest request);
+    public JsonResult login(String loginName, String loginPwd, HttpServletRequest request);
 
-    public SysUserExt register(SysUserExt sysUserExt,HttpServletRequest request);
+    public JsonResult bind(String loginName, String loginPwd, HttpSession session);
 
-    public SysUserExt uploadAvatar(String filePath,String sysUserId);
+    public SysUserExt register(SysUserExt sysUserExt, HttpServletRequest request);
 
-    public SysUserExt updateProfile(SysUserExt sysUserExt,int updateType);
+    public SysUserExt uploadAvatar(String filePath, String sysUserId);
+
+    public SysUserExt updateProfile(SysUserExt sysUserExt, int updateType);
 }

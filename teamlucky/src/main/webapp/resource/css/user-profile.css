@@ -170,7 +170,7 @@
 }
 .main_bg .persional_property .person-photo {
   width: 150px;
-  height: 200px;
+  height: 150px;
   float: left;
   margin: 15px 30px 15px 20px;
 }
@@ -1172,7 +1172,7 @@
   text-transform: uppercase;
   white-space: nowrap;
   position: absolute;
-  right: 120px;
+  right: 220px;
 }
 .main_bg .persion_section .connection_title_con .connection_search_form {
   width: 210px;
@@ -1221,7 +1221,7 @@
   width: 70px;
 }
 .main_bg .persion_section .connection_list_con {
-  width: 820px;
+  width: 100%;
   background: #fff;
 }
 .main_bg .persion_section .connection_list_con .more {
@@ -2347,6 +2347,11 @@
   margin-right: -3px;
   text-align: right;
 }
+.main_bg .login_partyuser,.main_bg .login_sysuser,.main_bg .reg_partyuser {
+  width: 590px;
+  overflow: hidden;
+}
+
 .main_bg .edit_partyseting {
   width: 590px;
 }
@@ -3018,4 +3023,54 @@
   font-size: 12px;
   margin-right: 5px;
   cursor: pointer;
+}
+
+.main_bg .persion_section .person_detail_tab li .link_partyuser{
+  display: none;
+  font-size: 12px;
+  position: absolute;
+  right: 0;
+  top:0;
+  color: #e9733a;
+}
+.main_bg .persion_section .person_detail_tab li.current_detail .link_partyuser{
+  display: block;
+}
+.main_bg .persion_section .person_detail_tab li.current_detail .link_partyuser:hover{
+  color: #E8645A;
+}
+.main_bg .persion_section .person_detail_tab li .link_sysuser{
+  height: 48px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  line-height: 48px;
+}
+.main_bg .connection_list_con .table{
+  font-size: 12px;
+}
+.main_bg .connection_list_con .member-table img{
+  float: left;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+}
+.main_bg .connection_list_con .member-table span.user_loginname{
+  float: left;
+  line-height: 30px;
+  margin-left: 3px;
+}
+.main_bg .connection_list_con .member-table td.table-actions a{
+  color:#6AB3AC;
+  cursor:pointer;
+  font-size:12px;
+  margin-right: 5px;
+}
+.main_bg .connection_list_con .member-table td.table-actions a:last-child{
+  margin-right: 0;
+}
+.main_bg .connection_list_con .member-table td.table-actions a:hover{
+  color: #E8645A;
 }

@@ -3,15 +3,23 @@ package com.tmlk.service.impl;
 import com.tmlk.aop.SysServiceLog;
 import com.tmlk.framework.mybatis.EqCondition;
 import com.tmlk.framework.mybatis.ICondition;
+import com.tmlk.framework.session.SessionUser;
+import com.tmlk.framework.util.Constants;
 import com.tmlk.framework.util.FormatUtils;
 import com.tmlk.framework.util.JsonResult;
 import com.tmlk.framework.util.MD5Util;
+import com.tmlk.po.PartyUserExt;
+import com.tmlk.po.SysPartyUserLink;
+import com.tmlk.po.SysPartyUserLinkExt;
 import com.tmlk.po.SysUserExt;
+import com.tmlk.service.IPartyUserServiceExt;
+import com.tmlk.service.ISysPartyUserLinkServiceExt;
 import org.apache.log4j.Logger;
 
 import com.tmlk.service.ISysUserServiceExt;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +30,25 @@ public class SysUserServiceExt extends SysUserService implements ISysUserService
 
     private static final Logger logger = Logger.getLogger(SysUserServiceExt.class);
 
+    private ISysPartyUserLinkServiceExt sysPartyUserLinkService;
+
+    public ISysPartyUserLinkServiceExt getSysPartyUserLinkService() {
+        return sysPartyUserLinkService;
+    }
+
+    public void setSysPartyUserLinkService(ISysPartyUserLinkServiceExt sysPartyUserLinkService) {
+        this.sysPartyUserLinkService = sysPartyUserLinkService;
+    }
+
+    private IPartyUserServiceExt partyUserService;
+
+    public IPartyUserServiceExt getPartyUserService() {
+        return partyUserService;
+    }
+
+    public void setPartyUserService(IPartyUserServiceExt partyUserService) {
+        this.partyUserService = partyUserService;
+    }
 
     @Override
     @SysServiceLog(description = "登录系统", code = 101)
@@ -49,6 +76,59 @@ public class SysUserServiceExt extends SysUserService implements ISysUserService
             }
         } else {
             result.setStatus(3);
+        }
+
+        return result;
+    }
+
+
+
+    @Override
+    @SysServiceLog(description = "关联系统帐号", code = 105)
+    public JsonResult bind(String loginName, String loginPwd,HttpSession session) {
+        JsonResult result = new JsonResult();
+
+        List<ICondition> conditions = new ArrayList<ICondition>();
+        conditions.add(new EqCondition("loginName", loginName));
+
+        List<SysUserExt> userList = this.criteriaQuery(conditions);
+        if (userList != null && userList.size() == 1) {
+            SysUserExt sysUser = userList.get(0);
+
+            SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+
+            //判断是否已有同活动下的用户绑定到该系统帐号
+            conditions.clear();
+            conditions.add(new EqCondition("sysUserId",sysUser.getId()));
+            conditions.add(new EqCondition("partyId",sessionUser.getPartyId()));
+
+            List<SysPartyUserLinkExt> sysPartyUserLinkExtList = sysPartyUserLinkService.criteriaQuery(conditions);
+            if(sysPartyUserLinkExtList != null && sysPartyUserLinkExtList.size() > 0)
+            {
+                PartyUserExt partyUserExt = partyUserService.load(sysPartyUserLinkExtList.get(0).getPartyUserId());
+                result.setStatus(1);
+                result.setMessage("同活动的["+partyUserExt.getUserName()+"]已绑定到该系统帐号");
+            }
+            else{
+                if (MD5Util.MD5(loginPwd).equals(sysUser.getLoginPwd())) {
+                    result.setStatus(0);
+
+                    SysPartyUserLinkExt sysPartyUserLinkExt = new SysPartyUserLinkExt();
+                    sysPartyUserLinkExt.setPartyUserId(sessionUser.getPartyUserId());
+                    sysPartyUserLinkExt.setJoinTime(new Date());
+                    sysPartyUserLinkExt.setPartyId(sessionUser.getPartyId());
+                    sysPartyUserLinkExt.setSysUserId(sysUser.getId());
+                    sysPartyUserLinkService.create(sysPartyUserLinkExt);
+
+                    result.setData(sysUser);
+                } else {
+                    result.setStatus(1);
+                    result.setMessage("密码不正确");
+                }
+            }
+        } else {
+            result.setStatus(1);
+            result.setMessage("活动账户不存在");
         }
 
         return result;

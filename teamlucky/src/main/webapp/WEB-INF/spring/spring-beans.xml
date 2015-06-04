@@ -5,12 +5,15 @@
 
     <bean id="sysUserService" class="com.tmlk.service.impl.SysUserServiceExt">
         <property name="sysUserDao" ref="sysUserDao"/>
+        <property name="sysPartyUserLinkService" ref="sysPartyUserLinkService"/>
+        <property name="partyUserService" ref="partyUserService"/>
     </bean>
     <bean id="sysLogService" class="com.tmlk.service.impl.SysLogServiceExt">
         <property name="sysLogDao" ref="sysLogDao" />
     </bean>
     <bean id="partyUserService" class="com.tmlk.service.impl.PartyUserServiceExt">
         <property name="partyUserDao" ref="partyUserDao"/>
+        <property name="sysPartyUserLinkService" ref="sysPartyUserLinkService"/>
     </bean>
     <bean id="sysPartyUserLinkService" class="com.tmlk.service.impl.SysPartyUserLinkServiceExt">
         <property name="sysPartyUserLinkDao" ref="sysPartyUserLinkDao"/>

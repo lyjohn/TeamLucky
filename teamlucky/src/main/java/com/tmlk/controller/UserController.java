@@ -4,10 +4,12 @@ package com.tmlk.controller;
  * Created by YangJunLin on 2015/4/18.
  */
 
+import com.alibaba.fastjson.JSON;
 import com.tmlk.framework.mybatis.EqCondition;
 import com.tmlk.framework.mybatis.ICondition;
 import com.tmlk.framework.mybatis.InCondition;
 import com.tmlk.framework.mybatis.Order;
+import com.tmlk.framework.session.SessionStatus;
 import com.tmlk.framework.session.SessionUser;
 import com.tmlk.framework.util.Constants;
 import com.tmlk.framework.util.FormatUtils;
@@ -40,6 +42,8 @@ public class UserController {
 
     private static final Logger logger = Logger.getLogger(UserController.class);
 
+    private static SessionStatus sessionStatus = SessionStatus.getInstance();
+
     @Autowired
     private ISysUserServiceExt sysUserService;
 
@@ -58,7 +62,7 @@ public class UserController {
     @Autowired
     private IMessageServiceExt messageService;
 
-    @RequestMapping(value = {"/","/index"})
+    @RequestMapping(value = {"/", "/index"})
     public String show(@ModelAttribute SysUserModel sysUserModel, ModelMap model, HttpSession session) throws IOException {
         SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
 
@@ -71,7 +75,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/sprofile")
-    public String goSysUserProfile(@ModelAttribute SysUserModel sysUserModel, ModelMap model, HttpSession session){
+    public String goSysUserProfile(@ModelAttribute SysUserModel sysUserModel, ModelMap model, HttpSession session) {
         SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
 
         SysUserExt sysUserExt = sysUserService.load(sessionUser.getSysUserId());
@@ -84,16 +88,16 @@ public class UserController {
 
     @RequestMapping(value = "/scontact")
     @ResponseBody
-    public JsonResult doContactSave(@ModelAttribute SysUserExt sysUserExt, ModelMap model, HttpSession session){
+    public JsonResult doContactSave(@ModelAttribute SysUserExt sysUserExt, ModelMap model, HttpSession session) {
         JsonResult result = new JsonResult();
-        try{
-            SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+        try {
+            SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
             sysUserExt.setId(sessionUser.getSysUserId());
 
-            sysUserService.updateProfile(sysUserExt,2);
+            sysUserService.updateProfile(sysUserExt, 2);
 
             result.setStatus(0);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.trace(ex);
             result.setMessage("保存失败");
         }
@@ -102,16 +106,16 @@ public class UserController {
 
     @RequestMapping(value = "/sintro")
     @ResponseBody
-    public JsonResult doIntroSave(@ModelAttribute SysUserExt sysUserExt, ModelMap model, HttpSession session){
+    public JsonResult doIntroSave(@ModelAttribute SysUserExt sysUserExt, ModelMap model, HttpSession session) {
         JsonResult result = new JsonResult();
-        try{
-            SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+        try {
+            SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
             sysUserExt.setId(sessionUser.getSysUserId());
 
-            sysUserService.updateProfile(sysUserExt,1);
+            sysUserService.updateProfile(sysUserExt, 1);
 
             result.setStatus(0);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.trace(ex);
             result.setMessage("保存失败");
         }
@@ -120,23 +124,23 @@ public class UserController {
 
     @RequestMapping(value = "/spwd")
     @ResponseBody
-    public JsonResult doPwdSave(@RequestParam(value = "oldPwd",required = true) String oldPwd,@RequestParam(value = "newPwd",required = true) String newPwd, HttpSession session){
+    public JsonResult doPwdSave(@RequestParam(value = "oldPwd", required = true) String oldPwd, @RequestParam(value = "newPwd", required = true) String newPwd, HttpSession session) {
         JsonResult result = new JsonResult();
-        try{
-            SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+        try {
+            SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
 
             SysUserExt sysUserExt = sysUserService.load(sessionUser.getSysUserId());
 
-            if(MD5Util.MD5(oldPwd).equals(sysUserExt.getLoginPwd())){
+            if (MD5Util.MD5(oldPwd).equals(sysUserExt.getLoginPwd())) {
                 sysUserExt.setLoginPwd(MD5Util.MD5(newPwd));
-                sysUserService.updateProfile(sysUserExt,3);
+                sysUserService.updateProfile(sysUserExt, 3);
 
                 result.setStatus(0);
                 result.setMessage("修改密码成功");
-            }else{
+            } else {
                 result.setMessage("旧密码不不正确");
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.trace(ex);
             result.setMessage("保存失败");
         }
@@ -144,7 +148,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/pprofile")
-    public String goPartyUserProfile(@ModelAttribute PartyUserModel partyUserModel, ModelMap model, HttpSession session){
+    public String goPartyUserProfile(@ModelAttribute PartyUserModel partyUserModel, ModelMap model, HttpSession session) {
         SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
 
         PartyUserExt partyUserExt = partyUserService.load(sessionUser.getPartyUserId());
@@ -158,16 +162,16 @@ public class UserController {
 
     @RequestMapping(value = "/pcontact")
     @ResponseBody
-    public JsonResult doContactSave(@ModelAttribute PartyUserExt partyUserExt, ModelMap model, HttpSession session){
+    public JsonResult doContactSave(@ModelAttribute PartyUserExt partyUserExt, ModelMap model, HttpSession session) {
         JsonResult result = new JsonResult();
-        try{
-            SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+        try {
+            SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
             partyUserExt.setId(sessionUser.getPartyUserId());
 
             partyUserService.updateProfile(partyUserExt, 2);
 
             result.setStatus(0);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.trace(ex);
             result.setMessage("保存失败");
         }
@@ -176,16 +180,16 @@ public class UserController {
 
     @RequestMapping(value = "/pintro")
     @ResponseBody
-    public JsonResult doIntroSave(@ModelAttribute PartyUserExt partyUserExt, ModelMap model, HttpSession session){
+    public JsonResult doIntroSave(@ModelAttribute PartyUserExt partyUserExt, ModelMap model, HttpSession session) {
         JsonResult result = new JsonResult();
-        try{
-            SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+        try {
+            SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
             partyUserExt.setId(sessionUser.getPartyUserId());
 
             partyUserService.updateProfile(partyUserExt, 1);
 
             result.setStatus(0);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.trace(ex);
             result.setMessage("保存失败");
         }
@@ -194,23 +198,23 @@ public class UserController {
 
     @RequestMapping(value = "/ppwd")
     @ResponseBody
-    public JsonResult doPPwdSave(@RequestParam(value = "oldPwd",required = true) String oldPwd,@RequestParam(value = "newPwd",required = true) String newPwd, HttpSession session){
+    public JsonResult doPPwdSave(@RequestParam(value = "oldPwd", required = true) String oldPwd, @RequestParam(value = "newPwd", required = true) String newPwd, HttpSession session) {
         JsonResult result = new JsonResult();
-        try{
-            SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+        try {
+            SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
 
             PartyUserExt partyUserExt = partyUserService.load(sessionUser.getPartyUserId());
 
-            if(MD5Util.MD5(oldPwd).equals(partyUserExt.getLoginPwd())){
+            if (MD5Util.MD5(oldPwd).equals(partyUserExt.getLoginPwd())) {
                 partyUserExt.setLoginPwd(MD5Util.MD5(newPwd));
-                partyUserService.updateProfile(partyUserExt,3);
+                partyUserService.updateProfile(partyUserExt, 3);
 
                 result.setStatus(0);
                 result.setMessage("修改密码成功");
-            }else{
+            } else {
                 result.setMessage("旧密码不不正确");
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.trace(ex);
             result.setMessage("保存失败");
         }
@@ -219,27 +223,27 @@ public class UserController {
 
     @RequestMapping(value = "/partylist")
     @ResponseBody
-    public JsonResult goPartyList(HttpSession session){
+    public JsonResult goPartyList(HttpSession session) {
         JsonResult result = new JsonResult();
         try {
             SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
 
             List<ICondition> conditions = new ArrayList<ICondition>();
-            conditions.add(new EqCondition("sysUserId",sessionUser.getSysUserId()));
+            conditions.add(new EqCondition("sysUserId", sessionUser.getSysUserId()));
 
             List<Order> orders = new ArrayList<Order>();
             orders.add(Order.desc("joinTime"));
 
             //系统用户和活动用户的关联表
-            List<SysPartyUserLinkExt> sysPartyUserLinkExts = sysPartyUserLinkService.criteriaQuery(conditions,orders);
+            List<SysPartyUserLinkExt> sysPartyUserLinkExts = sysPartyUserLinkService.criteriaQuery(conditions, orders);
 
             List<PartyExt> partyExts = new ArrayList<PartyExt>();
 
-            for(SysPartyUserLinkExt sysPartyUserLinkExt : sysPartyUserLinkExts){
+            for (SysPartyUserLinkExt sysPartyUserLinkExt : sysPartyUserLinkExts) {
                 PartyExt partyExt = partyService.load(sysPartyUserLinkExt.getPartyId());
 
                 PartyUserExt partyUserExt = partyUserService.load(sysPartyUserLinkExt.getPartyUserId());
-                if(partyUserExt.getGroupId() != 0 && partyUserExt.getUserStatus() > 6)//即已成功分配了团队小组
+                if (partyUserExt.getGroupId() != 0 && partyUserExt.getUserStatus() > 6)//即已成功分配了团队小组
                 {
                     partyExt.setGroup(partyGroupService.load(partyUserExt.getGroupId()));
                 }
@@ -249,7 +253,7 @@ public class UserController {
 
             result.setData(partyExts);
             result.setStatus(0);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             result.setMessage(ex.getMessage());
         }
         return result;
@@ -257,7 +261,7 @@ public class UserController {
 
     @RequestMapping(value = "/message")
     @ResponseBody
-    public JsonResult go(@ModelAttribute MessageModel messageModel ,ModelMap model, HttpSession session){
+    public JsonResult go(@ModelAttribute MessageModel messageModel, ModelMap model, HttpSession session) {
         JsonResult result = new JsonResult();
         try {
             SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
@@ -288,16 +292,15 @@ public class UserController {
             List<Order> orders = new ArrayList<Order>();
             orders.add(Order.desc("messageTime"));
 
-            List<MessageExt> messageExtList = messageService.criteriaQuery(conditions,orders);
+            List<MessageExt> messageExtList = messageService.criteriaQuery(conditions, orders);
 
             result.setData(messageExtList);
             result.setStatus(0);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             result.setMessage(ex.getMessage());
         }
         return result;
     }
-
 
 
 //    @RequestMapping(value="/users/{userId}")：{×××}占位符，  请求的 URL 可以是  “/users/123456”或
@@ -323,6 +326,65 @@ public class UserController {
         sysUserModel.setSysUserExt(sysUserExt);
         model.addAttribute("model", sysUserModel);
         return "/user/index";
+    }
+
+    @RequestMapping(value = "/lkpartyuser")
+    @ResponseBody
+    public JsonResult linkPartyUser(@RequestParam(value = "loginName", required = true) String loginName, @RequestParam(value = "loginPwd", required = true) String loginPwd, HttpServletRequest request, HttpSession session) {
+        JsonResult result = new JsonResult();
+        try {
+            JsonResult loginResult = null;
+            if (loginName.indexOf('_') > 0) { //有下划线，是活动用户
+                loginResult = partyUserService.bind(loginName, loginPwd, session);
+
+                if(loginResult.getStatus()==0) {
+                    List<PartyExt> partyExts = new ArrayList<PartyExt>();
+                    SysPartyUserLinkExt sysPartyUserLinkExt = (SysPartyUserLinkExt) loginResult.getData();
+                    PartyExt partyExt = partyService.load(sysPartyUserLinkExt.getPartyId());
+
+                    PartyUserExt partyUserExt = partyUserService.load(sysPartyUserLinkExt.getPartyUserId());
+                    if (partyUserExt.getGroupId() != 0 && partyUserExt.getUserStatus() > 6)//即已成功分配了团队小组
+                    {
+                        partyExt.setGroup(partyGroupService.load(partyUserExt.getGroupId()));
+                    }
+
+                    partyExts.add(partyExt);
+
+                    result.setData(partyExts);
+                    result.setStatus(0);
+                }else{
+                    result.setMessage(loginResult.getMessage());
+                }
+            } else
+                result.setMessage("活动用户帐号必须有_下划线");
+        } catch (Exception ex) {
+            result.setMessage(ex.getMessage());
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/lksysuser")
+    @ResponseBody
+    public JsonResult linkSysUser(@RequestParam(value = "loginName", required = true) String loginName, @RequestParam(value = "loginPwd", required = true) String loginPwd, HttpServletRequest request, HttpSession session) {
+        JsonResult result = new JsonResult();
+        try {
+            JsonResult loginResult = null;
+            if (loginName.indexOf('_') == -1 ) { //系统用户没有下划线
+                loginResult = sysUserService.bind(loginName, loginPwd, session);
+
+                if(loginResult.getStatus()==0) {
+                    SysUserExt sysUserExt = (SysUserExt)loginResult.getData();
+                    sessionStatus.checkAndBindSysUser(session,sysUserExt);
+                    result.setStatus(0);
+                }else{
+                    result.setMessage(loginResult.getMessage());
+                }
+            } else
+                result.setMessage("系统用户帐号没有_下划线");
+        } catch (Exception ex) {
+            result.setMessage(ex.getMessage());
+        }
+        return result;
     }
 
 }

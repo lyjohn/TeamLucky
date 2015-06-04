@@ -207,7 +207,19 @@ public class SysLogAspect {
                 sysLogExt.setUserName(sysUserExt.getLoginName());
                 sysLogExt.setLogObjId(0L);
                 sysLogExt.setLogContent(JSONUtil.object2JsonString(sysLogExt));
-            } else if (code == 201 || code==203) {//创建活动 || 编辑活动
+            }else if(code == 104){ //系统用户绑定活动用户
+                SysUserExt sysUserExt = (SysUserExt) joinPoint.getArgs()[0];
+
+                sysLogExt.setUserName(sysUserExt.getLoginName());
+                sysLogExt.setLogObjId(0L);
+                sysLogExt.setLogContent(JSONUtil.object2JsonString(sysLogExt));
+            }else if(code==105){//活动用户关联系统用户
+                SysUserExt sysUserExt = (SysUserExt) joinPoint.getArgs()[0];
+
+                sysLogExt.setUserName(sysUserExt.getLoginName());
+                sysLogExt.setLogObjId(0L);
+                sysLogExt.setLogContent(JSONUtil.object2JsonString(sysLogExt));
+            }else if (code == 201 || code==203) {//创建活动 || 编辑活动
                 PartyExt partyExt = (PartyExt)returnValue;
 
                 sysLogExt.setLogObjId(partyExt.getId());

@@ -63,10 +63,10 @@
                 <dt>
                     <a href="javascript:;">
                         <img src="${ctx}/avatar/party/${model.partyExt.id}" class="header">
-	                	<span class="edit_person_pic" style="overflow:hidden;">
-	                		<input id="user_avatar" name="file" type="file"
+                        <span class="edit_person_pic" style="overflow:hidden;">
+                            <input id="user_avatar" name="file" type="file"
                                    style="opacity:0; width:200px;height:200px;position:absolute;left:-50px;"/>
-	                	</span>
+                        </span>
                     </a>
                 </dt>
             </dl>
@@ -95,14 +95,14 @@
     <div class="persion_section">
         <div class="person_detail_tab party_tab">
             <ul>
-                <li data-modal="tab" data-tab="myDetails" class="current_detail">基本配置</li>
-                <li data-modal="tab" data-tab="myMembers">成员管理</li>
+                <li data-modal="tab" data-tab="myDetails" data-load=true class="current_detail">基本配置</li>
+                <li data-modal="tab" data-tab="myMembers" data-load=false>成员管理</li>
                 <c:if test="${model.partyExt.isGroup}">
-                    <li data-modal="tab" data-tab="myGroups">小组管理</li>
+                    <li data-modal="tab" data-tab="myGroups" data-load=false>小组管理</li>
                 </c:if>
-                <li data-modal="tab" data-tab="myNews">新闻通知</li>
-                <li data-modal="tab" data-tab="myDocuments">文档维护</li>
-                <li data-modal="tab" data-tab="myForums">论坛维护</li>
+                <li data-modal="tab" data-tab="myNews" data-load=false>新闻通知</li>
+                <li data-modal="tab" data-tab="myDocuments" data-load=false>文档维护</li>
+                <li data-modal="tab" data-tab="myForums" data-load=false>论坛维护</li>
             </ul>
         </div>
         <div class="aboutMe">
@@ -181,26 +181,52 @@
                     </ul>
                     <div class="connection_action_form">
                         <a class="download" href="${ctx}/party/exportModel" target="_blank">活动成员导入模板.xlsx</a>
-                        <a class="import_member button button--secondary" href="#" data-method="post" rel="nofollow" style="overflow:hidden;position: relative;">导入成员
+                        <a class="import_member button button--secondary" href="#" data-method="post" rel="nofollow" style="overflow:hidden;position: relative; margin-right:5px;">批量导入
                             <input id="import_user" name="file" type="file" style="opacity:0; width:200px;height:200px;position:absolute;right: 0;top: 0;">
+                        </a>
+                        <a class="add_partyuser button button--secondary" href="#" data-method="post" rel="nofollow" style="overflow:hidden;position: relative;">手动添加
                         </a>
                     </div>
                 </div>
                 <div class="connection_list_con clearfix">
-
+                    <table class="table table-striped member-table">
+                        <thead>
+                        <tr>
+                            <th style="width:11%;min-width:50px">帐号</th>
+                            <th style="width:8%;min-width:50px">昵称</th>
+                            <th style="width:7%;min-width:20px">性别</th>
+                            <th style="width:13%;min-width:100px">简介</th>
+                            <th style="width:8%;min-width:50px">电话</th>
+                            <th style="width:8%;min-width:50px">邮箱</th>
+                            <th style="width:6%;min-width:50px">QQ</th>
+                            <th style="width:6%;min-width:50px">微信</th>
+                            <th style="width:8%;min-width:50px">所属团队</th>
+                            <th style="width:6%;min-width:50px">状态</th>
+                            <th style="width:10%;min-width:100px">上次登录日期</th>
+                            <th style="width:13%;min-width:50px">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <c:if test="${model.partyExt.isGroup}">
                 <div nodetype="myGroups" nodeindex="my2" data-modal="tab-layer" class="myGroups">
-                    <div data-bind="collect" class="mod-my-collect">
-                        <div class="silder-wraper">
-
-                            <div class="operate clearfix"></div>
-                        </div>
-                        <div class="silder-content">
-                            <ul class="J-more"></ul>
-                        </div>
-                        <a href="#" class="more" style="display: none;">显示更多<i class="icon-angle-down"></i></a>
+                    <div class="connection_list_con clearfix">
+                        <table class="table table-striped member-table">
+                            <thead>
+                            <tr>
+                                <th style="width:15%;min-width:50px">名称</th>
+                                <th style="width:50%;min-width:100px">描述</th>
+                                <th style="width:15%;min-width:100px">创建日期</th>
+                                <th style="width:10%;min-width:20px">人数</th>
+                                <th style="width:10%;min-width:20px">活跃度</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </c:if>
@@ -244,7 +270,6 @@
     </div>
     <div class="pop_edit edit_intro">
         <h3>编辑简介</h3>
-
         <div style="background: #f3f3f3; border:1px solid #DCDCDC; margin-bottom:30px; padding:0 17px; color:#333; font-size:16px; line-height:30px;">
             <span>活动识别码 :</span><span style="color: #666666; margin-left:15px;"><c:out
                 value="${model.partyExt.partyCode}"></c:out></span>
@@ -272,6 +297,35 @@
         </div>
         <div class="success"><a href="#" nodetype="cancel" class="button">取消</a>
             <a class="js_save button button--secondary" href="#" data-method="post" rel="nofollow">确定</a>
+        </div>
+    </div>
+    <div class="pop_edit reg_partyuser">
+        <h3>创建活动用户</h3>
+        <div class="context">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="inputPartyUser" class="col-sm-3 control-label">* 用户帐号</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputPartyUser" name="inputPartyUser" placeholder="活动的登录帐号，不包含_" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPartyPwd" class="col-sm-3 control-label">* 用户密码</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputPartyPwd" name="inputPartyPwd" placeholder="活动用户的密码，默认 123456" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName" class="col-sm-3 control-label">用户昵称</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputUserName" name="inputUserName" placeholder="用户的显示名名称" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="success">
+            <a href="#" nodetype="cancel" class="button">取消</a>
+            <a class="js_save button button--secondary" href="#" data-method="post" rel="nofollow">创建</a>
         </div>
     </div>
     <div class="pop_edit edit_partyseting">
@@ -353,8 +407,55 @@
 <script type="text/javascript" src="${ctx}/resource/plugins/datetime/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/plugins/datetime/locales/bootstrap-datepicker.zh-CN.js"></script>
 
+<script type="text/javascript" src="${ctx}/resource/js/template-native.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/common.js"></script>
 
+<script id="partyuserlist" type="text/html">
+    ${'<'}% for(var i = 0; i < list.length; i++) { %${'>'}
+    ${'<'}% if( list[i].statusName == "已禁用") { %${'>'}
+    <tr class="danger">
+        ${'<'}% }else{ %${'>'}
+    <tr class="">
+        ${'<'}% } %${'>'}
+        <td><img alt="${'<'}%= list[i].userName %${'>'}" src="${ctx}/avatar/user/2/${'<'}%= list[i].id%${'>'}" /><span class="user_loginname">${'<'}%= list[i].loginName %${'>'}</span></td>
+        <td>${'<'}%= list[i].userName %${'>'}</td>
+        <td>${'<'}%= list[i].sex %${'>'}</td>
+        <td>${'<'}%= list[i].userRemark %${'>'}</td>
+        <td>${'<'}%= list[i].tel %${'>'}</td>
+        <td>${'<'}%= list[i].email %${'>'}</td>
+        <td>${'<'}%= list[i].qq %${'>'}</td>
+        <td>${'<'}%= list[i].weiXin %${'>'}</td>
+        <td>
+            ${'<'}% if( list[i].group == null) { %${'>'}
+            无组织
+            ${'<'}% }else{ %${'>'}
+            ${'<'}%= list[i].group.groupName%${'>'}
+            ${'<'}% } %${'>'}
+        </td>
+        <td>${'<'}%= list[i].statusName %${'>'}</td>
+        <td>${'<'}%= list[i].lastLoginTimeStr %${'>'}</td>
+        <td class="table-actions" data-id="${'<'}%= list[i].id%${'>'}">
+            ${'<'}% if( list[i].statusName == "已禁用") { %${'>'}
+            <a class='user_valid' data-setvalid=true>激活</a>
+            ${'<'}% }else{ %${'>'}
+            <a class='user_valid' data-setvalid=false>禁用</a>
+            ${'<'}% } %${'>'}
+            <a class='action_resetpwd'>重置密码</a>
+        </td>
+    </tr>
+    ${'<'}% } %${'>'}
+</script>
+<script id="partygrouplist" type="text/html">
+    ${'<'}% for(var i = 0; i < list.length; i++) { %${'>'}
+    <tr>
+        <td><img alt="${'<'}%= list[i].groupName %${'>'}" src="${ctx}/avatar/group/${'<'}%= list[i].id%${'>'}" /><span class="user_loginname">${'<'}%= list[i].groupName %${'>'}</span></td>
+        <td>${'<'}%= list[i].groupRemark %${'>'}</td>
+        <td>${'<'}%= list[i].createTimeStr %${'>'}</td>
+        <td>${'<'}%= list[i].memberCount %${'>'}</td>
+        <td>${'<'}%= list[i].hotCount %${'>'}</td>
+    </tr>
+    ${'<'}% } %${'>'}
+</script>
 <script type="text/javascript">
     var layerLoadIndex = 0;
     $(function () {
@@ -385,6 +486,17 @@
                 title: false,
                 area: [width + 'px', height + 'px'],
                 content: $(".edit_intro")
+            });
+        }).on("click",".add_partyuser",function(){
+            $(".reg_partyuser").show();
+            var width = $(".reg_partyuser").width();
+            var height = $(".reg_partyuser").height();
+            layer.open({
+                zIndex: 1000,
+                type: 1,
+                title: false,
+                area: [width + 'px', height + 'px'],
+                content: $(".reg_partyuser")
             });
         }).on("click", ".pop_edit a[nodetype='cancel']", function () { //取消按钮
             layer.closeAll();
@@ -460,6 +572,43 @@
                             $(".public_view").text("私密活动").addClass("info_null");
 
                         $(".person-sign span").text(pRemark);
+                    }
+                    else
+                        layer.msg(res.message, {icon: 5, offset: '110px'});
+                },
+                error: function (data, status, e) {
+                    layer.closeAll();
+                    layer.msg("保存失败", {icon: 5, offset: '110px'});
+                }
+            })
+        }).on("click", ".reg_partyuser .js_save", function () {//创建活动帐号
+            var puName = $(".reg_partyuser #inputPartyUser").val();
+            var puPwd = $(".reg_partyuser #inputPartyPwd").val();
+            var puNick= $(".reg_partyuser #inputUserName").val();
+
+            if (puName == "") {
+                layer.msg("帐号不能为空", {icon: 5, offset: "110px"});
+                return false;
+            }
+
+            if (puName.indexOf("_") > -1) {
+                layer.msg("帐号不能包含_，系统会自动添加", {icon: 5, offset: "110px"});
+                return false;
+            }
+
+            var postDate = {loginName: puName, loginPwd: puPwd, userName: puNick};
+            $.ajax({
+                url: "${ctx}/party/createuser",
+                dataType: "json",
+                data: postDate,
+                type: "post",
+                success: function (res) {
+                    if (res.status == 0) {
+                        layer.closeAll();
+
+                        layer.msg("创建成员成功", {icon: 6, offset: '110px'});
+
+                        $(".reg_partyuser input").val("");
                     }
                     else
                         layer.msg(res.message, {icon: 5, offset: '110px'});
@@ -546,6 +695,7 @@
             avatarResize();
             return false;
         }).on("click", ".person_detail_tab li", function () {
+            var thisli = $(this);
             var nTab = $(this).data("tab");
             var oTab = $(".aboutMe .current_content").attr("nodetype");
 
@@ -553,7 +703,48 @@
             $(".person_detail_tab .current_detail").removeClass("current_detail");
 
             $(this).addClass("current_detail");
-            $(".aboutMe ." + nTab).addClass("current_content");
+            $(".aboutMe ."+nTab).addClass("current_content");
+
+            if(!thisli.data("load")){
+                //加载数据
+                layer.load(2);
+
+                if(nTab == "myMembers"){
+                    $.get("${ctx}/party/userlist",{},function(result){
+                        if(result.status==0){
+                            var data = {list:result.data};
+                            var html = template('partyuserlist',data);
+                            $(".myMembers table tbody").html(html);
+
+                            layer.closeAll();
+                            thisli.data("load",true);
+                        }else{
+                            layer.closeAll();
+                            layer.msg(result.message,{icon:6,offset:'110px'});
+                        }
+                    },"json")
+                }
+                else if(nTab == "myGroups"){
+                    $.get("${ctx}/party/grouplist",{},function(result){
+                        if(result.status==0){
+                            var data = {list:result.data};
+                            var html = template('partygrouplist',data);
+                            $(".myGroups table tbody").html(html);
+
+                            layer.closeAll();
+                            thisli.data("load",true);
+                        }else{
+                            layer.closeAll();
+                            layer.msg(result.message,{icon:6,offset:'110px'});
+                        }
+                    },"json")
+                }
+                else{
+                    layer.closeAll();
+                    layer.msg("功能开发中...",{icon:6,offset:'110px'});
+                    thisli.data("load",true);
+                }
+            }
         });
 
         //图片加载完成之后
@@ -612,6 +803,44 @@
                     $("#photo_popup").hide();
                 }
             });
+        });
+
+        $(document).on("click",".myMembers .table-actions a.user_valid",function(){
+            var thisa = $(this);
+            var thistr = $(this).parent().parent();
+            var userId = $(this).parent("td").data("id");
+            var setvalid = $(this).data("setvalid");
+
+            $.post("${ctx}/party/uservalid",{userId:userId,setvalid:setvalid},function(result){
+                if(result.status==0){
+                    if(setvalid){
+                        thisa.data("setvalid",!setvalid);
+
+                        layer.msg("激活成功",{icon:6,offset:'110px'});
+                        thisa.text("禁用");
+                        thistr.removeClass("danger");
+                    }else{
+                        thisa.data("setvalid",!setvalid);
+
+                        layer.msg("禁用成功",{icon:6,offset:'110px'});
+                        thisa.text("激活");
+                        thistr.addClass("danger");
+                    }
+                }else{
+                    layer.msg(result.message,{icon:5,offset:'110px'});
+                }
+            },"json")
+
+        }).on("click",".myMembers .table-actions a.action_resetpwd",function(){
+            var userId = $(this).parent("td").data("id");
+
+            $.post("${ctx}/party/resetpwd",{userId:userId},function(result){
+                if(result.status==0){
+                    layer.msg(result.message,{icon:6,offset:'110px'});
+                }else{
+                    layer.msg(result.message,{icon:5,offset:'110px'});
+                }
+            },"json")
         });
 
     });

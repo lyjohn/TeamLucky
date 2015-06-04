@@ -6,6 +6,11 @@
     SessionUser sessionUser = (SessionUser) request.getSession().getAttribute(
             Constants.SESSION_USER);
 
+    Boolean canC = (Boolean)request.getSession().getAttribute(Constants.SESSION_AUTOCREATE);
+    boolean canCreate = false;
+    if(canC != null)
+        canCreate = canC;
+
     //1:活动界面 0:系统界面
     String type = request.getParameter("type");
     //-1无active
@@ -38,9 +43,9 @@
             <%} else {%>
             <li class="js_acthome"><a href="${ctx}/party/index/<%=sessionUser.getPartyId()%>">活动首页</a></li>
             <li class="js_userset"><a href="${ctx}/user/pprofile">我的名片</a></li>
-            <% if(sessionUser.getGroupId() == 0) {%>
+            <% if(sessionUser.getGroupId() == 0 && canCreate) {%>
             <li class="js_groupcreate"><a href="${ctx}/group/create">创建小组</a></li>
-            <% } else {%>
+            <% } else if(sessionUser.getGroupId() > 0) {%>
             <li class="js_groupindex"><a href="${ctx}/group/index">我的团队</a></li>
             <% } %>
             <% if(sessionUser.isPartyAdmin()){%>
@@ -58,7 +63,6 @@
         var cur = "<%= cur %>";
         if(cur!="")
             $(".js_"+cur).addClass("activate");
-
 
         $(document).on("click",".js_aboutus",function(){
             var pos = $("#footer").position();
