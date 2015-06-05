@@ -19,4 +19,6 @@ public interface IPartyUserServiceExt extends IPartyUserService{
     public PartyUserExt uploadAvatar(String filePath,String partyUserId);
 
     public PartyUserExt updateProfile(PartyUserExt partyUserExt,int updateType);
+
+    public PartyUserExt joinGroup(PartyUserExt partyUserExt);
 }

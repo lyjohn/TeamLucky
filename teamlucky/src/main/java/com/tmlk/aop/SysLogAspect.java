@@ -239,6 +239,11 @@ public class SysLogAspect {
 
                 sysLogExt.setLogObjId(partyGroupExt.getId());
                 sysLogExt.setLogContent(JSONUtil.object2JsonString(partyGroupExt));
+            }else if(code == 302){//加入小组
+                PartyUserExt partyUserExt = (PartyUserExt)returnValue;
+
+                sysLogExt.setLogObjId(partyUserExt.getGroupId());
+                sysLogExt.setLogContent(JSONUtil.object2JsonString(partyUserExt));
             }else if(code == 401){
                 NewsExt newsExt = (NewsExt)returnValue;
 

@@ -171,7 +171,7 @@
             <div nodetype="myMembers" nodeindex="my2" data-modal="tab-layer" class="myMembers">
                 <div class="connection_title_con">
                     <ul>
-                        <li id="btnAllMember" class="current_foucus">所有成员(1)</li>
+                        <li id="btnAllMember" class="current_foucus">所有成员(0)</li>
                         <li class="interval_line"></li>
                         <li id="btnInValid" class="">已禁用(0)</li>
                         <li class="interval_line"></li>

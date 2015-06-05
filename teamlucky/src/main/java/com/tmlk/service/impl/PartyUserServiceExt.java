@@ -195,4 +195,17 @@ public class PartyUserServiceExt extends PartyUserService implements IPartyUserS
 
         return partyUserExtPer;
     }
+
+    /**
+     * 修改用户基本in洗
+     * @param partyUserExt 用户实体，承载需要变更的内容，某些项是空的
+     * @return
+     */
+    @Override
+    @SysServiceLog(description = "加入小组",code = 302)
+    public PartyUserExt joinGroup(PartyUserExt partyUserExt) {
+        this.update(partyUserExt);
+
+        return partyUserExt;
+    }
 }

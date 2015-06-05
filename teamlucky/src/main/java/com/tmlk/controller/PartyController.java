@@ -7,6 +7,7 @@ package com.tmlk.controller;
 import com.alibaba.fastjson.JSON;
 import com.tmlk.framework.mybatis.EqCondition;
 import com.tmlk.framework.mybatis.ICondition;
+import com.tmlk.framework.mybatis.InCondition;
 import com.tmlk.framework.mybatis.Order;
 import com.tmlk.framework.session.SessionStatus;
 import com.tmlk.framework.session.SessionUser;
@@ -14,6 +15,7 @@ import com.tmlk.framework.util.*;
 import com.tmlk.model.*;
 import com.tmlk.po.*;
 import com.tmlk.service.*;
+import com.tmlk.service.impl.PartyGroupService;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -35,6 +37,7 @@ import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -343,10 +346,39 @@ public class PartyController {
                 //TODO 用户进入活动 活动 小组 活跃度+1
 
                 PartyUserExt partyUserExt = partyUserService.load(sysPartyUserLinkExts.get(0).getPartyUserId());
+
                 sessionStatus.checkAndInParty(session, partyUserExt);
             }
 
+            conditions.clear();
+            conditions.add(new EqCondition("partyId", partyExt.getId()));
+
+            List<Order> orders = new ArrayList<Order>();
+            orders.add(Order.desc("groupStatus"));
+            orders.add(Order.desc("hotCount"));
+
+            List<PartyGroupExt> groupExtList = partyGroupService.criteriaQuery(conditions, orders);
+
+            partyModel.setPartyGroups(groupExtList);
+
+            conditions.clear();
+            conditions.add(new EqCondition("partyId", partyExt.getId()));
+            List<Integer> userStatusList = Arrays.asList(2, 4, 8, 10, 16);
+            conditions.add(new InCondition("userStatus", userStatusList));
+
+            orders.clear();
+            orders.add(Order.asc("userName"));
+
+            List<PartyUserExt> groupUserList = partyUserService.criteriaQuery(conditions, orders);
+            partyModel.setPartyUsers(groupUserList);
+
+            if (sessionUser.getGroupId() > 0)
+                model.addAttribute("join", false);
+            else
+                model.addAttribute("join", true);
+
             partyModel.setPartyExt(partyExt);
+
             model.addAttribute("model", partyModel);
             return "/party/index";
         }
@@ -567,22 +599,21 @@ public class PartyController {
         try {
 
             PartyUserExt partyUserExt = partyUserService.load(userId);
-            if(partyUserExt!=null){
-                if(partyUserExt.getUserStatus() == 16){
+            if (partyUserExt != null) {
+                if (partyUserExt.getUserStatus() == 16) {
                     throw new Exception("活动创建者不能禁用...");
                 }
 
                 int userStatus = partyUserExt.getUserStatus();
-                if(setvalid){//设置为激活
-                    partyUserExt.setUserStatus(userStatus-1);
-                }
-                else
-                    partyUserExt.setUserStatus(userStatus+1);
+                if (setvalid) {//设置为激活
+                    partyUserExt.setUserStatus(userStatus - 1);
+                } else
+                    partyUserExt.setUserStatus(userStatus + 1);
 
                 partyUserService.update(partyUserExt);
 
                 result.setStatus(0);
-            }else{
+            } else {
                 result.setMessage("用户不存在");
             }
         } catch (Exception ex) {
@@ -597,7 +628,7 @@ public class PartyController {
         JsonResult result = new JsonResult();
         try {
 
-            SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+            SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
             //只有活动创建者才能进入管理页面
             PartyExt partyExt = partyService.load(sessionUser.getPartyId());
             PartyUserExt partyUserExt = partyUserService.load(sessionUser.getPartyUserId());
@@ -616,7 +647,7 @@ public class PartyController {
                 } else {
                     result.setMessage("用户不存在");
                 }
-            }else
+            } else
                 result.setMessage("没有权限");
         } catch (Exception ex) {
             result.setMessage(ex.getMessage());

@@ -102,10 +102,10 @@
     <div class="persion_section">
         <div class="person_detail_tab party_tab">
             <ul>
-                <li data-modal="tab" data-tab="myTimeline" class="current_detail">小组动态</li>
-                <li data-modal="tab" data-tab="myNews">新闻通知</li>
-                <li data-modal="tab" data-tab="myDocs">文档</li>
-                <li data-modal="tab" data-tab="myForum">论坛</li>
+                <li data-modal="tab" data-tab="myTimeline" data-load=true class="current_detail">小组动态</li>
+                <li data-modal="tab" data-tab="myNews" data-load=false >新闻通知</li>
+                <li data-modal="tab" data-tab="myDocs" data-load=false >文档</li>
+                <li data-modal="tab" data-tab="myForum" data-load=false >论坛</li>
             </ul>
         </div>
         <div class="aboutMe">
@@ -113,7 +113,6 @@
                 <div class="mod_contact">
                     <a href="#" nodetype="contact-modify" class="modify fa fa-edit fa-2x"></a>
                     <ul class="clearfix">
-
                     </ul>
                 </div>
             </div>
@@ -131,6 +130,34 @@
                     </div>
                     <a href="#" class="more" style="display: none;">显示更多<i class="icon-angle-down"></i></a>
                 </div>
+            </div>
+        </div>
+        <div class="group_section">
+            <div class="section_title">
+                <i class="fa fa-group"></i>小组成员
+            </div>
+            <div class="section_content">
+                <ul>
+                    <c:forEach items="${ model.groupUsers }" var="var" varStatus="status">
+                        <li>
+                            <div class="media">
+                                <div class="media-left">
+                                    <img class="img-circle" src="${ctx}/avatar/user/2/<c:out value='${var.id}'></c:out>">
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading" id="media-heading"><c:out value="${var.userName}"></c:out>
+                                        <span class="time_lastlogin"><fmt:formatDate
+                                                value="${model.partyGroupExt.createTime}"
+                                                pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></span>
+                                    </h4>
+                                    <div class="media-content">
+                                        <c:out value="${var.userRemark}"></c:out>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </c:forEach>
+                </ul>
             </div>
         </div>
     </div>
@@ -332,7 +359,7 @@
         }).on("click", "#edit-photo #js-save", function () {
             avatarResize();
             return false;
-        }).on("click", ".person_detail_tab li", function () {
+        }).on("click", ".person_detail_tab li", function () {var thisli = $(this);
             var nTab = $(this).data("tab");
             var oTab = $(".aboutMe .current_content").attr("nodetype");
 
@@ -340,7 +367,21 @@
             $(".person_detail_tab .current_detail").removeClass("current_detail");
 
             $(this).addClass("current_detail");
-            $(".aboutMe ." + nTab).addClass("current_content");
+            $(".aboutMe ."+nTab).addClass("current_content");
+
+            if(!thisli.data("load")){
+                //加载数据
+                layer.load(2);
+
+                if(nTab == "myMembers"){
+
+                }
+                else{
+                    setTimeout(function(){layer.closeAll();},1000);
+                    // layer.msg("功能开发中...",{icon:6,offset:'110px'});
+                    thisli.data("load",true);
+                }
+            }
         });
 
         //图片加载完成之后
