@@ -1,19 +1,20 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : Dev
+ Source Server         : AliYun
  Source Server Type    : MySQL
  Source Server Version : 50624
- Source Host           : localhost
+ Source Host           : 101.200.73.94
  Source Database       : teamlucky
 
  Target Server Type    : MySQL
  Target Server Version : 50624
  File Encoding         : utf-8
 
- Date: 05/31/2015 02:17:16 AM
+ Date: 06/05/2015 20:34:23 PM
 */
 
+SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
@@ -137,7 +138,7 @@ CREATE TABLE `Party` (
   `hotCount` int(10) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `Party_createBy` (`createBy`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `PartyGroup`
@@ -159,7 +160,7 @@ CREATE TABLE `PartyGroup` (
   PRIMARY KEY (`id`),
   KEY `PartyGroup_partyId` (`partyId`),
   KEY `PartyGroup_createBy` (`createBy`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `PartyUser`
@@ -208,7 +209,7 @@ CREATE TABLE `SysLog` (
   `logObjId` bigint(13) DEFAULT NULL,
   `logContent` varchar(1000) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=349 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `SysPartyUserLink`
@@ -219,11 +220,12 @@ CREATE TABLE `SysPartyUserLink` (
   `sysUserId` varchar(32) NOT NULL,
   `partyUserId` varchar(32) NOT NULL,
   `partyId` bigint(13) NOT NULL,
+  `joinTime` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `SysPartyUserLink_sysUserId` (`sysUserId`),
   KEY `SysPartyUserLink_partyUserId` (`partyUserId`),
   KEY `SysPartyUserLink_partyId` (`partyId`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `SysUser`

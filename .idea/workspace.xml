@@ -2,17 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="26ad3f5f-b104-4da6-ab91-f1f3b8bda468" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/GroupController.java" afterPath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/GroupController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/PartyController.java" afterPath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/PartyController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/shared/_footer.jsp" afterPath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/shared/_footer.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/index.jsp" afterPath="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/group/index.jsp" afterPath="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/group/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/index.jsp" afterPath="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/index.jsp" afterPath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/group/index.jsp" afterPath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/group/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/party/index.jsp" afterPath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/party/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/webapp/resource/css/user-profile.css" afterPath="$PROJECT_DIR$/teamlucky/src/main/webapp/resource/css/user-profile.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/css/user-profile.css" afterPath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/css/user-profile.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="teamlucky.iws" />
@@ -92,11 +81,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PartyController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PartyController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/PartyController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="5677" max-vertical-offset="10905">
-              <caret line="389" column="0" selection-start-line="389" selection-start-column="0" selection-end-line="389" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.33246753" vertical-offset="3427" max-vertical-offset="10905">
+              <caret line="239" column="0" selection-start-line="239" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4494#4506#0" expanded="true" />
@@ -120,11 +109,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.91689754" vertical-offset="3224" max-vertical-offset="3645">
-              <caret line="237" column="7" selection-start-line="237" selection-start-column="7" selection-end-line="237" selection-end-column="7" />
+            <state vertical-scroll-proportion="-10.666667" vertical-offset="3224" max-vertical-offset="3645">
+              <caret line="232" column="0" selection-start-line="232" selection-start-column="0" selection-end-line="232" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1351,16 +1340,16 @@
       <workItem from="1433336284843" duration="8610000" />
       <workItem from="1433349137533" duration="9080000" />
       <workItem from="1433428045121" duration="18390000" />
-      <workItem from="1433474459644" duration="9957000" />
+      <workItem from="1433474459644" duration="10265000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="273596000" />
+    <option name="totallyTimeSpent" value="273904000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="781" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1380,7 +1369,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32880846" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35746607" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35746607" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32428357" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964234" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
@@ -1450,12 +1439,6 @@
           <line>154</line>
           <properties />
           <option name="timeStamp" value="90" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/PartyController.java</url>
-          <line>239</line>
-          <properties />
-          <option name="timeStamp" value="94" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -1873,32 +1856,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/PartyController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5677" max-vertical-offset="10905">
-          <caret line="389" column="0" selection-start-line="389" selection-start-column="0" selection-end-line="389" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4494#4506#0" expanded="true" />
-            <element signature="e#5553#5565#0" expanded="true" />
-            <element signature="e#5698#5705#0" expanded="true" />
-            <element signature="e#8656#8668#0" expanded="true" />
-            <element signature="e#9926#9938#0" expanded="true" />
-            <element signature="e#10869#10881#0" expanded="true" />
-            <element signature="e#11813#11825#0" expanded="true" />
-            <element signature="e#12851#12863#0" expanded="true" />
-            <element signature="e#13805#13812#0" expanded="true" />
-            <element signature="e#15626#15638#0" expanded="true" />
-            <element signature="e#16580#16587#0" expanded="true" />
-            <element signature="e#17894#17906#0" expanded="true" />
-            <element signature="e#18012#18019#0" expanded="true" />
-            <element signature="e#19104#19116#0" expanded="true" />
-            <element signature="e#19230#19237#0" expanded="true" />
-            <element signature="e#25376#25390#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/GroupController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="6457" max-vertical-offset="6885">
@@ -1920,9 +1877,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.91689754" vertical-offset="3224" max-vertical-offset="3645">
-          <caret line="237" column="7" selection-start-line="237" selection-start-column="7" selection-end-line="237" selection-end-column="7" />
+        <state vertical-scroll-proportion="-10.666667" vertical-offset="3224" max-vertical-offset="3645">
+          <caret line="232" column="0" selection-start-line="232" selection-start-column="0" selection-end-line="232" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/PartyController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33246753" vertical-offset="3427" max-vertical-offset="10905">
+          <caret line="239" column="0" selection-start-line="239" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4494#4506#0" expanded="true" />
+            <element signature="e#5553#5565#0" expanded="true" />
+            <element signature="e#5698#5705#0" expanded="true" />
+            <element signature="e#8656#8668#0" expanded="true" />
+            <element signature="e#9926#9938#0" expanded="true" />
+            <element signature="e#10869#10881#0" expanded="true" />
+            <element signature="e#11813#11825#0" expanded="true" />
+            <element signature="e#12851#12863#0" expanded="true" />
+            <element signature="e#13805#13812#0" expanded="true" />
+            <element signature="e#15626#15638#0" expanded="true" />
+            <element signature="e#16580#16587#0" expanded="true" />
+            <element signature="e#17894#17906#0" expanded="true" />
+            <element signature="e#18012#18019#0" expanded="true" />
+            <element signature="e#19104#19116#0" expanded="true" />
+            <element signature="e#19230#19237#0" expanded="true" />
+            <element signature="e#25376#25390#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
