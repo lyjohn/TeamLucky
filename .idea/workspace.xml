@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="26ad3f5f-b104-4da6-ab91-f1f3b8bda468" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/GroupController.java" afterPath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/GroupController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/service/IPartyUserServiceExt.java" afterPath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/service/IPartyUserServiceExt.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/PartyController.java" afterPath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/PartyController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/service/impl/PartyUserServiceExt.java" afterPath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/service/impl/PartyUserServiceExt.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/aop/SysLogAspect.java" afterPath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/aop/SysLogAspect.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/party/conf.jsp" afterPath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/party/conf.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/group/index.jsp" afterPath="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/group/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/index.jsp" afterPath="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/group/index.jsp" afterPath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/group/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/party/index.jsp" afterPath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/party/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/webapp/resource/css/user-profile.css" afterPath="$PROJECT_DIR$/teamlucky/src/main/webapp/resource/css/user-profile.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/css/user-profile.css" afterPath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/css/user-profile.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/shared/_footer.jsp" afterPath="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/shared/_footer.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="teamlucky.iws" />
@@ -72,11 +61,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user-profile.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="user-profile.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/resource/css/user-profile.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5477387" vertical-offset="49237" max-vertical-offset="49680">
-              <caret line="3297" column="25" selection-start-line="3297" selection-start-column="25" selection-end-line="3297" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="49237" max-vertical-offset="49680">
+              <caret line="3302" column="18" selection-start-line="3302" selection-start-column="18" selection-end-line="3302" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_footer.jsp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/shared/_footer.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.9529086" vertical-offset="571" max-vertical-offset="1005">
+              <caret line="61" column="6" selection-start-line="61" selection-start-column="6" selection-end-line="61" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -158,7 +157,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/MainController.java" />
         <option value="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/framework/session/SessionUser.java" />
         <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/errors/error.jsp" />
         <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/web.xml" />
@@ -209,6 +207,7 @@
         <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/index.jsp" />
         <option value="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/GroupController.java" />
         <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/resource/css/user-profile.css" />
+        <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/shared/_footer.jsp" />
       </list>
     </option>
   </component>
@@ -1387,12 +1386,12 @@
       <workItem from="1433336284843" duration="8610000" />
       <workItem from="1433349137533" duration="9080000" />
       <workItem from="1433428045121" duration="18390000" />
-      <workItem from="1433474459644" duration="6041000" />
+      <workItem from="1433474459644" duration="6160000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="269680000" />
+    <option name="totallyTimeSpent" value="269799000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="781" extended-state="6" />
@@ -1411,7 +1410,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329927" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32846716" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21530758" sideWeight="0.49756098" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21530758" sideWeight="0.49756098" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23378582" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1512,13 +1511,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/framework/util/ImageUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1354" max-vertical-offset="3810">
-          <caret line="108" column="37" selection-start-line="108" selection-start-column="37" selection-end-line="108" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/properties/app.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="397">
@@ -1948,8 +1940,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/resource/css/user-profile.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5477387" vertical-offset="49237" max-vertical-offset="49680">
-          <caret line="3297" column="25" selection-start-line="3297" selection-start-column="25" selection-end-line="3297" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="49237" max-vertical-offset="49680">
+          <caret line="3302" column="18" selection-start-line="3302" selection-start-column="18" selection-end-line="3302" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/shared/_footer.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9529086" vertical-offset="571" max-vertical-offset="1005">
+          <caret line="61" column="6" selection-start-line="61" selection-start-column="6" selection-end-line="61" selection-end-column="6" />
           <folding />
         </state>
       </provider>
