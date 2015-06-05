@@ -411,6 +411,7 @@
                     } else {
                         $(".js_userset").removeClass("hide")
                         $(".js_userset a").attr("href", "${ctx}/user/pprofile");
+                        window.location.href = "${ctx}/party/"
                     }
                 } else {
                     layer.msg(res.message, {icon: 5, offset: '110px'});

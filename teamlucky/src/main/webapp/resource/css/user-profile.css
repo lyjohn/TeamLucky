@@ -3259,6 +3259,9 @@
   margin-right: 5px;
   margin-bottom: 5px;
 }
+.partyIndex .myMembers ul.user_list > li.user_ingroup .media-heading{
+  color: #f65a5b;
+}
 .partyIndex .myMembers ul.user_list > li:nth-child(4n){
   margin-right: 0;
 }

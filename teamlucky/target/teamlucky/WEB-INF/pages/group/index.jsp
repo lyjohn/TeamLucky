@@ -251,7 +251,8 @@
 <script type="text/javascript">
     var layerLoadIndex = 0;
     $(function () {
-
+        //计算高度
+        $(".aboutMe").height($(".section_content ul li").length * 117)
         $(document).on("click", ".person-info-edit", function () {//修改基本信息
             $(".edit_intro").show();
             var width = $(".edit_intro").width();
