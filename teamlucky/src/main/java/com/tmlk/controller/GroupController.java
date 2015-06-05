@@ -316,17 +316,16 @@ public class GroupController {
      */
     @RequestMapping(value = "/edit")
     @ResponseBody
-    public JsonResult saveInto(@ModelAttribute PartyGroupExt partyGroupExt, HttpSession session){
+    public JsonResult saveInto(@ModelAttribute PartyGroupExt partyGroupExt, HttpSession session) {
         JsonResult result = new JsonResult();
-        try{
-            SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+        try {
+            SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
             partyGroupExt.setId(sessionUser.getGroupId());
 
             partyGroupService.updateGroup(partyGroupExt);
 
             result.setStatus(0);
-        }catch (Exception ex)
-        {
+        } catch (Exception ex) {
             result.setMessage(ex.getMessage());
             logger.trace(ex);
         }
@@ -335,43 +334,58 @@ public class GroupController {
 
     @RequestMapping(value = "/join")
     @ResponseBody
-    public JsonResult doJoinGroup(@RequestParam(value = "groupId", required = true) Long groupId, HttpSession session){
+    public JsonResult doJoinGroup(@RequestParam(value = "groupId", required = true) Long groupId, HttpSession session) {
         JsonResult result = new JsonResult();
-        try{
-            SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+        try {
+            SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
 
             PartyGroupExt partyGroupExt = partyGroupService.load(groupId);
             PartyUserExt partyUserExt = partyUserService.load(sessionUser.getPartyUserId());
 
-            if(partyGroupExt.getGroupStatus() == 2){ //组已满
-                result.setMessage("该组人数已满");
-            }else{
-                if(partyUserExt.getGroupId() > 0){
-                    throw new Exception("您是不是已经加入了其他小组");
-                }
-                if(partyGroupExt.getIsCustomJoin()){
-                    partyUserExt.setGroupId(partyGroupExt.getId());
-                    partyUserExt.setUserStatus(8);
-                }else{
-                    partyUserExt.setGroupId(partyGroupExt.getId());
-                    //partyUserExt.setUserStatus(4); //预备组员
-
-                    //TODO 为了测试效果 暂时都将所有加入的 直接置为正式的
-                    partyUserExt.setUserStatus(8);
-                }
-
-                partyUserService.joinGroup(partyUserExt);
-                if(partyGroupExt.getIsCustomJoin()){
-                    result.setMessage("成功加入小组【"+partyGroupExt.getGroupName()+"】");
-                }else{
-                    result.setMessage("申请加入小组【" + partyGroupExt.getGroupName() + "】,等待组长通过，只能同时申请一个小组");
-                }
-
-                result.setData(partyUserExt);
-                result.setStatus(0);
+            PartyExt partyExt = partyService.load(sessionUser.getPartyId());
+            if (partyGroupExt.getGroupStatus() == 2) { //组已满
+                throw new Exception("该组人数已满");
             }
-        }catch (Exception ex)
-        {
+
+            if (partyExt.getMemberNumMax() != 0 && partyExt.getMemberNumMax() == partyGroupExt.getMemberCount()) {
+                partyGroupExt.setGroupStatus(2);
+                partyGroupService.update(partyGroupExt);
+                throw new Exception("您所在的小组人数已达上限");
+            }
+
+            if (partyUserExt.getGroupId() > 0) {
+                throw new Exception("您是不是已经加入了其他小组");
+            }
+
+            if (partyGroupExt.getIsCustomJoin()) {
+                partyUserExt.setGroupId(partyGroupExt.getId());
+                partyUserExt.setUserStatus(8);
+            } else {
+                partyUserExt.setGroupId(partyGroupExt.getId());
+                //partyUserExt.setUserStatus(4); //预备组员
+
+                //TODO 为了测试效果 暂时都将所有加入的 直接置为正式的
+                partyUserExt.setUserStatus(8);
+            }
+
+            partyUserService.joinGroup(partyUserExt);
+            if (partyGroupExt.getIsCustomJoin()) {
+                result.setMessage("成功加入小组【" + partyGroupExt.getGroupName() + "】");
+
+                partyGroupExt.setMemberCount(partyGroupExt.getMemberCount() + 1);
+                partyGroupService.update(partyGroupExt);
+            } else {
+                //TODO 为了效果 暂时直接加入了 应该是审批之后才加入的
+                partyGroupExt.setMemberCount(partyGroupExt.getMemberCount() + 1);
+                partyGroupService.update(partyGroupExt);
+                result.setMessage("申请加入小组【" + partyGroupExt.getGroupName() + "】,等待组长通过，只能同时申请一个小组");
+            }
+
+
+            result.setData(partyUserExt);
+            result.setStatus(0);
+
+        } catch (Exception ex) {
             result.setMessage(ex.getMessage());
             logger.trace(ex);
         }
@@ -381,13 +395,15 @@ public class GroupController {
 
     @RequestMapping(value = "/invite")
     @ResponseBody
-    public JsonResult doInviteUser(@RequestParam(value = "userId", required = true) String userId, HttpSession session){
+    public JsonResult doInviteUser(@RequestParam(value = "userId", required = true) String userId, HttpSession session) {
         JsonResult result = new JsonResult();
-        try{
-            SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
+        try {
+            SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
+
+            PartyExt partyExt = partyService.load(sessionUser.getPartyId());
 
             PartyGroupExt partyGroupExt = partyGroupService.load(sessionUser.getGroupId());
-            if(partyGroupExt == null)
+            if (partyGroupExt == null)
                 throw new Exception("您未加入小组，不能邀请");
 
             PartyUserExt partyUserExt = partyUserService.load(sessionUser.getPartyUserId());
@@ -396,32 +412,39 @@ public class GroupController {
 //                throw new Exception("您不是小组的创建人，不能要请别人");
 //            }
             //不是自动进入的 并且邀请人不是创建人 则不能邀请
-            if(!partyGroupExt.getIsCustomJoin() && !partyUserExt.getId().equals(partyGroupExt.getCreateBy())){
+            if (!partyGroupExt.getIsCustomJoin() && !partyUserExt.getId().equals(partyGroupExt.getCreateBy())) {
                 throw new Exception("您没有邀请他人的权限");
             }
             PartyUserExt inviteWho = partyUserService.load(userId);
-            if(inviteWho==null)
+            if (inviteWho == null)
                 throw new Exception("您在邀请谁？");
 
+            if (partyGroupExt.getGroupStatus() == 2) //组已满
+                throw new Exception("您的小组人数已满");
 
-            if(partyGroupExt.getGroupStatus() == 2){ //组已满
-                result.setMessage("您的小组人数已满");
-            }else {
-                if (inviteWho.getGroupId() != 0) {
-                    result.setMessage("【" + inviteWho.getUserName() + "】已有小组");
-                } else {
-                    inviteWho.setGroupId(partyGroupExt.getId());
-                    inviteWho.setUserStatus(8);
-
-                    partyUserService.joinGroup(inviteWho);
-                    result.setMessage("成功邀请【" + inviteWho.getUserName() + "】加入小组【" + partyGroupExt.getGroupName() + "】");
-
-                    result.setData(partyGroupExt);
-                    result.setStatus(0);
-                }
+            if (partyExt.getMemberNumMax() != 0 && partyExt.getMemberNumMax() == partyGroupExt.getMemberCount()) {
+                partyGroupExt.setGroupStatus(2);
+                partyGroupService.update(partyGroupExt);
+                throw new Exception("您的小组人数已满");
             }
-        }catch (Exception ex)
-        {
+
+            if (inviteWho.getGroupId() != 0) {
+                result.setMessage("【" + inviteWho.getUserName() + "】已有小组");
+            } else {
+                inviteWho.setGroupId(partyGroupExt.getId());
+                inviteWho.setUserStatus(8);
+
+                partyUserService.joinGroup(inviteWho);
+                result.setMessage("成功邀请【" + inviteWho.getUserName() + "】加入小组【" + partyGroupExt.getGroupName() + "】");
+
+                partyGroupExt.setMemberCount(partyGroupExt.getMemberCount() + 1);
+                partyGroupService.update(partyGroupExt);
+
+                result.setData(partyGroupExt);
+                result.setStatus(0);
+
+            }
+        } catch (Exception ex) {
             result.setMessage(ex.getMessage());
             logger.trace(ex);
         }

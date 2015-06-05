@@ -52,6 +52,9 @@
                             Copyright Made in China © 2015 校缘派 版权所有
                         </small>
                     </div>
+                    <div class="grid-col-3 grid-col--no-spacing">
+                        <a href="https://github.com/lyjohn/TeamLucky" target="_blank">Source From <i style="margin-left:10px;" class="fa fa-github fa-lg"></i></a>
+                    </div>
                 </div>
             </div>
         </article>

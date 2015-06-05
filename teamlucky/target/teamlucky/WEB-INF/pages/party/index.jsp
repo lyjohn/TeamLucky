@@ -174,7 +174,7 @@
         var mWidth = $(".partyIndex").width();
         $(".user_list > li").width((mWidth-16)/4);
         $(document).on("click",".button_joingroup",function(){
-            var groupId = $("this").data("id");
+            var groupId = $(this).data("id");
             var thisbtn = $(this);
             $.post("${ctx}/group/join",{groupId:groupId},function(result){
                 if(result.status==0){
@@ -191,14 +191,15 @@
         }).on("click",".button_inviteuser",function(){
             var userId = $(this).data("id");
             var thisbtn = $(this);
-            var thisli = thisbtn.parent().parent();
+            var thisli = thisbtn.parent().parent().parent();
             $.post("${ctx}/group/invite",{userId:userId},function(result){
                 if(result.status==0){
                     layer.msg(result.message,{icon:6,offset:'110px'});
 
                     var groupdata = result.data;
-                    thisli.data("group",groupdata.id).addClass("user_ingroup").removeClass("user_along");
-                    //把申请按钮去掉
+                    thisli.data("group",groupdata.id);=
+                            thisli.addClass("user_ingroup").removeClass("user_along");
+                    //把按钮去掉
                     thisli.find(".media-hover").remove();
                     thisli.find(".media-action").remove();
                 }

@@ -322,14 +322,14 @@ public class PartyController {
     *  上面是活动管理功能模块
     */
 
-    @RequestMapping(value = "/index/{id}", method = RequestMethod.GET)
-    public String index(@PathVariable("id") Long id, HttpSession session, HttpServletRequest request, @ModelAttribute PartyModel partyModel, ModelMap model) {
+    @RequestMapping(value = {"/","/index"}, method = RequestMethod.GET)
+    public String initIndex(HttpSession session, HttpServletRequest request, @ModelAttribute PartyModel partyModel, ModelMap model) {
+        SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
+        Long id = sessionUser.getPartyId();
         PartyExt partyExt = partyService.load(id);
         if (partyExt == null) {
             return "redirect:/errors/error/2";
         } else {
-            SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
-
             session.setAttribute(Constants.SESSION_AUTOCREATE, partyExt.getIsCustomBuild());//是否自动分组 进入活动的时候初始化
 
             List<ICondition> conditions = new ArrayList<ICondition>();
@@ -367,6 +367,71 @@ public class PartyController {
             conditions.add(new InCondition("userStatus", userStatusList));
 
             orders.clear();
+            orders.add(Order.desc("groupId"));
+            orders.add(Order.asc("userName"));
+
+            List<PartyUserExt> groupUserList = partyUserService.criteriaQuery(conditions, orders);
+            partyModel.setPartyUsers(groupUserList);
+
+            if (sessionUser.getGroupId() > 0)
+                model.addAttribute("join", false);
+            else
+                model.addAttribute("join", true);
+
+            partyModel.setPartyExt(partyExt);
+
+            model.addAttribute("model", partyModel);
+            return "/party/index";
+        }
+    }
+
+    @RequestMapping(value = "/index/{id}", method = RequestMethod.GET)
+    public String index(@PathVariable("id") Long id, HttpSession session, HttpServletRequest request, @ModelAttribute PartyModel partyModel, ModelMap model) {
+        SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
+        if(id == null)
+            id = sessionUser.getPartyId();
+        PartyExt partyExt = partyService.load(id);
+        if (partyExt == null) {
+            return "redirect:/errors/error/2";
+        } else {
+            session.setAttribute(Constants.SESSION_AUTOCREATE, partyExt.getIsCustomBuild());//是否自动分组 进入活动的时候初始化
+
+            List<ICondition> conditions = new ArrayList<ICondition>();
+            conditions.add(new EqCondition("partyId", partyExt.getId()));
+            conditions.add(new EqCondition("sysUserId", sessionUser.getSysUserId()));
+            List<SysPartyUserLinkExt> sysPartyUserLinkExts = sysPartyUserLinkService.criteriaQuery(conditions);
+            if (sysPartyUserLinkExts.size() == 0) {//已登录 但是不是该活动的成员
+                if (partyExt.getIsPublic()) {
+                    //TODO 公共活动用户可以参观
+                } else {
+                    return "redirect:/errors/error/3";
+                }
+            } else {
+                //TODO 用户进入活动 活动 小组 活跃度+1
+
+                PartyUserExt partyUserExt = partyUserService.load(sysPartyUserLinkExts.get(0).getPartyUserId());
+
+                sessionStatus.checkAndInParty(session, partyUserExt);
+            }
+
+            conditions.clear();
+            conditions.add(new EqCondition("partyId", partyExt.getId()));
+
+            List<Order> orders = new ArrayList<Order>();
+            orders.add(Order.desc("groupStatus"));
+            orders.add(Order.desc("hotCount"));
+
+            List<PartyGroupExt> groupExtList = partyGroupService.criteriaQuery(conditions, orders);
+
+            partyModel.setPartyGroups(groupExtList);
+
+            conditions.clear();
+            conditions.add(new EqCondition("partyId", partyExt.getId()));
+            List<Integer> userStatusList = Arrays.asList(2, 4, 8, 10, 16);
+            conditions.add(new InCondition("userStatus", userStatusList));
+
+            orders.clear();
+            orders.add(Order.desc("groupId"));
             orders.add(Order.asc("userName"));
 
             List<PartyUserExt> groupUserList = partyUserService.criteriaQuery(conditions, orders);
