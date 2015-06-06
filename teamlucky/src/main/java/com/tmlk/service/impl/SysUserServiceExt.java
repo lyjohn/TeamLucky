@@ -160,7 +160,7 @@ public class SysUserServiceExt extends SysUserService implements ISysUserService
     }
 
     @Override
-    @SysServiceLog(description = "上传系统用户头像头像",code = 104)
+    @SysServiceLog(description = "上传系统用户头像头像",code = 108)
     public SysUserExt uploadAvatar(String filePath, String sysUserId) {
         SysUserExt sysUserExt = this.load(sysUserId);
 

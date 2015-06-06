@@ -208,20 +208,47 @@ public class SysLogAspect {
                 sysLogExt.setLogObjId(0L);
                 sysLogExt.setLogContent(JSONUtil.object2JsonString(sysLogExt));
             }else if(code == 104){ //系统用户绑定活动用户
-                SysUserExt sysUserExt = (SysUserExt) joinPoint.getArgs()[0];
-
-                sysLogExt.setUserName(sysUserExt.getLoginName());
+                sysLogExt.setUserName(sessionUser.getSysUserName());
                 sysLogExt.setLogObjId(0L);
-                sysLogExt.setLogContent(JSONUtil.object2JsonString(sysLogExt));
+
+                JsonResult bindResult = (JsonResult)returnValue;
+                if(bindResult.getStatus()==0)
+                    sysLogExt.setLogContent("关联活动用户:"+joinPoint.getArgs()[0]+" 成功");
+                else
+                    sysLogExt.setLogContent("关联活动用户:"+joinPoint.getArgs()[0]+" 失败:"+bindResult.getMessage());
             }else if(code==105){//活动用户关联系统用户
+                sysLogExt.setUserName(sessionUser.getPartyUserName());
+
+                JsonResult bindResult = (JsonResult)returnValue;
+                if(bindResult.getStatus()==0)
+                    sysLogExt.setLogContent("关联系统用户:"+joinPoint.getArgs()[0]+" 成功");
+                else
+                    sysLogExt.setLogContent("关联系统用户:"+joinPoint.getArgs()[0]+" 失败:"+bindResult.getMessage());
+            }else if(code==106){//编辑系统用户基本信息
                 SysUserExt sysUserExt = (SysUserExt) joinPoint.getArgs()[0];
 
-                sysLogExt.setUserName(sysUserExt.getLoginName());
+                sysLogExt.setUserName(sessionUser.getSysUserName());
                 sysLogExt.setLogObjId(0L);
-                sysLogExt.setLogContent(JSONUtil.object2JsonString(sysLogExt));
+                sysLogExt.setLogContent(JSONUtil.object2JsonString(sysUserExt));
+            }else if(code==107){//编辑活动用户基本信息
+                PartyUserExt partyUserExt = (PartyUserExt) joinPoint.getArgs()[0];
+
+                sysLogExt.setUserName(sessionUser.getPartyUserName());
+                sysLogExt.setLogObjId(0L);
+                sysLogExt.setLogContent(JSONUtil.object2JsonString(partyUserExt));
+            }else if(code==108){//上传系统用户头像
+                sysLogExt.setUserName(sessionUser.getSysUserName());
+                sysLogExt.setLogObjId(0L);
+                sysLogExt.setLogContent(joinPoint.getArgs()[0].toString());
+            }else if(code==109){//上传活动用户头像
+                sysLogExt.setUserName(sessionUser.getPartyUserName());
+
+                sysLogExt.setLogObjId(0L);
+                sysLogExt.setLogContent(joinPoint.getArgs()[0].toString());
             }else if (code == 201 || code==203) {//创建活动 || 编辑活动
                 PartyExt partyExt = (PartyExt)returnValue;
 
+                sysLogExt.setUserName(sessionUser.getSysUserName());
                 sysLogExt.setLogObjId(partyExt.getId());
                 sysLogExt.setLogContent(JSONUtil.object2JsonString(partyExt));
             } else if(code == 202){//创建活动用户
@@ -232,8 +259,16 @@ public class SysLogAspect {
             }else if(code == 204){//导入活动成员
                 List<PartyUserExt> partyUserExtList = (List<PartyUserExt>)returnValue;
 
+                sysLogExt.setUserName(sessionUser.getPartyUserName());
                 sysLogExt.setLogObjId(0L);
                 sysLogExt.setLogContent("成功导入了"+partyUserExtList.size()+"个新成员");
+            }else if(code == 205){//用户进入访问活动
+                sysLogExt.setUserName(sessionUser.getPartyUserName());
+                PartyUserExt partyUserExt = (PartyUserExt)joinPoint.getArgs()[0];
+                PartyExt partyExt =(PartyExt)joinPoint.getArgs()[1];
+
+                sysLogExt.setLogObjId(partyExt.getId());
+                sysLogExt.setLogContent("活动用户:"+partyUserExt.getUserName()+" 访问了活动: "+partyExt.getPartyName());
             }else if(code == 301 || code == 303){//创建小组
                 PartyGroupExt partyGroupExt = (PartyGroupExt)returnValue;
 
@@ -251,7 +286,7 @@ public class SysLogAspect {
                 sysLogExt.setLogContent(JSONUtil.object2JsonString(newsExt));
             }else {
                 sysLogExt.setLogObjId(-1L);
-                sysLogExt.setLogContent("未处理的日志信息，请开发人员知悉");
+                sysLogExt.setLogContent("未处理的日志信息"+code+"，请开发人员知悉");
             }
             //保存数据库
             sysLogService.create(sysLogExt);

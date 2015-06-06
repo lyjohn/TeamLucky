@@ -11,6 +11,11 @@
     if(canC != null)
         canCreate = canC;
 
+    Boolean isMem = (Boolean)request.getSession().getAttribute(Constants.SESSION_ISMEMBER);
+    boolean isMember = false;
+    if(isMem != null)
+        isMember = isMem;
+
     //1:活动界面 0:系统界面
     String type = request.getParameter("type");
     //-1无active
@@ -42,6 +47,8 @@
             <%}%>
             <%} else {%>
             <li class="js_acthome"><a href="${ctx}/party/index/<%=sessionUser.getPartyId()%>">活动首页</a></li>
+
+            <% if(isMember) {%>
             <li class="js_userset"><a href="${ctx}/user/pprofile">我的名片</a></li>
             <% if(sessionUser.getGroupId() == 0 && canCreate) {%>
             <li class="js_groupcreate"><a href="${ctx}/group/create">创建小组</a></li>
@@ -51,7 +58,12 @@
             <% if(sessionUser.isPartyAdmin()){%>
             <li class="js_partyconf"><a href="${ctx}/party/conf">管理活动</a></li>
             <% } %>
-            <li class="js_logout"><a href="${ctx}/logout">退出登录</a></li>
+
+            <% }else{ %>
+            <li class="head_action"><a href="#" class="head_action_joinparty">加入活动</a></li>
+            <%}%>
+
+            <li class="js_logout head_action"><a href="${ctx}/logout">退出登录</a></li>
             <%}%>
         </ul>
     </nav>

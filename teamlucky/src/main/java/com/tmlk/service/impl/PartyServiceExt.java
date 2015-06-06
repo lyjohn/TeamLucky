@@ -15,6 +15,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.text.DateFormat;
 import java.util.*;
 
 public class PartyServiceExt extends PartyService implements IPartyServiceExt {
@@ -92,7 +93,7 @@ public class PartyServiceExt extends PartyService implements IPartyServiceExt {
 		if(party != null) {//创建成功
 			//把自己加入这个活动，即创建一个关联到自己的活动用户
 			PartyUserExt partyUserExt = new PartyUserExt();
-			partyUserExt.setHotCount(0);
+			partyUserExt.setHotCount(1);
 			partyUserExt.setPartyId(party.getId());
 			partyUserExt.setGroupId(0L);//没有分组就是0
 			partyUserExt.setUserStatus(16);
@@ -100,14 +101,14 @@ public class PartyServiceExt extends PartyService implements IPartyServiceExt {
 			partyUserExt.setEmail(author.getEmail());
 			partyUserExt.setLastLoginIP(author.getLastLoginIP());
 			partyUserExt.setLastLoginTime(author.getLastLoginTime());
-			partyUserExt.setLoginName(party.getPartyCode()+"_"+author.getUserName());
+			partyUserExt.setLoginName(party.getPartyCode()+"_"+author.getLoginName());
 			partyUserExt.setLoginPwd(author.getLoginPwd());
 			partyUserExt.setQq(author.getQq());
 			partyUserExt.setRegisterIP(FormatUtils.getIpAddress(request));
 			partyUserExt.setRegisterTime(party.getCreateTime());
 			partyUserExt.setSex(author.getSex());
 			partyUserExt.setTel(author.getTel());
-			partyUserExt.setUserName(author.getLoginName());
+			partyUserExt.setUserName(author.getUserName());
 			partyUserExt.setWeiXin(author.getWeiXin());
 			partyUserExt.setUserAvatar(author.getUserAvatar());
 
@@ -115,7 +116,7 @@ public class PartyServiceExt extends PartyService implements IPartyServiceExt {
 				PartyGroupExt partyGroupExt = new PartyGroupExt();
 
 				partyGroupExt.setCreateBy(party.getCreateBy());
-				partyGroupExt.setHotCount(0);
+				partyGroupExt.setHotCount(1);
 				partyGroupExt.setCreateTime(party.getCreateTime());
 				if (!FormatUtils.isEmpty(party.getPartyCover())) {
 					partyGroupExt.setGroupCover(party.getPartyCover());
@@ -147,6 +148,39 @@ public class PartyServiceExt extends PartyService implements IPartyServiceExt {
 		}
 
 		return null;
+	}
+
+	public PartyUserExt join(SysUserExt sysUser,PartyExt party){
+		PartyUserExt partyUserExt = new PartyUserExt();
+		partyUserExt.setHotCount(1);
+		partyUserExt.setPartyId(party.getId());
+		partyUserExt.setGroupId(0L);//没有分组就是0
+		partyUserExt.setUserStatus(16);
+		partyUserExt.setBirthDay(sysUser.getBirthDay());
+		partyUserExt.setEmail(sysUser.getEmail());
+		partyUserExt.setLastLoginIP(sysUser.getLastLoginIP());
+		partyUserExt.setLastLoginTime(sysUser.getLastLoginTime());
+		partyUserExt.setLoginName(party.getPartyCode()+"_"+sysUser.getLoginName());
+		partyUserExt.setLoginPwd(sysUser.getLoginPwd());
+		partyUserExt.setQq(sysUser.getQq());
+		partyUserExt.setRegisterIP(sysUser.getLastLoginIP());
+		partyUserExt.setRegisterTime(party.getCreateTime());
+		partyUserExt.setSex(sysUser.getSex());
+		partyUserExt.setTel(sysUser.getTel());
+		partyUserExt.setUserName(sysUser.getUserName());
+		partyUserExt.setWeiXin(sysUser.getWeiXin());
+		partyUserExt.setUserAvatar(sysUser.getUserAvatar());
+
+		PartyUserExt partyUser = partyUserService.register(partyUserExt);
+
+		SysPartyUserLinkExt sysPartyUserLinkExt = new SysPartyUserLinkExt();
+		sysPartyUserLinkExt.setPartyId(party.getId());
+		sysPartyUserLinkExt.setPartyUserId(partyUser.getId());
+		sysPartyUserLinkExt.setSysUserId(sysUser.getId());
+		sysPartyUserLinkExt.setJoinTime(new Date());
+		sysPartyUserLinkService.create(sysPartyUserLinkExt);
+
+		return partyUser;
 	}
 
 	@Override
@@ -295,5 +329,39 @@ public class PartyServiceExt extends PartyService implements IPartyServiceExt {
 		}
 
 		return result;
+	}
+
+	@Override
+	@SysServiceLog(description = "用户进入访问活动",code = 205)
+	public void loginParty(PartyUserExt partyUserExt, PartyExt partyExt) {
+
+		Date dt = partyUserExt.getLastLoginTime();
+
+		//获取系统当前时间
+		Date time=new Date();
+		String s;
+		if(dt==null){
+			s="";
+		}else {
+			s = DateFormat.getDateInstance().format(dt);
+		}
+		String t= DateFormat.getDateInstance().format(time);
+		//将当前系统时间和用户最后登录时间进行格式化，判断是否为同一天
+		if(!s.equals(t)){
+			partyExt.setHotCount(partyExt.getHotCount()+1);
+			this.update(partyExt);
+
+			if(partyUserExt.getGroupId()!=0){
+				PartyGroupExt partyGroupExt = partyGroupService.load(partyUserExt.getGroupId());
+				if(partyGroupExt!=null){
+					partyGroupExt.setHotCount(partyGroupExt.getHotCount()+1);
+					partyGroupService.update(partyGroupExt);
+				}
+			}
+
+			partyUserExt.setHotCount(partyUserExt.getHotCount()+1);
+			partyUserExt.setLastLoginTime(time);
+			partyUserService.update(partyUserExt);
+		}
 	}
 }

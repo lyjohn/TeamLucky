@@ -70,7 +70,8 @@ public class PartyUserServiceExt extends PartyUserService implements IPartyUserS
                 } else {
                     Date now = new Date();
                     String ipAddress = FormatUtils.getIpAddress(request);
-                    partyUser.setLastLoginTime(now);
+//进入活动的时候设置
+//                  partyUser.setLastLoginTime(now);
                     partyUser.setLastLoginIP(ipAddress);
                     this.update(partyUser);
 
@@ -148,7 +149,7 @@ public class PartyUserServiceExt extends PartyUserService implements IPartyUserS
     }
 
     @Override
-    @SysServiceLog(description = "上传活动用户头像头像",code = 105)
+    @SysServiceLog(description = "上传活动用户头像头像",code = 109)
     public PartyUserExt uploadAvatar(String filePath, String partyUserId) {
         PartyUserExt partyUserExt = this.load(partyUserId);
 

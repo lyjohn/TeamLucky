@@ -54,14 +54,9 @@ public class AvatarController {
     public String uploadAvatar(@RequestParam(value = "file",required = true) MultipartFile file,@RequestParam(value = "type",required = true) int type,HttpServletRequest request,HttpSession session) {
         JsonResult result = new JsonResult();
         try {
-            //这个路径已略过，未登录还是可以进来的  没做进一步的拦截 在这儿判断下是否登录吧
-            SessionUser sessionUser = (SessionUser)session.getAttribute(Constants.SESSION_USER);
-            if(session == null)
-                return null;
-
             String fileName = file.getOriginalFilename();
 
-            String[] str = { ".jpg", ".jpeg", ".bmp", ".gif", ".png"};
+            String[] str = { ".jpg", ".jpeg", ".bmp", ".gif", ".png",".JPG", ".JPEG", ".BMP", ".GIF", ".PNG"};
 
             boolean isPic = false;
             for (String s : str) {

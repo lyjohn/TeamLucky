@@ -70,7 +70,7 @@
             </dl>
             <dl class="person-info">
                 <dt class="person-nick-name">
-                    <span>${model.sysUserExt.userName}</span>
+                    <span class="nick_name">${model.sysUserExt.userName}</span>
                     <span title="修改密码"><i class="fa fa-key password-edit" style="color:#999;cursor:pointer; margin-left:10px;"></i></span>
                 </dt>
                 <dd class="person-detail">
@@ -295,14 +295,13 @@
 
 <script type="text/javascript" src="${ctx}/resource/plugins/layer/layer.js"></script>
 
-<script type="text/javascript" src="${ctx}/resource/plugins/datetime/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="${ctx}/resource/plugins/datetime/locales/bootstrap-datepicker.zh-CN.js"></script>
-
 <script type="text/javascript" src="${ctx}/resource/js/menu.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/jquery-ui.min.js" ></script>
 <script type="text/javascript" src="${ctx}/resource/js/jquery.ui.touch-punch.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/allinone_carousel.js"></script>
 
+<script type="text/javascript" src="${ctx}/resource/plugins/datetime/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="${ctx}/resource/plugins/datetime/locales/bootstrap-datepicker.zh-CN.js"></script>
 
 <script type="text/javascript" src="${ctx}/resource/js/template-native.js"></script>
 
@@ -472,7 +471,7 @@
                 }
             })
         }).on("click",".edit_intro .js_save",function(){//保存基本信息
-            var username = $(".nick_name").val();
+            var username = $(".edit_intro .nick_name").val();
             var sex = $(".edit_intro :radio").val();
             var birthday = $(".birthday").val();
             var userRemark = $(".edit_intro textarea").val();
@@ -496,7 +495,7 @@
 
                         layer.msg("基本信息保存成功",{icon:6,offset:'110px'});
 
-                        $(".person-nick-name span").text(username);
+                        $(".person-nick-name span.nick_name").text(username);
                         $(".sex_view").text(sex).removeClass("info_null");
 
                         if(birthday != "")

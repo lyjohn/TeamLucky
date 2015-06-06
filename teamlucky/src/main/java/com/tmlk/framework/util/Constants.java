@@ -12,6 +12,8 @@ public class Constants {
 
     public static final String SESSION_AUTOCREATE = "session_creategroup";
 
+    public static final String SESSION_ISMEMBER = "session_ismember";
+
     public static final int DEFAULT_PAGE_SIZE = 20;
 
     //Integer 表示Map的Value 是需要存储在数据库的logAction字段,String 表示Map的Key 是注解的Description

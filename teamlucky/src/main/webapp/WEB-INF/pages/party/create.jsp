@@ -256,7 +256,7 @@
             var pName = $("#partyName").val();
             var pRamark = $("#partyRemark").val();
             var pCode = $("#partyCode").val();
-            var pCover = $("#partyCover").data("img");
+            var pCover = $("#partyCover").data("img").replace("resource/","");
             var pIsGroup = $("#group").prop("checked");
             var pIsPublic = $("#public").prop("checked");
             var pIsAuto = $("#autoBuild").prop("checked");

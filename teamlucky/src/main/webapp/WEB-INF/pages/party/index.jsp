@@ -164,7 +164,7 @@
 
 <script type="text/javascript" src="${ctx}/resource/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/css3-mediaqueries.js"></script>
-<script type="text/javascript" src="${ctx}/resource/js/fwslider.js"></script>
+
 <script type="text/javascript" src="${ctx}/resource/js/jquery.ui.touch-punch.min.js"></script>
 
 <script type="text/javascript">
@@ -230,8 +230,31 @@
                 }
             }
         });
-
     });
+
+    $(document).on("click",".head_action_joinparty",function(){
+        layer.confirm('确定加入该活动？加入之后可参与互动', {
+            btn: ['确定','取消'], //按钮
+        }, function(){
+            var url = window.location.href;
+            var partyId = url.substr(url.lastIndexOf("/")+1).replace("#","");
+            if(partyId==""){
+                layer.msg('获取不到url上的活动信息，请返回再进来？', {shift: 6});
+            }else{
+                $.post("${ctx}/party/join",{partyId:partyId},function(result){
+                    if(result.status==0)
+                    {
+                        window.location.reload();
+                    }else{
+                        layer.msg(result.message,{icon:6,offset:'110px'});
+                    }
+                },"json");
+            }
+        }, function(){
+            layer.closeAll();
+        });
+        return false;
+    })
 </script>
 
 </body>
