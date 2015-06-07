@@ -19,6 +19,10 @@
                             <ul>
                                 <li><small><a href="/joinus/jjd" class="undo">贾经冬</a></small></li>
                             </ul>
+                            <h5 class="margin-top--1"><strong>课程老师</strong></h5>
+                            <ul>
+                                <li><small><a href="/joinus/sxp" class="undo">申雪萍</a></small></li>
+                            </ul>
                         </div>
 
                         <div class="grid-col-6  grid-col--no-padding">

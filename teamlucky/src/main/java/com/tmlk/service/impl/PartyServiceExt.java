@@ -155,7 +155,7 @@ public class PartyServiceExt extends PartyService implements IPartyServiceExt {
 		partyUserExt.setHotCount(1);
 		partyUserExt.setPartyId(party.getId());
 		partyUserExt.setGroupId(0L);//没有分组就是0
-		partyUserExt.setUserStatus(16);
+		partyUserExt.setUserStatus(2);
 		partyUserExt.setBirthDay(sysUser.getBirthDay());
 		partyUserExt.setEmail(sysUser.getEmail());
 		partyUserExt.setLastLoginIP(sysUser.getLastLoginIP());
@@ -170,7 +170,6 @@ public class PartyServiceExt extends PartyService implements IPartyServiceExt {
 		partyUserExt.setUserName(sysUser.getUserName());
 		partyUserExt.setWeiXin(sysUser.getWeiXin());
 		partyUserExt.setUserAvatar(sysUser.getUserAvatar());
-
 		PartyUserExt partyUser = partyUserService.register(partyUserExt);
 
 		SysPartyUserLinkExt sysPartyUserLinkExt = new SysPartyUserLinkExt();

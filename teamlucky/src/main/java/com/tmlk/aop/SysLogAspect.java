@@ -151,21 +151,7 @@ public class SysLogAspect {
         SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
         //获取请求ip
         String ip = request.getRemoteAddr();
-//        获取用户请求方法的参数并序列化为JSON格式字符串,太容易出错了
-//        String params = "";
-//        if (joinPoint.getArgs() != null && joinPoint.getArgs().length > 0) {
-//            for (int i = 0; i < joinPoint.getArgs().length; i++) {
-//                //以Http开头的参数 不存储 例如 HttpServletRequest HttpServletResponse HttpSession 数据太长了
-//                if (joinPoint.getArgs()[i].getClass() == request.getClass() || joinPoint.getArgs()[i].getClass() == session.getClass() || joinPoint.getArgs()[i].getClass() == XSSFSheet.class)
-//                    continue;
-//
-//                if (joinPoint.getArgs()[i].getClass() == String.class || joinPoint.getArgs()[i].getClass() == Long.class || joinPoint.getArgs()[i].getClass() == Integer.class) {
-//                    params += joinPoint.getArgs()[i] + ";";
-//                } else {
-//                    params += JSONUtil.object2JsonString(joinPoint.getArgs()[i]) + ";";
-//                }
-//            }
-//        }
+
         try {
             String desc = getServiceMethodDescription(joinPoint);
             Integer code = getServiceMethodCode(joinPoint);

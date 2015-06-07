@@ -81,7 +81,7 @@
                                     <c:out value="${var.userRemark}"></c:out>
                                 </div>
                             </div>
-                            <c:if test="${var.userStatus== 2}">
+                            <c:if test="${var.userStatus== 2 && join}">
                                 <div class="media-hover"></div>
                                 <div class="media-action">
                                     <a data-id="<c:out value='${var.id}'></c:out>" class="button button_inviteuser" href="javascrit:;">邀 请</a>

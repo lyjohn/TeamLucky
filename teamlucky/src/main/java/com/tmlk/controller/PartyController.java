@@ -424,7 +424,7 @@ public class PartyController {
                     return "redirect:/errors/error/3";
                 }
             } else {
-                session.setAttribute(Constants.SESSION_ISMEMBER,false);
+                session.setAttribute(Constants.SESSION_ISMEMBER,true);
 
                 PartyUserExt partyUserExt = partyUserService.load(sysPartyUserLinkExts.get(0).getPartyUserId());
 
@@ -512,14 +512,14 @@ public class PartyController {
             orders.add(Order.desc("createTime"));
 
             int count = partyService.count(conditions);
-
             Pagination pp = new Pagination();
             pp.setPageSize(pageSize);
             pp.setCurrentPage(currentPage + 1);
-
             pp.checkPagination(count);
 
             List<PartyExt> partyExtList = partyService.criteriaQuery(conditions, orders, pp);
+
+
             for (PartyExt partyExt : partyExtList) {
                 partyExt.setPartyAuthor(sysUserService.load(partyExt.getCreateBy()));
                 partyExt.setCreateTimeString(RelativeDateUtils.format(partyExt.getCreateTime()));
