@@ -28,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -72,6 +73,19 @@ public class UserController {
         model.addAttribute("model", sysUserModel);
 
         return "/user/index";
+    }
+
+    @RequestMapping(value = "/card/{id}")
+    @ResponseBody
+    public ModelAndView getCard(@PathVariable("id") String id,ModelAndView m){
+        PartyUserExt partyUserExt = partyUserService.load(id);
+        if(partyUserExt == null) {
+            return null;
+        }
+
+        m.addObject("user", partyUserExt);
+        m.setViewName("/user/_card");
+        return m;
     }
 
     @RequestMapping(value = "/sprofile")

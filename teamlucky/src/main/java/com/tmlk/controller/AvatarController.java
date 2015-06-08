@@ -154,26 +154,7 @@ public class AvatarController {
                 avatarPath = "avatar"+File.separator+"default"+File.separator+"user.png";
 
             documentService.doAvatarShow(response,avatarPath);
-
-//            avatarPath = request.getSession().getServletContext().getRealPath(avatarPath);
-//
-//            File file = new File(avatarPath);
-//
-//            response.setContentType("image/jpeg; charset=GBK");
-//            ServletOutputStream outputStream = response.getOutputStream();
-//            FileInputStream inputStream = new FileInputStream(file);
-//            byte[] buffer = new byte[1024];
-//            int i = -1;
-//            while ((i = inputStream.read(buffer)) != -1) {
-//                outputStream.write(buffer, 0, i);
-//            }
-//            outputStream.flush();
-//            outputStream.close();
-//            inputStream.close();
-//            outputStream = null;
-//            return null;
         }catch(Exception e){
-//            return null;
         }
     }
 
@@ -194,30 +175,12 @@ public class AvatarController {
             if(FormatUtils.isEmpty(avatarPath)) {
                 int rdn = (int)Math.round(Math.random()*5);
                 System.out.println(rdn);
-                avatarPath = "avatar" + File.separator + "default" + File.separator + "party"+rdn+".png";
+                avatarPath = "default" + File.separator + "party"+rdn+".png";
             }
 
             documentService.doAvatarShow(response,avatarPath);
-//
-//            avatarPath = request.getSession().getServletContext().getRealPath(avatarPath);
-//
-//            File file = new File(avatarPath);
-//
-//            response.setContentType("image/jpeg; charset=GBK");
-//            ServletOutputStream outputStream = response.getOutputStream();
-//            FileInputStream inputStream = new FileInputStream(file);
-//            byte[] buffer = new byte[1024];
-//            int i = -1;
-//            while ((i = inputStream.read(buffer)) != -1) {
-//                outputStream.write(buffer, 0, i);
-//            }
-//            outputStream.flush();
-//            outputStream.close();
-//            inputStream.close();
-//            outputStream = null;
-//            return null;
+
         }catch(Exception e){
-//            return null;
         }
     }
 
@@ -235,29 +198,11 @@ public class AvatarController {
             avatarPath = partyGroupExt.getGroupCover();
 
             if(FormatUtils.isEmpty(avatarPath))
-                avatarPath = "resource"+File.separator+"avatar"+File.separator+"default"+File.separator+"group.png";
+                avatarPath = "avatar"+File.separator+"default"+File.separator+"group.png";
 
             documentService.doAvatarShow(response,avatarPath);
-//
-//            avatarPath = request.getSession().getServletContext().getRealPath(avatarPath);
-//
-//            File file = new File(avatarPath);
-//
-//            response.setContentType("image/jpeg; charset=GBK");
-//            ServletOutputStream outputStream = response.getOutputStream();
-//            FileInputStream inputStream = new FileInputStream(file);
-//            byte[] buffer = new byte[1024];
-//            int i = -1;
-//            while ((i = inputStream.read(buffer)) != -1) {
-//                outputStream.write(buffer, 0, i);
-//            }
-//            outputStream.flush();
-//            outputStream.close();
-//            inputStream.close();
-//            outputStream = null;
-//            return null;
+
         }catch(Exception e){
-//            return null;
         }
     }
 }

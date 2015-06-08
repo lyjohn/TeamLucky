@@ -198,7 +198,7 @@ public class PartyUserServiceExt extends PartyUserService implements IPartyUserS
     }
 
     /**
-     * 修改用户基本in洗
+     * 加入小组
      * @param partyUserExt 用户实体，承载需要变更的内容，某些项是空的
      * @return
      */

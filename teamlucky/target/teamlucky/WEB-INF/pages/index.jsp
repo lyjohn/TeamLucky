@@ -216,7 +216,7 @@
         <hr>
         <div class="grid-row learners padding-bottom--1">
             <div class="grid-col-12 grid-col--center grid-col--align-center grid-col--no--padding">
-                <h2>2
+                <h2>4
                     <small>公共活动</small>
                     10
                     <small>私有活动</small>

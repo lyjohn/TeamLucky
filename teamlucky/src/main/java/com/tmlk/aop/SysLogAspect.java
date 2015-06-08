@@ -249,9 +249,10 @@ public class SysLogAspect {
                 sysLogExt.setLogObjId(0L);
                 sysLogExt.setLogContent("成功导入了"+partyUserExtList.size()+"个新成员");
             }else if(code == 205){//用户进入访问活动
-                sysLogExt.setUserName(sessionUser.getPartyUserName());
                 PartyUserExt partyUserExt = (PartyUserExt)joinPoint.getArgs()[0];
                 PartyExt partyExt =(PartyExt)joinPoint.getArgs()[1];
+
+                sysLogExt.setUserName(partyUserExt.getUserName());
 
                 sysLogExt.setLogObjId(partyExt.getId());
                 sysLogExt.setLogContent("活动用户:"+partyUserExt.getUserName()+" 访问了活动: "+partyExt.getPartyName());

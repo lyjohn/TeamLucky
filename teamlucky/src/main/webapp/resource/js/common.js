@@ -2,19 +2,9 @@
  * Created by laiguoqiang on 15/5/17.
  * 全局的JS函数
  */
-
-(function ($) {
-
-    function scrollToPosition(top) {
-        $("html,body").animate({
-            scrollTop: top
-        }, 500);
-    }
-})(jQuery);
-
-
-
 $(function(){
+    if (!window.tmlk) { window.tmlk = {}; }
+
     $(document).on("click",".undo",function(e){
         layer.msg("程序猿还在开发这个页面",{icon:5,offset: '110px'});
 
@@ -95,5 +85,127 @@ $(function(){
         }
         //if(!pass) alert(tip);
         return pass;
+    }
+
+    //用户面板
+
+    //用户弹出面板 时间设定
+    window.tmlk.tmlk_Data = { fadeOut: 0, fadeIn: 0 };
+    tmlk.ctx = "/"+window.location.pathname.split("/")[1];
+
+    //用户头像滑动
+    $(document).on("mouseover", ".user-hover", function () {
+        if (tmlk.tmlk_Data.fadeOut != undefined) {
+            clearTimeout(tmlk.tmlk_Data.fadeOut);
+            $(".hovercard").removeClass("hide");//.fadeOut(300);
+            tmlk.tmlk_Data.fadeOut = undefined;
+        }
+
+        var userobj = $(this);
+        if (tmlk.tmlk_Data.fadeIn != undefined) {
+            clearTimeout(tmlk.tmlk_Data.fadeIn);
+        }
+        tmlk.tmlk_Data.fadeIn = setTimeout(function () {
+            tmlk.tmlk_ShowCard(userobj);
+        }, 1000);
+    }).on("mouseout", ".user-hover", function () {
+        tmlk.tmlk_HideCard();
+        if (tmlk.tmlk_Data.fadeIn != undefined) {
+            clearTimeout(tmlk.tmlk_Data.fadeIn);
+            tmlk.tmlk_Data.fadeIn = undefined;
+        }
+    }).on("mouseover", ".hovercard", function () {
+        if (tmlk.tmlk_Data.fadeOut != undefined) {
+            clearTimeout(tmlk.tmlk_Data.fadeOut);
+            tmlk.tmlk_Data.fadeOut = undefined;
+        }
+    }).on("mouseout", ".hovercard", function () {
+        tmlk.tmlk_HideCard();
+    }).on("click", ".hovercard .close-link", function () {
+        $(".hovercard").fadeOut(300);
+        tmlk.tmlk_Data.fadeOut = undefined;
+    }).on("click", ".hovercard .button_inviteuser", function () {
+        var thisbtn = $(this);
+        var userId = thisbtn.data("id");
+        var thisli = $(".user_list li[data-id="+userId+"]");
+        $.post(tmlk.ctx+"/group/invite",{userId:userId},function(result){
+            if(result.status==0){
+                layer.msg(result.message,{icon:6,offset:'110px'});
+
+                var groupdata = result.data;
+                thisli.data("group",groupdata.id);
+                thisli.addClass("user_ingroup user_insame").removeClass("user_along");
+
+                //把按钮去掉
+                thisli.find(".media-hover").remove();
+                thisli.find(".media-action").remove();
+                thisbtn.parent().parent().remove();
+            }
+            else
+                layer.msg(result.message,{icon:5,offset:'110px'});
+        },"json");
+    });
+
+    window.tmlk.tmlk_HideCard = function () {
+        tmlk.tmlk_Data.fadeOut = setTimeout(function () { $(".hovercard").fadeOut(300); }, 500);
+    }
+
+    window.tmlk.tmlk_ShowCard = function (userobj) {
+        $(".hovercard").stop();
+        var istop = userobj.offset().top - $(window).scrollTop() > 350;
+        var isright = $(window).width() - userobj.offset().left < 350;
+        var id = userobj.data("hover");
+        if ($(".hovercard-details").data("id") != id) { //如果当前div里面的不是，则ajax获取新的
+            $.ajax({
+                url: tmlk.ctx+"/user/card/"+id+"?v=" + (new Date().getTime()),
+                data: {},
+                dataType: "html",
+                type: "GET",
+                beforeSend: function (req) {
+                    $(".hovercard-resource").addClass("hide");
+                    $(".hovercard-loading").removeClass("hide");
+                },
+                success: function (htm) {
+                    setTimeout(function(){
+                        $(".hovercard-resource").html(htm).removeClass("hide");
+                        $(".hovercard-loading").addClass("hide");
+                    },800);
+                },
+                error: function (data, status, e) {
+                    layer.msg("显示用户明细错误：" + e, {icon:5,offset:"110px"});
+                }
+            });
+        }
+        if (isright) {
+            if (istop) {
+                $(".hovercard").removeClass("lk-bottom lk-left").addClass("lk-top lk-right");
+                $(".hovercard").fadeOut(100, function () {
+                    $(".hovercard").attr("style", "bottom:" + ($(document).height() - userobj.offset().top) + "px;right:" + ($(window).width() - userobj.offset().left - userobj.outerWidth(true) - 8) + "px");
+                })
+            }
+            else {
+                $(".hovercard").removeClass("lk-top lk-left").addClass("lk-bottom lk-right");
+                $(".hovercard").fadeOut(100, function () {
+                    $(".hovercard").attr("style", "top:" + (userobj.offset().top + userobj.outerHeight(true)) + "px;right:" + ($(window).width() - userobj.offset().left - userobj.outerWidth(true) - 8) + "px");
+                });
+            }
+        }
+        else {
+            if (istop) {
+                $(".hovercard").removeClass("lk-bottom lk-right").addClass("lk-top lk-left");
+                $(".hovercard").fadeOut(100, function () {
+                    $(".hovercard").attr("style", "bottom:" + ($(document).height() - userobj.offset().top) + "px;left:" + (userobj.offset().left - 8) + "px");
+                })
+            }
+            else {
+                $(".hovercard").removeClass("lk-top lk-right").addClass("lk-bottom lk-left");
+                $(".hovercard").fadeOut(100, function () {
+                    $(".hovercard").attr("style", "top:" + (userobj.offset().top + userobj.outerHeight(true)) + "px;left:" + (userobj.offset().left - 8) + "px");
+                });
+            }
+        }
+
+        $(".hovercard").fadeIn(200);
+        tmlk.tmlk_Data.fadeIn = undefined;
     }
 });

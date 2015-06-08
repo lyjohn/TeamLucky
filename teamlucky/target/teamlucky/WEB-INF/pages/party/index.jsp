@@ -69,11 +69,11 @@
                             <li class="user_along" data-id="<c:out value='${var.id}'></c:out>" data-group="<c:out value='${var.groupId}'></c:out>">
                         </c:if>
                         <c:if test="${var.userStatus!=2}">
-                            <li class="user_ingroup" data-id="<c:out value='${var.id}'></c:out>" data-group="<c:out value='${var.groupId}'></c:out>">
+                            <li class="user_ingroup ${var.groupId==groupId ? 'user_insame' :''}" data-id="<c:out value='${var.id}'></c:out>" data-group="<c:out value='${var.groupId}'></c:out>">
                         </c:if>
                         <div class="media">
                             <div class="media-left">
-                                <img class="img-circle" src="${ctx}/avatar/user/2/<c:out value='${var.id}'></c:out>">
+                                <img class="img-circle user-hover" data-hover="<c:out value='${var.id}'></c:out>" src="${ctx}/avatar/user/2/<c:out value='${var.id}'></c:out>">
                             </div>
                             <div class="media-body">
                                 <h4 class="media-heading"><c:out value="${var.userName}"></c:out></h4>
@@ -81,12 +81,12 @@
                                     <c:out value="${var.userRemark}"></c:out>
                                 </div>
                             </div>
-                            <c:if test="${var.userStatus== 2 && join}">
+                            <!-- <c:if test="${var.userStatus== 2 && join}">
                                 <div class="media-hover"></div>
                                 <div class="media-action">
                                     <a data-id="<c:out value='${var.id}'></c:out>" class="button button_inviteuser" href="javascrit:;">邀 请</a>
                                 </div>
-                            </c:if>
+                            </c:if> -->
                         </div>
                         </li>
                     </c:forEach>
@@ -111,10 +111,10 @@
             <ul>
                 <c:forEach items="${ model.partyGroups }" var="var" varStatus="status">
                     <c:if test="${var.groupStatus==2}">
-                        <li class="full">
+                        <li class="full ${var.id == groupId ? 'insame' :''}" data-id="${var.id}">
                     </c:if>
                     <c:if test="${var.groupStatus!=2}">
-                        <li>
+                        <li class="${var.id == groupId ? 'insame' :''}" data-id="${var.id}">
                     </c:if>
                     <div class="media">
                         <div class="media-left">
@@ -130,7 +130,7 @@
                                 <c:out value="${var.groupRemark}"></c:out>
                             </div>
                         </div>
-                        <c:if test="${var.groupStatus==1 && join}">
+                        <c:if test="${var.groupStatus==1 && !join && groupId!=-1}">
                             <div class="media-hover"></div>
                             <div class="media-action">
                                 <a data-id="<c:out value='${var.id}'></c:out>" class="button button_joingroup" href="javascrit:;">入 伙</a>
@@ -160,15 +160,14 @@
 <script type="text/javascript" src="${ctx}/resource/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/jquery.ui.touch-punch.min.js"></script>
 
-<script type="text/javascript" src="${ctx}/resource/js/common.js"></script>
-
 <script type="text/javascript" src="${ctx}/resource/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/css3-mediaqueries.js"></script>
 
 <script type="text/javascript" src="${ctx}/resource/js/jquery.ui.touch-punch.min.js"></script>
 
-<script type="text/javascript">
+<script type="text/javascript" src="${ctx}/resource/js/common.js"></script>
 
+<script type="text/javascript">
 
     $(function () {
         var mWidth = $(".partyIndex").width();
@@ -176,19 +175,26 @@
         $(document).on("click",".button_joingroup",function(){
             var groupId = $(this).data("id");
             var thisbtn = $(this);
+            var thisli = thisbtn.parent().parent().parent();
             $.post("${ctx}/group/join",{groupId:groupId},function(result){
                 if(result.status==0){
                     layer.msg(result.message,{icon:6,offset:'110px'});
                     var guserdata = result.data;
-                    $(".user_list li[data-id="+guserdata.id+"]").data("group",guserdata.groupId).addClass("user_ingroup").removeClass("user_along");
+                    $(".user_list li[data-id="+guserdata.id+"]").data("group",guserdata.groupId).addClass("user_ingroup user_insame").removeClass("user_along");
+                    $(".user_list li[data-id="+guserdata.id+"]").find(".media-action").remove();
+                    $(".user_list li[data-id="+guserdata.id+"]").find(".media-hover").remove();
+
+                    $(".user_list li[data-group="+groupId+"]").addClass("user_insame");
+
                     //把申请按钮去掉
-                    thisbtn.parent().parent().find(".media-hover").remove();
-                    thisbtn.parent().parent().find(".media-action").remove();
+                    thisli.find(".media-hover").remove();
+                    thisli.find(".media-action").remove();
+                    thisli.addClass("insame");
                 }
                 else
                     layer.msg(result.message,{icon:5,offset:'110px'});
             },"json");
-        }).on("click",".button_inviteuser",function(){
+        }).on("click",".user_list .button_inviteuser",function(){
             var userId = $(this).data("id");
             var thisbtn = $(this);
             var thisli = thisbtn.parent().parent().parent();
@@ -198,7 +204,7 @@
 
                     var groupdata = result.data;
                     thisli.data("group",groupdata.id);
-                    thisli.addClass("user_ingroup").removeClass("user_along");
+                    thisli.addClass("user_ingroup user_insame").removeClass("user_along");
                     //把按钮去掉
                     thisli.find(".media-hover").remove();
                     thisli.find(".media-action").remove();
@@ -234,7 +240,7 @@
 
     $(document).on("click",".head_action_joinparty",function(){
         layer.confirm('确定加入该活动？加入之后可参与互动', {
-            btn: ['确定','取消'], //按钮
+            btn: ['确定','取消'] //按钮
         }, function(){
             var url = window.location.href;
             var partyId = url.substr(url.lastIndexOf("/")+1).replace("#","");

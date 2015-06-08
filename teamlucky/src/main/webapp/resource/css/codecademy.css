@@ -9943,21 +9943,21 @@ article.fit-full, section.fit-full, header.fit-full, footer.fit-full, div.fit-fu
 
 @media screen and (min-width: 1140px) {
     main {
-        margin-bottom: -24rem
+        margin-bottom: -20rem
     }
 
     main:after, footer {
-        height: 24rem
+        height: 20rem
     }
 }
 
 @media screen and (min-width: 1116px) and (max-width: 1139px) {
     main {
-        margin-bottom: -24rem
+        margin-bottom: -20rem
     }
 
     main:after, footer {
-        height: 24rem
+        height: 20rem
     }
 }
 

@@ -147,7 +147,7 @@
                                 <div class="media-body">
                                     <h4 class="media-heading" id="media-heading"><c:out value="${var.userName}"></c:out>
                                         <span class="time_lastlogin"><fmt:formatDate
-                                                value="${model.partyGroupExt.createTime}"
+                                                value="${var.lastLoginTime}"
                                                 pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></span>
                                     </h4>
                                     <div class="media-content">

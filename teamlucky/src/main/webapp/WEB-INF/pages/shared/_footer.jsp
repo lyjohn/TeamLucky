@@ -14,26 +14,22 @@
                     </div>
 
                     <div class="grid-col-7 grid-row grid-col--no-margin grid-col--no-padding">
-                        <div class="grid-col-6 grid-col--no-padding">
-                            <h5 class="margin-top--1"><strong>指导老师</strong></h5>
-                            <ul>
-                                <li><small><a href="/joinus/jjd" class="undo">贾经冬</a></small></li>
-                            </ul>
-                            <h5 class="margin-top--1"><strong>课程老师</strong></h5>
-                            <ul>
-                                <li><small><a href="/joinus/sxp" class="undo">申雪萍</a></small></li>
-                            </ul>
-                        </div>
+                        <%--<div class="grid-col-6 grid-col--no-padding">--%>
+                        <%--<h5 class="margin-top--1"><strong>联系我们</strong></h5>--%>
+                        <%--<ul>--%>
 
-                        <div class="grid-col-6  grid-col--no-padding">
-                            <h5 class="margin-top--1"><strong>我们的团队</strong></h5>
-                            <ul>
-                                <li><small><a href="/joinus/lgq" class="undo">赖国强 ZY14211 22</a></small></li>
-                                <li><small><a href="/joinus/ljt" class="undo">吕骏腾 ZY14211 30</a></small></li>
-                                <li><small><a href="/joinus/jzg" class="undo">金子刚 ZY14211 18</a></small></li>
-                                <li><small><a href="/joinus/hys" class="undo">侯祎莎 ZY14211 12</a></small></li>
-                            </ul>
-                        </div>
+                        <%--</ul>--%>
+
+                        <%--</div>--%>
+
+                        <%--<div class="grid-col-6  grid-col--no-padding">--%>
+                        <%--<h5 class="margin-top--1"><strong>我们的团队</strong></h5>--%>
+                        <%--<ul>--%>
+                        <%--<li><small><a href="/joinus/lgq" class="undo">赖国强 ZY14211 22</a></small></li>--%>
+                        <%--<li><small><a href="/joinus/ljt" class="undo">吕骏腾 ZY14211 30</a></small></li>--%>
+                        <%--<li><small><a href="/joinus/jzg" class="undo">金子刚 ZY14211 18</a></small></li>--%>
+                        <%--</ul>--%>
+                        <%--</div>--%>
                     </div>
                 </div>
             </article>
@@ -63,4 +59,15 @@
             </div>
         </article>
     </footer>
+</div>
+<div class="hovercard balloon hide">
+    <div class="tooltip-container balloon-content">
+        <div>
+            <div class="hovercard-resource hide">
+            </div>
+            <div class="hovercard-loading"></div>
+        </div>
+    </div>
+    <div class="balloon-arrow-border"></div>
+    <div class="balloon-arrow"></div>
 </div>

@@ -181,7 +181,6 @@ public class DocumentServiceExt extends DocumentService implements IDocumentServ
     public void doAvatarShow(HttpServletResponse response, String filePath) {
         File file = new File(rootPath + filePath);
         if (file.exists()) {
-
             response.reset();
             response.setContentType("image/jpeg; charset=GBK");
             ServletOutputStream outputStream = null;

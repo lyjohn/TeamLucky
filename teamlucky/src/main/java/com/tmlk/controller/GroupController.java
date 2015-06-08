@@ -160,7 +160,11 @@ public class GroupController {
             List<ICondition> conditions = new ArrayList<ICondition>();
             conditions.add(new EqCondition("groupId", partyGroupExt.getId()));
             conditions.add(new GeCondition("userStatus", 8));//只能看到当前在活动的用户  被禁用，或者审批中的不能看到
-            List<PartyUserExt> partyUserExts = partyUserService.criteriaQuery(conditions);
+
+            List<Order> orders = new ArrayList<Order>();
+            orders.add(Order.desc("lastLoginTime"));
+
+            List<PartyUserExt> partyUserExts = partyUserService.criteriaQuery(conditions,orders);
 
             partyGroupModel.setGroupUsers(partyUserExts);
             partyGroupModel.setPartyGroupExt(partyGroupExt);
@@ -360,27 +364,25 @@ public class GroupController {
             if (partyGroupExt.getIsCustomJoin()) {
                 partyUserExt.setGroupId(partyGroupExt.getId());
                 partyUserExt.setUserStatus(8);
+                partyUserService.joinGroup(partyUserExt);
+
+                partyGroupExt.setMemberCount(partyGroupExt.getMemberCount() + 1);
+                partyGroupService.update(partyGroupExt);
+
+                result.setMessage("成功加入小组【" + partyGroupExt.getGroupName() + "】");
             } else {
                 partyUserExt.setGroupId(partyGroupExt.getId());
                 //partyUserExt.setUserStatus(4); //预备组员
 
                 //TODO 为了测试效果 暂时都将所有加入的 直接置为正式的
                 partyUserExt.setUserStatus(8);
-            }
-
-            partyUserService.joinGroup(partyUserExt);
-            if (partyGroupExt.getIsCustomJoin()) {
-                result.setMessage("成功加入小组【" + partyGroupExt.getGroupName() + "】");
+                partyUserService.joinGroup(partyUserExt);
 
                 partyGroupExt.setMemberCount(partyGroupExt.getMemberCount() + 1);
                 partyGroupService.update(partyGroupExt);
-            } else {
-                //TODO 为了效果 暂时直接加入了 应该是审批之后才加入的
-                partyGroupExt.setMemberCount(partyGroupExt.getMemberCount() + 1);
-                partyGroupService.update(partyGroupExt);
+
                 result.setMessage("申请加入小组【" + partyGroupExt.getGroupName() + "】,等待组长通过，只能同时申请一个小组");
             }
-
 
             result.setData(partyUserExt);
             result.setStatus(0);
@@ -404,7 +406,7 @@ public class GroupController {
 
             PartyGroupExt partyGroupExt = partyGroupService.load(sessionUser.getGroupId());
             if (partyGroupExt == null)
-                throw new Exception("您未加入小组，不能邀请");
+                throw new Exception("您未加入小组，不能邀请.");
 
             PartyUserExt partyUserExt = partyUserService.load(sessionUser.getPartyUserId());
 //            if(!partyUserExt.getId().equals(partyGroupExt.getCreateBy()))

@@ -163,8 +163,10 @@ public class PartyServiceExt extends PartyService implements IPartyServiceExt {
 		partyUserExt.setLoginName(party.getPartyCode()+"_"+sysUser.getLoginName());
 		partyUserExt.setLoginPwd(sysUser.getLoginPwd());
 		partyUserExt.setQq(sysUser.getQq());
+
+		//注册时间和ip为系统用户上次登录的时间和IP
 		partyUserExt.setRegisterIP(sysUser.getLastLoginIP());
-		partyUserExt.setRegisterTime(party.getCreateTime());
+		partyUserExt.setRegisterTime(sysUser.getLastLoginTime());
 		partyUserExt.setSex(sysUser.getSex());
 		partyUserExt.setTel(sysUser.getTel());
 		partyUserExt.setUserName(sysUser.getUserName());

@@ -3136,6 +3136,9 @@
   width:295px;
   overflow: hidden;
 }
+.main_bg .group_section .section_content li.insame .media-heading a{
+  color: #76C7C0;
+}
 .main_bg .group_section .section_content li .time_lastlogin{
   position: absolute;
   right: 0;
@@ -3261,6 +3264,9 @@
 }
 .partyIndex .myMembers ul.user_list > li.user_ingroup .media-heading{
   color: #f65a5b;
+}
+.partyIndex .myMembers ul.user_list > li.user_insame .media-heading{
+  color: #76C7C0;
 }
 .partyIndex .myMembers ul.user_list > li:nth-child(4n){
   margin-right: 0;

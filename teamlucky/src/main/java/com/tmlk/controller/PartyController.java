@@ -250,7 +250,7 @@ public class PartyController {
                 List<Order> orders = new ArrayList<Order>();
                 orders.add(Order.desc("createTime"));
 
-                List<NewsExt> newsExtList = newsService.criteriaQuery(conditions,orders);
+                List<NewsExt> newsExtList = newsService.criteriaQuery(conditions, orders);
                 for (NewsExt newsExt : newsExtList) {
                     newsExt.setCreateTimeStr(FormatUtils.date2Str(newsExt.getCreateTime()));
                 }
@@ -283,7 +283,7 @@ public class PartyController {
                 List<Order> orders = new ArrayList<Order>();
                 orders.add(Order.desc("createTime"));
 
-                List<ForumExt> forumExtList = forumService.criteriaQuery(conditions,orders);
+                List<ForumExt> forumExtList = forumService.criteriaQuery(conditions, orders);
                 for (ForumExt forumExt : forumExtList) {
                     forumExt.setCreateTimeStr(FormatUtils.date2Str(forumExt.getCreateTime()));
                 }
@@ -316,7 +316,7 @@ public class PartyController {
                 List<Order> orders = new ArrayList<Order>();
                 orders.add(Order.desc("createTime"));
 
-                List<DocumentExt> documentExtList = documentService.criteriaQuery(conditions,orders);
+                List<DocumentExt> documentExtList = documentService.criteriaQuery(conditions, orders);
                 for (DocumentExt documentExt : documentExtList) {
                     documentExt.setCreateTimeStr(FormatUtils.date2Str(documentExt.getCreateTime()));
                 }
@@ -335,7 +335,7 @@ public class PartyController {
     *  上面是活动管理功能模块
     */
 
-    @RequestMapping(value = {"/","/index"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String initIndex(HttpSession session, HttpServletRequest request, @ModelAttribute PartyModel partyModel, ModelMap model) {
         SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
         Long id = sessionUser.getPartyId();
@@ -343,26 +343,26 @@ public class PartyController {
         if (partyExt == null) {
             return "redirect:/errors/error/2";
         } else {
+            session.setAttribute(Constants.SESSION_ISMEMBER, true);
             session.setAttribute(Constants.SESSION_AUTOCREATE, partyExt.getIsCustomBuild());//是否自动分组 进入活动的时候初始化
 
             List<ICondition> conditions = new ArrayList<ICondition>();
-            conditions.add(new EqCondition("partyId", partyExt.getId()));
-            conditions.add(new EqCondition("sysUserId", sessionUser.getSysUserId()));
-            List<SysPartyUserLinkExt> sysPartyUserLinkExts = sysPartyUserLinkService.criteriaQuery(conditions);
-            if (sysPartyUserLinkExts.size() == 0) {//已登录 但是不是该活动的成员
-                if (partyExt.getIsPublic()) {
 
-                } else {
-                    return "redirect:/errors/error/3";
-                }
-            } else {
-                PartyUserExt partyUserExt = partyUserService.load(sysPartyUserLinkExts.get(0).getPartyUserId());
+            PartyUserExt partyUserExt = partyUserService.load(sessionUser.getPartyUserId());
 
-                //用户进入活动 活动 小组 活跃度+1
-                partyService.loginParty(partyUserExt,partyExt);
+            //更新Session
+            sessionStatus.checkAndInParty(session, partyUserExt);
+            //用户进入活动 活动 小组 活跃度+1
+            partyService.loginParty(partyUserExt, partyExt);
 
-                sessionStatus.checkAndInParty(session, partyUserExt);
-            }
+            //用户已经是正式成员了
+            if (partyUserExt.getGroupId() > 0 && partyUserExt.getUserStatus() > 6)
+                model.addAttribute("join", true);
+            else
+                model.addAttribute("join", false);
+
+            model.addAttribute("groupId", partyUserExt.getGroupId());
+
 
             conditions.clear();
             conditions.add(new EqCondition("partyId", partyExt.getId()));
@@ -370,7 +370,6 @@ public class PartyController {
             List<Order> orders = new ArrayList<Order>();
             orders.add(Order.desc("groupStatus"));
             orders.add(Order.desc("hotCount"));
-
             List<PartyGroupExt> groupExtList = partyGroupService.criteriaQuery(conditions, orders);
 
             partyModel.setPartyGroups(groupExtList);
@@ -385,13 +384,8 @@ public class PartyController {
             orders.add(Order.asc("userName"));
 
             List<PartyUserExt> groupUserList = partyUserService.criteriaQuery(conditions, orders);
+
             partyModel.setPartyUsers(groupUserList);
-
-            if (sessionUser.getGroupId() > 0)
-                model.addAttribute("join", false);
-            else
-                model.addAttribute("join", true);
-
             partyModel.setPartyExt(partyExt);
 
             model.addAttribute("model", partyModel);
@@ -402,7 +396,7 @@ public class PartyController {
     @RequestMapping(value = "/index/{id}", method = RequestMethod.GET)
     public String index(@PathVariable("id") Long id, HttpSession session, HttpServletRequest request, @ModelAttribute PartyModel partyModel, ModelMap model) {
         SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
-        if(id == null)
+        if (id == null)
             id = sessionUser.getPartyId();
         PartyExt partyExt = partyService.load(id);
         if (partyExt == null) {
@@ -414,29 +408,34 @@ public class PartyController {
             conditions.add(new EqCondition("partyId", partyExt.getId()));
             conditions.add(new EqCondition("sysUserId", sessionUser.getSysUserId()));
             List<SysPartyUserLinkExt> sysPartyUserLinkExts = sysPartyUserLinkService.criteriaQuery(conditions);
-            if (sysPartyUserLinkExts.size() == 0) {//已登录 但是不是该活动的成员
+
+            String partyUserId = sessionUser.getPartyUserId();
+            if (sysPartyUserLinkExts.size() == 0 && partyUserId == null) {//已登录 但是不是该活动的成员
                 if (partyExt.getIsPublic()) {
-
-                    model.addAttribute("join", false);
-
-                    session.setAttribute(Constants.SESSION_ISMEMBER,false);
+                    session.setAttribute(Constants.SESSION_ISMEMBER, false);
                 } else {
                     return "redirect:/errors/error/3";
                 }
-            } else {
-                session.setAttribute(Constants.SESSION_ISMEMBER,true);
 
-                PartyUserExt partyUserExt = partyUserService.load(sysPartyUserLinkExts.get(0).getPartyUserId());
+                model.addAttribute("join", false);
+                model.addAttribute("groupId", -1);
+            } else {
+                session.setAttribute(Constants.SESSION_ISMEMBER, true);
+
+                if (sysPartyUserLinkExts.size() > 0)//按理说是1,如果这个系统用户登录过其他活动，partyuserid就会有值，这儿覆盖一下
+                    partyUserId = sysPartyUserLinkExts.get(0).getPartyUserId();
+
+                PartyUserExt partyUserExt = partyUserService.load(partyUserId);
 
                 sessionStatus.checkAndInParty(session, partyUserExt);
-
-                //TODO 用户进入活动 活动 小组 活跃度+1
-                partyService.loginParty(partyUserExt,partyExt);
+                //用户进入活动 活动 小组 活跃度+1
+                partyService.loginParty(partyUserExt, partyExt);
 
                 if (sessionUser.getGroupId() > 0)
-                    model.addAttribute("join", false);
-                else
                     model.addAttribute("join", true);
+                else
+                    model.addAttribute("join", false);
+                model.addAttribute("groupId", partyUserExt.getGroupId());
             }
 
             conditions.clear();
@@ -746,7 +745,7 @@ public class PartyController {
     /*加入公共活动*/
     @RequestMapping(value = "/join")
     @ResponseBody
-    public JsonResult joinParty(@RequestParam(value = "partyId", required = true) Long partyId, HttpSession session){
+    public JsonResult joinParty(@RequestParam(value = "partyId", required = true) Long partyId, HttpSession session) {
         JsonResult result = new JsonResult();
         try {
             SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
@@ -758,10 +757,10 @@ public class PartyController {
             SysUserExt sysUserExt = sysUserService.load(sessionUser.getSysUserId());
 
             //加入活动
-            PartyUserExt partyUserExt =  partyService.join(sysUserExt, partyExt);
+            PartyUserExt partyUserExt = partyService.join(sysUserExt, partyExt);
 
             //刷新Session
-            sessionStatus.checkAndInParty(session,partyUserExt);
+            sessionStatus.checkAndInParty(session, partyUserExt);
 
             result.setStatus(0);
         } catch (Exception ex) {
