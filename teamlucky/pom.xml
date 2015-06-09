@@ -1,13 +1,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>TeamLucky</groupId>
-    <artifactId>teamlucky</artifactId>
-    <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
-    <name>TeamLucky Maven Webapp</name>
-    <url>http://maven.apache.org</url>
 
+    <!--工程ID，是整个产品的大ID-->
+    <groupId>TeamLucky</groupId>
+
+    <!--项目ID，是这个小项目的产品ID-->
+    <artifactId>tmlk.web</artifactId>
+
+    <!--版本号-->
+    <version>1.0</version>
+
+    <!--打包的机制 如pom, jar, maven-plugin, ejb, war, ear, rar, par-->
+    <packaging>war</packaging>
+
+    <!--仓库地址-->
     <repositories>
         <repository>
             <id>Java.Net</id>
@@ -15,6 +22,7 @@
         </repository>
     </repositories>
 
+    <!--属性，定义一些常量，在pom中的其它地方直接引用-->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- spring版本号 -->
@@ -26,6 +34,7 @@
         <log4j.version>1.2.17</log4j.version>
     </properties>
 
+    <!--依赖列表 下面是一些第三方的依赖包-->
     <dependencies>
 
         <dependency>
@@ -252,7 +261,51 @@
         </dependency>
     </dependencies>
 
+    <!--生成war包的名名称-->
     <build>
-        <finalName>teamlucky</finalName>
+        <finalName>tmlk</finalName>
     </build>
+
+    <!--项目名字-->
+    <name>tmlk</name>
+    <!--项目说明描述-->
+    <description>二级工程实践的项目：校缘派，这个是web端，供用户创建和管理活动，并参与其中的一个网页平台</description>
+    <!--项目的链接-->
+    <url>http://www.lyjohn.com/tmlk</url>
+    <!--创始年份-->
+    <inceptionYear>2015</inceptionYear>
+
+    <!--软件配置管理-->
+    <scm>
+        <url>https://github.com/lyjohn/TeamLucky</url>
+        <tag>master</tag>
+    </scm>
+
+    <!--配置开发者信息:一个开发者可以有多个roles，属性-->
+    <developers>
+        <developer>
+            <id>lyjohn</id>
+            <name>Lai Guoqiang</name>
+            <email>lyjohn@lyjohn.com</email>
+            <url>http://www.lyjohn.com</url>
+            <organization>buaasoft</organization>
+            <organizationUrl>http://soft.buaa.edu.cn/</organizationUrl>
+            <roles>
+                <role>project</role>
+                <role>architect</role>
+                <role>developer</role>
+                <role>tester</role>
+            </roles>
+            <timezone>+8</timezone>
+            <properties>
+                <picUrl>http://lyjohn.com/tmlk/avatar/user/1/fb0de1dd1fae499ebd5531c8509b4b07</picUrl>
+            </properties>
+        </developer>
+    </developers>
+
+    <!--bug跟踪管理系统-->
+    <issueManagement>
+        <system>Redmine</system>
+        <url>http://redmine.lyjohn.com/</url>
+    </issueManagement>
 </project>

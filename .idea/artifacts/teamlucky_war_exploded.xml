@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="teamlucky:war exploded">
-    <output-path>$PROJECT_DIR$/teamlucky/target/teamlucky</output-path>
+    <output-path>$PROJECT_DIR$/teamlucky/target/tmlk</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
