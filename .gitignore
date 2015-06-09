@@ -1,6 +1,8 @@
 *.class
 .DS_Store
-workspace.xml
+/.idea/workspace.xml
+
+/teamlucky/target/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

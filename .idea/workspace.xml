@@ -5,199 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26ad3f5f-b104-4da6-ab91-f1f3b8bda468" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/classes/log4j.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/classes/mybatis/mapper/Document.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/classes/mybatis/mapper/Forum.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/classes/mybatis/mapper/ForumComment.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/classes/mybatis/mapper/Message.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/classes/mybatis/mapper/News.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/classes/mybatis/mapper/Party.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/classes/mybatis/mapper/PartyGroup.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/classes/mybatis/mapper/PartyUser.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/classes/mybatis/mapper/SysLog.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/classes/mybatis/mapper/SysPartyUserLink.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/classes/mybatis/mapper/SysUser.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/META-INF/MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/classes/log4j.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/classes/mybatis/mapper/Document.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/classes/mybatis/mapper/Forum.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/classes/mybatis/mapper/ForumComment.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/classes/mybatis/mapper/Message.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/classes/mybatis/mapper/News.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/classes/mybatis/mapper/Party.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/classes/mybatis/mapper/PartyGroup.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/classes/mybatis/mapper/PartyUser.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/classes/mybatis/mapper/SysLog.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/classes/mybatis/mapper/SysPartyUserLink.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/classes/mybatis/mapper/SysUser.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/mybatis/mybatis-config.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/core/include.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/errors/error.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/group/confdocs.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/group/confforum.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/group/confinfo.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/group/confmember.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/group/confnews.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/group/create.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/group/index.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/index.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/news/createnews.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/news/show.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/party/conf.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/party/confdocs.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/party/confforum.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/party/confgroup.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/party/confinfo.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/party/confmember.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/party/confnews.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/party/create.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/party/index.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/party/list.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/party/setting.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/shared/_footer.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/shared/_header.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/user/_card.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/user/index.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/user/message.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/user/partylist.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/user/pprofile.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/pages/user/sprofile.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/properties/app.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/properties/jdbc.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/spring/spring-beans.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/spring/spring-dataSource.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/spring/spring-mvc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/WEB-INF/web.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/avatar/default/group.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/avatar/default/party1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/avatar/default/party2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/avatar/default/party3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/avatar/default/party4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/avatar/default/party5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/avatar/default/party6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/avatar/default/user.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/css/allinone_carousel.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/css/blue.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/css/bootstrap-responsive.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/css/bootstrap-theme.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/css/bootstrap-theme.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/css/bootstrap.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/css/bootstrap.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/css/codecademy.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/css/datepicker.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/css/font-awesome.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/css/font-awesome.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/css/fwslider.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/css/index.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/css/jquery.fancybox.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/css/user-profile.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/fonts/FontAwesome.otf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/fonts/RobotoCondensed-Regular-webfont.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/fonts/fontawesome-webfont.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/fonts/fontawesome-webfont.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/fonts/fontawesome-webfont.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/fonts/fontawesome-webfont.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/fonts/glyphicons-halflings-regular.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/fonts/glyphicons-halflings-regular.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/fonts/glyphicons-halflings-regular.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/fonts/glyphicons-halflings-regular.woff2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/C4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/aarrows.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/ads_pic.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/arrow.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/arrows.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/blog-pic1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/blog-pic2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/blog_pic1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/blog_pic2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/border-anim-h.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/border-anim-v.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/border-h.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/border-v.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/c1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/c2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/c3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/circle_left_arrow.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/circle_right_arrow.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/clock.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/connection_title_bg.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/det_pic.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/down_arrow.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/down_arrowh.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/edit_photo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/fancy_closebox.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/fancy_left.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/fancy_right.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/favicon.ico" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/loading.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/logo0.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/right_arrow.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/s1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/s2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/s3.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/s4.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/s5.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/s6.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/s7.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/s8.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/search_zoon_btn.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/slider0.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/slider00.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/slider1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/slider2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/slider_pic1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/slider_pic2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/slider_pic3.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/slider_pic4.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/slider_pic5.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/top-image1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/top-image2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/images/user_pic.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/js/ajaxfileupload.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/js/allinone_carousel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/js/bootstrap.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/js/bootstrap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/js/common.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/js/css3-mediaqueries.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/js/fliplightbox.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/js/fwslider.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/js/jquery-ui.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/js/jquery.easing.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/js/jquery.fancybox-1.2.1.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/js/jquery.imgareaselect.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/js/jquery.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/js/jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/js/jquery.mixitup.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/js/jquery.ui.touch-punch.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/js/jquery.validate.ext.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/js/jquery.validate.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/js/json2.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/js/menu.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/js/template-native.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/model/memberImport.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/plugins/datetime/bootstrap-datepicker.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/plugins/datetime/bootstrap-datetimepicker.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/plugins/datetime/bootstrap-timepicker.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/plugins/datetime/locales/bootstrap-datepicker.zh-CN.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/plugins/datetime/locales/bootstrap-datetimepicker.zh-CN.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/plugins/datetime/moment.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/plugins/layer/extend/layer.ext.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/plugins/layer/layer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/plugins/layer/skin/default/icon-ext.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/plugins/layer/skin/default/icon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/plugins/layer/skin/default/loading-0.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/plugins/layer/skin/default/loading-1.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/plugins/layer/skin/default/loading-2.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/plugins/layer/skin/layer.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/plugins/layer/skin/layer.ext.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/plugins/layer/skin/moon/default.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamlucky/target/teamlucky/resource/plugins/layer/skin/moon/style.css" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/pom.xml" afterPath="$PROJECT_DIR$/teamlucky/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/teamlucky_war.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/teamlucky_war.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/teamlucky_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/teamlucky_war_exploded.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="teamlucky.iws" />
@@ -296,23 +103,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/MainController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1576" max-vertical-offset="2205">
-              <caret line="85" column="83" selection-start-line="85" selection-start-column="83" selection-end-line="85" selection-end-column="83" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#1838#1850#0" expanded="false" />
-                <element signature="e#1955#1962#0" expanded="false" />
-                <element signature="e#4064#4076#0" expanded="false" />
-                <element signature="e#4181#4188#0" expanded="false" />
-                <element signature="e#5428#5440#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="GroupController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/GroupController.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -356,16 +146,26 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/teamlucky/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.59653467" vertical-offset="556" max-vertical-offset="960">
+            <state vertical-scroll-proportion="0.0" vertical-offset="556" max-vertical-offset="960">
               <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
               <folding>
                 <element signature="n#properties#0;n#project#0;n#!!top" expanded="false" />
                 <element signature="n#dependencies#0;n#project#0;n#!!top" expanded="false" />
                 <element signature="n#developers#0;n#project#0;n#!!top" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="379">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -580,108 +380,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="teamlucky" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="teamlucky" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="user" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="teamlucky" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="teamlucky" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shared" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="teamlucky" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="teamlucky" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="group" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1410,12 +1108,12 @@
       <workItem from="1433694664076" duration="950000" />
       <workItem from="1433735865965" duration="216000" />
       <workItem from="1433737890159" duration="17726000" />
-      <workItem from="1433865460487" duration="3033000" />
+      <workItem from="1433865460487" duration="3138000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="315614000" />
+    <option name="totallyTimeSpent" value="315719000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="786" extended-state="0" />
@@ -1491,13 +1189,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/service/impl/SysLogServiceExt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14778325" vertical-offset="0" max-vertical-offset="406">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/group/create.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5810811" vertical-offset="850" max-vertical-offset="5310">
@@ -1896,13 +1587,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/teamlucky/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.59653467" vertical-offset="556" max-vertical-offset="960">
+        <state vertical-scroll-proportion="0.0" vertical-offset="556" max-vertical-offset="960">
           <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
           <folding>
             <element signature="n#properties#0;n#project#0;n#!!top" expanded="false" />
             <element signature="n#dependencies#0;n#project#0;n#!!top" expanded="false" />
             <element signature="n#developers#0;n#project#0;n#!!top" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="404">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
