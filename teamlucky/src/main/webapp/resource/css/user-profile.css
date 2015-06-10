@@ -1151,7 +1151,7 @@
 }
 .main_bg .persion_section .connection_title_con ul {
   list-style: none;
-  height: 72px;
+  height: 52px;
   width: 600px;
   margin: 0px;
   padding: 0px;
@@ -1160,7 +1160,9 @@
 }
 .main_bg .persion_section .connection_action_form{
   text-align: right;
-  position: relative;
+  position: absolute;
+  width: 400px;
+  right: 20px;
 }
 .main_bg .persion_section .connection_title_con .connection_action_form a.download {
   line-height: 36px;
@@ -1199,12 +1201,15 @@
 }
 .main_bg .persion_section .connection_title_con ul li {
   float: left;
-  height: 52px;
+  height: 40px;
   line-height: 40px;
   display: block;
-  margin-right: 5px;
+  margin:0 5px 0 0;
   cursor: pointer;
   font-size: 16px;
+}
+.main_bg .persion_section .connection_title_con ul li span{
+  padding: 0 3px;
 }
 .main_bg .persion_section .my_connections .no-mess {
   font-size: 16px;
@@ -1217,9 +1222,10 @@
   margin-left: 5px;
 }
 .main_bg .persion_section .connection_title_con ul .current_foucus {
+  color:#39d1b4;
 }
 .main_bg .persion_section .connection_title_con ul .interval_line {
-  width: 70px;
+  width: 30px;
 }
 .main_bg .persion_section .connection_list_con {
   width: 100%;
@@ -3052,6 +3058,10 @@
 .main_bg .connection_list_con .table{
   font-size: 12px;
 }
+.main_bg .connection_list_con .table > tbody > tr > td{
+  line-height: 30px;
+}
+
 .main_bg .connection_list_con .member-table img{
   float: left;
   width: 30px;
@@ -3314,3 +3324,4 @@
 .partyIndex .myMembers ul.user_list > li:hover .media-hover{
   left:0;
 }
+

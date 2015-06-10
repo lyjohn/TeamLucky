@@ -170,14 +170,14 @@
             </div>
             <div nodetype="myMembers" nodeindex="my2" data-modal="tab-layer" class="myMembers">
                 <div class="connection_title_con">
-                    <ul>
-                        <li id="btnAllMember" class="current_foucus">所有成员(0)</li>
+                    <ul class="member-filter">
+                        <li class="current_foucus filter all-member" data-seq=0>所有成员(<span>0</span>)</li>
                         <li class="interval_line"></li>
-                        <li id="btnInValid" class="">已禁用(0)</li>
+                        <li class="filter invalid-member" data-seq=1>已禁用(<span>0</span>)</li>
                         <li class="interval_line"></li>
-                        <li id="btnGrouped" class="">已分组(0)</li>
+                        <li class="filter ingroup-member" data-seq=2>已分组(<span>0</span>)</li>
                         <li class="interval_line"></li>
-                        <li id="btnNoGrouped" class="">未分组(0)</li>
+                        <li class="filter nogroup-member" data-seq=3>未分组(<span>0</span>)</li>
                     </ul>
                     <div class="connection_action_form">
                         <a class="download" href="${ctx}/party/exportModel" target="_blank">活动成员导入模板.xlsx</a>
@@ -213,6 +213,19 @@
             </div>
             <c:if test="${model.partyExt.isGroup}">
                 <div nodetype="myGroups" nodeindex="my2" data-modal="tab-layer" class="myGroups">
+                    <div class="connection_title_con">
+                        <ul class="group-filter">
+                            <li class="current_foucus filter all-group" data-seq=0>所有小组(<span>0</span>)</li>
+                            <li class="interval_line"></li>
+                            <li class="filter complete-group" data-seq=1>分组完成(<span>0</span>)</li>
+                            <li class="interval_line"></li>
+                            <li class="filter processing-group" data-seq=2>分组进行中(<span>0</span>)</li>
+                        </ul>
+                        <div class="connection_action_form">
+                            <a class="add_partygroup button button--secondary" href="#" data-method="post" rel="nofollow" style="overflow:hidden;position: relative;">创建小组
+                            </a>
+                        </div>
+                    </div>
                     <div class="connection_list_con clearfix">
                         <table class="table table-striped member-table">
                             <thead>
@@ -310,7 +323,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputPartyPwd" class="col-sm-3 control-label">* 用户密码</label>
+                    <label for="inputPartyPwd" class="col-sm-3 control-label">用户密码</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="inputPartyPwd" name="inputPartyPwd" placeholder="活动用户的密码，默认 123456" />
                     </div>
@@ -319,6 +332,35 @@
                     <label for="inputUserName" class="col-sm-3 control-label">用户昵称</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="inputUserName" name="inputUserName" placeholder="用户的显示名名称" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="success">
+            <a href="#" nodetype="cancel" class="button">取消</a>
+            <a class="js_save button button--secondary" href="#" data-method="post" rel="nofollow">创建</a>
+        </div>
+    </div>
+    <div class="pop_edit reg_partygroup">
+        <h3>创建小组</h3>
+        <div class="context">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="inputGroupName" class="col-sm-3 control-label">* 小组名称</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputGroupName" name="inputGroupName" placeholder="可含中文字母或特殊符号" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputGroupRemark" class="col-sm-3 control-label">* 小组简介</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" id="inputGroupRemark" name="inputGroupRemark" placeholder="小组简介不能为空"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputGroupAdmin" class="col-sm-3 control-label">* 设置组长</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputGroupAdmin" name="inputGroupAdmin" placeholder="输入名字查找" />
                     </div>
                 </div>
             </form>
@@ -408,6 +450,10 @@
 <script type="text/javascript" src="${ctx}/resource/plugins/datetime/locales/bootstrap-datepicker.zh-CN.js"></script>
 
 <script type="text/javascript" src="${ctx}/resource/js/template-native.js"></script>
+
+<script type="text/javascript" src="${ctx}/resource/js/jquery.caret.min.js"></script>
+<script type="text/javascript" src="${ctx}/resource/js/jquery.atwho.min.js"></script>
+
 <script type="text/javascript" src="${ctx}/resource/js/common.js"></script>
 
 <script id="partyuserlist" type="text/html">
@@ -417,7 +463,7 @@
         ${'<'}% }else{ %${'>'}
     <tr class="">
         ${'<'}% } %${'>'}
-        <td><img alt="${'<'}%= list[i].userName %${'>'}" src="${ctx}/avatar/user/2/${'<'}%= list[i].id%${'>'}" /><span class="user_loginname">${'<'}%= list[i].loginName %${'>'}</span></td>
+        <td><img class="user-hover" data-hover="${'<'}%= list[i].id%${'>'}" alt="${'<'}%= list[i].userName %${'>'}" src="${ctx}/avatar/user/2/${'<'}%= list[i].id%${'>'}" /><span class="user_loginname">${'<'}%= list[i].loginName %${'>'}</span></td>
         <td>${'<'}%= list[i].userName %${'>'}</td>
         <td>${'<'}%= list[i].sex %${'>'}</td>
         <td>${'<'}%= list[i].userRemark %${'>'}</td>
@@ -425,13 +471,11 @@
         <td>${'<'}%= list[i].email %${'>'}</td>
         <td>${'<'}%= list[i].qq %${'>'}</td>
         <td>${'<'}%= list[i].weiXin %${'>'}</td>
-        <td>
-            ${'<'}% if( list[i].group == null) { %${'>'}
-            无组织
-            ${'<'}% }else{ %${'>'}
-            ${'<'}%= list[i].group.groupName%${'>'}
-            ${'<'}% } %${'>'}
-        </td>
+        ${'<'}% if( list[i].group == null) { %${'>'}
+        <td class="nogroup">无组织</td>
+        ${'<'}% }else{ %${'>'}
+        <td class="ingroup">${'<'}%= list[i].group.groupName%${'>'}</td>
+        ${'<'}% } %${'>'}
         <td>${'<'}%= list[i].statusName %${'>'}</td>
         <td>${'<'}%= list[i].lastLoginTimeStr %${'>'}</td>
         <td class="table-actions" data-id="${'<'}%= list[i].id%${'>'}">
@@ -497,6 +541,17 @@
                 title: false,
                 area: [width + 'px', height + 'px'],
                 content: $(".reg_partyuser")
+            });
+        }).on("click",".add_partygroup",function(){
+            $(".reg_partygroup").show();
+            var width = $(".reg_partygroup").width();
+            var height = $(".reg_partygroup").height();
+            layer.open({
+                zIndex: 1000,
+                type: 1,
+                title: false,
+                area: [width + 'px', height + 'px'],
+                content: $(".reg_partygroup")
             });
         }).on("click", ".pop_edit a[nodetype='cancel']", function () { //取消按钮
             layer.closeAll();
@@ -609,6 +664,16 @@
                         layer.msg("创建成员成功", {icon: 6, offset: '110px'});
 
                         $(".reg_partyuser input").val("");
+
+                        var data = {list:res.data};
+                        var html = template('partyuserlist',data);
+                        $(".myMembers table tbody").append(html);
+
+                        var total = $(".all-member span").text()*1;
+                        var nogroup = $(".nogroup-member span").text()*1;
+
+                        $(".all-member span").text(total+1);
+                        $(".nogroup-member span").text(nogroup+1);
                     }
                     else
                         layer.msg(res.message, {icon: 5, offset: '110px'});
@@ -616,6 +681,49 @@
                 error: function (data, status, e) {
                     layer.closeAll();
                     layer.msg("保存失败", {icon: 5, offset: '110px'});
+                }
+            })
+        }).on("click", ".reg_partygroup .js_save", function () {//创建活动小组
+            var pgName = $(".reg_partygroup #inputGroupName").val();
+            var pgRemark = $(".reg_partygroup #inputGroupRemark").val();
+            var pgCreater = $(".reg_partygroup #inputGroupAdmin").val();
+            var pgCreaterId = $(".reg_partygroup #inputGroupAdmin").data("id");
+            if (pgName == "" || pgRemark=="" || pgCreater=="") {
+                layer.msg("所有的内容都是必填的", {icon: 5, offset: "110px"});
+                return false;
+            }
+
+            var postDate = {groupName: pgName, groupRemark: pgRemark, createBy: pgCreaterId};
+            $.ajax({
+                url: "${ctx}/party/creategroup",
+                dataType: "json",
+                data: postDate,
+                type: "post",
+                success: function (res) {
+                    if (res.status == 0) {
+                        layer.closeAll();
+
+                        layer.msg("创建小组成功", {icon: 6, offset: '110px'});
+
+                        $(".reg_partygroup input").val("");
+                        $(".reg_partygroup #inputGroupAdmin").removeData();
+
+                        var data = {list:res.data};
+                        var html = template('partygrouplist',data);
+                        $(".myGroups table tbody").append(html);
+
+                        var total = $(".all-group span").text()*1;
+                        var process = $(".processing-group span").text()*1;
+
+                        $(".all-group span").text(total+1);
+                        $(".processing-group span").text(process+1);
+                    }
+                    else
+                        layer.msg(res.message, {icon: 5, offset: '110px'});
+                },
+                error: function (data, status, e) {
+                    layer.closeAll();
+                    layer.msg("保存失败, JS有误，请重试", {icon: 5, offset: '110px'});
                 }
             })
         }).on("change", ".edit_person_pic input[type='file']", function () { //上传图片
@@ -680,7 +788,17 @@
                     var bak = JSON.parse(resStr);
                     bak = JSON.parse(bak);
                     if (bak.status == 0) {
+                        var added = bak.data.length;
+                        layer.msg("成功导入 "+added+" 名新成员", {icon: 6, offset: '110px'});
 
+                        var data = {list:bak.data};
+                        var html = template('partyuserlist',data);
+                        $(".myMembers table tbody").append(html);
+
+                        var total = $(".all-member span").text()*1;
+                        var nogroup = $(".nogroup-member span").text()*1;
+                        $(".all-member span").text(total+added);
+                        $(".nogroup-member span").text(nogroup+added);
                     } else {
                         layer.msg(bak.message, {icon: 5, offset: '110px'});
                     }
@@ -694,7 +812,7 @@
         }).on("click", "#edit-photo #js-save", function () {
             avatarResize();
             return false;
-        }).on("click", ".person_detail_tab li", function () {
+        }).on("click", ".person_detail_tab li", function () {//切换tab
             var thisli = $(this);
             var nTab = $(this).data("tab");
             var oTab = $(".aboutMe .current_content").attr("nodetype");
@@ -717,6 +835,16 @@
                             $(".myMembers table tbody").html(html);
 
                             layer.closeAll();
+
+                            var total = $(".member-table tbody tr").length;
+                            var invalid = $(".member-table tbody tr.danger").length;
+                            var nogroup = $(".member-table tbody td.nogroup").length;
+                            var ingroup = total-nogroup;
+                            $(".all-member span").text(total);
+                            $(".invalid-member span").text(invalid);
+                            $(".nogroup-member span").text(nogroup);
+                            $(".ingroup-member span").text(ingroup);
+
                             thisli.data("load",true);
                         }else{
                             layer.closeAll();
@@ -841,6 +969,83 @@
                     layer.msg(result.message,{icon:5,offset:'110px'});
                 }
             },"json")
+        });
+
+        //切换用户列表状态筛选
+        $(document).on("click",".member-filter li.filter",function(){
+            var seq = $(this).data("seq");
+            switch(seq){
+                case 0:
+                    $(".member-table tbody tr").slideDown();
+                    break;
+                case 1:
+                    $(".member-table tbody tr:not(.danger)").slideUp();
+                    break;
+                case 2:
+                    $(".member-table tbody tr").slideUp();
+                    $(".member-table tbody td.ingroup").parent().slideDown();
+                    break;
+                case 3:
+                    $(".member-table tbody tr").slideUp();
+                    $(".member-table tbody td.nogroup").parent().slideDown();
+                    break;
+                default :
+                    $(".member-table tbody tr").slideDown();
+                    break;
+            }
+            $(".member-filter li.current_foucus").removeClass("current_foucus");
+            $(this).addClass("current_foucus");
+        })
+
+        var search_cache = [];
+        //人员选择
+        $("#inputGroupAdmin").atwho({
+            at: "",
+            alias: "at-users",
+            attype: 1,
+            search_key: "userName",
+            tpl: "<li data-name='${'$'}{userName}' data-id='${'$'}{id}' title='${'$'}{userRemark}'><span class='atwho-li'>${'$'}{userName}</li>",
+            limit: 10,
+            callbacks: {
+                remote_filter: function (query, render_view) {
+                    var thisVal = query;
+                    var self = $(this);
+                    if (!self.data('active') && thisVal.length >= 1) {
+                        self.data('active', true);
+                        var cached = search_cache[thisVal];
+                        if (typeof cached == "object") {
+                            render_view(cached);
+                            self.data('active', false);
+                        } else {
+                            if (self.xhr) {
+                                self.xhr.abort();
+                            }
+                            self.xhr = $.ajax({
+                                url: "${ctx}/party/searchnogroupuser",
+                                data: { "userName": thisVal },
+                                dataType: "json",
+                                type: "POST",
+                                success: function (res) {
+                                    if (res.status == 0) {
+                                        search_cache[thisVal] = res.data;
+
+                                        render_view(res.data);
+                                        self.data('active', false);
+                                    }
+                                },
+                                error: function (data, status, e) {
+                                    sf.sf_Message("查询用户JS错误：" + e + ",请刷新页面重试,抱歉！", 2);
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+        }).on('inserted-at-users.atwho', function (e, el) {
+            var id = el.data("id");
+            var name = el.data("name");
+
+            $(this).val(name).data("id",id);
         });
 
     });

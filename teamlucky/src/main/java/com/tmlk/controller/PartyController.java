@@ -5,10 +5,7 @@ package com.tmlk.controller;
  */
 
 import com.alibaba.fastjson.JSON;
-import com.tmlk.framework.mybatis.EqCondition;
-import com.tmlk.framework.mybatis.ICondition;
-import com.tmlk.framework.mybatis.InCondition;
-import com.tmlk.framework.mybatis.Order;
+import com.tmlk.framework.mybatis.*;
 import com.tmlk.framework.session.SessionStatus;
 import com.tmlk.framework.session.SessionUser;
 import com.tmlk.framework.util.*;
@@ -169,6 +166,7 @@ public class PartyController {
                 orders.add(Order.desc("lastLoginTime"));
 
                 List<PartyUserExt> partyUserExtList = partyUserService.criteriaQuery(conditions);
+
                 for (PartyUserExt partyUser : partyUserExtList) {
                     if (partyUser.getGroupId() > 0)
                         partyUser.setGroup(partyGroupService.load(partyUser.getGroupId()));
@@ -176,8 +174,10 @@ public class PartyController {
                     //用户状态
                     String statusName = Constants.PARTY_USER_STATUS_MAP.get(partyUser.getUserStatus());
                     if (FormatUtils.isEmpty(statusName)) {
-                        if (partyUser.getUserStatus() % 2 == 1)
+                        if (partyUser.getUserStatus() % 2 == 1) {
                             partyUser.setStatusName("已禁用");
+
+                        }
                         else
                             partyUser.setStatusName("未知");
                     } else
@@ -741,6 +741,84 @@ public class PartyController {
         return result;
     }
     /* 活动用户管理结束 */
+
+    /* 查询某个成员为小组长 */
+    @RequestMapping(value = "searchnogroupuser")
+    @ResponseBody
+    public JsonResult SearchNoGroupUser(@RequestParam(value = "userName", required = true) String userName,HttpSession session){
+        JsonResult result = new JsonResult();
+        try {
+            SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
+
+            //只有活动创建者才能进入管理页面
+            if (sessionUser.isPartyAdmin()) {
+                List<ICondition> conditions = new ArrayList<ICondition>();
+                conditions.add(new EqCondition("partyId",sessionUser.getPartyId()));
+                conditions.add(new EqCondition("userStatus",2));
+                conditions.add(new LikeCondition("userName",userName));
+
+                List<Order> orders = new ArrayList<Order>();
+                orders.add(Order.asc("userName"));
+
+                Pagination pp = new Pagination();
+                pp.setCurrentPage(1);
+                pp.setPageSize(10);
+
+                List<PartyUserExt> partyUserExtList = partyUserService.criteriaQuery(conditions,null,pp);
+
+                result.setData(partyUserExtList);
+                result.setStatus(0);
+            } else
+                result.setMessage("没有权限");
+        } catch (Exception ex) {
+            result.setMessage(ex.getMessage());
+        }
+        return result;
+    }
+
+    /* 小组手动创建 */
+    @RequestMapping(value = "creategroup")
+    @ResponseBody
+    public JsonResult createGroup(@ModelAttribute PartyGroupExt partyGroupExt, HttpServletRequest request, HttpSession session) {
+        JsonResult result = new JsonResult();
+        try {
+            SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
+
+            if(sessionUser.isPartyAdmin()) {
+                partyGroupExt.setCreateTime(new Date());
+                partyGroupExt.setPartyId(sessionUser.getPartyId());
+                partyGroupExt.setGroupStatus(1);
+                partyGroupExt.setMemberCount(1);
+                partyGroupExt.setHotCount(0);
+                partyGroupExt.setIsSourcePublic(true);
+                partyGroupExt.setIsCustomJoin(true);
+
+                partyGroupService.build(partyGroupExt);
+
+                //小组长 设置其小组
+                PartyUserExt partyUserExt = partyUserService.load(partyGroupExt.getCreateBy());
+                partyUserExt.setGroupId(partyGroupExt.getId());
+                partyUserExt.setUserStatus(10);//已进入小组,且是活动创建者
+                partyUserService.update(partyUserExt);
+
+
+                List<PartyGroupExt> partyGroupExtList = new ArrayList<PartyGroupExt>();
+                partyGroupExt.setCreateTimeStr(FormatUtils.date2Str(partyGroupExt.getCreateTime()));
+                partyGroupExtList.add(partyGroupExt);
+
+                result.setData(partyGroupExtList);
+                result.setStatus(0);
+            }else{
+                result.setMessage("不是活动创建者，没有权限");
+            }
+        } catch (Exception ex) {
+            result.setMessage("服务器异常，请重新提交");
+            logger.error(ex);
+        }
+        return result;
+    }
+    /* 小组手动创建结束 */
+
 
     /*加入公共活动*/
     @RequestMapping(value = "/join")
