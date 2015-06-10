@@ -2354,7 +2354,7 @@
   margin-right: -3px;
   text-align: right;
 }
-.main_bg .login_partyuser,.main_bg .login_sysuser,.main_bg .reg_partyuser {
+.main_bg .login_partyuser,.main_bg .login_sysuser,.main_bg .reg_partyuser,.main_bg .reg_partygroup {
   width: 590px;
   overflow: hidden;
 }
@@ -3325,3 +3325,92 @@
   left:0;
 }
 
+.atwho-view {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  margin-top: 18px;
+  background: white;
+  border: 1px solid #DDD;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  min-width: 120px;
+  z-index: 11110 !important;
+}
+
+.atwho-view .cur {
+  background: #f65a5b;
+  color: white;
+}
+
+.atwho-view .cur small {
+  color: white;
+}
+
+.atwho-view strong {
+  color: #f65a5b;
+}
+
+.atwho-view .cur strong {
+  color: white;
+  font: bold;
+}
+
+.atwho-view ul {
+  list-style: none;
+  padding: 0;
+  margin: auto;
+}
+
+.atwho-view ul li {
+  width: 140px;
+  display: block;
+  padding: 5px 10px;
+  border-bottom: 1px solid #DDD;
+  cursor: pointer;
+}
+
+.atwho-view ul li .atwho-li {
+  display: inline-block;
+  width: 50px;
+  font-size: 14px;
+}
+
+#at-view-at-labels.atwho-view ul li .atwho-li {
+  display: inline-block;
+  width: auto;
+}
+
+.atwho-view small {
+  font-size: smaller;
+  color: #777;
+  font-weight: normal;
+  float: right;
+  line-height: 24px;
+}
+
+.highlight {
+  color: #0072c6;
+  font-weight: 700;
+  margin: 0 2px;
+}
+
+.color-red {
+  color: #990000;
+}
+
+.color-green {
+  color: #009900;
+}
+
+.color-gray {
+  color: #999;
+}
+
+.color-blue {
+  color: #2e8bcc;
+}
+
+.color-orange {
+  color: #ff8100;
+}

@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26ad3f5f-b104-4da6-ab91-f1f3b8bda468" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/PartyController.java" afterPath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/PartyController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/properties/app.properties" afterPath="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/properties/app.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/conf.jsp" afterPath="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/conf.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/properties/jdbc.properties" afterPath="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/properties/jdbc.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/webapp/resource/css/user-profile.css" afterPath="$PROJECT_DIR$/teamlucky/src/main/webapp/resource/css/user-profile.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="teamlucky.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,10 +54,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.properties" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.properties" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/properties/app.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.027675277" vertical-offset="0" max-vertical-offset="542">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
               <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
@@ -82,8 +77,8 @@
       <file leaf-file-name="conf.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/conf.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.291667" vertical-offset="6515" max-vertical-offset="16755">
-              <caret line="454" column="71" selection-start-line="454" selection-start-column="71" selection-end-line="454" selection-end-column="71" />
+            <state vertical-scroll-proportion="-19.791666" vertical-offset="16805" max-vertical-offset="17370">
+              <caret line="1152" column="7" selection-start-line="1152" selection-start-column="7" selection-end-line="1152" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -102,11 +97,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user-profile.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="user-profile.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/resource/css/user-profile.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="49393" max-vertical-offset="49995">
-              <caret line="3327" column="0" selection-start-line="3327" selection-start-column="0" selection-end-line="3327" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.94464946" vertical-offset="50713" max-vertical-offset="51315">
+              <caret line="3415" column="1" selection-start-line="3415" selection-start-column="1" selection-end-line="3415" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -234,10 +229,10 @@
         <option value="$PROJECT_DIR$/teamlucky/pom.xml" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/properties/jdbc.properties" />
-        <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/resource/css/user-profile.css" />
-        <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/conf.jsp" />
         <option value="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/PartyController.java" />
         <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/properties/app.properties" />
+        <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/conf.jsp" />
+        <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/resource/css/user-profile.css" />
       </list>
     </option>
   </component>
@@ -1139,12 +1134,12 @@
       <workItem from="1433735865965" duration="216000" />
       <workItem from="1433737890159" duration="17726000" />
       <workItem from="1433865460487" duration="3231000" />
-      <workItem from="1433927881249" duration="10248000" />
+      <workItem from="1433927881249" duration="11208000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="326060000" />
+    <option name="totallyTimeSpent" value="327020000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="23" width="1614" height="924" extended-state="0" />
@@ -1168,7 +1163,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32880846" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29280397" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29280397" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3218563" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964234" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
@@ -1556,14 +1551,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/resource/css/user-profile.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="49393" max-vertical-offset="49995">
-          <caret line="3327" column="0" selection-start-line="3327" selection-start-column="0" selection-end-line="3327" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/GroupController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="885" max-vertical-offset="6105">
@@ -1572,14 +1559,6 @@
             <element signature="e#2037#2102#0" expanded="false" />
             <element signature="method#indexPublic#0;class#GroupController#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/conf.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.291667" vertical-offset="6515" max-vertical-offset="16755">
-          <caret line="454" column="71" selection-start-line="454" selection-start-column="71" selection-end-line="454" selection-end-column="71" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1613,8 +1592,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/properties/app.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.027675277" vertical-offset="0" max-vertical-offset="542">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/conf.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.791666" vertical-offset="16805" max-vertical-offset="17370">
+          <caret line="1152" column="7" selection-start-line="1152" selection-start-column="7" selection-end-line="1152" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/resource/css/user-profile.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.94464946" vertical-offset="50713" max-vertical-offset="51315">
+          <caret line="3415" column="1" selection-start-line="3415" selection-start-column="1" selection-end-line="3415" selection-end-column="1" />
           <folding />
         </state>
       </provider>

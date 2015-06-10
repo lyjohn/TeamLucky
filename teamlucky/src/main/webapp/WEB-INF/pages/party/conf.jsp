@@ -227,7 +227,7 @@
                         </div>
                     </div>
                     <div class="connection_list_con clearfix">
-                        <table class="table table-striped member-table">
+                        <table class="table table-striped group-table">
                             <thead>
                             <tr>
                                 <th style="width:15%;min-width:50px">名称</th>
@@ -491,7 +491,11 @@
 </script>
 <script id="partygrouplist" type="text/html">
     ${'<'}% for(var i = 0; i < list.length; i++) { %${'>'}
-    <tr>
+    ${'<'}% if( list[i].groupStatus == 2) { %${'>'}
+    <tr class="success">
+        ${'<'}% }else{ %${'>'}
+    <tr class="">
+        ${'<'}% } %${'>'}
         <td><img alt="${'<'}%= list[i].groupName %${'>'}" src="${ctx}/avatar/group/${'<'}%= list[i].id%${'>'}" /><span class="user_loginname">${'<'}%= list[i].groupName %${'>'}</span></td>
         <td>${'<'}%= list[i].groupRemark %${'>'}</td>
         <td>${'<'}%= list[i].createTimeStr %${'>'}</td>
@@ -836,7 +840,7 @@
 
                             layer.closeAll();
 
-                            var total = $(".member-table tbody tr").length;
+                            var total = result.data.length;
                             var invalid = $(".member-table tbody tr.danger").length;
                             var nogroup = $(".member-table tbody td.nogroup").length;
                             var ingroup = total-nogroup;
@@ -860,6 +864,14 @@
                             $(".myGroups table tbody").html(html);
 
                             layer.closeAll();
+
+                            var total = result.data.length;
+                            var complete = $(".group-table tbody tr.success").length;
+                            var process = total-complete;
+                            $(".all-group span").text(total);
+                            $(".complete-group span").text(complete);
+                            $(".processing-group span").text(process);
+
                             thisli.data("load",true);
                         }else{
                             layer.closeAll();
@@ -944,14 +956,23 @@
                     if(setvalid){
                         thisa.data("setvalid",!setvalid);
 
+                        var valid = $(".invalid-member span").text()*1;
+                        if(valid>0)
+                            $(".invalid-member span").text(valid-1);
+
                         layer.msg("激活成功",{icon:6,offset:'110px'});
                         thisa.text("禁用");
+                        thistr.find("td:eq(9)").text("正常");
                         thistr.removeClass("danger");
                     }else{
                         thisa.data("setvalid",!setvalid);
 
+                        var valid = $(".invalid-member span").text()*1;
+                        $(".invalid-member span").text(valid+1);
+
                         layer.msg("禁用成功",{icon:6,offset:'110px'});
                         thisa.text("激活");
+                        thistr.find("td:eq(9)").text("已禁用");
                         thistr.addClass("danger");
                     }
                 }else{
@@ -995,7 +1016,27 @@
             }
             $(".member-filter li.current_foucus").removeClass("current_foucus");
             $(this).addClass("current_foucus");
-        })
+        }).on("click",".group-filter li.filter",function(){
+            var seq = $(this).data("seq");
+            switch(seq){
+                case 0:
+                    $(".group-table tbody tr").slideDown();
+                    break;
+                case 1:
+                    $(".group-table tbody tr").slideUp();
+                    $(".group-table tbody tr.success").slideDown();
+                    break;
+                case 2:
+                    $(".group-table tbody tr").slideUp();
+                    $(".group-table tbody tr:not(.success)").slideDown();
+                    break;
+                default :
+                    $(".group-table tbody tr").slideDown();
+                    break;
+            }
+            $(".group-filter li.current_foucus").removeClass("current_foucus");
+            $(this).addClass("current_foucus");
+        });
 
         var search_cache = [];
         //人员选择
