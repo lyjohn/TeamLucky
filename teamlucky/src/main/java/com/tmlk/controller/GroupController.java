@@ -363,7 +363,9 @@ public class GroupController {
 
             if (partyGroupExt.getIsCustomJoin()) {
                 partyUserExt.setGroupId(partyGroupExt.getId());
-                partyUserExt.setUserStatus(8);
+
+                if(partyUserExt.getUserStatus()!=16) //活动创建者.. 只需要设置GroupId即可
+                    partyUserExt.setUserStatus(8);
                 partyUserService.joinGroup(partyUserExt);
 
                 partyGroupExt.setMemberCount(partyGroupExt.getMemberCount() + 1);
@@ -375,7 +377,8 @@ public class GroupController {
                 //partyUserExt.setUserStatus(4); //预备组员
 
                 //TODO 为了测试效果 暂时都将所有加入的 直接置为正式的
-                partyUserExt.setUserStatus(8);
+                if(partyUserExt.getUserStatus()!=16) //活动创建者.. 只需要设置GroupId即可
+                    partyUserExt.setUserStatus(8);
                 partyUserService.joinGroup(partyUserExt);
 
                 partyGroupExt.setMemberCount(partyGroupExt.getMemberCount() + 1);
@@ -434,7 +437,9 @@ public class GroupController {
                 result.setMessage("【" + inviteWho.getUserName() + "】已有小组");
             } else {
                 inviteWho.setGroupId(partyGroupExt.getId());
-                inviteWho.setUserStatus(8);
+
+                if(inviteWho.getUserStatus() != 16)//活动创建者.. 只需要设置GroupId即可
+                    inviteWho.setUserStatus(8);
 
                 partyUserService.joinGroup(inviteWho);
                 result.setMessage("成功邀请【" + inviteWho.getUserName() + "】加入小组【" + partyGroupExt.getGroupName() + "】");
