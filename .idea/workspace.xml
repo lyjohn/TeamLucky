@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26ad3f5f-b104-4da6-ab91-f1f3b8bda468" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/PartyController.java" afterPath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/PartyController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/framework/session/SessionStatus.java" afterPath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/framework/session/SessionStatus.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/GroupController.java" afterPath="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/GroupController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="teamlucky.iws" />
@@ -59,7 +58,7 @@
         <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/properties/app.properties">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
-              <caret line="1" column="54" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="54" />
+              <caret line="1" column="38" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -75,14 +74,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GroupController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GroupController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/GroupController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6180">
-              <caret line="402" column="118" selection-start-line="402" selection-start-column="111" selection-end-line="402" selection-end-column="118" />
+            <state vertical-scroll-proportion="0.42857143" vertical-offset="1425" max-vertical-offset="6675">
+              <caret line="128" column="42" selection-start-line="128" selection-start-column="42" selection-end-line="128" selection-end-column="42" />
               <folding>
                 <element signature="e#2037#2102#0" expanded="false" />
-                <element signature="method#indexPublic#0;class#GroupController#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -118,10 +116,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PartyController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PartyController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/PartyController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5833333" vertical-offset="5410" max-vertical-offset="12345">
+            <state vertical-scroll-proportion="0.0" vertical-offset="5410" max-vertical-offset="12345">
               <caret line="412" column="84" selection-start-line="412" selection-start-column="84" selection-end-line="412" selection-end-column="84" />
               <folding />
             </state>
@@ -191,7 +189,6 @@
         <option value="$PROJECT_DIR$/teamlucky/pom.xml" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/conf.jsp" />
-        <option value="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/GroupController.java" />
         <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/properties/jdbc.properties" />
         <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/group/create.jsp" />
         <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/create.jsp" />
@@ -202,6 +199,7 @@
         <option value="$PROJECT_DIR$/teamlucky/src/main/webapp/resource/css/blue.css" />
         <option value="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/framework/session/SessionStatus.java" />
         <option value="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/PartyController.java" />
+        <option value="$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/GroupController.java" />
       </list>
     </option>
   </component>
@@ -313,6 +311,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="teamlucky" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="teamlucky" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="properties" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -924,12 +952,12 @@
       <workItem from="1433865460487" duration="3231000" />
       <workItem from="1433927881249" duration="11875000" />
       <workItem from="1434088873750" duration="595000" />
-      <workItem from="1434367989941" duration="4060000" />
+      <workItem from="1434367989941" duration="4453000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="332342000" />
+    <option name="totallyTimeSpent" value="332735000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="790" extended-state="0" />
@@ -1318,25 +1346,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/GroupController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6180">
-          <caret line="402" column="118" selection-start-line="402" selection-start-column="111" selection-end-line="402" selection-end-column="118" />
-          <folding>
-            <element signature="e#2037#2102#0" expanded="false" />
-            <element signature="method#indexPublic#0;class#GroupController#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/properties/app.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
-          <caret line="1" column="54" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/pages/party/conf.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-22.06" vertical-offset="8977" max-vertical-offset="17370">
@@ -1384,17 +1393,35 @@
         <state vertical-scroll-proportion="0.33256352" vertical-offset="711" max-vertical-offset="1395">
           <caret line="77" column="18" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="32" />
           <folding>
-            <element signature="e#1505#1506#0" expanded="true" />
-            <element signature="e#1539#1540#0" expanded="true" />
+            <element signature="e#1505#1506#0" expanded="false" />
+            <element signature="e#1539#1540#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/PartyController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5833333" vertical-offset="5410" max-vertical-offset="12345">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5410" max-vertical-offset="12345">
           <caret line="412" column="84" selection-start-line="412" selection-start-column="84" selection-end-line="412" selection-end-column="84" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teamlucky/src/main/webapp/WEB-INF/properties/app.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
+          <caret line="1" column="38" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teamlucky/src/main/java/com/tmlk/controller/GroupController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42857143" vertical-offset="1425" max-vertical-offset="6675">
+          <caret line="128" column="42" selection-start-line="128" selection-start-column="42" selection-end-line="128" selection-end-column="42" />
+          <folding>
+            <element signature="e#2037#2102#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

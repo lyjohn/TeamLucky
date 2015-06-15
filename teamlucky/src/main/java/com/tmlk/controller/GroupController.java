@@ -129,7 +129,7 @@ public class GroupController {
             List<ICondition> conditions = new ArrayList<ICondition>();
             conditions.add(new EqCondition("groupId", partyGroupExt.getId()));
             if (!sessionUser.isPartyAdmin())
-                conditions.add(new GtCondition("userStatus", 8));//只能看到当前在活动的用户  被禁用，或者审批中的不能看到
+                conditions.add(new GeCondition("userStatus", 8));//只能看到当前在活动的用户  被禁用，或者审批中的不能看到
 
             List<PartyUserExt> partyUserExts = partyUserService.criteriaQuery(conditions);
 
