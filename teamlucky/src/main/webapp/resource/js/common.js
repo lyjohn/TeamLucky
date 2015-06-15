@@ -97,7 +97,6 @@ $(function(){
     $(document).on("mouseover", ".user-hover", function () {
         if (tmlk.tmlk_Data.fadeOut != undefined) {
             clearTimeout(tmlk.tmlk_Data.fadeOut);
-            $(".hovercard").removeClass("hide");//.fadeOut(300);
             tmlk.tmlk_Data.fadeOut = undefined;
         }
 
@@ -152,8 +151,6 @@ $(function(){
 
     window.tmlk.tmlk_ShowCard = function (userobj) {
         $(".hovercard").stop();
-        var istop = userobj.offset().top - $(window).scrollTop() > 350;
-        var isright = $(window).width() - userobj.offset().left < 350;
         var id = userobj.data("hover");
         if ($(".hovercard-details").data("id") != id) { //如果当前div里面的不是，则ajax获取新的
             $.ajax({
@@ -166,6 +163,7 @@ $(function(){
                     $(".hovercard-loading").removeClass("hide");
                 },
                 success: function (htm) {
+                    $(".hovercard").removeClass("hide");
                     setTimeout(function(){
                         $(".hovercard-resource").html(htm).removeClass("hide");
                         $(".hovercard-loading").addClass("hide");
@@ -176,6 +174,8 @@ $(function(){
                 }
             });
         }
+        var istop = userobj.offset().top - $(window).scrollTop() > 350;
+        var isright = $(window).width() - userobj.offset().left < 350;
         if (isright) {
             if (istop) {
                 $(".hovercard").removeClass("lk-bottom lk-left").addClass("lk-top lk-right");
