@@ -410,9 +410,12 @@ public class PartyController {
             List<SysPartyUserLinkExt> sysPartyUserLinkExts = sysPartyUserLinkService.criteriaQuery(conditions);
 
             String partyUserId = sessionUser.getPartyUserId();
-            if (sysPartyUserLinkExts.size() == 0 && partyUserId == null) {//已登录 但是不是该活动的成员
+            if (sysPartyUserLinkExts.size() == 0 && sessionUser.getSysUserId()!=null) {//已登录 但是不是该活动的成员
                 if (partyExt.getIsPublic()) {
                     session.setAttribute(Constants.SESSION_ISMEMBER, false);
+
+                    //把Session中的上一个活动用户去掉 这样可以进入其他公共活动了
+                    sessionStatus.checkAndRemoveParty(session);
                 } else {
                     return "redirect:/errors/error/3";
                 }

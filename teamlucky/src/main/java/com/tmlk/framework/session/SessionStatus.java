@@ -164,6 +164,33 @@ public class SessionStatus {
     }
 
     /**
+     * 用户进入一个公共活动的时候，如果不是这个活动的人将 把session里面的Party信息去掉 这样就可以加入新的活动了
+     *
+     * @param session   HttpSession
+     * @return 返回值
+     */
+    public synchronized void checkAndRemoveParty(HttpSession session) {
+
+        SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
+
+        //肯定是系统用户
+        sessionMap.remove(sessionUser.getSessionKey());
+
+        //需要重新配置了PartyUser的相关信息
+        sessionUser.setPartyUserAvatar(null);
+        sessionUser.setPartyUserId(null);
+        sessionUser.setPartyUserName(null);
+        sessionUser.setPartyId(0L);
+        sessionUser.setGroupId(0L);
+        sessionUser.setPartyAdmin(false);
+        sessionUser.setGroupAdmin(false);
+
+        session.setAttribute(Constants.SESSION_USER, sessionUser);
+
+        sessionMap.put(sessionUser.getSessionKey(), session);
+    }
+
+    /**
      * 活动用户绑定系统用户之后，需存入系统用户的信息
      *
      * @param session   HttpSession
