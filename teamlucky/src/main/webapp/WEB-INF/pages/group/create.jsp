@@ -176,7 +176,10 @@
 
       var pName = $("#groupName").val();
       var pRamark = $("#groupRemark").val();
-      var pCover = $("#groupCover").data("img").replace("resource/","");
+      var pCover = "";
+      if($("#groupCover").data("img") != undefined){
+        pCover = $("#groupCover").data("img").replace("resource/","");
+      }
       var pIsPublic = $("#public").prop("checked");
       var pIsAuto = $("#autoJoin").prop("checked");
 

@@ -184,7 +184,7 @@ public class PartyController {
                         partyUser.setStatusName(statusName);
 
                     if (partyUser.getLastLoginTime() != null)
-                        partyUser.setLastLoginTimeStr(FormatUtils.date2Str(partyUser.getLastLoginTime()));
+                        partyUser.setLastLoginTimeStr(FormatUtils.date2Str(partyUser.getLastLoginTime(),"yyyy-MM-dd HH:mm"));
                     else
                         partyUser.setLastLoginTimeStr("");
                 }

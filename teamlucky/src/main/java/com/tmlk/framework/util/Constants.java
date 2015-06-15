@@ -62,6 +62,6 @@ public class Constants {
         PARTY_USER_STATUS_MAP.put(4,"预备组员");
         PARTY_USER_STATUS_MAP.put(8,"正式组员");
         PARTY_USER_STATUS_MAP.put(10,"组长");
-        PARTY_USER_STATUS_MAP.put(16,"活动创建者");
+        PARTY_USER_STATUS_MAP.put(16,"管理员");
     }
 }

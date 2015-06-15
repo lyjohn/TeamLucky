@@ -1357,7 +1357,6 @@
   display: none;
   right: 0;
   color: #a6a9ac;
-  font-size: 18px;
   z-index: 1001;
   transaction: .5s;
 }
@@ -3062,7 +3061,7 @@
   line-height: 30px;
 }
 
-.main_bg .connection_list_con .member-table img{
+.main_bg .connection_list_con .member-table img,.main_bg .connection_list_con .group-table img{
   float: left;
   width: 30px;
   height: 30px;

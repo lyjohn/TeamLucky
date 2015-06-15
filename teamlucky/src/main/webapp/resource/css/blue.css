@@ -2064,3 +2064,7 @@ h3.style{
 	min-height: 100px;
 	background: url(../images/loading.gif) no-repeat center center;
 }
+.container .jumbotron, .container-fluid .jumbotron{
+	border-radius: 0;
+	background-color: #fff;
+}
