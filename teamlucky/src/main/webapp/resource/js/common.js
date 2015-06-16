@@ -151,8 +151,6 @@ $(function(){
 
     window.tmlk.tmlk_ShowCard = function (userobj) {
         $(".hovercard").stop();
-        var istop = userobj.offset().top - $(window).scrollTop() > 350;
-        var isright = $(window).width() - userobj.offset().left < 350;
         var id = userobj.data("hover");
         if ($(".hovercard-details").data("id") != id) { //如果当前div里面的不是，则ajax获取新的
             $.ajax({
@@ -176,6 +174,8 @@ $(function(){
                 }
             });
         }
+        var istop = userobj.offset().top - $(window).scrollTop() > 350;
+        var isright = $(window).width() - userobj.offset().left < 350;
         if (isright) {
             if (istop) {
                 $(".hovercard").removeClass("lk-bottom lk-left").addClass("lk-top lk-right");
