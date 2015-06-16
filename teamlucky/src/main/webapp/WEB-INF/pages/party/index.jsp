@@ -41,6 +41,7 @@
         <div class="header">
             <div class="logo">
                 <a href="${ctx}"><img src="${ctx}/resource/images/logo.png" alt=""/></a>
+                <span class="gap">·</span><a class="subtitle" href="${ctx}/party/index"><c:out value="${model.partyExt.partyName}"></c:out></a>
             </div>
             <jsp:include page="../shared/_header.jsp">
                 <jsp:param value="1" name="type"/>

@@ -97,7 +97,6 @@ $(function(){
     $(document).on("mouseover", ".user-hover", function () {
         if (tmlk.tmlk_Data.fadeOut != undefined) {
             clearTimeout(tmlk.tmlk_Data.fadeOut);
-            $(".hovercard").removeClass("hide");//.fadeOut(300);
             tmlk.tmlk_Data.fadeOut = undefined;
         }
 
@@ -166,6 +165,7 @@ $(function(){
                     $(".hovercard-loading").removeClass("hide");
                 },
                 success: function (htm) {
+                    $(".hovercard").removeClass("hide");
                     setTimeout(function(){
                         $(".hovercard-resource").html(htm).removeClass("hide");
                         $(".hovercard-loading").addClass("hide");

@@ -21,7 +21,24 @@ body {
 .logo{
 	margin-top: 0;
 	float: left;
+	position: relative;
 }
+
+.logo .gap{
+	color: #fff;
+	font-size: 8rem;
+	position: absolute;
+	top: -34px;
+	left: 180px;
+}
+
+.logo .subtitle{
+	font-size: 2rem;
+	color: #fff;
+	font-weight: bold;
+	padding: 0 12px;
+}
+
 /* start h_menu */
 .h_menu{
 	float: right;
